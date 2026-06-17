@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sprint Roadmap 01 · Analista BAIP · La Brecha AI de las Personas · Digital Change Advisors</title>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   SISTEMA DE DISEÑO DCA 2026
+═══════════════════════════════════════════════ */
+:root {
+  --teal:      #2e8b76;
+  --teal-dk:   #247060;
+  --gold:      #a48111;
+  --carbon:    #1e2a38;
+  --platinum:  #dfe3e1;
+  --white:     #ffffff;
+  --teal-bg:   rgba(46,139,118,0.06);
+  --teal-bd:   rgba(46,139,118,0.18);
+  --gold-bg:   rgba(164,129,17,0.05);
+  --fd:        'Marcellus', Georgia, serif;
+  --fb:        'Montserrat', 'Helvetica Neue', sans-serif;
+  --tab:       36px;
+  --doc:       720px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--fb); font-size: 15px; line-height: 1.75; color: var(--carbon); background: #d8dbd9; }
+
+/* ─── TOP NAV ──────────────────────────────── */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  background: var(--carbon); height: 50px;
+  display: flex; align-items: center; padding: 0 20px; gap: 0;
+  box-shadow: 0 2px 16px rgba(0,0,0,.35);
+}
+.nav-brand { font-family: var(--fd); font-size: 14px; color: white; white-space: nowrap; margin-right: 16px; padding-right: 16px; border-right: 1px solid rgba(255,255,255,.15); }
+.nav-brand span { color: var(--gold); }
+.nav-links { display: flex; gap: 2px; flex: 1; overflow-x: auto; }
+.nav-links::-webkit-scrollbar { display: none; }
+.nav-links a { color: rgba(255,255,255,.55); text-decoration: none; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 5px 9px; border-radius: 4px; white-space: nowrap; transition: all .15s; flex-shrink: 0; }
+.nav-links a:hover { color: white; background: rgba(255,255,255,.09); }
+.nav-links a.done { color: var(--teal); }
+.nav-right { display: flex; align-items: center; gap: 10px; margin-left: 12px; flex-shrink: 0; }
+.pb-wrap { width: 100px; height: 3px; background: rgba(255,255,255,.12); border-radius: 2px; }
+.pb-fill { height: 3px; background: var(--teal); border-radius: 2px; transition: width .4s ease; width: 0%; }
+.pb-pct { font-size: 10px; font-weight: 700; color: rgba(255,255,255,.45); min-width: 28px; }
+.save-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.2); transition: background .3s; }
+.save-dot.saving { background: var(--gold); }
+.save-dot.saved  { background: var(--teal); }
+
+/* ─── DOCUMENT WRAPPER ─────────────────────── */
+.doc-wrap { max-width: var(--doc); margin: 68px auto 80px; display: flex; flex-direction: column; gap: 3px; }
+.doc-wrap > * { box-shadow: 0 2px 20px rgba(0,0,0,.13); }
+
+/* ─── RUNNING HEADER ─────────────────────── */
+.run-header { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(30,42,56,.35); text-align: center; padding: 12px 0 10px; border-bottom: 1px solid var(--platinum); }
+
+/* ─── PAGE LAYOUT ─────────────────────────── */
+.p-layout { display: flex; background: white; position: relative; }
+.s-tab { flex: 0 0 var(--tab); background: var(--teal); display: flex; align-items: center; justify-content: center; min-height: 180px; }
+.s-tab .lbl { writing-mode: vertical-rl; transform: rotate(180deg); font-weight: 700; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: white; white-space: nowrap; }
+.p-body { flex: 1; padding: 36px 40px 36px 28px; }
+
+/* ─── PAGE FOOTER ─────────────────────────── */
+.p-footer { background: white; display: flex; align-items: center; padding: 8px 40px 10px calc(var(--tab) + 28px); gap: 14px; border-top: 1px solid var(--platinum); }
+.p-footer .rule { flex: 1; height: 1px; background: var(--platinum); }
+.p-footer .pnum { font-size: 10px; font-weight: 700; color: white; background: var(--teal); width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+/* ─── COVER ────────────────────────────────── */
+.cover-page { background: white; }
+.cover-visual { height: 300px; background: var(--carbon); position: relative; overflow: hidden; }
+.cover-visual svg { width: 100%; height: 100%; display: block; }
+.cover-band { background: var(--teal); padding: 26px 44px 30px; }
+.c-sprint-lbl { font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: 10px; }
+.c-theme { font-family: var(--fd); font-size: 34px; color: white; line-height: 1.2; letter-spacing: -.01em; }
+.cover-body { padding: 24px 44px 16px; background: white; }
+.c-program { font-size: 22px; font-weight: 700; color: var(--carbon); margin-bottom: 10px; }
+.c-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--teal); border: 1.5px solid var(--teal); padding: 4px 14px; border-radius: 30px; margin-bottom: 24px; }
+.student-row { display: flex; gap: 14px; flex-wrap: wrap; padding: 20px 0 4px; border-top: 1px solid var(--platinum); }
+.s-field { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 140px; }
+.s-field label { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(30,42,56,.45); }
+.s-field input { border: 1.5px solid var(--platinum); border-radius: 6px; padding: 8px 12px; font-family: var(--fb); font-size: 14px; font-weight: 500; color: var(--carbon); background: #fafafa; outline: none; transition: border-color .2s; }
+.s-field input:focus { border-color: var(--teal); background: white; }
+.s-field input::placeholder { color: rgba(30,42,56,.28); }
+.cover-foot { background: var(--carbon); padding: 12px 44px; display: flex; align-items: center; justify-content: space-between; }
+.cf-text { font-size: 12px; font-weight: 500; color: rgba(255,255,255,.6); }
+.cf-text strong { color: white; }
+
+/* ─── SECTION TYPOGRAPHY ─────────────────── */
+.sec-title { font-family: var(--fd); font-size: 30px; color: var(--carbon); line-height: 1.25; letter-spacing: -.01em; border-bottom: 2px solid var(--platinum); padding-bottom: 12px; margin-bottom: 22px; }
+.sec-sublabel { font-size: 12px; font-weight: 600; letter-spacing: .06em; color: var(--teal); margin-bottom: 8px; }
+p { margin-bottom: 15px; } p:last-child { margin-bottom: 0; } strong { font-weight: 700; }
+
+/* ─── TOC ────────────────────────────────── */
+.toc-entry { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0; border-bottom: 1px solid var(--teal-bg); }
+.toc-entry:last-child { border-bottom: none; }
+.toc-group { margin-bottom: 28px; }
+.toc-group-head { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--carbon); margin-bottom: 2px; }
+.toc-name { font-size: 15px; color: rgba(30,42,56,.75); }
+.toc-pg { font-weight: 700; font-size: 13px; color: var(--teal); }
+
+/* ─── MENSAJE ────────────────────────────── */
+.msg-layout { display: grid; grid-template-columns: 180px 1fr; gap: 36px; align-items: start; }
+.msg-img { background: var(--teal-bg); border: 1px solid var(--platinum); border-radius: 8px; aspect-ratio: 3/4; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.msg-title { font-family: var(--fd); font-size: 24px; color: var(--teal); font-style: italic; margin-bottom: 8px; }
+.sig-block { margin-top: 22px; }
+.sig-line { width: 80px; height: 1px; background: var(--carbon); margin-bottom: 5px; }
+.sig-name { font-size: 12px; font-weight: 700; color: var(--carbon); }
+.sig-role { font-size: 11px; color: rgba(30,42,56,.55); }
+
+/* ─── INSTRUCCIONES ─────────────────────── */
+.ni { margin-bottom: 26px; }
+.ni-head { font-size: 15px; font-weight: 700; color: var(--carbon); margin-bottom: 8px; }
+.ni-head .nn { color: var(--teal); margin-right: 4px; }
+.ni-text { padding-left: 22px; font-size: 14px; line-height: 1.75; color: rgba(30,42,56,.82); }
+.quote-band { margin-top: 36px; padding: 18px 24px; border-left: 4px solid var(--gold); background: var(--gold-bg); border-radius: 0 8px 8px 0; }
+.quote-band p { font-style: italic; font-size: 14px; color: var(--carbon); margin: 0; }
+.quote-band p::before { content: '\201C'; } .quote-band p::after { content: '\201D'; }
+
+/* ─── EXPERIMENT SHARED ──────────────────── */
+.exp-lbl { font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+.sdiv { height: 1px; background: var(--platinum); margin: 28px 0; }
+.gold-acc { border-left: 4px solid var(--gold); padding: 14px 18px 14px 22px; background: var(--gold-bg); border-radius: 0 8px 8px 0; margin: 18px 0; }
+.gold-acc p { font-style: italic; font-size: 14px; color: var(--carbon); margin: 0; }
+.note { margin: 16px 0; padding: 12px 16px; background: var(--gold-bg); border-left: 3px solid var(--gold); border-radius: 0 6px 6px 0; }
+.note-hd { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--gold); margin-bottom: 4px; }
+.note p { font-size: 12px; line-height: 1.65; color: rgba(30,42,56,.72); margin: 0; }
+
+/* ─── REPORT IDENTIFICATION BLOCK ─────── */
+.report-id-block { background: var(--carbon); border-radius: 10px; padding: 20px 24px; margin-bottom: 28px; }
+.rid-head { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.rid-badge { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: white; background: var(--teal); padding: 4px 12px; border-radius: 20px; flex-shrink: 0; }
+.rid-title { font-size: 11px; font-weight: 600; color: rgba(255,255,255,.55); letter-spacing: .08em; text-transform: uppercase; }
+.rid-fields { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.rid-field { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 155px; }
+.rid-field label { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45); }
+.rid-field input[type="text"], .rid-field input[type="date"] { border: 1.5px solid rgba(255,255,255,.15); border-radius: 6px; padding: 8px 12px; background: rgba(255,255,255,.08); font-family: var(--fb); font-size: 13px; font-weight: 500; color: white; outline: none; transition: border-color .2s; }
+.rid-field input:focus { border-color: var(--teal); background: rgba(255,255,255,.14); }
+.rid-field input::placeholder { color: rgba(255,255,255,.3); }
+.rid-field input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); opacity: .5; }
+.rid-level { border-top: 1px solid rgba(255,255,255,.1); padding-top: 14px; }
+.rid-level-lbl { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 10px; }
+.level-opts { display: flex; gap: 10px; flex-wrap: wrap; }
+.level-opt { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 8px; border: 1.5px solid rgba(255,255,255,.12); cursor: pointer; transition: all .2s; }
+.level-opt:hover { border-color: var(--teal); background: rgba(46,139,118,.12); }
+.level-opt input[type="radio"] { accent-color: var(--teal); width: 15px; height: 15px; cursor: pointer; }
+.level-opt span { font-size: 12px; font-weight: 600; color: rgba(255,255,255,.7); }
+
+/* ─── IP GUARDRAIL ───────────────────────── */
+.ip-guard { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; background: rgba(164,129,17,.07); border: 1px solid rgba(164,129,17,.2); border-radius: 8px; margin-bottom: 24px; }
+.ip-guard-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+.ip-guard span { font-size: 12px; color: rgba(30,42,56,.7); line-height: 1.65; }
+
+/* ─── EXP META ROW ───────────────────────── */
+.exp-meta-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.exp-lente { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: .06em; }
+.lente-aimt { background: rgba(46,139,118,.1); color: var(--teal); border: 1px solid var(--teal-bd); }
+.lente-ails { background: rgba(164,129,17,.08); color: var(--gold); border: 1px solid rgba(164,129,17,.25); }
+.lente-aicd { background: rgba(194,89,63,.08); color: #c2593f; border: 1px solid rgba(194,89,63,.25); }
+.lente-int  { background: rgba(30,42,56,.07); color: var(--carbon); border: 1px solid var(--platinum); }
+.entregable-badge { padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: .06em; background: rgba(194,89,63,.1); color: #c2593f; border: 1px solid rgba(194,89,63,.25); }
+
+/* ─── STEP LIST ──────────────────────────── */
+.step-list { list-style: none; counter-reset: sc; margin: 0 0 20px; }
+.step-list li { counter-increment: sc; display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; padding: 11px 14px; background: #fafafa; border: 1px solid var(--platinum); border-radius: 8px; }
+.step-list li::before { content: counter(sc); flex: 0 0 26px; height: 26px; background: var(--carbon); color: white; font-weight: 700; font-size: 12px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.step-list li span { font-size: 13px; line-height: 1.65; color: rgba(30,42,56,.82); padding-top: 2px; }
+
+/* ─── IA ROLE BLOCK ──────────────────────── */
+.ia-role { display: flex; align-items: flex-start; gap: 10px; padding: 11px 14px; background: var(--teal-bg); border: 1px solid var(--teal-bd); border-radius: 8px; margin: 16px 0 24px; }
+.ia-role-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+.ia-role span { font-size: 12px; color: rgba(30,42,56,.75); line-height: 1.65; }
+
+/* ─── METRIC CARDS ───────────────────────── */
+.metric-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0; }
+.metric-card { padding: 14px 16px; border-radius: 8px; background: #fafafa; border: 1px solid var(--platinum); }
+.metric-card.beh { border-top: 3px solid var(--teal); }
+.metric-card.biz { border-top: 3px solid var(--gold); }
+.metric-card-lbl { font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 6px; }
+.metric-card.beh .metric-card-lbl { color: var(--teal); }
+.metric-card.biz .metric-card-lbl { color: var(--gold); }
+.metric-card p { font-size: 13px; line-height: 1.65; color: rgba(30,42,56,.8); margin: 0; }
+
+/* ─── FILL AREAS ─────────────────────────── */
+.fill { margin: 14px 0 22px; }
+.fill-lbl { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--carbon); margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
+.fill-lbl::after { content: ''; flex: 1; height: 1px; background: var(--platinum); }
+textarea { width: 100%; min-height: 110px; border: 1.5px solid var(--platinum); border-radius: 8px; padding: 12px 14px; font-family: var(--fb); font-size: 13px; line-height: 1.7; color: var(--carbon); background: #fafafa; resize: vertical; outline: none; transition: border-color .2s, background .2s; }
+textarea:focus { border-color: var(--teal); background: white; }
+textarea.filled { border-color: var(--teal); background: white; }
+textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
+.char-ct { font-size: 10px; color: rgba(30,42,56,.35); text-align: right; margin-top: 3px; }
+
+/* ─── OBSERVATION FIELD ──────────────────── */
+.fill-obs { border-top: 1px dashed var(--platinum); padding-top: 20px; margin-top: 8px; }
+.fill-obs .fill-lbl { color: var(--gold); }
+.fill-obs .fill-lbl::after { background: rgba(164,129,17,.25); }
+.fill-obs textarea { border-color: rgba(164,129,17,.2); }
+.fill-obs textarea:focus { border-color: var(--gold); background: white; }
+
+/* ─── SUBMIT SECTION ─────────────────────── */
+.submit-sec { margin-top: 36px; padding: 24px 28px; background: var(--teal-bg); border: 1px solid var(--teal-bd); border-radius: 10px; }
+.submit-sec h3 { font-weight: 700; font-size: 15px; color: var(--carbon); margin-bottom: 6px; }
+.submit-sec p { font-size: 13px; color: rgba(30,42,56,.7); margin-bottom: 18px; }
+.submit-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 4px; }
+.btn-sub { display: inline-flex; align-items: center; gap: 8px; background: var(--teal); color: white; font-family: var(--fb); font-weight: 700; font-size: 13px; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; transition: background .2s; }
+.btn-sub:hover { background: var(--teal-dk); }
+.btn-sub.done { background: #2a6b50; }
+.btn-print { display: inline-flex; align-items: center; gap: 7px; background: transparent; color: var(--teal); font-family: var(--fb); font-weight: 700; font-size: 13px; padding: 12px 20px; border: 1.5px solid var(--teal); border-radius: 8px; cursor: pointer; transition: all .2s; }
+.btn-print:hover { background: var(--teal-bg); }
+.sub-ok { margin-top: 10px; font-size: 12px; color: var(--teal); font-weight: 700; display: none; }
+.sub-ok.show { display: block; }
+
+/* ─── MODAL ──────────────────────────────── */
+.modal-ov { display: none; position: fixed; inset: 0; background: rgba(30,42,56,.8); z-index: 9999; align-items: center; justify-content: center; }
+.modal-ov.open { display: flex; }
+.modal { background: white; border-radius: 12px; padding: 32px 36px; max-width: 560px; width: 90%; max-height: 82vh; overflow-y: auto; }
+.modal-title { font-family: var(--fd); font-size: 20px; color: var(--carbon); margin-bottom: 6px; }
+.modal-sub { font-size: 12px; color: rgba(30,42,56,.55); margin-bottom: 22px; }
+.modal-body { background: #fafafa; border: 1px solid var(--platinum); border-radius: 8px; padding: 14px; font-size: 12px; line-height: 1.7; color: var(--carbon); white-space: pre-wrap; max-height: 220px; overflow-y: auto; font-family: monospace; margin-bottom: 20px; }
+.modal-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn-m { display: inline-flex; align-items: center; gap: 6px; font-family: var(--fb); font-weight: 700; font-size: 12px; padding: 10px 18px; border-radius: 8px; border: none; cursor: pointer; transition: all .2s; }
+.btn-m.p { background: var(--teal); color: white; } .btn-m.p:hover { background: var(--teal-dk); }
+.btn-m.s { background: transparent; color: var(--carbon); border: 1.5px solid var(--platinum); } .btn-m.s:hover { background: #f5f5f5; }
+
+/* ─── BACK COVER ─────────────────────────── */
+.back-cover { background: white; }
+.bc-band { background: var(--teal); padding: 36px 44px 40px; text-align: center; }
+.bc-sprint { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 8px; }
+.bc-theme { font-family: var(--fd); font-size: 28px; color: white; }
+.bc-body { padding: 28px 44px; background: white; text-align: center; }
+.bc-program { font-size: 20px; font-weight: 700; color: var(--carbon); margin-bottom: 8px; }
+.bc-foot { background: var(--carbon); padding: 12px 44px; display: flex; justify-content: space-between; }
+.bc-foot-t { font-size: 11px; color: rgba(255,255,255,.55); }
+.bc-foot-t strong { color: white; }
+
+/* ─── PRINT / PDF ────────────────────────── */
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .top-nav, .modal-ov, .btn-print, .submit-actions, .submit-sec, .pb-wrap, .pb-pct, .save-dot { display: none !important; }
+  body { background: white !important; }
+  .doc-wrap { margin: 0 !important; }
+  .doc-wrap > * { box-shadow: none !important; }
+  section.cover-page { page-break-after: always; }
+  #exp-101, #exp-102, #exp-103, #exp-104 { page-break-before: always; }
+  section.back-cover { page-break-before: always; }
+  textarea { border: 1px solid #c0c4c2 !important; background: white !important; min-height: 50px !important; resize: none !important; overflow: visible !important; height: auto !important; }
+  .char-ct, .ip-guard { display: none !important; }
+  .report-id-block { background: #1e2a38 !important; }
+  @page { size: letter portrait; margin: 0.45in; }
+}
+@media (max-width: 600px) {
+  .msg-layout { grid-template-columns: 1fr; } .msg-img { display: none; }
+  .s-tab { display: none; } .p-body { padding: 28px 22px; }
+  .metric-pair { grid-template-columns: 1fr; }
+  .rid-fields { flex-direction: column; } .level-opts { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <div class="nav-brand">DCA · <span>ARIA</span></div>
+  <div class="nav-links">
+    <a href="#portada">Portada</a>
+    <a href="#contenido">Contenido</a>
+    <a href="#mensaje">Mensaje</a>
+    <a href="#instrucciones">Instrucciones</a>
+    <a href="#exp-101" id="nav-101">Exp. 1.01</a>
+    <a href="#exp-102" id="nav-102">Exp. 1.02</a>
+    <a href="#exp-103" id="nav-103">Exp. 1.03</a>
+    <a href="#exp-104" id="nav-104">Exp. 1.04</a>
+  </div>
+  <div class="nav-right">
+    <div class="pb-wrap"><div class="pb-fill" id="pbFill"></div></div>
+    <span class="pb-pct" id="pbPct">0%</span>
+    <div class="save-dot" id="saveDot"></div>
+  </div>
+</nav>
+
+<div class="doc-wrap">
+
+<!-- ══════════════════════════════════
+     PORTADA
+══════════════════════════════════ -->
+<section class="cover-page" id="portada">
+  <div class="cover-visual">
+    <svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs><pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.2" fill="rgba(46,139,118,0.18)"/></pattern></defs>
+      <rect width="720" height="300" fill="#1e2a38"/><rect width="720" height="300" fill="url(#dots)"/>
+      <!-- Three lenses visualization -->
+      <circle cx="180" cy="150" r="70" fill="none" stroke="rgba(46,139,118,0.25)" stroke-width="1.5"/>
+      <circle cx="180" cy="150" r="45" fill="none" stroke="rgba(46,139,118,0.18)" stroke-width="1"/>
+      <circle cx="180" cy="150" r="20" fill="rgba(46,139,118,0.15)"/>
+      <text x="180" y="155" fill="rgba(46,139,118,0.7)" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">AIMT</text>
+      <circle cx="360" cy="150" r="70" fill="none" stroke="rgba(164,129,17,0.25)" stroke-width="1.5"/>
+      <circle cx="360" cy="150" r="45" fill="none" stroke="rgba(164,129,17,0.18)" stroke-width="1"/>
+      <circle cx="360" cy="150" r="20" fill="rgba(164,129,17,0.12)"/>
+      <text x="360" y="155" fill="rgba(164,129,17,0.7)" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">AILS</text>
+      <circle cx="540" cy="150" r="70" fill="none" stroke="rgba(194,89,63,0.25)" stroke-width="1.5"/>
+      <circle cx="540" cy="150" r="45" fill="none" stroke="rgba(194,89,63,0.18)" stroke-width="1"/>
+      <circle cx="540" cy="150" r="20" fill="rgba(194,89,63,0.12)"/>
+      <text x="540" y="155" fill="rgba(194,89,63,0.7)" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">AICD</text>
+      <!-- Connecting arcs -->
+      <path d="M 248 120 Q 270 100 290 120" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+      <path d="M 428 120 Q 450 100 470 120" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+      <!-- Triangulation point -->
+      <circle cx="360" cy="280" r="8" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+      <line x1="180" y1="218" x2="360" y2="272" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+      <line x1="540" y1="218" x2="360" y2="272" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+      <text x="360" y="285" fill="rgba(255,255,255,0.3)" font-family="sans-serif" font-size="8" font-weight="700" text-anchor="middle" letter-spacing="2">INSIGHT DE CAUSA RAÍZ</text>
+    </svg>
+  </div>
+  <div class="cover-band">
+    <div class="c-sprint-lbl">Sprint Roadmap · 01 de 04</div>
+    <div class="c-theme">La Brecha AI de las Personas</div>
+  </div>
+  <div class="cover-body">
+    <div class="c-program">Analista BAIP — Brecha AI Personas</div>
+    <div class="c-badge">Certificación ARIA · Digital Change Academy · DCA</div>
+    <div class="student-row">
+      <div class="s-field"><label>Participante</label><input type="text" id="sf-nombre" data-save="sf-nombre" placeholder="Nombre completo"></div>
+      <div class="s-field"><label>Organización</label><input type="text" id="sf-empresa" data-save="sf-empresa" placeholder="Empresa"></div>
+      <div class="s-field"><label>Cohorte</label><input type="text" id="sf-cohorte" data-save="sf-cohorte" placeholder="Ej. BAIP-2025-01"></div>
+    </div>
+  </div>
+  <div class="cover-foot">
+    <div class="cf-text"><strong>Facilitador:</strong> César Lozano</div>
+    <div class="cf-text"><strong>Digital Change Advisors</strong> · Modelo ARIA</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     ÍNDICE
+══════════════════════════════════ -->
+<div id="contenido">
+  <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Contenido</span></div>
+    <div class="p-body">
+      <h1 class="sec-title">¿Qué encontrarás en este Roadmap?</h1>
+      <div class="toc-group">
+        <div class="toc-entry"><span class="toc-name">Mensaje del Facilitador</span><span class="toc-pg">02</span></div>
+        <div class="toc-entry"><span class="toc-name">Instrucciones de uso del Roadmap</span><span class="toc-pg">03</span></div>
+      </div>
+      <div class="toc-group">
+        <div class="toc-group-head">Experimento 1.01 &nbsp;·&nbsp; Lente AIMT</div>
+        <div class="toc-entry"><span class="toc-name">Clasificar la creencia, no la persona</span><span class="toc-pg">04</span></div>
+      </div>
+      <div class="toc-group">
+        <div class="toc-group-head">Experimento 1.02 &nbsp;·&nbsp; Lente AILS</div>
+        <div class="toc-entry"><span class="toc-name">Separar lo que el líder dice de lo que el equipo ve</span><span class="toc-pg">08</span></div>
+      </div>
+      <div class="toc-group">
+        <div class="toc-group-head">Experimento 1.03 &nbsp;·&nbsp; Lente AICD</div>
+        <div class="toc-entry"><span class="toc-name">Leer la cultura como estructura, no como clima</span><span class="toc-pg">13</span></div>
+      </div>
+      <div class="toc-group">
+        <div class="toc-group-head">Experimento 1.04 &nbsp;·&nbsp; Integración de las tres lentes</div>
+        <div class="toc-entry"><span class="toc-name">Triangular las tres lentes y entregar un insight de causa raíz</span><span class="toc-pg">18</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">1</div><div class="rule"></div></div>
+</div>
+
+<!-- ══════════════════════════════════
+     MENSAJE DEL FACILITADOR
+══════════════════════════════════ -->
+<div id="mensaje">
+  <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Mensaje</span></div>
+    <div class="p-body">
+      <div class="msg-layout">
+        <div class="msg-img">
+          <svg viewBox="0 0 180 240" xmlns="http://www.w3.org/2000/svg">
+            <rect width="180" height="240" fill="#f5f8f7"/>
+            <circle cx="90" cy="50" r="24" fill="none" stroke="#2e8b76" stroke-width="1.5"/>
+            <circle cx="90" cy="50" r="14" fill="rgba(46,139,118,0.1)"/>
+            <circle cx="90" cy="50" r="6" fill="#2e8b76" opacity=".6"/>
+            <line x1="90" y1="74" x2="90" y2="120" stroke="#2e8b76" stroke-width="1.5"/>
+            <line x1="60" y1="95" x2="120" y2="95" stroke="#2e8b76" stroke-width="1.5"/>
+            <line x1="90" y1="120" x2="68" y2="150" stroke="#2e8b76" stroke-width="1.5"/>
+            <line x1="90" y1="120" x2="112" y2="150" stroke="#2e8b76" stroke-width="1.5"/>
+            <!-- Three lens circles -->
+            <circle cx="50" cy="185" r="16" fill="none" stroke="#2e8b76" stroke-width="1.2"/>
+            <circle cx="90" cy="185" r="16" fill="none" stroke="#a48111" stroke-width="1.2"/>
+            <circle cx="130" cy="185" r="16" fill="none" stroke="#c2593f" stroke-width="1.2"/>
+            <text x="50" y="189" fill="#2e8b76" font-family="sans-serif" font-size="7" font-weight="700" text-anchor="middle">AIMT</text>
+            <text x="90" y="189" fill="#a48111" font-family="sans-serif" font-size="7" font-weight="700" text-anchor="middle">AILS</text>
+            <text x="130" y="189" fill="#c2593f" font-family="sans-serif" font-size="7" font-weight="700" text-anchor="middle">AICD</text>
+            <line x1="66" y1="195" x2="90" y2="215" stroke="rgba(30,42,56,0.2)" stroke-width="1"/>
+            <line x1="114" y1="195" x2="90" y2="215" stroke="rgba(30,42,56,0.2)" stroke-width="1"/>
+            <circle cx="90" cy="220" r="5" fill="#1e2a38" opacity=".3"/>
+          </svg>
+        </div>
+        <div>
+          <div class="msg-title">Mensaje del Facilitador</div>
+          <p>Existe una distancia crítica entre lo que la plataforma DCA entrega y lo que el C-Level necesita escuchar para actuar. Los reportes procesados — AIMT, AILS y AICD — son datos de precisión: cuantifican con exactitud qué creencias frenan la conducta, qué comportamientos de liderazgo bloquean la circulación del aprendizaje y qué estructuras culturales cronifican los obstáculos.</p>
+          <p>El problema no es la calidad del dato. El problema es la distancia entre el dato y la decisión. Un reporte de mentalidad en nivel Cautela no le dice al CEO qué hacer; un insight de causa raíz que conecta ese Cautela con los USD de inversión en IA que están en riesgo — y con la única palanca que los desbloquea — sí lo hace.</p>
+          <p>Esa traducción es exactamente la competencia que estos cuatro experimentos instalan. Cada uno trabaja con reportes ya procesados por la plataforma DCA · Suite BAIP — nunca con el instrumento directamente. Los tres primeros instalan la lectura de una lente cada uno: creencia, liderazgo y cultura. El cuarto las triangula en el producto que usted le entrega al responsable del retorno: un insight de causa raíz con magnitud, costo de oportunidad y una decisión concreta.</p>
+          <p>No se trata de gestionar el cambio. Se trata de diagnosticar con precisión dónde está bloqueado el ROI de la IA y nombrar la palanca que lo desbloquea.</p>
+          <div class="sig-block">
+            <div class="sig-line"></div>
+            <div class="sig-name">César Lozano</div>
+            <div class="sig-role">Facilitador · Digital Change Advisors</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">2</div><div class="rule"></div></div>
+</div>
+
+<!-- ══════════════════════════════════
+     INSTRUCCIONES
+══════════════════════════════════ -->
+<div id="instrucciones">
+  <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Instrucciones</span></div>
+    <div class="p-body">
+      <h1 class="sec-title">Instrucciones de Uso</h1>
+      <div class="sec-sublabel">¿Cómo utilizar este documento de forma efectiva?</div>
+      <div class="ni">
+        <div class="ni-head"><span class="nn">1.</span> Trabaje en la versión digital con autoguardado activo.</div>
+        <div class="ni-text">Este instrumento es HTML nativo con autoguardado automático. Sus registros se conservan en el dispositivo en tiempo real — no hay riesgo de perder el trabajo. Tenga el documento abierto cuando reciba los reportes procesados de la plataforma DCA · Suite BAIP para registrar sus hallazgos inmediatamente.</div>
+      </div>
+      <div class="ni">
+        <div class="ni-head"><span class="nn">2.</span> Complete el bloque de identificación antes de registrar evidencias.</div>
+        <div class="ni-text">Cada experimento abre con un bloque de identificación del reporte de trabajo — grupo/organización, fecha del reporte y nivel de aplicación. Complete este bloque <strong>antes</strong> de iniciar el registro de evidencias. El nivel de trabajo (base o campo) debe declararse al iniciar; determina el tipo de reporte con el que opera y el tipo de feedback que recibirá del facilitador.</div>
+      </div>
+      <div class="ni">
+        <div class="ni-head"><span class="nn">3.</span> Envíe cada experimento al completarlo — es obligatorio para la Mentoría.</div>
+        <div class="ni-text">Al finalizar cada experimento encontrará un botón de envío. El registro de evidencias enviado es la condición que habilita el feedback de seguimiento del facilitador y el requisito de acceso a la Sesión de Mentoría de Cohorte que cierra el Sprint 01.</div>
+      </div>
+      <div class="quote-band">
+        <p>El analista no entrega un tablero de niveles: entrega un insight de causa raíz dirigido al responsable del retorno. Ese es el producto que este sprint le enseña a producir.</p>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">3</div><div class="rule"></div></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     EXPERIMENTO 1.01
+     Clasificar la creencia, no la persona
+══════════════════════════════════════════ -->
+<div id="exp-101">
+  <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 1.01</span></div>
+    <div class="p-body">
+      <div class="exp-lbl">Experimento 1.01</div>
+      <h1 class="sec-title">Clasificar la creencia, no la persona</h1>
+      <div class="exp-meta-row">
+        <span class="exp-lente lente-aimt">Lente AIMT · Mentalidad IA</span>
+        <span class="exp-lente lente-int">Temática 1.1 · Creencias e interpretación de la realidad</span>
+      </div>
+      <p><em>La competencia raíz del analista es dejar de leer «resistencia al cambio» y empezar a leer una creencia específica, ubicada en su familia y con su nivel. Sin esa distinción, el diagnóstico colapsa en un juicio único.</em></p>
+      <p><strong>Objetivo de aprendizaje:</strong> Leer la lente AIMT de un reporte procesado, clasificar las señales de creencia en sus tres familias — estratégica, organizacional, psicológica —, nombrar la familia dominante por «mayor peso × nivel más bajo» y separar un freno de creencia de un freno de capacidad.</p>
+      <p><strong>Contexto de aplicación:</strong> La plataforma DCA · Suite BAIP entrega el reporte AIMT procesado. El Analista BAIP trabaja sobre ese reporte — no lanza la medición ni aplica el instrumento.</p>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">4</div><div class="rule"></div></div>
+</div>
+
+<div>
+  <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 1.01</span></div>
+    <div class="p-body">
+
+      <!-- Report ID Block -->
+      <div class="report-id-block">
+        <div class="rid-head">
+          <span class="rid-badge">Experimento 1.01</span>
+          <span class="rid-title">Identificación del Reporte de Trabajo</span>
+        </div>
+        <div class="rid-fields">
+          <div class="rid-field"><label>Grupo / Organización del reporte</label><input type="text" id="f-101-rid-grupo" data-save="f-101-rid-grupo" placeholder="Nombre del equipo u organización analizada"></div>
+          <div class="rid-field"><label>Fecha del reporte procesado</label><input type="date" id="f-101-rid-fecha" data-save="f-101-rid-fecha"></div>
+          <div class="rid-field"><label>Participante (de portada)</label><input type="text" id="f-101-rid-part" data-save="f-101-rid-part" placeholder="Se sincroniza desde portada"></div>
+        </div>
+        <div class="rid-level">
+          <div class="rid-level-lbl">Nivel de trabajo</div>
+          <div class="level-opts">
+            <label class="level-opt"><input type="radio" name="level-101" value="base" data-radio-save="f-101-nivel"><span>📋 Nivel base — Reporte-caso curado (anonimizado)</span></label>
+            <label class="level-opt"><input type="radio" name="level-101" value="campo" data-radio-save="f-101-nivel"><span>🏢 Nivel de campo — Reporte real de mi entorno</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- IP Guardrail -->
+      <div class="ip-guard">
+        <span class="ip-guard-icon">🔒</span>
+        <span>Este experimento opera sobre el reporte ya <strong>procesado</strong> por la plataforma DCA · Suite BAIP. El Analista BAIP lee e interpreta; no aplica el instrumento, no manipula reactivos y no calcula puntajes ni baremos.</span>
+      </div>
+
+      <!-- Paso a paso -->
+      <p style="font-weight:700;font-size:14px;color:var(--carbon);margin-bottom:12px;">Paso a paso</p>
+      <ul class="step-list">
+        <li><span>Recibir el reporte AIMT procesado y leer el perfil por obstáculo: solo familias y niveles que la plataforma ya entregó (Cautela · Vulnerable · Diestro · Óptimo).</span></li>
+        <li><span>Clasificar cada señal de creencia en su familia — estratégica, organizacional o psicológica — y registrar el nivel asignado por la plataforma.</span></li>
+        <li><span>Identificar la familia dominante: la de <strong>mayor peso con el nivel más bajo</strong>, no el promedio global del reporte.</span></li>
+        <li><span>Redactar una hipótesis de secuencia de intervención: qué creencia mover antes de cualquier capacitación, y por qué capacitar primero desperdiciaría la inversión en este caso.</span></li>
+        <li><span>Contrastar con un par de la cohorte o con el mentor: ¿es freno de creencia o freno de capacidad? Ajustar la hipótesis con base en el contraste.</span></li>
+      </ul>
+
+      <!-- Métricas -->
+      <div class="metric-pair">
+        <div class="metric-card beh"><div class="metric-card-lbl">Métrica de comportamiento</div><p>Proporción de señales correctamente clasificadas en su familia. Marcador observable: el analista deja de decir «resistencia» y nombra familia + obstáculo + nivel.</p></div>
+        <div class="metric-card biz"><div class="metric-card-lbl">Métrica de negocio</div><p>Monto de inversión en capacitación técnica que el diagnóstico revela mal dirigida — la familia en Cautela filtraría la formación — y que se reorienta a mover la creencia primero. Indicador: USD de formación reasignada o evitada.</p></div>
+      </div>
+
+      <!-- Rol de la IA -->
+      <div class="ia-role">
+        <span class="ia-role-icon">🤖</span>
+        <span><strong>Rol de la IA como andamiaje:</strong> Puede usar una herramienta de IA generativa para estresar la clasificación y contraargumentar la hipótesis de secuencia. La priorización la decide el analista; la IA no lee el reporte por usted ni genera puntajes o baremos.</span>
+      </div>
+
+      <!-- Evidence Fields -->
+      <div class="fill">
+        <div class="fill-lbl">Hoja de clasificación — Señal → Familia → Nivel</div>
+        <textarea id="f-101-e1" data-save="f-101-e1" rows="8" placeholder="Para cada señal relevante del reporte AIMT, registre:&#10;• Señal detectada (descripción de la creencia o comportamiento observable)&#10;• Familia: estratégica / organizacional / psicológica&#10;• Nivel asignado por la plataforma: Cautela / Vulnerable / Diestro / Óptimo&#10;&#10;Ejemplo:&#10;'Espera directriz antes de actuar' → Estratégica (#1) → Cautela"></textarea>
+        <div class="char-ct"><span id="cc-101-e1">0</span> caracteres</div>
+      </div>
+
+      <div class="fill">
+        <div class="fill-lbl">Familia dominante — Identificación y justificación</div>
+        <textarea id="f-101-e2" data-save="f-101-e2" rows="5" placeholder="¿Cuál es la familia de mayor peso con el nivel más bajo? Justifique por qué esa combinación de peso y nivel la convierte en la prioridad de intervención — y no el promedio global del reporte."></textarea>
+        <div class="char-ct"><span id="cc-101-e2">0</span> caracteres</div>
+      </div>
+
+      <div class="fill">
+        <div class="fill-lbl">Hipótesis de secuencia de intervención</div>
+        <textarea id="f-101-e3" data-save="f-101-e3" rows="6" placeholder="¿Qué creencia debe moverse antes de cualquier capacitación técnica? ¿Por qué capacitar primero, sobre esta familia en este nivel, desperdiciaría la inversión? Formule la hipótesis en lenguaje de retorno — no de aprendizaje."></textarea>
+        <div class="char-ct"><span id="cc-101-e3">0</span> caracteres</div>
+      </div>
+
+      <div class="fill">
+        <div class="fill-lbl">Nota de contraste — ¿Freno de creencia o freno de capacidad?</div>
+        <textarea id="f-101-e4" data-save="f-101-e4" rows="4" placeholder="Registre el resultado del contraste con su par o con el mentor: ¿qué cuestionó? ¿qué ajustó en su clasificación o hipótesis? ¿cuál fue el veredicto final — creencia o capacidad?"></textarea>
+        <div class="char-ct"><span id="cc-101-e4">0</span> caracteres</div>
+      </div>
+
+      <div class="fill fill-obs">
+        <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
+        <textarea id="f-101-obs" data-save="f-101-obs" rows="4" placeholder="Comparta con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores. Su observación puede mejorar el instrumento y la formación de las próximas cohortes."></textarea>
+        <div class="char-ct"><span id="cc-101-obs">0</span> caracteres</div>
+      </div>
+
+      <!-- Submit -->
+      <div class="submit-sec">
+        <h3>Envío del Experimento 1.01</h3>
+        <p>Una vez completados los cinco pasos y los campos de evidencia, envíe su registro. Este envío es el requisito de acceso al feedback de seguimiento y a la Sesión de Mentoría de Cohorte.</p>
+        <div class="submit-actions">
+          <button class="btn-sub" onclick="openModal('101')" id="btn-101">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
+            Enviar Experimento 1.01
+          </button>
+          <button class="btn-print" onclick="window.print()">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="4" y="2" width="12" height="8" rx="1"/><rect x="3" y="10" width="14" height="8" rx="1"/><rect x="7" y="13" width="6" height="5" rx="0.5" fill="currentColor" stroke="none"/></svg>
+            Guardar copia en PDF
+          </button>
+        </div>
+        <div class="sub-ok" id="ok-101">✓ Experimento 1.01 enviado correctamente.</div>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">7</div><div class="rule"></div></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     EXPERIMENTO 1.02
+     Separar lo que el líder dice de lo que el equipo ve
+══════════════════════════════════════════ -->
+<div id="exp-102">
+  <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 1.02</span></div>
+    <div class="p-body">
+      <div class="exp-lbl">Experimento 1.02</div>
+      <h1 class="sec-title">Separar lo que el líder dice de lo que el equipo ve</h1>
+      <div class="exp-meta-row">
+        <span class="exp-lente lente-ails">Lente AILS · Liderazgo IA (5C)</span>
+        <span class="exp-lente lente-int">Temática 1.2 · Comportamientos de liderazgo que frenan la adopción</span>
+      </div>
+      <p><em>La adopción la mueve lo que el equipo observa en el líder, no lo que declara. El analista lee esa brecha en la lente AILS y la distingue de una creencia colectiva: confundirlas dirige mal la intervención.</em></p>
+      <p><strong>Objetivo de aprendizaje:</strong> Leer la lente AILS, ubicar el déficit de comportamiento de liderazgo en una de las 5C — Conexión, Confianza, Coherencia, Cocreación, Cuidado — y separar un freno de liderazgo de un freno de creencia organizacional (AIMT).</p>
+      <p><strong>Contexto de aplicación:</strong> Reporte AILS ya procesado — perfil de un líder o cohorte de líderes anonimizado. Lectura de reporte, no aplicación del instrumento.</p>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">8</div><div class="rule"></div></div>
+</div>
+
+<div>
+  <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 1.02</span></div>
+    <div class="p-body">
+
+      <div class="report-id-block">
+        <div class="rid-head">
+          <span class="rid-badge">Experimento 1.02</span>
+          <span class="rid-title">Identificación del Reporte de Trabajo</span>
+        </div>
+        <div class="rid-fields">
+          <div class="rid-field"><label>Grupo / Organización del reporte</label><input type="text" id="f-102-rid-grupo" data-save="f-102-rid-grupo" placeholder="Nombre del equipo u organización analizada"></div>
+          <div class="rid-field"><label>Fecha del reporte procesado</label><input type="date" id="f-102-rid-fecha" data-save="f-102-rid-fecha"></div>
+          <div class="rid-field"><label>Participante (de portada)</label><input type="text" id="f-102-rid-part" data-save="f-102-rid-part" placeholder="Se sincroniza desde portada"></div>
+        </div>
+        <div class="rid-level">
+          <div class="rid-level-lbl">Nivel de trabajo</div>
+          <div class="level-opts">
+            <label class="level-opt"><input type="radio" name="level-102" value="base" data-radio-save="f-102-nivel"><span>📋 Nivel base — Reporte-caso curado (anonimizado)</span></label>
+            <label class="level-opt"><input type="radio" name="level-102" value="campo" data-radio-save="f-102-nivel"><span>🏢 Nivel de campo — Reporte real de mi entorno</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="ip-guard">
+        <span class="ip-guard-icon">🔒</span>
+        <span>Este experimento opera sobre el reporte ya <strong>procesado</strong> por la plataforma DCA · Suite BAIP. El Analista BAIP lee e interpreta; no aplica el instrumento, no manipula reactivos y no calcula puntajes ni baremos.</span>
+      </div>
+
+      <p style="font-weight:700;font-size:14px;color:var(--carbon);margin-bottom:12px;">Paso a paso</p>
+      <ul class="step-list">
+        <li><span>Leer el reporte AILS: perfil de comportamientos por cada una de las 5C y su nivel (Cautela · Vulnerable · Diestro · Óptimo).</span></li>
+        <li><span>Marcar la brecha «dice–hace» que el reporte hace visible: lo que el liderazgo declara frente a lo que el equipo, de forma anónima, observa que hace.</span></li>
+        <li><span>Localizar la C de <strong>menor nivel</strong> que más bloquea la conducta de experimentación del equipo. Recordar: Conexión y Confianza encienden la experimentación; Coherencia, Cocreación y Cuidado la vuelven permanente.</span></li>
+        <li><span>Cruzar con la familia organizacional del AIMT del mismo grupo: ¿el freno a escalar es la creencia colectiva o el comportamiento del líder? Nombrar el cuello de botella primario.</span></li>
+        <li><span>Formular una palanca de liderazgo: qué comportamiento concreto y observable debe volverse visible para desbloquear la circulación del aprendizaje.</span></li>
+      </ul>
+
+      <div class="metric-pair">
+        <div class="metric-card beh"><div class="metric-card-lbl">Métrica de comportamiento</div><p>El analista nombra la C deficitaria con evidencia del reporte y separa freno-liderazgo de freno-creencia sin fundirlos. Marcador: señala el comportamiento 5C específico, no «falta de liderazgo» genérico.</p></div>
+        <div class="metric-card biz"><div class="metric-card-lbl">Métrica de negocio</div><p>Tiempo a la primera réplica de una práctica de IA de un nodo a otro (lead time de escalado). La palanca propuesta busca acortarlo desbloqueando la C que retiene la circulación.</p></div>
+      </div>
+
+      <div class="ia-role">
+        <span class="ia-role-icon">🤖</span>
+        <span><strong>Rol de la IA como andamiaje:</strong> Puede usar IA para contrastar la lectura de las 5C y simular cómo se vería un comportamiento «modelado» frente a uno solo «declarado». La IA no puntúa el reporte ni decide el cuello de botella.</span>
+      </div>
+
+      <div class="fill">
+        <div class="fill-lbl">Mapa Dice–Hace por 5C</div>
+        <textarea id="f-102-e1" data-save="f-102-e1" rows="10" placeholder="Para cada una de las 5C, registre lo que el reporte refleja:&#10;&#10;Conexión:&#10;• Lo que el liderazgo declara: ...&#10;• Lo que el equipo observa: ...&#10;• Nivel asignado: ...&#10;&#10;Confianza:&#10;• Declara: ... | Observa: ... | Nivel: ...&#10;&#10;Coherencia:&#10;• Declara: ... | Observa: ... | Nivel: ...&#10;&#10;Cocreación:&#10;• Declara: ... | Observa: ... | Nivel: ...&#10;&#10;Cuidado:&#10;• Declara: ... | Observa: ... | Nivel: ..."></textarea>
+        <div class="char-ct"><span id="cc-102-e1">0</span> caracteres</div>
+      </div>
+
+      <div class="fill">
+        <div class="fill-lbl">C deficitaria — Identificación y justificación</div>
+        <textarea id="f-102-e2" data-save="f-102-e2" rows="5" placeholder="¿Cuál de las 5C tiene el nivel más bajo y bloquea más la experimentación del equipo? ¿Es un freno de encendido (Conexión/Confianza) o de permanencia (Coherencia/Cocreación/Cuidado)? Justifique con evidencia del reporte — no con impresiones."></textarea>
+        <div class="char-ct"><span id="cc-102-e2">0</span> caracteres</div>
+      </div>
+
+      <div class="fill">
+        <div class="fill-lbl">Veredicto — ¿Cuello de botella de liderazgo o de creencia?</div>
+        <textarea id="f-102-e3" data-save="f-102-e3" rows="5" placeholder="¿El freno a escalar la adopción de IA es la creencia organizacional del grupo (AIMT) o el comportamiento del líder (AILS)? Justifique con evidencia cruzada de los dos reportes. Sea específico: no basta decir 'ambos'; nombre cuál pesa más y por qué."></textarea>
+        <div class="char-ct"><span id="cc-102-e3">0</span> caracteres</div>
+      </div>
+
+      <div class="fill">
+        <div class="fill-lbl">Palanca de liderazgo observable recomendada</div>
+        <textarea id="f-102-e4" data-save="f-102-e4" rows="5" placeholder="¿Qué comportamiento concreto y observable debe volverse visible en el líder para desbloquear la C deficitaria y reactivar la circulación del aprendizaje de IA? Sea específico: no 'comunicar más', sino qué hace, dónde, con qué frecuencia y ante qué situación."></textarea>
+        <div class="char-ct"><span id="cc-102-e4">0</span> caracteres</div>
+      </div>
+
+      <div class="fill fill-obs">
+        <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
+        <textarea id="f-102-obs" data-save="f-102-obs" rows="4" placeholder="Comparta con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores."></textarea>
+        <div class="char-ct"><span id="cc-102-obs">0</span> caracteres</div>
+      </div>
+
+      <div class="submit-sec">
+        <h3>Envío del Experimento 1.02</h3>
+        <p>Complete el mapa dice-hace, el veredicto de cuello de botella y la palanca observable antes de enviar. Este registro alimenta el feedback de seguimiento y la mentoría de cohorte.</p>
+        <div class="submit-actions">
+          <button class="btn-sub" onclick="openModal('102')" id="btn-102">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
+            Enviar Experimento 1.02
+          </button>
+          <button class="btn-print" onclick="window.print()">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="4" y="2" width="12" height="8" rx="1"/><rect x="3" y="10" width="14" height="8" rx="1"/><rect x="7" y="13" width="6" height="5" rx="0.5" fill="currentColor" stroke="none"/></svg>
+            Guardar copia en PDF
+          </button>
+        </div>
+        <div class="sub-ok" id="ok-102">✓ Experimento 1.02 enviado correctamente.</div>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">12</div><div class="rule"></div></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     EXPERIMENTO 1.03
+     Leer la cultura como estructura, no como clima
+══════════════════════════════════════════ -->
+<div id="exp-103">
+  <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 1.03</span></div>
+    <div class="p-body">
+      <div class="exp-lbl">Experimento 1.03</div>
+      <h1 class="sec-title">Leer la cultura como estructura, no como clima</h1>
+      <div class="exp-meta-row">
+        <span class="exp-lente lente-aicd">Lente AICD · Cultura IA</span>
+        <span class="exp-lente lente-int">Temática 1.3 · Rasgos de ADN IA cultural</span>
+      </div>
+      <p><em>La cultura no es clima: es lo que la estructura institucionaliza. El analista lee en la lente AICD qué mecanismo estructural cronifica o cura un freno individual y nombra la palanca que lo mueve.</em></p>
+      <p><strong>Objetivo de aprendizaje:</strong> Leer la lente AICD, separar cultura (lo institucionalizado, verificable por un tercero) de clima (la percepción colectiva puntual), ubicar los marcadores de ADN IA que frenan la circulación del aprendizaje y leer cómo la cultura amplifica o desactiva un freno individual detectado por el AIMT.</p>
+      <p><strong>Contexto de aplicación:</strong> Reporte AICD ya procesado — ADN IA de una unidad anonimizada. Lectura de reporte, no aplicación del instrumento.</p>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">13</div><div class="rule"></div></div>
+</div>
+
+<div>
+  <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 1.03</span></div>
+    <div class="p-body">
+
+      <div class="report-id-block">
+        <div class="rid-head">
+          <span class="rid-badge">Experimento 1.03</span>
+          <span class="rid-title">Identificación del Reporte de Trabajo</span>
+        </div>
+        <div class="rid-fields">
+          <div class="rid-field"><label>Grupo / Organización del reporte</label><input type="text" id="f-103-rid-grupo" data-save="f-103-rid-grupo" placeholder="Nombre del equipo u organización analizada"></div>
+          <div class="rid-field"><label>Fecha del reporte procesado</label><input type="date" id="f-103-rid-fecha" data-save="f-103-rid-fecha"></div>
+          <div class="rid-field"><label>Participante (de portada)</label><input type="text" id="f-103-rid-part" data-save="f-103-rid-part" placeholder="Se sincroniza desde portada"></div>
+        </div>
+        <div class="rid-level">
+          <div class="rid-level-lbl">Nivel de trabajo</div>
+          <div class="level-opts">
+            <label class="level-opt"><input type="radio" name="level-103" value="base" data-radio-save="f-103-nivel"><span>📋 Nivel base — Reporte-caso curado (anonimizado)</span></label>
+            <label class="level-opt"><input type="radio" name="level-103" value="campo" data-radio-save="f-103-nivel"><span>🏢 Nivel de campo — Reporte real de mi entorno</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="ip-guard">
+        <span class="ip-guard-icon">🔒</span>
+        <span>Este experimento opera sobre el reporte ya <strong>procesado</strong> por la plataforma DCA · Suite BAIP. El Analista BAIP lee e interpreta; no aplica el instrumento, no manipula reactivos y no calcula puntajes ni baremos.</span>
+      </div>
+
+      <p style="font-weight:700;font-size:14px;color:var(--carbon);margin-bottom:12px;">Paso a paso</p>
+      <ul class="step-list">
+        <li><span>Leer el reporte AICD: marcadores de ADN IA y su nivel, separando desde el inicio cultura (lo institucionalizado, verificable) de clima (la percepción puntual).</span></li>
+        <li><span>Identificar los marcadores de <strong>menor nivel</strong> que más obstruyen que el aprendizaje de IA se comparta y escale dentro de la organización.</span></li>
+        <li><span>Conectar con el AIMT del mismo grupo: ¿la cultura cronifica un freno individual — como el síndrome del impostor — o lo cura? Nombrar el mecanismo estructural concreto: incentivo, ritual o norma.</span></li>
+        <li><span>Distinguir qué se mueve cambiando la estructura (AICD) de qué se mueve interviniendo la creencia (AIMT) o el comportamiento del líder (AILS).</span></li>
+        <li><span>Redactar la lectura de causa raíz cultural: qué marcador, qué obstáculo corporativo y qué palanca estructural concreta puede moverlo.</span></li>
+      </ul>
+
+      <div class="metric-pair">
+        <div class="metric-card beh"><div class="metric-card-lbl">Métrica de comportamiento</div><p>El analista separa cultura de clima y nombra el mecanismo institucional específico en vez de hablar de «cultura resistente». Marcador: señala el incentivo, ritual o norma — no un rasgo difuso.</p></div>
+        <div class="metric-card biz"><div class="metric-card-lbl">Métrica de negocio</div><p>Tasa de uso sostenido de IA después de la capacitación. La palanca estructural busca convertir formación desperdiciada en uso real y adopción sostenida. Indicador: brecha capacidad–uso antes y después de la intervención estructural.</p></div>
+      </div>
+
+      <div class="ia-role">
+        <span class="ia-role-icon">🤖</span>
+        <span><strong>Rol de la IA como andamiaje:</strong> Puede usar IA para mapear marcador → mecanismo estructural → obstáculo y para distinguir afirmaciones de clima de afirmaciones de cultura. La IA no puntúa el reporte ni determina el mecanismo.</span>
+      </div>
+
+      <div class="fill">
+        <div class="fill-lbl">Lectura de marcadores AICD — Cultura vs Clima</div>
+        <textarea id="f-103-e1" data-save="f-103-e1" rows="9" placeholder="Para cada marcador relevante del reporte AICD, registre:&#10;• Marcador de ADN IA (descripción de lo que mide)&#10;• Nivel asignado: Cautela / Vulnerable / Diestro / Óptimo&#10;• Tipo: CULTURA (hecho institucional verificable) o CLIMA (percepción puntual del grupo)&#10;&#10;Ejemplo:&#10;'Ausencia de rituales de compartición de aprendizajes de IA entre áreas' → Cautela → Cultura (no hay protocolo, no incentivo)&#10;'Percepción de que «acá no se comparte»' → Clima (percepción, no estructura)"></textarea>
+        <div class="char-ct"><span id="cc-103-e1">0</span> caracteres</div>
+      </div>
+
+      <div class="fill">
+        <div class="fill-lbl">Mecanismo estructural identificado — ¿Cronifica o cura el freno individual?</div>
+        <textarea id="f-103-e2" data-save="f-103-e2" rows="6" placeholder="¿Qué mecanismo estructural específico — incentivo, ritual o norma — cronifica un freno individual del AIMT (como el síndrome del impostor o el miedo al desplazamiento) o, alternativamente, lo cura? Nombre el mecanismo concreto: no 'la cultura no apoya', sino qué estructura específica produce ese resultado."></textarea>
+        <div class="char-ct"><span id="cc-103-e2">0</span> caracteres</div>
+      </div>
+
+      <div class="fill">
+        <div class="fill-lbl">Lectura de causa raíz cultural — Marcador, obstáculo y palanca estructural</div>
+        <textarea id="f-103-e3" data-save="f-103-e3" rows="6" placeholder="Sintetice en lenguaje ejecutivo: ¿qué marcador de ADN IA tiene el nivel más bajo? ¿A qué obstáculo corporativo está conectado? ¿Qué palanca estructural concreta — no un taller, no una charla — puede moverlo y con qué efecto esperado sobre la adopción de IA?"></textarea>
+        <div class="char-ct"><span id="cc-103-e3">0</span> caracteres</div>
+      </div>
+
+      <div class="fill fill-obs">
+        <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
+        <textarea id="f-103-obs" data-save="f-103-obs" rows="4" placeholder="Comparta con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores."></textarea>
+        <div class="char-ct"><span id="cc-103-obs">0</span> caracteres</div>
+      </div>
+
+      <div class="submit-sec">
+        <h3>Envío del Experimento 1.03</h3>
+        <p>Complete la lectura de marcadores, el mecanismo estructural y la causa raíz cultural antes de enviar.</p>
+        <div class="submit-actions">
+          <button class="btn-sub" onclick="openModal('103')" id="btn-103">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
+            Enviar Experimento 1.03
+          </button>
+          <button class="btn-print" onclick="window.print()">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="4" y="2" width="12" height="8" rx="1"/><rect x="3" y="10" width="14" height="8" rx="1"/><rect x="7" y="13" width="6" height="5" rx="0.5" fill="currentColor" stroke="none"/></svg>
+            Guardar copia en PDF
+          </button>
+        </div>
+        <div class="sub-ok" id="ok-103">✓ Experimento 1.03 enviado correctamente.</div>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">17</div><div class="rule"></div></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     EXPERIMENTO 1.04
+     Triangular las tres lentes y entregar un insight de causa raíz
+══════════════════════════════════════════ -->
+<div id="exp-104">
+  <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 1.04</span></div>
+    <div class="p-body">
+      <div class="exp-lbl">Experimento 1.04</div>
+      <h1 class="sec-title">Triangular las tres lentes y entregar un insight de causa raíz</h1>
+      <div class="exp-meta-row">
+        <span class="exp-lente lente-int">Integración AIMT · AILS · AICD</span>
+        <span class="exp-lente lente-int">Temática 1.4 · Lectura del reporte procesado</span>
+        <span class="entregable-badge">⚑ Entregable obligatorio del Sprint</span>
+      </div>
+      <p><em>El diagnóstico no vive en una lente: vive en el cruce de las tres. El producto del analista no es un tablero ni un promedio, sino un insight de causa raíz dirigido al responsable del retorno.</em></p>
+      <p><strong>Objetivo de aprendizaje:</strong> Triangular AIMT, AILS y AICD sobre el mismo grupo, priorizar por el obstáculo de mayor peso con el nivel más bajo — no por promedio — , nombrar el cuello de botella y traducirlo en un insight de causa raíz para el responsable del retorno.</p>
+      <p><strong>Contexto de aplicación:</strong> Paquete de tres reportes procesados — AIMT + AILS + AICD — del mismo grupo. Este es el experimento de cierre del Sprint 01.</p>
+      <div class="note"><div class="note-hd">Entregable obligatorio</div><p>El insight de causa raíz (Campo E3) es el entregable principal del Sprint 01. Es la pieza que el analista presenta en la Sesión de Mentoría de Cohorte y el criterio sobre el que el facilitador emite el feedback de cierre del sprint.</p></div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">18</div><div class="rule"></div></div>
+</div>
+
+<div>
+  <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 1.04</span></div>
+    <div class="p-body">
+
+      <div class="report-id-block">
+        <div class="rid-head">
+          <span class="rid-badge">Experimento 1.04</span>
+          <span class="rid-title">Identificación del Reporte de Trabajo</span>
+        </div>
+        <div class="rid-fields">
+          <div class="rid-field"><label>Grupo / Organización del reporte</label><input type="text" id="f-104-rid-grupo" data-save="f-104-rid-grupo" placeholder="Nombre del equipo u organización analizada"></div>
+          <div class="rid-field"><label>Fecha del paquete de reportes</label><input type="date" id="f-104-rid-fecha" data-save="f-104-rid-fecha"></div>
+          <div class="rid-field"><label>Participante (de portada)</label><input type="text" id="f-104-rid-part" data-save="f-104-rid-part" placeholder="Se sincroniza desde portada"></div>
+        </div>
+        <div class="rid-level">
+          <div class="rid-level-lbl">Nivel de trabajo</div>
+          <div class="level-opts">
+            <label class="level-opt"><input type="radio" name="level-104" value="base" data-radio-save="f-104-nivel"><span>📋 Nivel base — Paquete de tres reportes-caso curados</span></label>
+            <label class="level-opt"><input type="radio" name="level-104" value="campo" data-radio-save="f-104-nivel"><span>🏢 Nivel de campo — Tres reportes reales del mismo grupo</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="ip-guard">
+        <span class="ip-guard-icon">🔒</span>
+        <span>Este experimento opera sobre reportes ya <strong>procesados</strong> por la plataforma DCA · Suite BAIP. El Analista BAIP lee, triangula y formula el insight; no aplica instrumentos, no manipula reactivos y no calcula puntajes ni baremos. El veredicto de priorización lo decide el analista — no una IA.</span>
+      </div>
+
+      <p style="font-weight:700;font-size:14px;color:var(--carbon);margin-bottom:12px;">Paso a paso</p>
+      <ul class="step-list">
+        <li><span>Leer las tres lentes del mismo grupo y construir la <strong>matriz de triangulación</strong>: obstáculo × lente × nivel.</span></li>
+        <li><span>Priorizar: localizar el obstáculo de <strong>mayor peso con el nivel más bajo</strong> a través de las tres lentes. Descartar el promedio: el promedio diluye la severidad del cuello de botella.</span></li>
+        <li><span>Nombrar el cuello de botella primario y la <strong>secuencia de intervención</strong> — qué se mueve primero y qué después — justificando el orden con evidencia de las tres lentes.</span></li>
+        <li><span>Traducir el diagnóstico a un <strong>insight de causa raíz</strong> de una página para el responsable del retorno: qué bloquea el ROI de la IA, por qué y qué palanca lo desbloquea — sin reactivos, sin baremos, sin tablero.</span></li>
+        <li><span>Sostener el insight en lenguaje de KPI y retorno ante el mentor o el jurado, verificando que la recomendación no se deslice hacia capacitación ni hacia gestión humana.</span></li>
+      </ul>
+
+      <div class="metric-pair">
+        <div class="metric-card beh"><div class="metric-card-lbl">Métrica de comportamiento</div><p>El analista entrega un insight de causa raíz — no un tablero ni un promedio — , prioriza por «peso × nivel más bajo» y sostiene el encuadre de retorno ante el responsable del resultado.</p></div>
+        <div class="metric-card biz"><div class="metric-card-lbl">Métrica de negocio</div><p>El insight conecta la brecha priorizada con un KPI de negocio y estima el retorno de IA en riesgo o desbloqueable por el cuello de botella humano identificado. Indicador: USD de inversión en IA en riesgo y retorno desbloqueable cuantificado.</p></div>
+      </div>
+
+      <div class="ia-role">
+        <span class="ia-role-icon">🤖</span>
+        <span><strong>Rol de la IA como andamiaje:</strong> Puede usar IA para estresar la priorización — «¿es de verdad el de mayor peso con el menor nivel?» — y pulir el insight a lenguaje C-Level de retorno. La IA no decide la priorización ni redacta el veredicto final por el analista.</span>
+      </div>
+
+      <div class="fill">
+        <div class="fill-lbl">Matriz de triangulación — Obstáculo × Lente × Nivel</div>
+        <textarea id="f-104-e1" data-save="f-104-e1" rows="10" placeholder="Para cada obstáculo relevante identificado en los tres reportes, registre:&#10;&#10;Obstáculo #__ [descripción] | Peso (Alto/Medio/Bajo)&#10;• AIMT: nivel ... | señal: ...&#10;• AILS: nivel ... | C afectada: ...&#10;• AICD: nivel ... | marcador: ...&#10;• Convergencia: ¿refuerzo (los tres coinciden) o tensión (se contradicen)?&#10;&#10;Repita para cada obstáculo significativo. Identifique al final el de mayor peso × nivel más bajo a través de las tres lentes."></textarea>
+        <div class="char-ct"><span id="cc-104-e1">0</span> caracteres</div>
+      </div>
+
+      <div class="fill">
+        <div class="fill-lbl">Cuello de botella primario y secuencia de intervención</div>
+        <textarea id="f-104-e2" data-save="f-104-e2" rows="6" placeholder="¿Cuál es el obstáculo de mayor peso con el nivel más bajo a través de las tres lentes? ¿Por qué ese y no el promedio? ¿En qué secuencia se interviene — qué primero, qué después — y por qué ese orden? Justifique con evidencia de la matriz, no con intuición."></textarea>
+        <div class="char-ct"><span id="cc-104-e2">0</span> caracteres</div>
+      </div>
+
+      <div class="fill">
+        <div class="fill-lbl">Insight de causa raíz — Entregable obligatorio del Sprint 01</div>
+        <textarea id="f-104-e3" data-save="f-104-e3" rows="10" style="min-height:180px;" placeholder="Redacte el insight de causa raíz para el responsable del retorno. Debe incluir, en una página:&#10;&#10;1. Qué bloquea el ROI de la IA en esta organización/grupo (el cuello de botella con evidencia de las tres lentes).&#10;2. Por qué ese bloqueo no se resuelve con capacitación ni con comunicación (el mecanismo causal).&#10;3. Qué palanca lo desbloquea (específica, no genérica).&#10;4. La magnitud del retorno en riesgo o desbloqueable (estimación en USD u otro KPI relevante).&#10;&#10;Sin reactivos. Sin baremos. Sin tablero. Solo el insight dirigido al responsable del resultado."></textarea>
+        <div class="char-ct"><span id="cc-104-e3">0</span> caracteres</div>
+      </div>
+
+      <div class="fill">
+        <div class="fill-lbl">Registro de validación del encuadre de retorno</div>
+        <textarea id="f-104-e4" data-save="f-104-e4" rows="5" placeholder="¿Cómo se validó el insight ante el mentor o ante un par de la cohorte? ¿Qué cuestionamientos surgieron? ¿Cómo respondió? ¿El encuadre se sostuvo en lenguaje de retorno o se deslizó hacia capacitación o gestión humana? Registre los ajustes realizados."></textarea>
+        <div class="char-ct"><span id="cc-104-e4">0</span> caracteres</div>
+      </div>
+
+      <div class="fill fill-obs">
+        <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
+        <textarea id="f-104-obs" data-save="f-104-obs" rows="4" placeholder="Comparta con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores. Su observación puede mejorar el instrumento y la formación de las próximas cohortes."></textarea>
+        <div class="char-ct"><span id="cc-104-obs">0</span> caracteres</div>
+      </div>
+
+      <div class="submit-sec">
+        <h3>Envío del Experimento 1.04 — Cierre del Sprint 01</h3>
+        <p>Al enviar este experimento completa el Sprint Roadmap 01. El insight de causa raíz (campo E3) es el entregable que el facilitador revisará para el feedback de cierre y la Sesión de Mentoría de Cohorte.</p>
+        <div class="submit-actions">
+          <button class="btn-sub" onclick="openModal('104')" id="btn-104">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
+            Enviar Experimento 1.04 — Cerrar Sprint 01
+          </button>
+          <button class="btn-print" onclick="window.print()">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="4" y="2" width="12" height="8" rx="1"/><rect x="3" y="10" width="14" height="8" rx="1"/><rect x="7" y="13" width="6" height="5" rx="0.5" fill="currentColor" stroke="none"/></svg>
+            Guardar copia completa en PDF
+          </button>
+        </div>
+        <div class="sub-ok" id="ok-104">✓ Sprint 01 completado. Experimento 1.04 enviado correctamente.</div>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">23</div><div class="rule"></div></div>
+</div>
+
+<!-- ══════════════════════════════════
+     CONTRAPORTADA
+══════════════════════════════════ -->
+<section class="back-cover">
+  <div class="cover-visual">
+    <svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs><pattern id="dots2" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.2" fill="rgba(46,139,118,0.18)"/></pattern></defs>
+      <rect width="720" height="300" fill="#1e2a38"/><rect width="720" height="300" fill="url(#dots2)"/>
+      <circle cx="360" cy="150" r="90" fill="none" stroke="rgba(46,139,118,0.15)" stroke-width="1"/>
+      <circle cx="360" cy="150" r="60" fill="none" stroke="rgba(46,139,118,0.2)" stroke-width="1"/>
+      <circle cx="360" cy="150" r="30" fill="rgba(46,139,118,0.1)"/>
+      <circle cx="360" cy="150" r="8" fill="#2e8b76" opacity=".7"/>
+      <circle cx="360" cy="60" r="5" fill="#a48111" opacity=".8"/>
+      <circle cx="447" cy="105" r="4" fill="#2e8b76" opacity=".7"/>
+      <circle cx="447" cy="195" r="4" fill="#2e8b76" opacity=".7"/>
+      <circle cx="360" cy="240" r="5" fill="#a48111" opacity=".8"/>
+      <circle cx="273" cy="195" r="4" fill="#2e8b76" opacity=".7"/>
+      <circle cx="273" cy="105" r="4" fill="#2e8b76" opacity=".7"/>
+      <line x1="360" y1="60" x2="447" y2="105" stroke="rgba(46,139,118,0.2)" stroke-width="1"/>
+      <line x1="447" y1="105" x2="447" y2="195" stroke="rgba(46,139,118,0.2)" stroke-width="1"/>
+      <line x1="447" y1="195" x2="360" y2="240" stroke="rgba(46,139,118,0.2)" stroke-width="1"/>
+      <line x1="360" y1="240" x2="273" y2="195" stroke="rgba(46,139,118,0.2)" stroke-width="1"/>
+      <line x1="273" y1="195" x2="273" y2="105" stroke="rgba(46,139,118,0.2)" stroke-width="1"/>
+      <line x1="273" y1="105" x2="360" y2="60" stroke="rgba(46,139,118,0.2)" stroke-width="1"/>
+      <text x="360" y="158" fill="rgba(164,129,17,0.7)" font-family="Georgia, serif" font-size="22" text-anchor="middle">ARIA</text>
+    </svg>
+  </div>
+  <div class="bc-band">
+    <div class="bc-sprint">Sprint Roadmap · 01 de 04</div>
+    <div class="bc-theme">La Brecha AI de las Personas</div>
+  </div>
+  <div class="bc-body">
+    <div class="bc-program">Analista BAIP — Brecha AI Personas</div>
+    <div class="c-badge" style="margin-top:10px;">Certificación ARIA · Digital Change Academy · DCA</div>
+  </div>
+  <div class="bc-foot">
+    <div class="bc-foot-t"><strong>Facilitador:</strong> César Lozano</div>
+    <div class="bc-foot-t"><strong>Digital Change Advisors</strong> · Modelo ARIA</div>
+  </div>
+</section>
+
+</div><!-- /doc-wrap -->
+
+<!-- MODAL -->
+<div class="modal-ov" id="modal">
+  <div class="modal">
+    <div class="modal-title" id="modal-title">Resumen del Experimento</div>
+    <div class="modal-sub" id="modal-sub"></div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-actions">
+      <button class="btn-m p" onclick="copyModal()">📋 Copiar resumen</button>
+      <button class="btn-m p" onclick="mailModal()">✉ Abrir en correo</button>
+      <button class="btn-m s" onclick="closeModal()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══ AUTOSAVE ══════════════════════════════
+const SAVE_KEY = 'dca_aria_sprint01_v3';
+let saveTimer;
+const saveDot = document.getElementById('saveDot');
+
+function getData() { try { return JSON.parse(localStorage.getItem(SAVE_KEY) || '{}'); } catch(e) { return {}; } }
+
+function saveField(key, val) {
+  const d = getData(); d[key] = val; localStorage.setItem(SAVE_KEY, JSON.stringify(d));
+}
+
+function loadAll() {
+  const d = getData();
+  // Text/date inputs and textareas
+  document.querySelectorAll('[data-save]').forEach(el => {
+    const k = el.dataset.save;
+    if (d[k] !== undefined) {
+      el.value = d[k];
+      if (el.tagName === 'TEXTAREA' && d[k]) el.classList.add('filled');
+    }
+  });
+  // Radio buttons
+  document.querySelectorAll('[data-radio-save]').forEach(radio => {
+    const k = radio.dataset.radioSave;
+    if (d[k] === radio.value) radio.checked = true;
+  });
+  // Sync participant fields from cover
+  syncParticipant();
+  updateProgress();
+}
+
+// Sync participant name from cover to all RID blocks
+function syncParticipant() {
+  const nombre = document.getElementById('sf-nombre')?.value || '';
+  ['101','102','103','104'].forEach(n => {
+    const el = document.getElementById(`f-${n}-rid-part`);
+    if (el && !el.dataset.manually) el.value = nombre;
+  });
+}
+
+let saveTimer2;
+function autosave() {
+  saveDot.className = 'save-dot saving';
+  clearTimeout(saveTimer2);
+  saveTimer2 = setTimeout(() => {
+    saveDot.className = 'save-dot saved';
+    setTimeout(() => saveDot.className = 'save-dot', 2000);
+  }, 800);
+}
+
+document.querySelectorAll('[data-save]').forEach(el => {
+  el.addEventListener('input', () => {
+    saveField(el.dataset.save, el.value);
+    if (el.tagName === 'TEXTAREA') el.classList.toggle('filled', el.value.length > 0);
+    if (el.id === 'sf-nombre') syncParticipant();
+    autosave(); updateProgress(); updateCharCount(el);
+  });
+});
+document.querySelectorAll('[data-radio-save]').forEach(radio => {
+  radio.addEventListener('change', () => {
+    saveField(radio.dataset.radioSave, radio.value); autosave(); updateProgress();
+  });
+});
+
+// ══ CHAR COUNTERS ══════════════════════════
+function updateCharCount(el) {
+  const id = el.id;
+  const ccEl = document.getElementById('cc-' + id.replace('f-',''));
+  if (ccEl) ccEl.textContent = el.value.length;
+}
+document.querySelectorAll('textarea').forEach(ta => ta.addEventListener('input', () => updateCharCount(ta)));
+
+// ══ PROGRESS ════════════════════════════════
+function updateProgress() {
+  const allInputs = document.querySelectorAll('textarea[data-save], input[data-save]:not([type="radio"])');
+  const allRadioGroups = ['level-101','level-102','level-103','level-104'];
+  let total = allInputs.length + allRadioGroups.length;
+  let filled = 0;
+  allInputs.forEach(el => { if (el.value && el.value.trim()) filled++; });
+  allRadioGroups.forEach(grp => { if (document.querySelector(`input[name="${grp}"]:checked`)) filled++; });
+  const pct = Math.round((filled / total) * 100);
+  document.getElementById('pbFill').style.width = pct + '%';
+  document.getElementById('pbPct').textContent = pct + '%';
+}
+
+// ══ MODAL ════════════════════════════════════
+let currentExp = '', mailBody = '', mailSubject = '';
+
+const EXP_FIELDS = {
+  '101': [
+    { id: 'f-101-rid-grupo', label: 'Grupo / Organización del reporte' },
+    { id: 'f-101-rid-fecha', label: 'Fecha del reporte procesado' },
+    { id: 'f-101-nivel',     label: 'Nivel de trabajo', type: 'radio', name: 'level-101' },
+    { id: 'f-101-e1', label: 'Hoja de clasificación (señal → familia → nivel)' },
+    { id: 'f-101-e2', label: 'Familia dominante y justificación' },
+    { id: 'f-101-e3', label: 'Hipótesis de secuencia de intervención' },
+    { id: 'f-101-e4', label: 'Nota de contraste (creencia vs capacidad)' },
+    { id: 'f-101-obs', label: 'Observaciones, hallazgos y comentarios adicionales' }
+  ],
+  '102': [
+    { id: 'f-102-rid-grupo', label: 'Grupo / Organización del reporte' },
+    { id: 'f-102-rid-fecha', label: 'Fecha del reporte procesado' },
+    { id: 'f-102-nivel',     label: 'Nivel de trabajo', type: 'radio', name: 'level-102' },
+    { id: 'f-102-e1', label: 'Mapa Dice–Hace por 5C' },
+    { id: 'f-102-e2', label: 'C deficitaria identificada y justificación' },
+    { id: 'f-102-e3', label: 'Veredicto — cuello de botella liderazgo vs creencia' },
+    { id: 'f-102-e4', label: 'Palanca de liderazgo observable recomendada' },
+    { id: 'f-102-obs', label: 'Observaciones, hallazgos y comentarios adicionales' }
+  ],
+  '103': [
+    { id: 'f-103-rid-grupo', label: 'Grupo / Organización del reporte' },
+    { id: 'f-103-rid-fecha', label: 'Fecha del reporte procesado' },
+    { id: 'f-103-nivel',     label: 'Nivel de trabajo', type: 'radio', name: 'level-103' },
+    { id: 'f-103-e1', label: 'Lectura de marcadores AICD (cultura vs clima)' },
+    { id: 'f-103-e2', label: 'Mecanismo estructural que cronifica o cura' },
+    { id: 'f-103-e3', label: 'Lectura de causa raíz cultural' },
+    { id: 'f-103-obs', label: 'Observaciones, hallazgos y comentarios adicionales' }
+  ],
+  '104': [
+    { id: 'f-104-rid-grupo', label: 'Grupo / Organización del reporte' },
+    { id: 'f-104-rid-fecha', label: 'Fecha del paquete de reportes' },
+    { id: 'f-104-nivel',     label: 'Nivel de trabajo', type: 'radio', name: 'level-104' },
+    { id: 'f-104-e1', label: 'Matriz de triangulación (obstáculo × lente × nivel)' },
+    { id: 'f-104-e2', label: 'Cuello de botella primario y secuencia de intervención' },
+    { id: 'f-104-e3', label: 'Insight de causa raíz — ENTREGABLE OBLIGATORIO' },
+    { id: 'f-104-e4', label: 'Registro de validación del encuadre de retorno' },
+    { id: 'f-104-obs', label: 'Observaciones, hallazgos y comentarios adicionales' }
+  ]
+};
+
+const expNames = { '101': 'Experimento 1.01 — Clasificar la creencia, no la persona', '102': 'Experimento 1.02 — Separar lo que el líder dice de lo que el equipo ve', '103': 'Experimento 1.03 — Leer la cultura como estructura, no como clima', '104': 'Experimento 1.04 — Triangular las tres lentes y entregar un insight de causa raíz' };
+
+function getStudentInfo() {
+  return {
+    nombre:  document.getElementById('sf-nombre')?.value  || '(sin nombre)',
+    empresa: document.getElementById('sf-empresa')?.value || '(sin empresa)',
+    cohorte: document.getElementById('sf-cohorte')?.value || '(sin cohorte)'
+  };
+}
+
+function getRadioValue(name) {
+  const r = document.querySelector(`input[name="${name}"]:checked`);
+  return r ? r.value : '(no seleccionado)';
+}
+
+function openModal(exp) {
+  currentExp = exp;
+  const si = getStudentInfo();
+  const fields = EXP_FIELDS[exp] || [];
+
+  let summary = `════════════════════════════════════\n`;
+  summary += `SPRINT ROADMAP 01 · LA BRECHA AI DE LAS PERSONAS\n`;
+  summary += `Analista BAIP — Brecha AI Personas · Digital Change Academy · DCA\n`;
+  summary += `════════════════════════════════════\n\n`;
+  summary += `IDENTIFICACIÓN\n`;
+  summary += `Certificación: Analista BAIP — Brecha AI Personas\n`;
+  summary += `Sprint: Sprint 01 — La Brecha AI de las Personas\n`;
+  summary += `Experimento: ${expNames[exp].split('—')[0].trim()}\n`;
+  summary += `Participante: ${si.nombre}\n`;
+  summary += `Cohorte: ${si.cohorte}\n`;
+  summary += `Organización del participante: ${si.empresa}\n`;
+  summary += `Fecha de envío: ${new Date().toLocaleDateString('es-CO', { year:'numeric', month:'long', day:'numeric' })}\n`;
+  summary += `\n── ${expNames[exp]} ──\n\n`;
+
+  fields.forEach(f => {
+    let val;
+    if (f.type === 'radio') {
+      val = getRadioValue(f.name);
+    } else {
+      const el = document.getElementById(f.id);
+      val = el ? el.value.trim() : '';
+    }
+    summary += `▸ ${f.label}:\n${val || '(sin respuesta)'}\n\n`;
+  });
+
+  summary += `════════════════════════════════════\n`;
+  summary += `Modelo ARIA — Aceleración del Retorno de la IA\n`;
+  summary += `Desarrollado por Digital Change Advisors, LLC.\n`;
+  summary += `Licenciado bajo Creative Commons BY-SA 4.0.`;
+
+  mailSubject = `[ARIA Sprint 01] ${expNames[exp].split('—')[0].trim()} — ${si.nombre} | ${si.cohorte}`;
+  mailBody = summary;
+
+  document.getElementById('modal-title').textContent = expNames[exp].split('—')[0].trim();
+  document.getElementById('modal-sub').textContent = `${si.nombre} · ${si.empresa} · ${si.cohorte}`;
+  document.getElementById('modal-body').textContent = summary;
+  document.getElementById('modal').classList.add('open');
+}
+
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+function copyModal() {
+  const text = document.getElementById('modal-body').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.btn-m.p');
+    const orig = btn.textContent; btn.textContent = '✓ Copiado';
+    setTimeout(() => { btn.textContent = orig; }, 2000);
+    markSent(currentExp);
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+    markSent(currentExp);
+  });
+}
+
+function mailModal() {
+  window.open(`mailto:facilitador@digitalchangeadvisors.com?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`);
+  markSent(currentExp);
+}
+
+function markSent(exp) {
+  const btn = document.getElementById('btn-' + exp);
+  const ok  = document.getElementById('ok-' + exp);
+  if (btn) { btn.classList.add('done'); btn.textContent = '✓ Enviado'; }
+  if (ok)  { ok.classList.add('show'); }
+  const d = getData(); d['sent_' + exp] = true; localStorage.setItem(SAVE_KEY, JSON.stringify(d));
+  const navEl = document.getElementById('nav-' + exp.replace('1',''));
+  if (navEl) navEl.classList.add('done');
+  closeModal();
+}
+
+document.getElementById('modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+
+// ══ INIT ════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  loadAll();
+  const d = getData();
+  ['101','102','103','104'].forEach(exp => {
+    if (d['sent_' + exp]) {
+      const btn = document.getElementById('btn-' + exp);
+      const ok  = document.getElementById('ok-' + exp);
+      if (btn) { btn.classList.add('done'); btn.textContent = '✓ Enviado'; }
+      if (ok)  { ok.classList.add('show'); }
+    }
+  });
+  document.querySelectorAll('textarea').forEach(ta => updateCharCount(ta));
+});
+</script>
+</body>
+</html>
