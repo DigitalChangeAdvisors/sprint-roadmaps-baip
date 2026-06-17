@@ -51,7 +51,7 @@ body { font-family: var(--fb); font-size: 15px; line-height: 1.75; color: var(--
 
 /* ─── DOCUMENT WRAPPER ─────────────────────── */
 .doc-wrap { max-width: var(--doc); margin: 68px auto 80px; display: flex; flex-direction: column; gap: 3px; }
-.doc-wrap > * { box-shadow: 0 2px 20px rgba(0,0,0,.13); }
+.doc-wrap > * { box-shadow: 0 2px 20px rgba(0,0,0,.13); min-height: 932px; }
 
 /* ─── RUNNING HEADER ─────────────────────── */
 .run-header { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(30,42,56,.35); text-align: center; padding: 12px 0 10px; border-bottom: 1px solid var(--platinum); }
@@ -240,14 +240,17 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
   * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
   .top-nav, .modal-ov, .btn-print, .submit-actions, .submit-sec, .pb-wrap, .pb-pct, .save-dot { display: none !important; }
   body { background: white !important; }
-  .doc-wrap { margin: 0 !important; }
-  .doc-wrap > * { box-shadow: none !important; }
-  section.cover-page { page-break-after: always; }
-  #exp-101, #exp-102, #exp-103, #exp-104 { page-break-before: always; }
-  section.back-cover { page-break-before: always; }
-  textarea { border: 1px solid #c0c4c2 !important; background: white !important; min-height: 50px !important; resize: none !important; overflow: visible !important; height: auto !important; }
+  .doc-wrap { margin: 0 !important; max-width: 100% !important; }
+  .doc-wrap > * {
+    box-shadow: none !important;
+    min-height: 10.1in;
+    page-break-after: always;
+    break-after: page;
+  }
+  .report-id-block { background: #1e2a38 !important; page-break-inside: avoid; break-inside: avoid; }
+  .metric-pair, .ia-role, .step-list, .fill, .note, .gold-acc, .quote-band, .ni { page-break-inside: avoid; break-inside: avoid; }
   .char-ct, .ip-guard { display: none !important; }
-  .report-id-block { background: #1e2a38 !important; }
+  textarea { border: 1px solid #c0c4c2 !important; background: white !important; min-height: 50px !important; resize: none !important; overflow: visible !important; height: auto !important; }
   @page { size: letter portrait; margin: 0.45in; }
 }
 @media (max-width: 600px) {
