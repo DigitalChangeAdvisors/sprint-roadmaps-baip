@@ -52,7 +52,9 @@ body { font-family: var(--fb); font-size: 15px; line-height: 1.75; color: var(--
 /* ─── DOCUMENT WRAPPER ─────────────────────── */
 .doc-wrap { max-width: var(--doc); margin: 68px auto 80px; display: flex; flex-direction: column; gap: 3px; }
 .doc-wrap > * { box-shadow: 0 2px 20px rgba(0,0,0,.13); }
-.doc-wrap > div { background: white; }
+/* ─── FIXED PAGE CONTAINERS ─────────────── */
+.page { min-height: 932px; background: white; display: flex; flex-direction: column; }
+.page .p-layout { flex: 1; }
 
 /* ─── RUNNING HEADER ─────────────────────── */
 .run-header { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(30,42,56,.35); text-align: center; padding: 12px 0 10px; border-bottom: 1px solid var(--platinum); }
@@ -69,13 +71,13 @@ body { font-family: var(--fb); font-size: 15px; line-height: 1.75; color: var(--
 .p-footer .pnum { font-size: 10px; font-weight: 700; color: white; background: var(--teal); width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
 /* ─── COVER ────────────────────────────────── */
-.cover-page { background: white; }
+.cover-page { background: white; min-height: 932px; display: flex; flex-direction: column; }
 .cover-visual { height: 300px; background: var(--carbon); position: relative; overflow: hidden; }
 .cover-visual svg { width: 100%; height: 100%; display: block; }
 .cover-band { background: var(--teal); padding: 26px 44px 30px; }
 .c-sprint-lbl { font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: 10px; }
 .c-theme { font-family: var(--fd); font-size: 34px; color: white; line-height: 1.2; letter-spacing: -.01em; }
-.cover-body { padding: 24px 44px 16px; background: white; }
+.cover-body { padding: 24px 44px 16px; background: white; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
 .c-program { font-size: 22px; font-weight: 700; color: var(--carbon); margin-bottom: 10px; }
 .c-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--teal); border: 1.5px solid var(--teal); padding: 4px 14px; border-radius: 30px; margin-bottom: 24px; }
 .student-row { display: flex; gap: 14px; flex-wrap: wrap; padding: 20px 0 4px; border-top: 1px solid var(--platinum); }
@@ -226,11 +228,11 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
 .btn-m.s { background: transparent; color: var(--carbon); border: 1.5px solid var(--platinum); } .btn-m.s:hover { background: #f5f5f5; }
 
 /* ─── BACK COVER ─────────────────────────── */
-.back-cover { background: white; }
+.back-cover { background: white; min-height: 932px; display: flex; flex-direction: column; }
 .bc-band { background: var(--teal); padding: 36px 44px 40px; text-align: center; }
 .bc-sprint { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 8px; }
 .bc-theme { font-family: var(--fd); font-size: 28px; color: white; }
-.bc-body { padding: 28px 44px; background: white; text-align: center; }
+.bc-body { padding: 28px 44px; background: white; text-align: center; flex: 1; }
 .bc-program { font-size: 20px; font-weight: 700; color: var(--carbon); margin-bottom: 8px; }
 .bc-foot { background: var(--carbon); padding: 12px 44px; display: flex; justify-content: space-between; }
 .bc-foot-t { font-size: 11px; color: rgba(255,255,255,.55); }
@@ -242,8 +244,8 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
   .top-nav, .modal-ov, .btn-print, .submit-actions, .submit-sec, .pb-wrap, .pb-pct, .save-dot { display: none !important; }
   body { background: white !important; }
   .doc-wrap { margin: 0 !important; max-width: 100% !important; gap: 0 !important; }
-  .doc-wrap > * { box-shadow: none !important; background: white !important; }
-  .doc-wrap > * + * { page-break-before: always; break-before: page; }
+  .doc-wrap > * { box-shadow: none !important; }
+  .page, .cover-page, .back-cover { height: 10.1in !important; min-height: unset !important; page-break-after: always; break-after: page; overflow: hidden; }
   .report-id-block { background: #1e2a38 !important; page-break-inside: avoid; break-inside: avoid; }
   .metric-pair, .ia-role, .step-list, .note, .gold-acc, .quote-band, .ni { page-break-inside: avoid; break-inside: avoid; }
   .char-ct, .ip-guard { display: none !important; }
@@ -335,7 +337,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
 <!-- ══════════════════════════════════
      ÍNDICE
 ══════════════════════════════════ -->
-<div id="contenido">
+<div class="page" id="contenido">
   <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
   <div class="p-layout">
     <div class="s-tab"><span class="lbl">Contenido</span></div>
@@ -359,7 +361,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
       </div>
       <div class="toc-group">
         <div class="toc-group-head">Experimento 1.04 &nbsp;·&nbsp; Integración de las tres lentes</div>
-        <div class="toc-entry"><span class="toc-name">Triangular las tres lentes y entregar un insight de causa raíz</span><span class="toc-pg">18</span></div>
+        <div class="toc-entry"><span class="toc-name">Triangular las tres lentes y entregar un insight de causa raíz</span><span class="toc-pg">17</span></div>
       </div>
     </div>
   </div>
@@ -369,7 +371,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
 <!-- ══════════════════════════════════
      MENSAJE DEL FACILITADOR
 ══════════════════════════════════ -->
-<div id="mensaje">
+<div class="page" id="mensaje">
   <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
   <div class="p-layout">
     <div class="s-tab"><span class="lbl">Mensaje</span></div>
@@ -418,7 +420,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
 <!-- ══════════════════════════════════
      INSTRUCCIONES
 ══════════════════════════════════ -->
-<div id="instrucciones">
+<div class="page" id="instrucciones">
   <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
   <div class="p-layout">
     <div class="s-tab"><span class="lbl">Instrucciones</span></div>
@@ -449,7 +451,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
      EXPERIMENTO 1.01
      Clasificar la creencia, no la persona
 ══════════════════════════════════════════ -->
-<div id="exp-101">
+<div class="page" id="exp-101">
   <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
   <div class="p-layout">
     <div class="s-tab"><span class="lbl">Exp. 1.01</span></div>
@@ -468,13 +470,12 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
   <div class="p-footer"><div class="rule"></div><div class="pnum">4</div><div class="rule"></div></div>
 </div>
 
-<div>
+<!-- EXP 1.01 · PÁGINA 5 · Identificación + Pasos -->
+<div class="page">
   <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
   <div class="p-layout">
     <div class="s-tab"><span class="lbl">Exp. 1.01</span></div>
     <div class="p-body">
-
-      <!-- Report ID Block -->
       <div class="report-id-block">
         <div class="rid-head">
           <span class="rid-badge">Experimento 1.01</span>
@@ -493,14 +494,10 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
           </div>
         </div>
       </div>
-
-      <!-- IP Guardrail -->
       <div class="ip-guard">
         <span class="ip-guard-icon">🔒</span>
         <span>Este experimento opera sobre el reporte ya <strong>procesado</strong> por la plataforma DCA · Suite BAIP. El Analista BAIP lee e interpreta; no aplica el instrumento, no manipula reactivos y no calcula puntajes ni baremos.</span>
       </div>
-
-      <!-- Paso a paso -->
       <p style="font-weight:700;font-size:14px;color:var(--carbon);margin-bottom:12px;">Paso a paso</p>
       <ul class="step-list">
         <li><span>Recibir el reporte AIMT procesado y leer el perfil por obstáculo: solo familias y niveles que la plataforma ya entregó (Cautela · Vulnerable · Diestro · Óptimo).</span></li>
@@ -509,51 +506,61 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
         <li><span>Redactar una hipótesis de secuencia de intervención: qué creencia mover antes de cualquier capacitación, y por qué capacitar primero desperdiciaría la inversión en este caso.</span></li>
         <li><span>Contrastar con un par de la cohorte o con el mentor: ¿es freno de creencia o freno de capacidad? Ajustar la hipótesis con base en el contraste.</span></li>
       </ul>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">5</div><div class="rule"></div></div>
+</div>
 
-      <!-- Métricas -->
+<!-- EXP 1.01 · PÁGINA 6 · Métricas + Campos E1 y E2 -->
+<div class="page">
+  <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 1.01</span></div>
+    <div class="p-body">
       <div class="metric-pair">
         <div class="metric-card beh"><div class="metric-card-lbl">Métrica de comportamiento</div><p>Proporción de señales correctamente clasificadas en su familia. Marcador observable: el analista deja de decir «resistencia» y nombra familia + obstáculo + nivel.</p></div>
         <div class="metric-card biz"><div class="metric-card-lbl">Métrica de negocio</div><p>Monto de inversión en capacitación técnica que el diagnóstico revela mal dirigida — la familia en Cautela filtraría la formación — y que se reorienta a mover la creencia primero. Indicador: USD de formación reasignada o evitada.</p></div>
       </div>
-
-      <!-- Rol de la IA -->
       <div class="ia-role">
         <span class="ia-role-icon">🤖</span>
         <span><strong>Rol de la IA como andamiaje:</strong> Puede usar una herramienta de IA generativa para estresar la clasificación y contraargumentar la hipótesis de secuencia. La priorización la decide el analista; la IA no lee el reporte por usted ni genera puntajes o baremos.</span>
       </div>
-
-      <!-- Evidence Fields -->
       <div class="fill">
         <div class="fill-lbl">Hoja de clasificación — Señal → Familia → Nivel</div>
         <textarea id="f-101-e1" data-save="f-101-e1" rows="8" placeholder="Para cada señal relevante del reporte AIMT, registre:&#10;• Señal detectada (descripción de la creencia o comportamiento observable)&#10;• Familia: estratégica / organizacional / psicológica&#10;• Nivel asignado por la plataforma: Cautela / Vulnerable / Diestro / Óptimo&#10;&#10;Ejemplo:&#10;'Espera directriz antes de actuar' → Estratégica (#1) → Cautela"></textarea>
         <div class="char-ct"><span id="cc-101-e1">0</span> caracteres</div>
       </div>
-
       <div class="fill">
         <div class="fill-lbl">Familia dominante — Identificación y justificación</div>
         <textarea id="f-101-e2" data-save="f-101-e2" rows="5" placeholder="¿Cuál es la familia de mayor peso con el nivel más bajo? Justifique por qué esa combinación de peso y nivel la convierte en la prioridad de intervención — y no el promedio global del reporte."></textarea>
         <div class="char-ct"><span id="cc-101-e2">0</span> caracteres</div>
       </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">6</div><div class="rule"></div></div>
+</div>
 
+<!-- EXP 1.01 · PÁGINA 7 · Campos E3, E4, Obs y Envío -->
+<div class="page">
+  <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 1.01</span></div>
+    <div class="p-body">
       <div class="fill">
         <div class="fill-lbl">Hipótesis de secuencia de intervención</div>
-        <textarea id="f-101-e3" data-save="f-101-e3" rows="6" placeholder="¿Qué creencia debe moverse antes de cualquier capacitación técnica? ¿Por qué capacitar primero, sobre esta familia en este nivel, desperdiciaría la inversión? Formule la hipótesis en lenguaje de retorno — no de aprendizaje."></textarea>
+        <textarea id="f-101-e3" data-save="f-101-e3" rows="5" placeholder="¿Qué creencia debe moverse antes de cualquier capacitación técnica? ¿Por qué capacitar primero, sobre esta familia en este nivel, desperdiciaría la inversión? Formule la hipótesis en lenguaje de retorno — no de aprendizaje."></textarea>
         <div class="char-ct"><span id="cc-101-e3">0</span> caracteres</div>
       </div>
-
       <div class="fill">
         <div class="fill-lbl">Nota de contraste — ¿Freno de creencia o freno de capacidad?</div>
         <textarea id="f-101-e4" data-save="f-101-e4" rows="4" placeholder="Registre el resultado del contraste con su par o con el mentor: ¿qué cuestionó? ¿qué ajustó en su clasificación o hipótesis? ¿cuál fue el veredicto final — creencia o capacidad?"></textarea>
         <div class="char-ct"><span id="cc-101-e4">0</span> caracteres</div>
       </div>
-
       <div class="fill fill-obs">
         <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
         <textarea id="f-101-obs" data-save="f-101-obs" rows="4" placeholder="Comparta con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores. Su observación puede mejorar el instrumento y la formación de las próximas cohortes."></textarea>
         <div class="char-ct"><span id="cc-101-obs">0</span> caracteres</div>
       </div>
-
-      <!-- Submit -->
       <div class="submit-sec">
         <h3>Envío del Experimento 1.01</h3>
         <p>Una vez completados los cinco pasos y los campos de evidencia, envíe su registro. Este envío es el requisito de acceso al feedback de seguimiento y a la Sesión de Mentoría de Cohorte.</p>
@@ -578,7 +585,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
      EXPERIMENTO 1.02
      Separar lo que el líder dice de lo que el equipo ve
 ══════════════════════════════════════════ -->
-<div id="exp-102">
+<div class="page" id="exp-102">
   <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
   <div class="p-layout">
     <div class="s-tab"><span class="lbl">Exp. 1.02</span></div>
@@ -597,7 +604,8 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
   <div class="p-footer"><div class="rule"></div><div class="pnum">8</div><div class="rule"></div></div>
 </div>
 
-<div>
+<!-- EXP 1.02 · PÁGINA 9 · Identificación + Pasos -->
+<div class="page">
   <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
   <div class="p-layout">
     <div class="s-tab"><span class="lbl">Exp. 1.02</span></div>
@@ -635,47 +643,72 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
         <li><span>Cruzar con la familia organizacional del AIMT del mismo grupo: ¿el freno a escalar es la creencia colectiva o el comportamiento del líder? Nombrar el cuello de botella primario.</span></li>
         <li><span>Formular una palanca de liderazgo: qué comportamiento concreto y observable debe volverse visible para desbloquear la circulación del aprendizaje.</span></li>
       </ul>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">9</div><div class="rule"></div></div>
+</div>
 
+<!-- EXP 1.02 · PÁGINA 10 · Métricas + Campos E1 y E2 -->
+<div class="page">
+  <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 1.02</span></div>
+    <div class="p-body">
       <div class="metric-pair">
         <div class="metric-card beh"><div class="metric-card-lbl">Métrica de comportamiento</div><p>El analista nombra la C deficitaria con evidencia del reporte y separa freno-liderazgo de freno-creencia sin fundirlos. Marcador: señala el comportamiento 5C específico, no «falta de liderazgo» genérico.</p></div>
         <div class="metric-card biz"><div class="metric-card-lbl">Métrica de negocio</div><p>Tiempo a la primera réplica de una práctica de IA de un nodo a otro (lead time de escalado). La palanca propuesta busca acortarlo desbloqueando la C que retiene la circulación.</p></div>
       </div>
-
       <div class="ia-role">
         <span class="ia-role-icon">🤖</span>
         <span><strong>Rol de la IA como andamiaje:</strong> Puede usar IA para contrastar la lectura de las 5C y simular cómo se vería un comportamiento «modelado» frente a uno solo «declarado». La IA no puntúa el reporte ni decide el cuello de botella.</span>
       </div>
-
       <div class="fill">
         <div class="fill-lbl">Mapa Dice–Hace por 5C</div>
         <textarea id="f-102-e1" data-save="f-102-e1" rows="10" placeholder="Para cada una de las 5C, registre lo que el reporte refleja:&#10;&#10;Conexión:&#10;• Lo que el liderazgo declara: ...&#10;• Lo que el equipo observa: ...&#10;• Nivel asignado: ...&#10;&#10;Confianza:&#10;• Declara: ... | Observa: ... | Nivel: ...&#10;&#10;Coherencia:&#10;• Declara: ... | Observa: ... | Nivel: ...&#10;&#10;Cocreación:&#10;• Declara: ... | Observa: ... | Nivel: ...&#10;&#10;Cuidado:&#10;• Declara: ... | Observa: ... | Nivel: ..."></textarea>
         <div class="char-ct"><span id="cc-102-e1">0</span> caracteres</div>
       </div>
-
       <div class="fill">
         <div class="fill-lbl">C deficitaria — Identificación y justificación</div>
         <textarea id="f-102-e2" data-save="f-102-e2" rows="5" placeholder="¿Cuál de las 5C tiene el nivel más bajo y bloquea más la experimentación del equipo? ¿Es un freno de encendido (Conexión/Confianza) o de permanencia (Coherencia/Cocreación/Cuidado)? Justifique con evidencia del reporte — no con impresiones."></textarea>
         <div class="char-ct"><span id="cc-102-e2">0</span> caracteres</div>
       </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">10</div><div class="rule"></div></div>
+</div>
 
+<!-- EXP 1.02 · PÁGINA 11 · Campos E3 y E4 -->
+<div class="page">
+  <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 1.02</span></div>
+    <div class="p-body">
       <div class="fill">
         <div class="fill-lbl">Veredicto — ¿Cuello de botella de liderazgo o de creencia?</div>
-        <textarea id="f-102-e3" data-save="f-102-e3" rows="5" placeholder="¿El freno a escalar la adopción de IA es la creencia organizacional del grupo (AIMT) o el comportamiento del líder (AILS)? Justifique con evidencia cruzada de los dos reportes. Sea específico: no basta decir 'ambos'; nombre cuál pesa más y por qué."></textarea>
+        <textarea id="f-102-e3" data-save="f-102-e3" rows="6" placeholder="¿El freno a escalar la adopción de IA es la creencia organizacional del grupo (AIMT) o el comportamiento del líder (AILS)? Justifique con evidencia cruzada de los dos reportes. Sea específico: no basta decir 'ambos'; nombre cuál pesa más y por qué."></textarea>
         <div class="char-ct"><span id="cc-102-e3">0</span> caracteres</div>
       </div>
-
       <div class="fill">
         <div class="fill-lbl">Palanca de liderazgo observable recomendada</div>
-        <textarea id="f-102-e4" data-save="f-102-e4" rows="5" placeholder="¿Qué comportamiento concreto y observable debe volverse visible en el líder para desbloquear la C deficitaria y reactivar la circulación del aprendizaje de IA? Sea específico: no 'comunicar más', sino qué hace, dónde, con qué frecuencia y ante qué situación."></textarea>
+        <textarea id="f-102-e4" data-save="f-102-e4" rows="6" placeholder="¿Qué comportamiento concreto y observable debe volverse visible en el líder para desbloquear la C deficitaria y reactivar la circulación del aprendizaje de IA? Sea específico: no 'comunicar más', sino qué hace, dónde, con qué frecuencia y ante qué situación."></textarea>
         <div class="char-ct"><span id="cc-102-e4">0</span> caracteres</div>
       </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">11</div><div class="rule"></div></div>
+</div>
 
+<!-- EXP 1.02 · PÁGINA 12 · Observaciones y Envío -->
+<div class="page">
+  <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 1.02</span></div>
+    <div class="p-body">
       <div class="fill fill-obs">
         <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
-        <textarea id="f-102-obs" data-save="f-102-obs" rows="4" placeholder="Comparta con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores."></textarea>
+        <textarea id="f-102-obs" data-save="f-102-obs" rows="5" placeholder="Comparta con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores."></textarea>
         <div class="char-ct"><span id="cc-102-obs">0</span> caracteres</div>
       </div>
-
       <div class="submit-sec">
         <h3>Envío del Experimento 1.02</h3>
         <p>Complete el mapa dice-hace, el veredicto de cuello de botella y la palanca observable antes de enviar. Este registro alimenta el feedback de seguimiento y la mentoría de cohorte.</p>
@@ -700,7 +733,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
      EXPERIMENTO 1.03
      Leer la cultura como estructura, no como clima
 ══════════════════════════════════════════ -->
-<div id="exp-103">
+<div class="page" id="exp-103">
   <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
   <div class="p-layout">
     <div class="s-tab"><span class="lbl">Exp. 1.03</span></div>
@@ -719,12 +752,12 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
   <div class="p-footer"><div class="rule"></div><div class="pnum">13</div><div class="rule"></div></div>
 </div>
 
-<div>
+<!-- EXP 1.03 · PÁGINA 14 · Identificación + Pasos -->
+<div class="page">
   <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
   <div class="p-layout">
     <div class="s-tab"><span class="lbl">Exp. 1.03</span></div>
     <div class="p-body">
-
       <div class="report-id-block">
         <div class="rid-head">
           <span class="rid-badge">Experimento 1.03</span>
@@ -743,12 +776,10 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
           </div>
         </div>
       </div>
-
       <div class="ip-guard">
         <span class="ip-guard-icon">🔒</span>
         <span>Este experimento opera sobre el reporte ya <strong>procesado</strong> por la plataforma DCA · Suite BAIP. El Analista BAIP lee e interpreta; no aplica el instrumento, no manipula reactivos y no calcula puntajes ni baremos.</span>
       </div>
-
       <p style="font-weight:700;font-size:14px;color:var(--carbon);margin-bottom:12px;">Paso a paso</p>
       <ul class="step-list">
         <li><span>Leer el reporte AICD: marcadores de ADN IA y su nivel, separando desde el inicio cultura (lo institucionalizado, verificable) de clima (la percepción puntual).</span></li>
@@ -757,41 +788,56 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
         <li><span>Distinguir qué se mueve cambiando la estructura (AICD) de qué se mueve interviniendo la creencia (AIMT) o el comportamiento del líder (AILS).</span></li>
         <li><span>Redactar la lectura de causa raíz cultural: qué marcador, qué obstáculo corporativo y qué palanca estructural concreta puede moverlo.</span></li>
       </ul>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">14</div><div class="rule"></div></div>
+</div>
 
+<!-- EXP 1.03 · PÁGINA 15 · Métricas + Campos E1 y E2 -->
+<div class="page">
+  <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 1.03</span></div>
+    <div class="p-body">
       <div class="metric-pair">
         <div class="metric-card beh"><div class="metric-card-lbl">Métrica de comportamiento</div><p>El analista separa cultura de clima y nombra el mecanismo institucional específico en vez de hablar de «cultura resistente». Marcador: señala el incentivo, ritual o norma — no un rasgo difuso.</p></div>
         <div class="metric-card biz"><div class="metric-card-lbl">Métrica de negocio</div><p>Tasa de uso sostenido de IA después de la capacitación. La palanca estructural busca convertir formación desperdiciada en uso real y adopción sostenida. Indicador: brecha capacidad–uso antes y después de la intervención estructural.</p></div>
       </div>
-
       <div class="ia-role">
         <span class="ia-role-icon">🤖</span>
         <span><strong>Rol de la IA como andamiaje:</strong> Puede usar IA para mapear marcador → mecanismo estructural → obstáculo y para distinguir afirmaciones de clima de afirmaciones de cultura. La IA no puntúa el reporte ni determina el mecanismo.</span>
       </div>
-
       <div class="fill">
         <div class="fill-lbl">Lectura de marcadores AICD — Cultura vs Clima</div>
         <textarea id="f-103-e1" data-save="f-103-e1" rows="9" placeholder="Para cada marcador relevante del reporte AICD, registre:&#10;• Marcador de ADN IA (descripción de lo que mide)&#10;• Nivel asignado: Cautela / Vulnerable / Diestro / Óptimo&#10;• Tipo: CULTURA (hecho institucional verificable) o CLIMA (percepción puntual del grupo)&#10;&#10;Ejemplo:&#10;'Ausencia de rituales de compartición de aprendizajes de IA entre áreas' → Cautela → Cultura (no hay protocolo, no incentivo)&#10;'Percepción de que «acá no se comparte»' → Clima (percepción, no estructura)"></textarea>
         <div class="char-ct"><span id="cc-103-e1">0</span> caracteres</div>
       </div>
-
       <div class="fill">
         <div class="fill-lbl">Mecanismo estructural identificado — ¿Cronifica o cura el freno individual?</div>
         <textarea id="f-103-e2" data-save="f-103-e2" rows="6" placeholder="¿Qué mecanismo estructural específico — incentivo, ritual o norma — cronifica un freno individual del AIMT (como el síndrome del impostor o el miedo al desplazamiento) o, alternativamente, lo cura? Nombre el mecanismo concreto: no 'la cultura no apoya', sino qué estructura específica produce ese resultado."></textarea>
         <div class="char-ct"><span id="cc-103-e2">0</span> caracteres</div>
       </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">15</div><div class="rule"></div></div>
+</div>
 
+<!-- EXP 1.03 · PÁGINA 16 · Campo E3, Obs y Envío -->
+<div class="page">
+  <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 1.03</span></div>
+    <div class="p-body">
       <div class="fill">
         <div class="fill-lbl">Lectura de causa raíz cultural — Marcador, obstáculo y palanca estructural</div>
-        <textarea id="f-103-e3" data-save="f-103-e3" rows="6" placeholder="Sintetice en lenguaje ejecutivo: ¿qué marcador de ADN IA tiene el nivel más bajo? ¿A qué obstáculo corporativo está conectado? ¿Qué palanca estructural concreta — no un taller, no una charla — puede moverlo y con qué efecto esperado sobre la adopción de IA?"></textarea>
+        <textarea id="f-103-e3" data-save="f-103-e3" rows="7" placeholder="Sintetice en lenguaje ejecutivo: ¿qué marcador de ADN IA tiene el nivel más bajo? ¿A qué obstáculo corporativo está conectado? ¿Qué palanca estructural concreta — no un taller, no una charla — puede moverlo y con qué efecto esperado sobre la adopción de IA?"></textarea>
         <div class="char-ct"><span id="cc-103-e3">0</span> caracteres</div>
       </div>
-
       <div class="fill fill-obs">
         <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
-        <textarea id="f-103-obs" data-save="f-103-obs" rows="4" placeholder="Comparta con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores."></textarea>
+        <textarea id="f-103-obs" data-save="f-103-obs" rows="5" placeholder="Comparta con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores."></textarea>
         <div class="char-ct"><span id="cc-103-obs">0</span> caracteres</div>
       </div>
-
       <div class="submit-sec">
         <h3>Envío del Experimento 1.03</h3>
         <p>Complete la lectura de marcadores, el mecanismo estructural y la causa raíz cultural antes de enviar.</p>
@@ -809,14 +855,14 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
       </div>
     </div>
   </div>
-  <div class="p-footer"><div class="rule"></div><div class="pnum">17</div><div class="rule"></div></div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">16</div><div class="rule"></div></div>
 </div>
 
 <!-- ══════════════════════════════════════════
      EXPERIMENTO 1.04
      Triangular las tres lentes y entregar un insight de causa raíz
 ══════════════════════════════════════════ -->
-<div id="exp-104">
+<div class="page" id="exp-104">
   <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
   <div class="p-layout">
     <div class="s-tab"><span class="lbl">Exp. 1.04</span></div>
@@ -834,10 +880,11 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
       <div class="note"><div class="note-hd">Entregable obligatorio</div><p>El insight de causa raíz (Campo E3) es el entregable principal del Sprint 01. Es la pieza que el analista presenta en la Sesión de Mentoría de Cohorte y el criterio sobre el que el facilitador emite el feedback de cierre del sprint.</p></div>
     </div>
   </div>
-  <div class="p-footer"><div class="rule"></div><div class="pnum">18</div><div class="rule"></div></div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">17</div><div class="rule"></div></div>
 </div>
 
-<div>
+<!-- EXP 1.04 · PÁGINA 18 · Identificación + Pasos -->
+<div class="page">
   <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
   <div class="p-layout">
     <div class="s-tab"><span class="lbl">Exp. 1.04</span></div>
@@ -866,7 +913,6 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
         <span class="ip-guard-icon">🔒</span>
         <span>Este experimento opera sobre reportes ya <strong>procesados</strong> por la plataforma DCA · Suite BAIP. El Analista BAIP lee, triangula y formula el insight; no aplica instrumentos, no manipula reactivos y no calcula puntajes ni baremos. El veredicto de priorización lo decide el analista — no una IA.</span>
       </div>
-
       <p style="font-weight:700;font-size:14px;color:var(--carbon);margin-bottom:12px;">Paso a paso</p>
       <ul class="step-list">
         <li><span>Leer las tres lentes del mismo grupo y construir la <strong>matriz de triangulación</strong>: obstáculo × lente × nivel.</span></li>
@@ -875,47 +921,72 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
         <li><span>Traducir el diagnóstico a un <strong>insight de causa raíz</strong> de una página para el responsable del retorno: qué bloquea el ROI de la IA, por qué y qué palanca lo desbloquea — sin reactivos, sin baremos, sin tablero.</span></li>
         <li><span>Sostener el insight en lenguaje de KPI y retorno ante el mentor o el jurado, verificando que la recomendación no se deslice hacia capacitación ni hacia gestión humana.</span></li>
       </ul>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">18</div><div class="rule"></div></div>
+</div>
 
+<!-- EXP 1.04 · PÁGINA 19 · Métricas + Campos E1 y E2 -->
+<div class="page">
+  <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 1.04</span></div>
+    <div class="p-body">
       <div class="metric-pair">
         <div class="metric-card beh"><div class="metric-card-lbl">Métrica de comportamiento</div><p>El analista entrega un insight de causa raíz — no un tablero ni un promedio — , prioriza por «peso × nivel más bajo» y sostiene el encuadre de retorno ante el responsable del resultado.</p></div>
         <div class="metric-card biz"><div class="metric-card-lbl">Métrica de negocio</div><p>El insight conecta la brecha priorizada con un KPI de negocio y estima el retorno de IA en riesgo o desbloqueable por el cuello de botella humano identificado. Indicador: USD de inversión en IA en riesgo y retorno desbloqueable cuantificado.</p></div>
       </div>
-
       <div class="ia-role">
         <span class="ia-role-icon">🤖</span>
         <span><strong>Rol de la IA como andamiaje:</strong> Puede usar IA para estresar la priorización — «¿es de verdad el de mayor peso con el menor nivel?» — y pulir el insight a lenguaje C-Level de retorno. La IA no decide la priorización ni redacta el veredicto final por el analista.</span>
       </div>
-
       <div class="fill">
         <div class="fill-lbl">Matriz de triangulación — Obstáculo × Lente × Nivel</div>
         <textarea id="f-104-e1" data-save="f-104-e1" rows="10" placeholder="Para cada obstáculo relevante identificado en los tres reportes, registre:&#10;&#10;Obstáculo #__ [descripción] | Peso (Alto/Medio/Bajo)&#10;• AIMT: nivel ... | señal: ...&#10;• AILS: nivel ... | C afectada: ...&#10;• AICD: nivel ... | marcador: ...&#10;• Convergencia: ¿refuerzo (los tres coinciden) o tensión (se contradicen)?&#10;&#10;Repita para cada obstáculo significativo. Identifique al final el de mayor peso × nivel más bajo a través de las tres lentes."></textarea>
         <div class="char-ct"><span id="cc-104-e1">0</span> caracteres</div>
       </div>
-
       <div class="fill">
         <div class="fill-lbl">Cuello de botella primario y secuencia de intervención</div>
         <textarea id="f-104-e2" data-save="f-104-e2" rows="6" placeholder="¿Cuál es el obstáculo de mayor peso con el nivel más bajo a través de las tres lentes? ¿Por qué ese y no el promedio? ¿En qué secuencia se interviene — qué primero, qué después — y por qué ese orden? Justifique con evidencia de la matriz, no con intuición."></textarea>
         <div class="char-ct"><span id="cc-104-e2">0</span> caracteres</div>
       </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">19</div><div class="rule"></div></div>
+</div>
 
+<!-- EXP 1.04 · PÁGINA 20 · Campo E3 — Insight de Causa Raíz (entregable principal) -->
+<div class="page">
+  <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 1.04</span></div>
+    <div class="p-body">
       <div class="fill">
         <div class="fill-lbl">Insight de causa raíz — Entregable obligatorio del Sprint 01</div>
-        <textarea id="f-104-e3" data-save="f-104-e3" rows="10" style="min-height:180px;" placeholder="Redacte el insight de causa raíz para el responsable del retorno. Debe incluir, en una página:&#10;&#10;1. Qué bloquea el ROI de la IA en esta organización/grupo (el cuello de botella con evidencia de las tres lentes).&#10;2. Por qué ese bloqueo no se resuelve con capacitación ni con comunicación (el mecanismo causal).&#10;3. Qué palanca lo desbloquea (específica, no genérica).&#10;4. La magnitud del retorno en riesgo o desbloqueable (estimación en USD u otro KPI relevante).&#10;&#10;Sin reactivos. Sin baremos. Sin tablero. Solo el insight dirigido al responsable del resultado."></textarea>
+        <textarea id="f-104-e3" data-save="f-104-e3" rows="14" style="min-height:200px;" placeholder="Redacte el insight de causa raíz para el responsable del retorno. Debe incluir, en una página:&#10;&#10;1. Qué bloquea el ROI de la IA en esta organización/grupo (el cuello de botella con evidencia de las tres lentes).&#10;2. Por qué ese bloqueo no se resuelve con capacitación ni con comunicación (el mecanismo causal).&#10;3. Qué palanca lo desbloquea (específica, no genérica).&#10;4. La magnitud del retorno en riesgo o desbloqueable (estimación en USD u otro KPI relevante).&#10;&#10;Sin reactivos. Sin baremos. Sin tablero. Solo el insight dirigido al responsable del resultado."></textarea>
         <div class="char-ct"><span id="cc-104-e3">0</span> caracteres</div>
       </div>
-
       <div class="fill">
         <div class="fill-lbl">Registro de validación del encuadre de retorno</div>
-        <textarea id="f-104-e4" data-save="f-104-e4" rows="5" placeholder="¿Cómo se validó el insight ante el mentor o ante un par de la cohorte? ¿Qué cuestionamientos surgieron? ¿Cómo respondió? ¿El encuadre se sostuvo en lenguaje de retorno o se deslizó hacia capacitación o gestión humana? Registre los ajustes realizados."></textarea>
+        <textarea id="f-104-e4" data-save="f-104-e4" rows="6" placeholder="¿Cómo se validó el insight ante el mentor o ante un par de la cohorte? ¿Qué cuestionamientos surgieron? ¿Cómo respondió? ¿El encuadre se sostuvo en lenguaje de retorno o se deslizó hacia capacitación o gestión humana? Registre los ajustes realizados."></textarea>
         <div class="char-ct"><span id="cc-104-e4">0</span> caracteres</div>
       </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">20</div><div class="rule"></div></div>
+</div>
 
+<!-- EXP 1.04 · PÁGINA 21 · Observaciones y Envío final -->
+<div class="page">
+  <div class="run-header">Sprint Roadmap 01 &mdash; La Brecha AI de las Personas &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 1.04</span></div>
+    <div class="p-body">
       <div class="fill fill-obs">
         <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
-        <textarea id="f-104-obs" data-save="f-104-obs" rows="4" placeholder="Comparta con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores. Su observación puede mejorar el instrumento y la formación de las próximas cohortes."></textarea>
+        <textarea id="f-104-obs" data-save="f-104-obs" rows="5" placeholder="Comparta con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores. Su observación puede mejorar el instrumento y la formación de las próximas cohortes."></textarea>
         <div class="char-ct"><span id="cc-104-obs">0</span> caracteres</div>
       </div>
-
       <div class="submit-sec">
         <h3>Envío del Experimento 1.04 — Cierre del Sprint 01</h3>
         <p>Al enviar este experimento completa el Sprint Roadmap 01. El insight de causa raíz (campo E3) es el entregable que el facilitador revisará para el feedback de cierre y la Sesión de Mentoría de Cohorte.</p>
@@ -933,7 +1004,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
       </div>
     </div>
   </div>
-  <div class="p-footer"><div class="rule"></div><div class="pnum">23</div><div class="rule"></div></div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">21</div><div class="rule"></div></div>
 </div>
 
 <!-- ══════════════════════════════════
