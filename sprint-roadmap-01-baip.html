@@ -138,10 +138,10 @@ p { margin-bottom: 15px; } p:last-child { margin-bottom: 0; } strong { font-weig
 .rid-fields { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
 .rid-field { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 155px; }
 .rid-field label { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45); }
-.rid-field input[type="text"], .rid-field input[type="date"] { border: 1.5px solid rgba(255,255,255,.15); border-radius: 6px; padding: 8px 12px; background: rgba(255,255,255,.08); font-family: var(--fb); font-size: 13px; font-weight: 500; color: white; outline: none; transition: border-color .2s; }
-.rid-field input:focus { border-color: var(--teal); background: rgba(255,255,255,.14); }
-.rid-field input::placeholder { color: rgba(255,255,255,.3); }
-.rid-field input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); opacity: .5; }
+.rid-field input[type="text"], .rid-field input[type="date"] { border: 1.5px solid rgba(30,42,56,.18); border-radius: 6px; padding: 8px 12px; background: #d2d0c8; font-family: var(--fb); font-size: 13px; font-weight: 500; color: var(--carbon); outline: none; transition: border-color .2s, background .2s; }
+.rid-field input:focus { border-color: var(--teal); background: #e4e2da; }
+.rid-field input::placeholder { color: rgba(30,42,56,.38); }
+.rid-field input[type="date"]::-webkit-calendar-picker-indicator { opacity: .5; }
 .rid-level { border-top: 1px solid rgba(255,255,255,.1); padding-top: 14px; }
 .rid-level-lbl { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 10px; }
 .level-opts { display: flex; gap: 10px; flex-wrap: wrap; }
@@ -468,9 +468,9 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
           <span class="rid-title">Identificación del Reporte de Trabajo</span>
         </div>
         <div class="rid-fields">
-          <div class="rid-field"><label>Grupo / Organización del reporte</label><input type="text" id="f-101-rid-grupo" data-save="f-101-rid-grupo" placeholder="Nombre del equipo u organización analizada"></div>
-          <div class="rid-field"><label>Fecha del reporte procesado</label><input type="date" id="f-101-rid-fecha" data-save="f-101-rid-fecha"></div>
-          <div class="rid-field"><label>Participante (de portada)</label><input type="text" id="f-101-rid-part" data-save="f-101-rid-part" placeholder="Se sincroniza desde portada"></div>
+          <div class="rid-field"><label>Nombre empresa</label><input type="text" id="f-101-rid-grupo" data-save="f-101-rid-grupo" placeholder="Nombre del equipo u organización analizada"></div>
+          <div class="rid-field"><label>Fecha reporte</label><input type="date" id="f-101-rid-fecha" data-save="f-101-rid-fecha"></div>
+          <div class="rid-field"><label>Analista BAIP</label><input type="text" id="f-101-rid-part" data-save="f-101-rid-part" placeholder="Se sincroniza desde portada"></div>
         </div>
         <div class="rid-level">
           <div class="rid-level-lbl">Nivel de trabajo</div>
@@ -607,9 +607,9 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
           <span class="rid-title">Identificación del Reporte de Trabajo</span>
         </div>
         <div class="rid-fields">
-          <div class="rid-field"><label>Grupo / Organización del reporte</label><input type="text" id="f-102-rid-grupo" data-save="f-102-rid-grupo" placeholder="Nombre del equipo u organización analizada"></div>
-          <div class="rid-field"><label>Fecha del reporte procesado</label><input type="date" id="f-102-rid-fecha" data-save="f-102-rid-fecha"></div>
-          <div class="rid-field"><label>Participante (de portada)</label><input type="text" id="f-102-rid-part" data-save="f-102-rid-part" placeholder="Se sincroniza desde portada"></div>
+          <div class="rid-field"><label>Nombre empresa</label><input type="text" id="f-102-rid-grupo" data-save="f-102-rid-grupo" placeholder="Nombre del equipo u organización analizada"></div>
+          <div class="rid-field"><label>Fecha reporte</label><input type="date" id="f-102-rid-fecha" data-save="f-102-rid-fecha"></div>
+          <div class="rid-field"><label>Analista BAIP</label><input type="text" id="f-102-rid-part" data-save="f-102-rid-part" placeholder="Se sincroniza desde portada"></div>
         </div>
         <div class="rid-level">
           <div class="rid-level-lbl">Nivel de trabajo</div>
@@ -758,9 +758,9 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
           <span class="rid-title">Identificación del Reporte de Trabajo</span>
         </div>
         <div class="rid-fields">
-          <div class="rid-field"><label>Grupo / Organización del reporte</label><input type="text" id="f-103-rid-grupo" data-save="f-103-rid-grupo" placeholder="Nombre del equipo u organización analizada"></div>
-          <div class="rid-field"><label>Fecha del reporte procesado</label><input type="date" id="f-103-rid-fecha" data-save="f-103-rid-fecha"></div>
-          <div class="rid-field"><label>Participante (de portada)</label><input type="text" id="f-103-rid-part" data-save="f-103-rid-part" placeholder="Se sincroniza desde portada"></div>
+          <div class="rid-field"><label>Nombre empresa</label><input type="text" id="f-103-rid-grupo" data-save="f-103-rid-grupo" placeholder="Nombre del equipo u organización analizada"></div>
+          <div class="rid-field"><label>Fecha reporte</label><input type="date" id="f-103-rid-fecha" data-save="f-103-rid-fecha"></div>
+          <div class="rid-field"><label>Analista BAIP</label><input type="text" id="f-103-rid-part" data-save="f-103-rid-part" placeholder="Se sincroniza desde portada"></div>
         </div>
         <div class="rid-level">
           <div class="rid-level-lbl">Nivel de trabajo</div>
@@ -894,9 +894,9 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
           <span class="rid-title">Identificación del Reporte de Trabajo</span>
         </div>
         <div class="rid-fields">
-          <div class="rid-field"><label>Grupo / Organización del reporte</label><input type="text" id="f-104-rid-grupo" data-save="f-104-rid-grupo" placeholder="Nombre del equipo u organización analizada"></div>
+          <div class="rid-field"><label>Nombre empresa</label><input type="text" id="f-104-rid-grupo" data-save="f-104-rid-grupo" placeholder="Nombre del equipo u organización analizada"></div>
           <div class="rid-field"><label>Fecha del paquete de reportes</label><input type="date" id="f-104-rid-fecha" data-save="f-104-rid-fecha"></div>
-          <div class="rid-field"><label>Participante (de portada)</label><input type="text" id="f-104-rid-part" data-save="f-104-rid-part" placeholder="Se sincroniza desde portada"></div>
+          <div class="rid-field"><label>Analista BAIP</label><input type="text" id="f-104-rid-part" data-save="f-104-rid-part" placeholder="Se sincroniza desde portada"></div>
         </div>
         <div class="rid-level">
           <div class="rid-level-lbl">Nivel de trabajo</div>
