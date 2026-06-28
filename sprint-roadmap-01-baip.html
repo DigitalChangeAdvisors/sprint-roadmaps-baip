@@ -232,7 +232,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
 .bc-band { background: var(--carbon); padding: 26px 44px 30px; }
 .bc-sprint { font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: 10px; }
 .bc-theme { font-family: var(--fd); font-size: 34px; color: white; line-height: 1.2; letter-spacing: -.01em; }
-.bc-spacer { flex: 1; background: white; }
+.bc-spacer { flex: 1; background: white; display: flex; align-items: center; justify-content: center; }
 .bc-foot { background: var(--gold); padding: 14px 44px; display: flex; justify-content: center; align-items: center; }
 .bc-foot-t { font-size: 12px; font-weight: 600; color: rgba(255,255,255,.90); letter-spacing: .04em; }
 
@@ -1053,7 +1053,24 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
     <div class="bc-sprint">Sprint Roadmap · 01</div>
     <div class="bc-theme">Identificación de Causas Raíz</div>
   </div>
-  <div class="bc-spacer"></div>
+  <div class="bc-spacer">
+    <svg viewBox="0 0 490 180" xmlns="http://www.w3.org/2000/svg" style="width:420px;display:block;">
+      <!-- baseline -->
+      <line x1="18" y1="158" x2="164" y2="158" stroke="#c8c8c4" stroke-width="1"/>
+      <!-- arc teal -->
+      <path d="M 58 152 C 65 100 100 55 138 34" fill="none" stroke="#2e8b76" stroke-width="4" stroke-linecap="round"/>
+      <!-- punto teal (base) -->
+      <circle cx="58" cy="152" r="9" fill="#2e8b76"/>
+      <!-- punto dorado (cima) -->
+      <circle cx="143" cy="28" r="27" fill="#a48111"/>
+      <!-- separador vertical -->
+      <line x1="178" y1="22" x2="178" y2="158" stroke="#c8c8c4" stroke-width="1"/>
+      <!-- DCA -->
+      <text x="197" y="140" font-family="Marcellus, Georgia, serif" font-size="108" fill="#2e8b76">DCA</text>
+      <!-- DIGITAL CHANGE ADVISORS -->
+      <text x="199" y="163" font-family="Montserrat, Arial, sans-serif" font-size="13" fill="#3d4f62" font-weight="600" letter-spacing="3.2">DIGITAL CHANGE ADVISORS</text>
+    </svg>
+  </div>
   <div class="bc-foot">
     <div class="bc-foot-t">Digital Change Advisors · Modelo ARIA</div>
   </div>
