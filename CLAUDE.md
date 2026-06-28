@@ -16,6 +16,7 @@ Cada archivo es un Sprint Roadmap autónomo (CSS + JS inline, sin deps).
 ## Reglas de marca DCA (NO negociables)
 1. Tipografías: SOLO Marcellus + Montserrat. Sin excepciones.
 2. Sin gradientes. Sin stock photos. Sin sombras dramáticas.
+3. **Tono de comunicación: tuteo.** La marca se comunica de tú a tú. Nunca usar «usted», «su», «sus», ni imperativos de usted (-e para -ar, -a para -er/-ir). Usar siempre: tú, tu, tus, imperativos de tuteo (-a para -ar, -e para -er/-ir).
 
 ## Qué NO tocar
 - Lógica de autosave (getData, saveField, loadAll)
@@ -63,6 +64,17 @@ El texto exacto proviene del campo «Conexión con la fundamentación» del arch
 `Roadmap_Sprint01_BAIP_v1-1_ALINEADO.md` (en este repo) es la ÚNICA fuente de verdad
 para objetivo, contexto, paso a paso, métricas y rol de la IA de los 4 experimentos.
 Al reconciliar HTML con .md: mantener voz «el analista» aunque el .md diga «el participante».
+Cuando el texto se dirige al lector directamente, usar tuteo (tú/tu) — nunca usted/su.
+
+## Bloque de identificación del reporte (report-id-block)
+Labels canónicos (una sola línea): **Nombre empresa** · **Fecha reporte** · **Analista BAIP**
+Fondo de campos: platino `#d2d0c8`. Texto ingresado: carbón `var(--carbon)`.
+Placeholder: carbón al 38% `rgba(30,42,56,.38)`. Focus: platino claro `#e4e2da` + borde teal.
+Este diseño aplica a los 4 experimentos (Exp 1.01–1.04).
+
+## Caso base Exp 1.01
+El reporte de caso curado (Nivel base) corresponde a **«Nexform Industrial»**.
+Referenciarlo en el Paso 1 del paso a paso del Exp 1.01.
 
 ## Marcas canónicas (2026)
 Certificación: Analista BAIP | Instrumentos: AIMT · AILS · AICD
