@@ -26,11 +26,25 @@ Cada archivo es un Sprint Roadmap autónomo (CSS + JS inline, sin deps).
 - SAVE_KEY
 
 ## Estructura de páginas (Sprint 01)
-- 21 páginas fijas `div.page` · 932 px pantalla / 10.1 in impresión
+- 20 páginas fijas `div.page` · 932 px pantalla / 10.1 in impresión
 - Portada y contraportada: `section.cover-page` y `section.back-cover`
 - Badge canónico portada: **«Experimentos para la puesta en práctica de aprendizajes · DCA»**
 - Badge contraportada: **«Certificación Analista BAIP · Digital Change Academy · DCA»**
 - Label de sprint: **«Sprint Roadmap · 01»** (sin "de 04")
+
+| Págs | Sección |
+|------|---------|
+| 1 | Índice |
+| 2 | Mensaje del facilitador |
+| 3 | Instrucciones de uso |
+| 4 | Exp 1.01 intro |
+| 5–7 | Exp 1.01 campos (3 págs) |
+| 8 | Exp 1.02 intro |
+| 9–11 | Exp 1.02 campos (3 págs) |
+| 12 | Exp 1.03 intro |
+| 13–15 | Exp 1.03 campos (3 págs) |
+| 16 | Exp 1.04 intro |
+| 17–20 | Exp 1.04 campos (4 págs) |
 
 ## Tema del sprint y variantes de nombre
 - Nombre largo (run-headers, bc-theme): **«Identificación de Causas Raíz de los Obstáculos al ROI de la IA»**
@@ -72,9 +86,10 @@ Fondo de campos: platino `#d2d0c8`. Texto ingresado: carbón `var(--carbon)`.
 Placeholder: carbón al 38% `rgba(30,42,56,.38)`. Focus: platino claro `#e4e2da` + borde teal.
 Este diseño aplica a los 4 experimentos (Exp 1.01–1.04).
 
-## Caso base Exp 1.01
-El reporte de caso curado (Nivel base) corresponde a **«Nexform Industrial»**.
-Referenciarlo en el Paso 1 del paso a paso del Exp 1.01.
+## Casos base por experimento
+- **Exp 1.01 (AIMT):** «Nexform Industrial» — referenciado en Paso 1.
+- **Exp 1.02 (AILS):** «Nexforma» — referenciado en contexto de aplicación y Paso 2.
+- **Exp 1.03 (AICD):** «Nexforma Industrial» — referenciado en contexto de aplicación.
 
 ## Marcas canónicas (2026)
 Certificación: Analista BAIP | Instrumentos: AIMT · AILS · AICD
