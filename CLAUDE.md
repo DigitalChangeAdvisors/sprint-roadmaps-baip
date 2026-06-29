@@ -90,6 +90,11 @@ Este diseño aplica a los 4 experimentos (Exp 1.01–1.04).
 - **Exp 1.01 (AIMT):** «Nexform Industrial» — referenciado en Paso 1.
 - **Exp 1.02 (AILS):** «Nexforma» — referenciado en contexto de aplicación y Paso 2.
 - **Exp 1.03 (AICD):** «Nexforma Industrial» — referenciado en contexto de aplicación.
+- **Exp 1.04 (triangulación):** «Nexform Industrial» — referenciado en Paso 1 (misma empresa que venimos analizando).
+
+## Estado del Sprint 01
+Fine-tuning **completado** en todas las páginas (portada, contraportada, págs. 1–20).
+Terminología consolidada: «reporte de causas raíz» (no «insight de causa raíz»), «rasgo» (no «marcador») para AICD, tuteo global aplicado.
 
 ## Marcas canónicas (2026)
 Certificación: Analista BAIP | Instrumentos: AIMT · AILS · AICD
