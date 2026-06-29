@@ -96,8 +96,9 @@ Este diseño aplica a los 4 experimentos (Exp 1.01–1.04).
 Fine-tuning **completado** en todas las páginas (portada, contraportada, págs. 1–20).
 Terminología consolidada: «reporte de causas raíz» (no «insight de causa raíz»), «rasgo» (no «marcador») para AICD, tuteo global aplicado.
 
-**URL de producción actual:** `https://srbaip01.digitalchangeadvisors.com/sprint-roadmap-01-baip.html`
-**URL objetivo:** `https://digitalchangeadvisors.com/sprint-roadmap-01-baip` (pendiente integrar en `dca-website`)
+**URL de producción:** `https://digitalchangeadvisors.com/sprint-roadmap-01-baip/`
+Integrado en `dca-website` como carpeta `sprint-roadmap-01-baip/` (`index.html` + `Images/`).
+El subdominio temporal `srbaip01` quedó retirado (CNAME del repo eliminado; pendiente borrar el registro DNS en Cloudflare).
 
 ## Marcas canónicas (2026)
 Certificación: Analista BAIP | Instrumentos: AIMT · AILS · AICD
