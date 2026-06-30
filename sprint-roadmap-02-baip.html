@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sprint Roadmap 02 · Analista BAIP · Valoración y Análisis de la Brecha AI · Digital Change Advisors</title>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   SISTEMA DE DISEÑO DCA 2026
+═══════════════════════════════════════════════ */
+:root {
+  --teal:      #2e8b76;
+  --teal-dk:   #247060;
+  --gold:      #a48111;
+  --carbon:    #1e2a38;
+  --platinum:  #dfe3e1;
+  --white:     #ffffff;
+  --teal-bg:   rgba(46,139,118,0.06);
+  --teal-bd:   rgba(46,139,118,0.18);
+  --gold-bg:   rgba(164,129,17,0.05);
+  --fd:        'Marcellus', Georgia, serif;
+  --fb:        'Montserrat', 'Helvetica Neue', sans-serif;
+  --tab:       36px;
+  --doc:       720px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--fb); font-size: 15px; line-height: 1.75; color: var(--carbon); background: #d8dbd9; }
+
+/* ─── TOP NAV ──────────────────────────────── */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  background: var(--carbon); height: 50px;
+  display: flex; align-items: center; padding: 0 20px; gap: 0;
+  box-shadow: 0 2px 16px rgba(0,0,0,.35);
+}
+.nav-brand { font-family: var(--fd); font-size: 14px; color: white; white-space: nowrap; margin-right: 16px; padding-right: 16px; border-right: 1px solid rgba(255,255,255,.15); }
+.nav-brand span { color: var(--gold); }
+.nav-links { display: flex; gap: 2px; flex: 1; overflow-x: auto; }
+.nav-links::-webkit-scrollbar { display: none; }
+.nav-links a { color: rgba(255,255,255,.55); text-decoration: none; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 5px 9px; border-radius: 4px; white-space: nowrap; transition: all .15s; flex-shrink: 0; }
+.nav-links a:hover { color: white; background: rgba(255,255,255,.09); }
+.nav-links a.done { color: var(--teal); }
+.nav-right { display: flex; align-items: center; gap: 10px; margin-left: 12px; flex-shrink: 0; }
+.pb-wrap { width: 100px; height: 3px; background: rgba(255,255,255,.12); border-radius: 2px; }
+.pb-fill { height: 3px; background: var(--teal); border-radius: 2px; transition: width .4s ease; width: 0%; }
+.pb-pct { font-size: 10px; font-weight: 700; color: rgba(255,255,255,.45); min-width: 28px; }
+.save-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.2); transition: background .3s; }
+.save-dot.saving { background: var(--gold); }
+.save-dot.saved  { background: var(--teal); }
+
+/* ─── DOCUMENT WRAPPER ─────────────────────── */
+.doc-wrap { max-width: var(--doc); margin: 68px auto 80px; display: flex; flex-direction: column; gap: 3px; }
+.doc-wrap > * { box-shadow: 0 2px 20px rgba(0,0,0,.13); }
+/* ─── FIXED PAGE CONTAINERS ─────────────── */
+.page { min-height: 932px; background: white; display: flex; flex-direction: column; }
+.page .p-layout { flex: 1; }
+
+/* ─── RUNNING HEADER ─────────────────────── */
+.run-header { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(30,42,56,.35); text-align: center; padding: 12px 0 10px; border-bottom: 1px solid var(--platinum); }
+
+/* ─── PAGE LAYOUT ─────────────────────────── */
+.p-layout { display: flex; background: white; position: relative; }
+.s-tab { flex: 0 0 var(--tab); background: var(--teal); display: flex; align-items: center; justify-content: center; min-height: 180px; }
+.s-tab .lbl { writing-mode: vertical-rl; transform: rotate(180deg); font-weight: 700; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: white; white-space: nowrap; }
+.p-body { flex: 1; padding: 36px 40px 36px 28px; }
+
+/* ─── PAGE FOOTER ─────────────────────────── */
+.p-footer { background: white; display: flex; align-items: center; padding: 8px 40px 10px calc(var(--tab) + 28px); gap: 14px; border-top: 1px solid var(--platinum); }
+.p-footer .rule { flex: 1; height: 1px; background: var(--platinum); }
+.p-footer .pnum { font-size: 10px; font-weight: 700; color: white; background: var(--teal); width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+/* ─── COVER ────────────────────────────────── */
+.cover-page { background: white; min-height: 932px; display: flex; flex-direction: column; }
+.cover-visual { height: 300px; background: var(--teal); position: relative; overflow: hidden; }
+.cover-visual svg { width: 100%; height: 100%; display: block; }
+.cover-band { background: var(--carbon); padding: 26px 44px 30px; }
+.c-sprint-lbl { font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: 10px; }
+.c-theme { font-family: var(--fd); font-size: 34px; color: white; line-height: 1.2; letter-spacing: -.01em; }
+.cover-body { padding: 24px 44px 16px; background: white; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+.c-program { font-size: 22px; font-weight: 700; color: var(--carbon); margin-bottom: 10px; }
+.c-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--teal); border: 1.5px solid var(--teal); padding: 4px 14px; border-radius: 30px; margin-bottom: 24px; }
+.student-row { display: flex; gap: 14px; flex-wrap: wrap; padding: 20px 0 4px; border-top: 1px solid var(--platinum); }
+.s-field { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 140px; }
+.s-field label { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(30,42,56,.45); }
+.s-field input { border: 1.5px solid var(--platinum); border-radius: 6px; padding: 8px 12px; font-family: var(--fb); font-size: 14px; font-weight: 500; color: var(--carbon); background: #fafafa; outline: none; transition: border-color .2s; }
+.s-field input:focus { border-color: var(--teal); background: white; }
+.s-field input::placeholder { color: rgba(30,42,56,.28); }
+.cover-foot { background: var(--carbon); padding: 12px 44px; display: flex; align-items: center; justify-content: space-between; }
+.cf-text { font-size: 12px; font-weight: 500; color: rgba(255,255,255,.6); }
+.cf-text strong { color: white; }
+
+/* ─── SECTION TYPOGRAPHY ─────────────────── */
+.sec-title { font-family: var(--fd); font-size: 30px; color: var(--carbon); line-height: 1.25; letter-spacing: -.01em; border-bottom: 2px solid var(--platinum); padding-bottom: 12px; margin-bottom: 22px; }
+.sec-sublabel { font-size: 12px; font-weight: 600; letter-spacing: .06em; color: var(--teal); margin-bottom: 8px; }
+p { margin-bottom: 15px; } p:last-child { margin-bottom: 0; } strong { font-weight: 700; }
+
+/* ─── TOC ────────────────────────────────── */
+.toc-entry { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0; border-bottom: 1px solid var(--teal-bg); }
+.toc-entry:last-child { border-bottom: none; }
+.toc-group { margin-bottom: 28px; }
+.toc-group-head { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--carbon); margin-bottom: 2px; }
+.toc-name { font-size: 15px; color: rgba(30,42,56,.75); }
+.toc-pg { font-weight: 700; font-size: 13px; color: var(--teal); }
+
+/* ─── MENSAJE ────────────────────────────── */
+.msg-layout { display: grid; grid-template-columns: 180px 1fr; gap: 36px; align-items: start; }
+.msg-img { background: var(--teal-bg); border: 1px solid var(--platinum); border-radius: 8px; aspect-ratio: 3/4; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.msg-title { font-family: var(--fd); font-size: 24px; color: var(--teal); margin-bottom: 8px; }
+.sig-block { margin-top: 22px; }
+.sig-line { width: 80px; height: 1px; background: var(--carbon); margin-bottom: 5px; }
+.sig-name { font-size: 12px; font-weight: 700; color: var(--carbon); }
+.sig-role { font-size: 11px; color: rgba(30,42,56,.55); }
+
+/* ─── INSTRUCCIONES ─────────────────────── */
+.ni { margin-bottom: 26px; }
+.ni-head { font-size: 15px; font-weight: 700; color: var(--carbon); margin-bottom: 8px; }
+.ni-head .nn { color: var(--teal); margin-right: 4px; }
+.ni-text { padding-left: 22px; font-size: 14px; line-height: 1.75; color: rgba(30,42,56,.82); }
+.quote-band { margin-top: 36px; padding: 18px 24px; border-left: 4px solid var(--gold); background: var(--gold-bg); border-radius: 0 8px 8px 0; }
+.quote-band p { font-style: italic; font-size: 14px; color: var(--carbon); margin: 0; }
+.quote-band p::before { content: '\201C'; } .quote-band p::after { content: '\201D'; }
+
+/* ─── EXPERIMENT SHARED ──────────────────── */
+.exp-lbl { font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+.sdiv { height: 1px; background: var(--platinum); margin: 28px 0; }
+.gold-acc { border-left: 4px solid var(--gold); padding: 14px 18px 14px 22px; background: var(--gold-bg); border-radius: 0 8px 8px 0; margin: 18px 0; }
+.gold-acc p { font-style: italic; font-size: 14px; color: var(--carbon); margin: 0; }
+.note { margin: 16px 0; padding: 12px 16px; background: var(--gold-bg); border-left: 3px solid var(--gold); border-radius: 0 6px 6px 0; }
+.note-hd { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--gold); margin-bottom: 4px; }
+.note p { font-size: 12px; line-height: 1.65; color: rgba(30,42,56,.72); margin: 0; }
+
+/* ─── REPORT IDENTIFICATION BLOCK ─────── */
+.report-id-block { background: var(--carbon); border-radius: 10px; padding: 20px 24px; margin-bottom: 28px; }
+.rid-head { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.rid-badge { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: white; background: var(--teal); padding: 4px 12px; border-radius: 20px; flex-shrink: 0; }
+.rid-title { font-size: 11px; font-weight: 600; color: rgba(255,255,255,.55); letter-spacing: .08em; text-transform: uppercase; }
+.rid-fields { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.rid-field { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 155px; }
+.rid-field label { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45); }
+.rid-field input[type="text"], .rid-field input[type="date"] { border: 1.5px solid rgba(30,42,56,.18); border-radius: 6px; padding: 8px 12px; background: #d2d0c8; font-family: var(--fb); font-size: 13px; font-weight: 500; color: var(--carbon); outline: none; transition: border-color .2s, background .2s; }
+.rid-field input:focus { border-color: var(--teal); background: #e4e2da; }
+.rid-field input::placeholder { color: rgba(30,42,56,.38); }
+.rid-field input[type="date"]::-webkit-calendar-picker-indicator { opacity: .5; }
+.rid-level { border-top: 1px solid rgba(255,255,255,.1); padding-top: 14px; }
+.rid-level-lbl { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 10px; }
+.level-opts { display: flex; gap: 10px; flex-wrap: wrap; }
+.level-opt { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 8px; border: 1.5px solid rgba(255,255,255,.12); cursor: pointer; transition: all .2s; }
+.level-opt:hover { border-color: var(--teal); background: rgba(46,139,118,.12); }
+.level-opt input[type="radio"] { accent-color: var(--teal); width: 15px; height: 15px; cursor: pointer; }
+.level-opt span { font-size: 12px; font-weight: 600; color: rgba(255,255,255,.7); }
+
+/* ─── IP GUARDRAIL ───────────────────────── */
+.ip-guard { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; background: rgba(164,129,17,.07); border: 1px solid rgba(164,129,17,.2); border-radius: 8px; margin-bottom: 24px; }
+.ip-guard-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+.ip-guard span { font-size: 12px; color: rgba(30,42,56,.7); line-height: 1.65; }
+
+/* ─── EXP META ROW ───────────────────────── */
+.exp-meta-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.exp-lente { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: .06em; }
+.lente-aimt { background: rgba(46,139,118,.1); color: var(--teal); border: 1px solid var(--teal-bd); }
+.lente-ails { background: rgba(164,129,17,.08); color: var(--gold); border: 1px solid rgba(164,129,17,.25); }
+.lente-aicd { background: rgba(194,89,63,.08); color: #c2593f; border: 1px solid rgba(194,89,63,.25); }
+.lente-int  { background: rgba(30,42,56,.07); color: var(--carbon); border: 1px solid var(--platinum); }
+.entregable-badge { padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: .06em; background: rgba(194,89,63,.1); color: #c2593f; border: 1px solid rgba(194,89,63,.25); }
+
+/* ─── STEP LIST ──────────────────────────── */
+.step-list { list-style: none; counter-reset: sc; margin: 0 0 20px; }
+.step-list li { counter-increment: sc; display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; padding: 11px 14px; background: #fafafa; border: 1px solid var(--platinum); border-radius: 8px; }
+.step-list li::before { content: counter(sc); flex: 0 0 26px; height: 26px; background: var(--carbon); color: white; font-weight: 700; font-size: 12px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.step-list li span { font-size: 13px; line-height: 1.65; color: rgba(30,42,56,.82); padding-top: 2px; }
+
+/* ─── IA ROLE BLOCK ──────────────────────── */
+.ia-role { display: flex; align-items: flex-start; gap: 10px; padding: 11px 14px; background: var(--teal-bg); border: 1px solid var(--teal-bd); border-radius: 8px; margin: 16px 0 24px; }
+.ia-role-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+.ia-role span { font-size: 12px; color: rgba(30,42,56,.75); line-height: 1.65; }
+
+/* ─── METRIC CARDS ───────────────────────── */
+.metric-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0; }
+.metric-card { padding: 14px 16px; border-radius: 8px; background: #fafafa; border: 1px solid var(--platinum); }
+.metric-card.beh { border-top: 3px solid var(--teal); }
+.metric-card.biz { border-top: 3px solid var(--gold); }
+.metric-card-lbl { font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 6px; }
+.metric-card.beh .metric-card-lbl { color: var(--teal); }
+.metric-card.biz .metric-card-lbl { color: var(--gold); }
+.metric-card p { font-size: 13px; line-height: 1.65; color: rgba(30,42,56,.8); margin: 0; }
+.metric-rows { margin: 0; }
+.metric-row { display: grid; grid-template-columns: 88px 1fr; gap: 8px; padding: 6px 0; border-top: 1px solid var(--platinum); }
+.metric-row:first-child { border-top: none; padding-top: 2px; }
+.metric-row dt { font-size: 9px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: rgba(30,42,56,.5); line-height: 1.4; }
+.metric-card.biz .metric-row dt { color: rgba(164,129,17,.7); }
+.metric-card.beh .metric-row dt { color: rgba(46,139,118,.8); }
+.metric-row dd { font-size: 12px; line-height: 1.55; color: rgba(30,42,56,.8); margin: 0; }
+
+/* ─── FILL AREAS ─────────────────────────── */
+.fill { margin: 14px 0 22px; }
+.fill-lbl { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--carbon); margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
+.fill-lbl::after { content: ''; flex: 1; height: 1px; background: var(--platinum); }
+textarea { width: 100%; min-height: 110px; border: 1.5px solid var(--platinum); border-radius: 8px; padding: 12px 14px; font-family: var(--fb); font-size: 13px; line-height: 1.7; color: var(--carbon); background: #fafafa; resize: vertical; outline: none; transition: border-color .2s, background .2s; }
+textarea:focus { border-color: var(--teal); background: white; }
+textarea.filled { border-color: var(--teal); background: white; }
+textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
+.char-ct { font-size: 10px; color: rgba(30,42,56,.35); text-align: right; margin-top: 3px; }
+
+/* ─── OBSERVATION FIELD ──────────────────── */
+.fill-obs { border-top: 1px dashed var(--platinum); padding-top: 20px; margin-top: 8px; }
+.fill-obs .fill-lbl { color: var(--gold); }
+.fill-obs .fill-lbl::after { background: rgba(164,129,17,.25); }
+.fill-obs textarea { border-color: rgba(164,129,17,.2); }
+.fill-obs textarea:focus { border-color: var(--gold); background: white; }
+
+/* ─── SUBMIT SECTION ─────────────────────── */
+.submit-sec { margin-top: 36px; padding: 24px 28px; background: var(--teal-bg); border: 1px solid var(--teal-bd); border-radius: 10px; }
+.submit-sec h3 { font-weight: 700; font-size: 15px; color: var(--carbon); margin-bottom: 6px; }
+.submit-sec p { font-size: 13px; color: rgba(30,42,56,.7); margin-bottom: 18px; }
+.submit-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 4px; }
+.btn-sub { display: inline-flex; align-items: center; gap: 8px; background: var(--teal); color: white; font-family: var(--fb); font-weight: 700; font-size: 13px; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; transition: background .2s; }
+.btn-sub:hover { background: var(--teal-dk); }
+.btn-sub.done { background: #2a6b50; }
+.btn-print { display: inline-flex; align-items: center; gap: 7px; background: transparent; color: var(--teal); font-family: var(--fb); font-weight: 700; font-size: 13px; padding: 12px 20px; border: 1.5px solid var(--teal); border-radius: 8px; cursor: pointer; transition: all .2s; }
+.btn-print:hover { background: var(--teal-bg); }
+.sub-ok { margin-top: 10px; font-size: 12px; color: var(--teal); font-weight: 700; display: none; }
+.sub-ok.show { display: block; }
+
+/* ─── MODAL ──────────────────────────────── */
+.modal-ov { display: none; position: fixed; inset: 0; background: rgba(30,42,56,.8); z-index: 9999; align-items: center; justify-content: center; }
+.modal-ov.open { display: flex; }
+.modal { background: white; border-radius: 12px; padding: 32px 36px; max-width: 560px; width: 90%; max-height: 82vh; overflow-y: auto; }
+.modal-title { font-family: var(--fd); font-size: 20px; color: var(--carbon); margin-bottom: 6px; }
+.modal-sub { font-size: 12px; color: rgba(30,42,56,.55); margin-bottom: 22px; }
+.modal-body { background: #fafafa; border: 1px solid var(--platinum); border-radius: 8px; padding: 14px; font-size: 12px; line-height: 1.7; color: var(--carbon); white-space: pre-wrap; max-height: 220px; overflow-y: auto; font-family: monospace; margin-bottom: 20px; }
+.modal-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn-m { display: inline-flex; align-items: center; gap: 6px; font-family: var(--fb); font-weight: 700; font-size: 12px; padding: 10px 18px; border-radius: 8px; border: none; cursor: pointer; transition: all .2s; }
+.btn-m.p { background: var(--teal); color: white; } .btn-m.p:hover { background: var(--teal-dk); }
+.btn-m.s { background: transparent; color: var(--carbon); border: 1.5px solid var(--platinum); } .btn-m.s:hover { background: #f5f5f5; }
+
+/* ─── BACK COVER ─────────────────────────── */
+.back-cover { background: white; min-height: 932px; display: flex; flex-direction: column; }
+.bc-band { background: var(--carbon); padding: 26px 44px 30px; }
+.bc-sprint { font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: 10px; }
+.bc-theme { font-family: var(--fd); font-size: 34px; color: white; line-height: 1.2; letter-spacing: -.01em; }
+.bc-spacer { flex: 1; background: white; display: flex; align-items: center; justify-content: center; }
+.bc-foot { background: var(--gold); padding: 14px 44px; display: flex; justify-content: center; align-items: center; }
+.bc-foot-t { font-size: 12px; font-weight: 600; color: rgba(255,255,255,.90); letter-spacing: .04em; }
+
+/* ─── PRINT / PDF ────────────────────────── */
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .top-nav, .modal-ov, .btn-print, .submit-actions, .submit-sec, .pb-wrap, .pb-pct, .save-dot { display: none !important; }
+  body { background: white !important; }
+  .doc-wrap { margin: 0 !important; max-width: 100% !important; gap: 0 !important; }
+  .doc-wrap > * { box-shadow: none !important; }
+  .page, .cover-page, .back-cover { height: 10.1in !important; min-height: unset !important; page-break-after: always; break-after: page; overflow: hidden; }
+  .report-id-block { background: #1e2a38 !important; page-break-inside: avoid; break-inside: avoid; }
+  .metric-pair, .ia-role, .step-list, .note, .gold-acc, .quote-band, .ni { page-break-inside: avoid; break-inside: avoid; }
+  .char-ct, .ip-guard { display: none !important; }
+  textarea { border: 1px solid #c0c4c2 !important; background: white !important; min-height: 50px !important; resize: none !important; overflow: visible !important; height: auto !important; }
+  @page { size: letter portrait; margin: 0.45in; }
+}
+@media (max-width: 600px) {
+  .msg-layout { grid-template-columns: 1fr; } .msg-img { display: none; }
+  .s-tab { display: none; } .p-body { padding: 28px 22px; }
+  .metric-pair { grid-template-columns: 1fr; }
+  .rid-fields { flex-direction: column; } .level-opts { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <div class="nav-brand">DCA · <span>ARIA</span></div>
+  <div class="nav-links">
+    <a href="#portada">Portada</a>
+    <a href="#contenido">Contenido</a>
+    <a href="#mensaje">Mensaje</a>
+    <a href="#instrucciones">Instrucciones</a>
+    <a href="#exp-201" id="nav-201">Exp. 2.01</a>
+    <a href="#exp-202" id="nav-202">Exp. 2.02</a>
+    <a href="#exp-203" id="nav-203">Exp. 2.03</a>
+    <a href="#exp-204" id="nav-204">Exp. 2.04</a>
+  </div>
+  <div class="nav-right">
+    <div class="pb-wrap"><div class="pb-fill" id="pbFill"></div></div>
+    <span class="pb-pct" id="pbPct">0%</span>
+    <div class="save-dot" id="saveDot"></div>
+  </div>
+</nav>
+
+<div class="doc-wrap">
+
+<!-- ══════════════════════════════════
+     PORTADA
+══════════════════════════════════ -->
+<section class="cover-page" id="portada">
+  <div class="cover-visual">
+    <svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs><pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.2" fill="rgba(30,42,56,0.28)"/></pattern></defs>
+      <rect width="720" height="300" fill="#2e8b76"/><rect width="720" height="300" fill="url(#dots)"/>
+      <!-- Three lenses visualization -->
+      <circle cx="180" cy="150" r="70" fill="none" stroke="rgba(255,255,255,0.52)" stroke-width="2"/>
+      <circle cx="180" cy="150" r="45" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+      <circle cx="180" cy="150" r="20" fill="rgba(255,255,255,0.12)"/>
+      <text x="180" y="155" fill="rgba(255,255,255,0.88)" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">AIMT</text>
+      <circle cx="360" cy="150" r="70" fill="none" stroke="rgba(210,208,200,0.65)" stroke-width="2"/>
+      <circle cx="360" cy="150" r="45" fill="none" stroke="rgba(210,208,200,0.45)" stroke-width="1.5"/>
+      <circle cx="360" cy="150" r="20" fill="rgba(210,208,200,0.14)"/>
+      <text x="360" y="155" fill="rgba(210,208,200,0.92)" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">AILS</text>
+      <circle cx="540" cy="150" r="70" fill="none" stroke="rgba(30,42,56,0.78)" stroke-width="2"/>
+      <circle cx="540" cy="150" r="45" fill="none" stroke="rgba(30,42,56,0.55)" stroke-width="1.5"/>
+      <circle cx="540" cy="150" r="20" fill="rgba(30,42,56,0.20)"/>
+      <text x="540" y="155" fill="rgba(30,42,56,0.88)" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">AICD</text>
+      <!-- Connecting arcs -->
+      <path d="M 248 120 Q 270 100 290 120" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="1.5"/>
+      <path d="M 428 120 Q 450 100 470 120" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="1.5"/>
+      <!-- Triangulation point -->
+      <circle cx="360" cy="280" r="8" fill="rgba(255,255,255,0.14)" stroke="rgba(255,255,255,0.38)" stroke-width="1"/>
+      <line x1="180" y1="218" x2="360" y2="272" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+      <line x1="540" y1="218" x2="360" y2="272" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+      <text x="360" y="285" fill="rgba(255,255,255,0.58)" font-family="sans-serif" font-size="8" font-weight="700" text-anchor="middle" letter-spacing="2">REPORTE BAIP · S1–S7</text>
+    </svg>
+  </div>
+  <div class="cover-band">
+    <div class="c-sprint-lbl">Sprint Roadmap · 02</div>
+    <div class="c-theme">Valoración y Análisis de la Brecha AI</div>
+  </div>
+  <div class="cover-body">
+    <div class="c-program">Certificación Analista BAIP — Brecha AI Personas</div>
+    <div class="c-badge">Experimentos para la puesta en práctica de aprendizajes · DCA</div>
+    <div class="student-row">
+      <div class="s-field"><label>Participante</label><input type="text" id="sf-nombre" data-save="sf-nombre" placeholder="Nombre completo"></div>
+      <div class="s-field"><label>Organización</label><input type="text" id="sf-empresa" data-save="sf-empresa" placeholder="Empresa"></div>
+      <div class="s-field"><label>Cohorte</label><input type="text" id="sf-cohorte" data-save="sf-cohorte" placeholder="Ej. BAIP-2026-01"></div>
+    </div>
+  </div>
+  <div class="cover-foot">
+    <div class="cf-text"><strong>Facilitador:</strong> César Lozano</div>
+    <div class="cf-text"><strong>Digital Change Advisors</strong> · Modelo ARIA</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     ÍNDICE
+══════════════════════════════════ -->
+<div class="page" id="contenido">
+  <div class="run-header">Sprint Roadmap 02 &mdash; Valoración y Análisis de la Brecha AI &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Contenido</span></div>
+    <div class="p-body">
+      <h1 class="sec-title">¿Qué encontrarás en este Roadmap?</h1>
+      <div class="toc-group">
+        <div class="toc-entry"><span class="toc-name">Mensaje del Facilitador</span><span class="toc-pg">02</span></div>
+        <div class="toc-entry"><span class="toc-name">Instrucciones de uso del Roadmap</span><span class="toc-pg">03</span></div>
+      </div>
+      <div class="toc-group">
+        <div class="toc-group-head">Experimento 2.01 &nbsp;·&nbsp; Temática 2.1 · Operar y lanzar la campaña</div>
+        <div class="toc-entry"><span class="toc-name">Campaña a escala</span><span class="toc-pg">04</span></div>
+      </div>
+      <div class="toc-group">
+        <div class="toc-group-head">Experimento 2.02 &nbsp;·&nbsp; Temática 2.2 · Del reporte al Reporte BAIP</div>
+        <div class="toc-entry"><span class="toc-name">El cruce</span><span class="toc-pg">08</span></div>
+      </div>
+      <div class="toc-group">
+        <div class="toc-group-head">Experimento 2.03 &nbsp;·&nbsp; Temática 2.3 · El plan y su caso de valor</div>
+        <div class="toc-entry"><span class="toc-name">El plan y su caso de valor</span><span class="toc-pg">12</span></div>
+      </div>
+      <div class="toc-group">
+        <div class="toc-group-head">Experimento 2.04 &nbsp;·&nbsp; Temática 2.4 · La defensa del diagnóstico</div>
+        <div class="toc-entry"><span class="toc-name">La defensa</span><span class="toc-pg">16</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">1</div><div class="rule"></div></div>
+</div>
+
+<!-- ══════════════════════════════════
+     MENSAJE DEL FACILITADOR
+══════════════════════════════════ -->
+<div class="page" id="mensaje">
+  <div class="run-header">Sprint Roadmap 02 &mdash; Valoración y Análisis de la Brecha AI &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Mensaje</span></div>
+    <div class="p-body">
+      <div class="msg-layout">
+        <div class="msg-img">
+          <img src="Images/Imagen mensaje facilitador.png" alt="Analista con tres lentes diagnósticas" style="width:100%;height:100%;object-fit:contain;display:block;">
+        </div>
+        <div>
+          <div class="msg-title">Mensaje del Facilitador</div>
+          <p>En el Sprint 01 aprendiste a leer cada lente por separado. En el Sprint 02 dejas de leer reportes y empiezas a producir el tuyo: un Reporte BAIP completo, sobre una unidad real de tu entorno, que termina en una decisión capturada de quien responde por el retorno de la IA.</p>
+          <p>Esa es la diferencia que instala este sprint. Aquí operas la plataforma DCA de extremo a extremo: tú configuras y lanzas la campaña multi-instrumento, defines la unidad, proteges la cobertura y luego cruzas los tres reportes procesados hasta encontrar la causa raíz que ninguno muestra por separado. Sigues sin tocar reactivos, scoring ni baremos — esa capa es de la plataforma — pero el diagnóstico, el plan y la defensa son tuyos.</p>
+          <p>Los cuatro experimentos se encadenan en una sola pieza sobre la misma unidad: Campaña, Cruce, Plan y Defensa. Mides con cobertura válida, integras en causa raíz, conviertes en caso de inversión y haces decidir. Cada uno deja evidencia capturable y alimenta al siguiente: el producto final es el Reporte BAIP (S1–S7) y la decisión de su responsable del KPI.</p>
+          <p>No se trata de presentar un diagnóstico bonito. Se trata de salir de la sala con una decisión —autoriza, ajusta o rechaza— y nunca con un «lo revisamos y te avisamos».</p>
+          <div class="sig-block">
+            <div class="sig-line"></div>
+            <div class="sig-name">César Lozano</div>
+            <div class="sig-role">Facilitador · Digital Change Advisors</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">2</div><div class="rule"></div></div>
+</div>
+
+<!-- ══════════════════════════════════
+     INSTRUCCIONES
+══════════════════════════════════ -->
+<div class="page" id="instrucciones">
+  <div class="run-header">Sprint Roadmap 02 &mdash; Valoración y Análisis de la Brecha AI &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Instrucciones</span></div>
+    <div class="p-body">
+      <h1 class="sec-title">Instrucciones de Uso</h1>
+      <div class="sec-sublabel">¿Cómo utilizar este documento de forma efectiva?</div>
+      <div class="ni">
+        <div class="ni-head"><span class="nn">1.</span> Trabaja en la versión digital con autoguardado activo.</div>
+        <div class="ni-text">Este instrumento es HTML nativo con autoguardado automático. Tus registros se conservan en el dispositivo en tiempo real — no hay riesgo de perder el trabajo. Ten el documento abierto mientras operas la campaña en la plataforma DCA y lees los reportes procesados, para registrar tus evidencias inmediatamente.</div>
+      </div>
+      <div class="ni">
+        <div class="ni-head"><span class="nn">2.</span> Los cuatro experimentos se encadenan sobre una sola unidad real.</div>
+        <div class="ni-text">Campaña, Cruce, Plan y Defensa no son ejercicios sueltos: producen un único Reporte BAIP (S1–S7) sobre la misma unidad de <strong>≥10 personas</strong>. El cierre de cada experimento es el insumo del siguiente. Completa el bloque de identificación —unidad medida, fecha y contexto de la unidad— <strong>antes</strong> de registrar evidencias.</div>
+      </div>
+      <div class="ni">
+        <div class="ni-head"><span class="nn">3.</span> Envía cada experimento al completarlo — es obligatorio para la Mentoría.</div>
+        <div class="ni-text">Al finalizar cada experimento encontrarás un botón de envío. El registro de evidencias enviado es la condición que habilita el feedback de seguimiento del facilitador y el requisito de acceso a la Sesión de Mentoring de Cohorte que cierra el Sprint 02.</div>
+      </div>
+      <div class="quote-band">
+        <p>El producto de este sprint no es un diagnóstico: es una decisión capturada. El analista entra a la sala con un Reporte BAIP y sale con un autoriza, ajusta o rechaza — nunca con un «lo revisamos y te avisamos».</p>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">3</div><div class="rule"></div></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     EXPERIMENTO 2.01
+     Campaña a escala
+══════════════════════════════════════════ -->
+<div class="page" id="exp-201">
+  <div class="run-header">Sprint Roadmap 02 &mdash; Valoración y Análisis de la Brecha AI &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 2.01</span></div>
+    <div class="p-body">
+      <div class="exp-lbl">Experimento 2.01</div>
+      <h1 class="sec-title">Campaña a escala</h1>
+      <div class="exp-meta-row">
+        <span class="exp-lente lente-int">Campaña multi-instrumento · AIMT · AILS · AICD</span>
+        <span class="exp-lente lente-int">Temática 2.1 · Operar y lanzar la campaña</span>
+      </div>
+      <div class="note">
+        <div class="note-hd">Conexión con la fundamentación</div>
+        <p><strong>Temática 2.1</strong></p>
+        <p>2.1.1 La campaña define la calidad del diagnóstico.</p>
+        <p>2.1.2 La unidad la define la decisión.</p>
+        <p>2.1.3 El encuadre protege el dato.</p>
+      </div>
+      <p><em>La calidad de todo el Reporte BAIP se decide antes de leer un solo dato: en cómo defines la unidad, proteges la cobertura y encuadras el lanzamiento. Una campaña mal lanzada produce un diagnóstico que no resiste la primera objeción.</em></p>
+      <p><strong>Objetivo de aprendizaje:</strong> Configurar y lanzar en la plataforma DCA una campaña multi-instrumento (AIMT, AILS, AICD) sobre una unidad real, alcanzando cobertura representativa, y encuadrar el lanzamiento de modo que proteja la validez del dato.</p>
+      <p><strong>Contexto de aplicación:</strong> Una unidad de ≥10 personas con cultura razonablemente homogénea —tu equipo, un área de un cliente activo o una unidad del piloto del nodo— sobre la que existe una decisión de negocio real con un dueño identificable (el responsable del KPI). El analista opera la plataforma de extremo a extremo; no ve ni edita reactivos, scoring ni baremos.</p>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">4</div><div class="rule"></div></div>
+</div>
+
+<!-- EXP 2.01 · PÁGINA 5 · Identificación + Pasos -->
+<div class="page">
+  <div class="run-header">Sprint Roadmap 02 &mdash; Valoración y Análisis de la Brecha AI &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 2.01</span></div>
+    <div class="p-body">
+      <div class="report-id-block">
+        <div class="rid-head">
+          <span class="rid-badge">Experimento 2.01</span>
+          <span class="rid-title">Identificación de la Unidad Medida</span>
+        </div>
+        <div class="rid-fields">
+          <div class="rid-field"><label>Unidad medida (≥10 personas)</label><input type="text" id="f-201-rid-unidad" data-save="f-201-rid-unidad" placeholder="Nombre de la unidad y nº de personas elegibles"></div>
+          <div class="rid-field"><label>Ventana de la campaña</label><input type="text" id="f-201-rid-fecha" data-save="f-201-rid-fecha" placeholder="Ej. 3–7 jul 2026"></div>
+          <div class="rid-field"><label>Analista BAIP</label><input type="text" id="f-201-rid-part" data-save="f-201-rid-part" placeholder="Se sincroniza desde portada"></div>
+        </div>
+        <div class="rid-level">
+          <div class="rid-level-lbl">Contexto de la unidad medida</div>
+          <div class="level-opts">
+            <label class="level-opt"><input type="radio" name="level-201" value="equipo" data-radio-save="f-201-ctx"><span>👥 Equipo propio</span></label>
+            <label class="level-opt"><input type="radio" name="level-201" value="cliente" data-radio-save="f-201-ctx"><span>🏢 Área de cliente activo</span></label>
+            <label class="level-opt"><input type="radio" name="level-201" value="piloto" data-radio-save="f-201-ctx"><span>🧪 Unidad del piloto del nodo</span></label>
+          </div>
+        </div>
+      </div>
+      <div class="ip-guard">
+        <span class="ip-guard-icon">🔒</span>
+        <span>En el Sprint 02 operas la plataforma DCA de extremo a extremo: configuras y lanzas la campaña multi-instrumento y lees los reportes ya procesados. Sigues sin ver ni editar reactivos, scoring ni baremos — esa capa permanece reservada a la plataforma DCA.</span>
+      </div>
+      <p style="font-weight:700;font-size:14px;color:var(--carbon);margin-bottom:12px;">Paso a paso</p>
+      <ul class="step-list">
+        <li><span>Nombrar la decisión que el diagnóstico debe sostener y su dueño (el responsable del KPI); derivar de ahí la unidad de medición y descartar las áreas de cultura distinta que no deben agregarse.</span></li>
+        <li><span>Redactar la ficha de cobertura —población elegible, criterio de segmentación (incluye exclusión) y ventana temporal— y justificar cada parámetro frente a la decisión.</span></li>
+        <li><span>Diseñar el encuadre de lanzamiento: emisor = dueño del KPI, mensaje de diagnóstico de aceleración del retorno (no auditoría de personas) y dos garantías creíbles sobre el futuro del rol, para no disparar el miedo al desplazamiento (obstáculo #10).</span></li>
+        <li><span>Configurar y lanzar la campaña multi-instrumento en la plataforma DCA; emitir la comunicación de encuadre firmada por el dueño del KPI.</span></li>
+        <li><span>Monitorear la cobertura en el panel de la plataforma durante la ventana y cerrar la campaña al alcanzar el umbral de representatividad de la unidad.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">5</div><div class="rule"></div></div>
+</div>
+
+<!-- EXP 2.01 · PÁGINA 6 · Métricas + Campos E1 y E2 -->
+<div class="page">
+  <div class="run-header">Sprint Roadmap 02 &mdash; Valoración y Análisis de la Brecha AI &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 2.01</span></div>
+    <div class="p-body">
+      <div class="metric-pair">
+        <div class="metric-card beh">
+          <div class="metric-card-lbl">Métrica de comportamiento</div>
+          <dl class="metric-rows">
+            <div class="metric-row"><dt>Qué se mide</dt><dd>Tasa de respuesta válida de la población elegible: la conducta del grupo medido ante el encuadre.</dd></div>
+            <div class="metric-row"><dt>Cómo se mide</dt><dd>Dato de cobertura del panel de campaña de la plataforma DCA. No autorreporte.</dd></div>
+            <div class="metric-row"><dt>Línea base</dt><dd>Cobertura de tu último levantamiento sobre esa unidad (o registro de que no existía medición previa).</dd></div>
+            <div class="metric-row"><dt>Valor objetivo</dt><dd>Cobertura representativa de la unidad según el umbral definido en la ficha de cobertura.</dd></div>
+          </dl>
+        </div>
+        <div class="metric-card biz">
+          <div class="metric-card-lbl">Métrica de negocio</div>
+          <dl class="metric-rows">
+            <div class="metric-row"><dt>KPI afectado</dt><dd>Tiempo de ciclo de la fase de medición del diagnóstico y reprocesos por cobertura insuficiente.</dd></div>
+            <div class="metric-row"><dt>Cómo se captura</dt><dd>Fechas de los hitos en la plataforma y bitácora de la campaña.</dd></div>
+            <div class="metric-row"><dt>Línea base</dt><dd>Duración de tu proceso de levantamiento actual; reprocesos previos.</dd></div>
+            <div class="metric-row"><dt>Valor objetivo</dt><dd>Dato representativo listo en ≤1 semana, con cero reprocesos por cobertura.</dd></div>
+          </dl>
+        </div>
+      </div>
+      <div class="ia-role">
+        <span class="ia-role-icon">🤖</span>
+        <span><strong>Rol de la IA como andamiaje:</strong> Usa un asistente de IA para draftear la ficha de cobertura y el encuadre de lanzamiento, y para anticipar el sesgo de no respuesta; tú validas y decides la unidad, la ventana y las garantías. La IA no decide la unidad ni sustituye el criterio, y es la plataforma DCA —no el asistente— la que procesa los instrumentos. Reactivos, scoring y baremos quedan reservados a la plataforma.</span>
+      </div>
+      <div class="fill">
+        <div class="fill-lbl">Ficha de cobertura</div>
+        <textarea id="f-201-e1" data-save="f-201-e1" rows="9" placeholder="Registra y justifica cada parámetro frente a la decisión:&#10;• Decisión de negocio que el diagnóstico debe sostener y su dueño (responsable del KPI)&#10;• Población elegible (nº de personas) y por qué esta unidad&#10;• Criterio de segmentación, incluyendo el criterio de exclusión (qué áreas de cultura distinta NO se agregan)&#10;• Ventana temporal de la campaña y umbral de representatividad"></textarea>
+        <div class="char-ct"><span id="cc-201-e1">0</span> caracteres</div>
+      </div>
+      <div class="fill">
+        <div class="fill-lbl">Encuadre de lanzamiento</div>
+        <textarea id="f-201-e2" data-save="f-201-e2" rows="7" placeholder="Redacta el texto que el dueño del KPI firmará y emitirá:&#10;• Emisor = dueño del KPI (no Recursos Humanos)&#10;• Mensaje de diagnóstico de aceleración del retorno — no «auditoría de personas»&#10;• Dos garantías creíbles sobre el futuro del rol, para no disparar el miedo al desplazamiento (obstáculo #10)"></textarea>
+        <div class="char-ct"><span id="cc-201-e2">0</span> caracteres</div>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">6</div><div class="rule"></div></div>
+</div>
+
+<!-- EXP 2.01 · PÁGINA 7 · Campo E3, Obs y Envío -->
+<div class="page">
+  <div class="run-header">Sprint Roadmap 02 &mdash; Valoración y Análisis de la Brecha AI &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 2.01</span></div>
+    <div class="p-body">
+      <div class="fill">
+        <div class="fill-lbl">Captura del panel de cobertura</div>
+        <textarea id="f-201-e3" data-save="f-201-e3" rows="6" placeholder="Al cierre de la campaña, registra el dato del panel de la plataforma DCA:&#10;• Tasa de respuesta válida alcanzada frente al umbral definido en la ficha&#10;• ¿Se alcanzó la representatividad de la unidad? ¿Hubo reprocesos por cobertura?&#10;• Adjunta o describe la captura del panel de cobertura"></textarea>
+        <div class="char-ct"><span id="cc-201-e3">0</span> caracteres</div>
+      </div>
+      <div class="fill fill-obs">
+        <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
+        <textarea id="f-201-obs" data-save="f-201-obs" rows="4" placeholder="Comparte con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores. Tu observación puede mejorar el instrumento y la formación de las próximas cohortes."></textarea>
+        <div class="char-ct"><span id="cc-201-obs">0</span> caracteres</div>
+      </div>
+      <div class="submit-sec">
+        <h3>Envío del Experimento 2.01</h3>
+        <p>Una vez cerrada la campaña y registradas la ficha de cobertura, el encuadre y la captura del panel, envía tu registro. Este envío es el requisito para recibir el feedback de seguimiento y entrega los tres reportes procesados que el Exp 2.02 cruza.</p>
+        <div class="submit-actions">
+          <button class="btn-sub" onclick="openModal('201')" id="btn-201">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
+            Enviar Experimento 2.01
+          </button>
+          <button class="btn-print" onclick="window.print()">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="4" y="2" width="12" height="8" rx="1"/><rect x="3" y="10" width="14" height="8" rx="1"/><rect x="7" y="13" width="6" height="5" rx="0.5" fill="currentColor" stroke="none"/></svg>
+            Guardar copia en PDF
+          </button>
+        </div>
+        <div class="sub-ok" id="ok-201">✓ Experimento 2.01 enviado correctamente.</div>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">7</div><div class="rule"></div></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     EXPERIMENTO 2.02
+     El cruce
+══════════════════════════════════════════ -->
+<div class="page" id="exp-202">
+  <div class="run-header">Sprint Roadmap 02 &mdash; Valoración y Análisis de la Brecha AI &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 2.02</span></div>
+    <div class="p-body">
+      <div class="exp-lbl">Experimento 2.02</div>
+      <h1 class="sec-title">El cruce</h1>
+      <div class="exp-meta-row">
+        <span class="exp-lente lente-int">Integración multi-instrumento</span>
+        <span class="exp-lente lente-int">Temática 2.2 · Del reporte al Reporte BAIP</span>
+      </div>
+      <div class="note">
+        <div class="note-hd">Conexión con la fundamentación</div>
+        <p><strong>Temática 2.2</strong></p>
+        <p>2.2.1 Sumar no es integrar.</p>
+        <p>2.2.2 Causa o síntoma, con el marco de los diez obstáculos.</p>
+        <p>2.2.3 De la causa raíz al componente ARIA en S4.</p>
+      </div>
+      <p><em>El diagnóstico de valor no vive en ningún reporte individual: vive en el cruce. Apilar las tres lecturas no es integrarlas; integrar es encontrar la causa raíz que solo aparece cuando las tres lentes se leen juntas.</em></p>
+      <p><strong>Objetivo de aprendizaje:</strong> Integrar los tres reportes procesados (AIMT, AILS, AICD) en un diagnóstico de causa raíz que ningún reporte individual revela, jerarquizando causa sobre síntoma con el marco de los diez obstáculos y mapeando cada causa a su componente del Modelo ARIA en la plantilla BAIP (de S3 a S4).</p>
+      <p><strong>Contexto de aplicación:</strong> Los tres reportes procesados que la plataforma DCA devolvió de la campaña del Exp 2.01, sobre la misma unidad real. El analista integra; la plataforma ya procesó. No accede a reactivos ni a scoring.</p>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">8</div><div class="rule"></div></div>
+</div>
+
+<!-- EXP 2.02 · PÁGINA 9 · Identificación + Pasos -->
+<div class="page">
+  <div class="run-header">Sprint Roadmap 02 &mdash; Valoración y Análisis de la Brecha AI &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 2.02</span></div>
+    <div class="p-body">
+      <div class="report-id-block">
+        <div class="rid-head">
+          <span class="rid-badge">Experimento 2.02</span>
+          <span class="rid-title">Identificación de la Unidad Medida</span>
+        </div>
+        <div class="rid-fields">
+          <div class="rid-field"><label>Unidad medida (≥10 personas)</label><input type="text" id="f-202-rid-unidad" data-save="f-202-rid-unidad" placeholder="La misma unidad de la campaña del Exp 2.01"></div>
+          <div class="rid-field"><label>Fecha reporte</label><input type="date" id="f-202-rid-fecha" data-save="f-202-rid-fecha"></div>
+          <div class="rid-field"><label>Analista BAIP</label><input type="text" id="f-202-rid-part" data-save="f-202-rid-part" placeholder="Se sincroniza desde portada"></div>
+        </div>
+        <div class="rid-level">
+          <div class="rid-level-lbl">Contexto de la unidad medida</div>
+          <div class="level-opts">
+            <label class="level-opt"><input type="radio" name="level-202" value="equipo" data-radio-save="f-202-ctx"><span>👥 Equipo propio</span></label>
+            <label class="level-opt"><input type="radio" name="level-202" value="cliente" data-radio-save="f-202-ctx"><span>🏢 Área de cliente activo</span></label>
+            <label class="level-opt"><input type="radio" name="level-202" value="piloto" data-radio-save="f-202-ctx"><span>🧪 Unidad del piloto del nodo</span></label>
+          </div>
+        </div>
+      </div>
+      <div class="ip-guard">
+        <span class="ip-guard-icon">🔒</span>
+        <span>En el Sprint 02 operas la plataforma DCA de extremo a extremo: configuras y lanzas la campaña multi-instrumento y lees los reportes ya procesados. Sigues sin ver ni editar reactivos, scoring ni baremos — esa capa permanece reservada a la plataforma DCA.</span>
+      </div>
+      <p style="font-weight:700;font-size:14px;color:var(--carbon);margin-bottom:12px;">Paso a paso</p>
+      <ul class="step-list">
+        <li><span>Aplicar los tres principios de integración —triangulación, coherencia sistémica y tensión productiva— sobre las tres lecturas y registrar al menos un patrón cruzado que ningún reporte individual muestra.</span></li>
+        <li><span>Clasificar cada hallazgo como síntoma o causa con la matriz de relaciones causales de los diez obstáculos; distinguir obstáculos independientes de derivados.</span></li>
+        <li><span>Jerarquizar las causas raíz por severidad, ponderando la convergencia entre instrumentos, y seleccionar las priorizadas para intervención.</span></li>
+        <li><span>Completar el Diagnóstico Integrado (S3) y la mini-ficha de cada causa en el Mapa de Causa Raíz (S4): evidencia (qué lente la vio), magnitud, costo de oportunidad sobre el retorno de la IA y componente ARIA que la cierra (DMC, LED, MATCH, DIB, Visión 4.0…), nombrado sin su mecánica.</span></li>
+        <li><span>Aplicar la prueba de valor: confirmar que cada causa priorizada no es una conclusión que el cliente habría inferido leyendo los tres reportes por separado.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">9</div><div class="rule"></div></div>
+</div>
+
+<!-- EXP 2.02 · PÁGINA 10 · Métricas + Campos E1 y E2 -->
+<div class="page">
+  <div class="run-header">Sprint Roadmap 02 &mdash; Valoración y Análisis de la Brecha AI &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 2.02</span></div>
+    <div class="p-body">
+      <div class="metric-pair">
+        <div class="metric-card beh">
+          <div class="metric-card-lbl">Métrica de comportamiento</div>
+          <dl class="metric-rows">
+            <div class="metric-row"><dt>Qué se mide</dt><dd>Número de patrones cruzados de causa raíz, triangulados por ≥2 instrumentos, que produces y que no aparecen en ningún reporte individual.</dd></div>
+            <div class="metric-row"><dt>Cómo se mide</dt><dd>Conteo sobre el S3/S4 redactado, contrastado contra las tres lecturas sueltas.</dd></div>
+            <div class="metric-row"><dt>Línea base</dt><dd>Cero: antes del cruce solo dispones de tres lecturas individuales.</dd></div>
+            <div class="metric-row"><dt>Valor objetivo</dt><dd>≥2 causas raíz priorizadas, cada una triangulada y con componente ARIA asignado.</dd></div>
+          </dl>
+        </div>
+        <div class="metric-card biz">
+          <div class="metric-card-lbl">Métrica de negocio</div>
+          <dl class="metric-rows">
+            <div class="metric-row"><dt>KPI afectado</dt><dd>Índice de accionabilidad del diagnóstico: proporción de hallazgos priorizados que son causa raíz (no síntoma) y tienen componente ARIA asignado.</dd></div>
+            <div class="metric-row"><dt>Cómo se captura</dt><dd>Conteo sobre la mini-ficha del Mapa de Causa Raíz (S4).</dd></div>
+            <div class="metric-row"><dt>Línea base</dt><dd>El diagnóstico de «tres reportes apilados» tiene cerca de 0% de causas raíz con componente: todo es síntoma.</dd></div>
+            <div class="metric-row"><dt>Valor objetivo</dt><dd>100% de las causas priorizadas en S4 mapeadas a causa raíz y componente ARIA; cero recomendaciones tipo «más capacitación».</dd></div>
+          </dl>
+        </div>
+      </div>
+      <div class="ia-role">
+        <span class="ia-role-icon">🤖</span>
+        <span><strong>Rol de la IA como andamiaje:</strong> La IA acelera la detección de patrones cruzados candidatos y ayuda a contrastar hallazgos contra la matriz de los diez obstáculos; tú validas la triangulación, decides la jerarquía de causas y asignas el componente. La IA no fija la causa raíz ni asigna el framework por sí sola. La mecánica de los componentes ARIA no se documenta: es capa protegida.</span>
+      </div>
+      <div class="fill">
+        <div class="fill-lbl">Diagnóstico Integrado (S3)</div>
+        <textarea id="f-202-e1" data-save="f-202-e1" rows="8" placeholder="Redacta el patrón cruzado que ningún reporte individual muestra, aplicando los tres principios de integración:&#10;• Triangulación: qué señal aparece en ≥2 lentes (AIMT / AILS / AICD)&#10;• Coherencia sistémica: cómo se refuerzan entre instrumentos&#10;• Tensión productiva: dónde un reporte contradice a otro y qué revela esa tensión"></textarea>
+        <div class="char-ct"><span id="cc-202-e1">0</span> caracteres</div>
+      </div>
+      <div class="fill">
+        <div class="fill-lbl">Mapa de Causa Raíz (S4)</div>
+        <textarea id="f-202-e2" data-save="f-202-e2" rows="8" placeholder="Mini-ficha por cada causa priorizada (≥2):&#10;• Evidencia: qué lente la vio&#10;• Magnitud&#10;• Costo de oportunidad sobre el retorno de la IA&#10;• Componente ARIA que la cierra (DMC, LED, MATCH, DIB, Visión 4.0…), nombrado sin su mecánica&#10;Recuerda: clasifica antes causa vs síntoma con la matriz de los diez obstáculos."></textarea>
+        <div class="char-ct"><span id="cc-202-e2">0</span> caracteres</div>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">10</div><div class="rule"></div></div>
+</div>
+
+<!-- EXP 2.02 · PÁGINA 11 · Campo E3, Obs y Envío -->
+<div class="page">
+  <div class="run-header">Sprint Roadmap 02 &mdash; Valoración y Análisis de la Brecha AI &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 2.02</span></div>
+    <div class="p-body">
+      <div class="fill">
+        <div class="fill-lbl">Prueba de valor</div>
+        <textarea id="f-202-e3" data-save="f-202-e3" rows="6" placeholder="Por cada causa priorizada, demuestra por qué NO era autoevidente leyendo los tres reportes por separado: ¿qué conclusión solo emerge del cruce? Si el cliente habría llegado a ella leyendo un reporte individual, no es una causa raíz integrada — revísala."></textarea>
+        <div class="char-ct"><span id="cc-202-e3">0</span> caracteres</div>
+      </div>
+      <div class="fill fill-obs">
+        <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
+        <textarea id="f-202-obs" data-save="f-202-obs" rows="4" placeholder="Comparte con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores."></textarea>
+        <div class="char-ct"><span id="cc-202-obs">0</span> caracteres</div>
+      </div>
+      <div class="submit-sec">
+        <h3>Envío del Experimento 2.02</h3>
+        <p>Completa el Diagnóstico Integrado (S3), el Mapa de Causa Raíz (S4) y la prueba de valor antes de enviar. El S4 priorizado es la entrada directa del Plan de Intervención (S5) del Exp 2.03.</p>
+        <div class="submit-actions">
+          <button class="btn-sub" onclick="openModal('202')" id="btn-202">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
+            Enviar Experimento 2.02
+          </button>
+          <button class="btn-print" onclick="window.print()">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="4" y="2" width="12" height="8" rx="1"/><rect x="3" y="10" width="14" height="8" rx="1"/><rect x="7" y="13" width="6" height="5" rx="0.5" fill="currentColor" stroke="none"/></svg>
+            Guardar copia en PDF
+          </button>
+        </div>
+        <div class="sub-ok" id="ok-202">✓ Experimento 2.02 enviado correctamente.</div>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">11</div><div class="rule"></div></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     EXPERIMENTO 2.03
+     El plan y su caso de valor
+══════════════════════════════════════════ -->
+<div class="page" id="exp-203">
+  <div class="run-header">Sprint Roadmap 02 &mdash; Valoración y Análisis de la Brecha AI &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 2.03</span></div>
+    <div class="p-body">
+      <div class="exp-lbl">Experimento 2.03</div>
+      <h1 class="sec-title">El plan y su caso de valor</h1>
+      <div class="exp-meta-row">
+        <span class="exp-lente lente-int">Plan de 90 días · Caso de inversión</span>
+        <span class="exp-lente lente-int">Temática 2.3 · El plan y su caso de valor</span>
+      </div>
+      <div class="note">
+        <div class="note-hd">Conexión con la fundamentación</div>
+        <p><strong>Temática 2.3</strong></p>
+        <p>2.3.1 Cada acción ancla a obstáculo, componente y métrica.</p>
+        <p>2.3.2 El Modelo de Impacto.</p>
+        <p>2.3.3 Aversión a la pérdida: el benchmark no es promesa.</p>
+      </div>
+      <p><em>Un diagnóstico sin plan es una observación; un plan sin caso de inversión es un gasto. El analista convierte la causa raíz en acciones ancladas y traduce el costo de inacción en el lenguaje del KPI del cliente.</em></p>
+      <p><strong>Objetivo de aprendizaje:</strong> Convertir el diagnóstico de causa raíz en un Plan de Intervención de 90 días (S5) con cada acción anclada a obstáculo, componente ARIA, métrica dual de adopción e hito-rol, y construir el Modelo de Impacto a 120 días (S6) —costo de inacción, inversión y retorno— derivado de los KPI del cliente.</p>
+      <p><strong>Contexto de aplicación:</strong> El Mapa de Causa Raíz priorizado (S4) del Exp 2.02 y los KPI reales de la unidad o cliente. El responsable del KPI es el dueño del plan.</p>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">12</div><div class="rule"></div></div>
+</div>
+
+<!-- EXP 2.03 · PÁGINA 13 · Identificación + Pasos -->
+<div class="page">
+  <div class="run-header">Sprint Roadmap 02 &mdash; Valoración y Análisis de la Brecha AI &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 2.03</span></div>
+    <div class="p-body">
+      <div class="report-id-block">
+        <div class="rid-head">
+          <span class="rid-badge">Experimento 2.03</span>
+          <span class="rid-title">Identificación de la Unidad Medida</span>
+        </div>
+        <div class="rid-fields">
+          <div class="rid-field"><label>Unidad medida (≥10 personas)</label><input type="text" id="f-203-rid-unidad" data-save="f-203-rid-unidad" placeholder="La misma unidad del diagnóstico (S4)"></div>
+          <div class="rid-field"><label>Fecha reporte</label><input type="date" id="f-203-rid-fecha" data-save="f-203-rid-fecha"></div>
+          <div class="rid-field"><label>Analista BAIP</label><input type="text" id="f-203-rid-part" data-save="f-203-rid-part" placeholder="Se sincroniza desde portada"></div>
+        </div>
+        <div class="rid-level">
+          <div class="rid-level-lbl">Contexto de la unidad medida</div>
+          <div class="level-opts">
+            <label class="level-opt"><input type="radio" name="level-203" value="equipo" data-radio-save="f-203-ctx"><span>👥 Equipo propio</span></label>
+            <label class="level-opt"><input type="radio" name="level-203" value="cliente" data-radio-save="f-203-ctx"><span>🏢 Área de cliente activo</span></label>
+            <label class="level-opt"><input type="radio" name="level-203" value="piloto" data-radio-save="f-203-ctx"><span>🧪 Unidad del piloto del nodo</span></label>
+          </div>
+        </div>
+      </div>
+      <div class="ip-guard">
+        <span class="ip-guard-icon">🔒</span>
+        <span>En el Sprint 02 operas la plataforma DCA de extremo a extremo: configuras y lanzas la campaña multi-instrumento y lees los reportes ya procesados. Sigues sin ver ni editar reactivos, scoring ni baremos — esa capa permanece reservada a la plataforma DCA.</span>
+      </div>
+      <p style="font-weight:700;font-size:14px;color:var(--carbon);margin-bottom:12px;">Paso a paso</p>
+      <ul class="step-list">
+        <li><span>Por cada causa priorizada en S4, redactar una acción de S5 con sus cuatro anclas: obstáculo que cierra, componente ARIA (nombrado, sin mecánica), métrica dual de adopción (comportamiento y negocio) e hito-rol (corte 30/60/90/120 y dueño = responsable del KPI).</span></li>
+        <li><span>Depurar el plan: eliminar toda acción de actividad genérica —«capacitar», «sensibilizar», «socializar»— que no nombre obstáculo, componente y métrica.</span></li>
+        <li><span>Cuantificar el costo de inacción por trimestre: el retorno que la inversión en IA ya hecha deja de generar mientras la brecha sigue abierta, leído en el KPI del cliente.</span></li>
+        <li><span>Estimar la inversión del plan y el retorno proyectado a 120 días, cada cifra rastreada a un KPI del cliente; dejar el benchmark del Modelo ARIA como referencia de categoría, nunca como promesa.</span></li>
+        <li><span>Redactar el caso de valor en clave de costo de inacción (marco de pérdida) y verificar la trazabilidad de cada número al negocio del cliente.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">13</div><div class="rule"></div></div>
+</div>
+
+<!-- EXP 2.03 · PÁGINA 14 · Métricas + Campos E1 y E2 -->
+<div class="page">
+  <div class="run-header">Sprint Roadmap 02 &mdash; Valoración y Análisis de la Brecha AI &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 2.03</span></div>
+    <div class="p-body">
+      <div class="metric-pair">
+        <div class="metric-card beh">
+          <div class="metric-card-lbl">Métrica de comportamiento</div>
+          <dl class="metric-rows">
+            <div class="metric-row"><dt>Qué se mide</dt><dd>Proporción de acciones del plan con las cuatro anclas completas y métrica dual, frente a las redactadas como verbos de actividad.</dd></div>
+            <div class="metric-row"><dt>Cómo se mide</dt><dd>Conteo sobre el Plan de Intervención (S5) redactado.</dd></div>
+            <div class="metric-row"><dt>Línea base</dt><dd>Porcentaje de acciones «ancladas» en tu forma de planear actual: típicamente bajo, dominado por «capacitar / sensibilizar».</dd></div>
+            <div class="metric-row"><dt>Valor objetivo</dt><dd>100% de acciones ancladas con métrica dual; cero acciones de actividad genérica.</dd></div>
+          </dl>
+        </div>
+        <div class="metric-card biz">
+          <div class="metric-card-lbl">Métrica de negocio</div>
+          <dl class="metric-rows">
+            <div class="metric-row"><dt>KPI afectado</dt><dd>Costo de inacción cuantificado por trimestre (velocidad de retorno perdida sobre la inversión en IA) y retorno proyectado a 120 días.</dd></div>
+            <div class="metric-row"><dt>Cómo se captura</dt><dd>Modelo de Impacto (S6), con cada cifra rastreada a un KPI del cliente.</dd></div>
+            <div class="metric-row"><dt>Línea base</dt><dd>Costo de inacción no cuantificado —cero visibilidad—: el plan se lee como gasto.</dd></div>
+            <div class="metric-row"><dt>Valor objetivo</dt><dd>Costo de inacción, inversión y retorno cuantificados y rastreables al KPI del cliente; el plan se lee como inversión.</dd></div>
+          </dl>
+        </div>
+      </div>
+      <div class="ia-role">
+        <span class="ia-role-icon">🤖</span>
+        <span><strong>Rol de la IA como andamiaje:</strong> La IA estructura el plan, propone formulaciones de métrica dual y ayuda a modelar escenarios de impacto; tú derivas cada cifra de los KPI reales del cliente y rechazas cualquier promesa tomada del benchmark. La IA no inventa cifras ni fija la promesa.</span>
+      </div>
+      <div class="fill">
+        <div class="fill-lbl">Plan de Intervención 90 días (S5)</div>
+        <textarea id="f-203-e1" data-save="f-203-e1" rows="9" placeholder="Por cada causa priorizada en S4, una acción con sus cuatro anclas:&#10;• Obstáculo que cierra&#10;• Componente ARIA (nombrado, sin mecánica)&#10;• Métrica dual de adopción (comportamiento y negocio)&#10;• Hito-rol (corte 30/60/90/120, dueño = responsable del KPI)&#10;Depura: nada de «capacitar / sensibilizar / socializar» sin las cuatro anclas."></textarea>
+        <div class="char-ct"><span id="cc-203-e1">0</span> caracteres</div>
+      </div>
+      <div class="fill">
+        <div class="fill-lbl">Modelo de Impacto 120 días (S6)</div>
+        <textarea id="f-203-e2" data-save="f-203-e2" rows="7" placeholder="Cada cifra trazada a un KPI del cliente:&#10;• Costo de inacción por trimestre (retorno que la inversión en IA deja de generar mientras la brecha sigue abierta)&#10;• Inversión del plan&#10;• Retorno proyectado a 120 días&#10;Mantén el benchmark del Modelo ARIA como referencia de categoría, nunca como promesa."></textarea>
+        <div class="char-ct"><span id="cc-203-e2">0</span> caracteres</div>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">14</div><div class="rule"></div></div>
+</div>
+
+<!-- EXP 2.03 · PÁGINA 15 · Campo E3, Obs y Envío -->
+<div class="page">
+  <div class="run-header">Sprint Roadmap 02 &mdash; Valoración y Análisis de la Brecha AI &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 2.03</span></div>
+    <div class="p-body">
+      <div class="fill">
+        <div class="fill-lbl">Tabla antes/después</div>
+        <textarea id="f-203-e3" data-save="f-203-e3" rows="7" placeholder="Contrasta dos columnas:&#10;• ANTES — acciones de actividad descartadas (verbos genéricos: capacitar, sensibilizar, socializar)&#10;• DESPUÉS — acciones ancladas (obstáculo + componente + métrica dual + hito-rol)&#10;Separa explícitamente el benchmark (referencia de categoría del Modelo ARIA) de la promesa (derivada de los KPI del cliente)."></textarea>
+        <div class="char-ct"><span id="cc-203-e3">0</span> caracteres</div>
+      </div>
+      <div class="fill fill-obs">
+        <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
+        <textarea id="f-203-obs" data-save="f-203-obs" rows="4" placeholder="Comparte con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores."></textarea>
+        <div class="char-ct"><span id="cc-203-obs">0</span> caracteres</div>
+      </div>
+      <div class="submit-sec">
+        <h3>Envío del Experimento 2.03</h3>
+        <p>Completa el Plan de Intervención (S5), el Modelo de Impacto (S6) y la tabla antes/después antes de enviar. El costo de inacción de S6 encabeza la Síntesis Ejecutiva (S1) y es el gancho de la defensa en el Exp 2.04.</p>
+        <div class="submit-actions">
+          <button class="btn-sub" onclick="openModal('203')" id="btn-203">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
+            Enviar Experimento 2.03
+          </button>
+          <button class="btn-print" onclick="window.print()">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="4" y="2" width="12" height="8" rx="1"/><rect x="3" y="10" width="14" height="8" rx="1"/><rect x="7" y="13" width="6" height="5" rx="0.5" fill="currentColor" stroke="none"/></svg>
+            Guardar copia en PDF
+          </button>
+        </div>
+        <div class="sub-ok" id="ok-203">✓ Experimento 2.03 enviado correctamente.</div>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">15</div><div class="rule"></div></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     EXPERIMENTO 2.04
+     La defensa
+══════════════════════════════════════════ -->
+<div class="page" id="exp-204">
+  <div class="run-header">Sprint Roadmap 02 &mdash; Valoración y Análisis de la Brecha AI &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 2.04</span></div>
+    <div class="p-body">
+      <div class="exp-lbl">Experimento 2.04</div>
+      <h1 class="sec-title">La defensa</h1>
+      <div class="exp-meta-row">
+        <span class="exp-lente lente-int">Defensa del diagnóstico</span>
+        <span class="exp-lente lente-int">Temática 2.4 · La defensa del diagnóstico</span>
+        <span class="entregable-badge">⚑ Entregable obligatorio del Sprint</span>
+      </div>
+      <div class="note">
+        <div class="note-hd">Conexión con la fundamentación</div>
+        <p><strong>Temática 2.4</strong></p>
+        <p>2.4.1 El reporte hace decidir desde la primera página.</p>
+        <p>2.4.2 La defensa se gana con evidencia, no con aplomo.</p>
+        <p>2.4.3 El producto del sprint es la decisión capturada.</p>
+      </div>
+      <p><em>El reporte que no hace decidir desde la primera página no se defiende: se archiva. La defensa no se gana con aplomo, se gana respondiendo cada objeción con un hallazgo del reporte y saliendo de la sala con una decisión.</em></p>
+      <p><strong>Objetivo de aprendizaje:</strong> Presentar y defender el Reporte BAIP ante el responsable del KPI —con una Síntesis Ejecutiva (S1) autocontenida y la defensa basada en evidencia— y capturar su decisión (autoriza, ajusta o rechaza) en la sección de Síntesis y Decisión (S7).</p>
+      <p><strong>Contexto de aplicación:</strong> El Reporte BAIP completo (S1–S7) producido en los Exp 2.01–2.03 sobre la unidad real, presentado en una reunión real con el responsable del KPI —no Recursos Humanos—.</p>
+      <div class="note"><div class="note-hd">Entregable obligatorio</div><p>El Reporte BAIP completo (S1–S7), la matriz objeción↔hallazgo y la decisión capturada (S7) son el entregable principal del Sprint 02. Es la pieza que el analista presenta en la Sesión de Mentoring de su cohorte; la misma competencia se sostiene ante el jurado en la auditoría de certificación.</p></div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">16</div><div class="rule"></div></div>
+</div>
+
+<!-- EXP 2.04 · PÁGINA 17 · Identificación + Pasos -->
+<div class="page">
+  <div class="run-header">Sprint Roadmap 02 &mdash; Valoración y Análisis de la Brecha AI &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 2.04</span></div>
+    <div class="p-body">
+      <div class="report-id-block">
+        <div class="rid-head">
+          <span class="rid-badge">Experimento 2.04</span>
+          <span class="rid-title">Identificación de la Unidad Medida</span>
+        </div>
+        <div class="rid-fields">
+          <div class="rid-field"><label>Unidad medida (≥10 personas)</label><input type="text" id="f-204-rid-unidad" data-save="f-204-rid-unidad" placeholder="La misma unidad del Reporte BAIP (S1–S7)"></div>
+          <div class="rid-field"><label>Fecha reporte</label><input type="date" id="f-204-rid-fecha" data-save="f-204-rid-fecha"></div>
+          <div class="rid-field"><label>Analista BAIP</label><input type="text" id="f-204-rid-part" data-save="f-204-rid-part" placeholder="Se sincroniza desde portada"></div>
+        </div>
+        <div class="rid-level">
+          <div class="rid-level-lbl">Contexto de la unidad medida</div>
+          <div class="level-opts">
+            <label class="level-opt"><input type="radio" name="level-204" value="equipo" data-radio-save="f-204-ctx"><span>👥 Equipo propio</span></label>
+            <label class="level-opt"><input type="radio" name="level-204" value="cliente" data-radio-save="f-204-ctx"><span>🏢 Área de cliente activo</span></label>
+            <label class="level-opt"><input type="radio" name="level-204" value="piloto" data-radio-save="f-204-ctx"><span>🧪 Unidad del piloto del nodo</span></label>
+          </div>
+        </div>
+      </div>
+      <div class="ip-guard">
+        <span class="ip-guard-icon">🔒</span>
+        <span>En el Sprint 02 operas la plataforma DCA de extremo a extremo: configuras y lanzas la campaña multi-instrumento y lees los reportes ya procesados. Sigues sin ver ni editar reactivos, scoring ni baremos — esa capa permanece reservada a la plataforma DCA.</span>
+      </div>
+      <p style="font-weight:700;font-size:14px;color:var(--carbon);margin-bottom:12px;">Paso a paso</p>
+      <ul class="step-list">
+        <li><span>Redactar la Síntesis Ejecutiva (S1) con sus cinco elementos —hallazgo central con magnitud, costo de oportunidad sobre el retorno de la IA, tres prioridades, horizonte y próxima decisión— y someterla a la prueba de autocontención: ¿decide el lector con solo esta página?</span></li>
+        <li><span>Convertir cada título del reporte en un título que afirma la conclusión, no que nombra el tema.</span></li>
+        <li><span>Construir la matriz de anticipación: las objeciones probables del decisor mapeadas, cada una, al hallazgo del reporte que la responde (S2–S6); declarar los límites del diagnóstico donde no haya respuesta.</span></li>
+        <li><span>Presentar el Reporte BAIP al responsable del KPI y solicitar en S7 la decisión específica —qué autorizar, con qué recursos, para cuándo—, no «considerar las recomendaciones».</span></li>
+        <li><span>Capturar la decisión en una de tres formas —autoriza, ajusta o rechaza— con próximos pasos, responsables y fechas; registrar el resultado como entregable del sprint.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">17</div><div class="rule"></div></div>
+</div>
+
+<!-- EXP 2.04 · PÁGINA 18 · Métricas + Campos E1 y E2 -->
+<div class="page">
+  <div class="run-header">Sprint Roadmap 02 &mdash; Valoración y Análisis de la Brecha AI &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 2.04</span></div>
+    <div class="p-body">
+      <div class="metric-pair">
+        <div class="metric-card beh">
+          <div class="metric-card-lbl">Métrica de comportamiento</div>
+          <dl class="metric-rows">
+            <div class="metric-row"><dt>Qué se mide</dt><dd>Proporción de objeciones del decisor respondidas con un hallazgo específico del reporte, frente a las respondidas con afirmación de confianza.</dd></div>
+            <div class="metric-row"><dt>Cómo se mide</dt><dd>Registro de la reunión (notas o grabación) contrastado con la matriz de anticipación.</dd></div>
+            <div class="metric-row"><dt>Línea base</dt><dd>Tu forma de defender actual, típicamente apoyada en el aplomo.</dd></div>
+            <div class="metric-row"><dt>Valor objetivo</dt><dd>100% de objeciones respondidas con un hallazgo o declaradas como límite del diagnóstico.</dd></div>
+          </dl>
+        </div>
+        <div class="metric-card biz">
+          <div class="metric-card-lbl">Métrica de negocio</div>
+          <dl class="metric-rows">
+            <div class="metric-row"><dt>KPI afectado</dt><dd>Captura de la decisión del responsable del KPI (autoriza/ajusta/rechaza) —la conversión del diagnóstico en decisión— y, si autoriza, recursos liberados y entrada al ciclo ReturnAI.</dd></div>
+            <div class="metric-row"><dt>Cómo se captura</dt><dd>Registro de S7 firmado o confirmado por el dueño del KPI.</dd></div>
+            <div class="metric-row"><dt>Línea base</dt><dd>Presentación sin decisión capturada: «lo revisamos y te avisamos».</dd></div>
+            <div class="metric-row"><dt>Valor objetivo</dt><dd>Decisión capturada en la sala —cualquiera de las tres—; nunca salir sin decisión.</dd></div>
+          </dl>
+        </div>
+      </div>
+      <div class="ia-role">
+        <span class="ia-role-icon">🤖</span>
+        <span><strong>Rol de la IA como andamiaje:</strong> La IA genera el banco de objeciones probables y permite ensayar la defensa en role-play; tú respondes en la sala con hallazgos reales del reporte —no con un guion de IA— y capturas la decisión real del dueño del KPI. La IA prepara; no decide ni sustituye la conversación con el responsable del KPI.</span>
+      </div>
+      <div class="fill">
+        <div class="fill-lbl">Síntesis Ejecutiva (S1)</div>
+        <textarea id="f-204-e1" data-save="f-204-e1" rows="9" placeholder="Redacta los cinco elementos y pasa la prueba de autocontención:&#10;• Hallazgo central con magnitud&#10;• Costo de oportunidad sobre el retorno de la IA&#10;• Tres prioridades&#10;• Horizonte&#10;• Próxima decisión&#10;Prueba de autocontención: ¿decide el lector con solo esta página? Convierte cada título en un título que afirma la conclusión, no que nombra el tema."></textarea>
+        <div class="char-ct"><span id="cc-204-e1">0</span> caracteres</div>
+      </div>
+      <div class="fill">
+        <div class="fill-lbl">Matriz de anticipación</div>
+        <textarea id="f-204-e2" data-save="f-204-e2" rows="7" placeholder="Una fila por objeción probable del decisor:&#10;• Objeción → hallazgo del reporte que la responde (S2–S6)&#10;Ej. «¿la muestra es representativa?» → cobertura del Exp 2.01; «¿no será solo percepción?» → triangulación del Exp 2.02&#10;Declara los límites del diagnóstico donde no haya respuesta."></textarea>
+        <div class="char-ct"><span id="cc-204-e2">0</span> caracteres</div>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">18</div><div class="rule"></div></div>
+</div>
+
+<!-- EXP 2.04 · PÁGINA 19 · Campo E3, Obs y Envío -->
+<div class="page">
+  <div class="run-header">Sprint Roadmap 02 &mdash; Valoración y Análisis de la Brecha AI &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Exp. 2.04</span></div>
+    <div class="p-body">
+      <div class="fill">
+        <div class="fill-lbl">Síntesis y Decisión (S7) — ENTREGABLE OBLIGATORIO</div>
+        <textarea id="f-204-e3" data-save="f-204-e3" rows="8" placeholder="Captura la decisión real del responsable del KPI:&#10;• Decisión: ¿AUTORIZA / AJUSTA / RECHAZA?&#10;• Próximos pasos concretos&#10;• Responsables&#10;• Fechas&#10;Si autoriza: recursos liberados y entrada al ciclo ReturnAI. No salgas de la sala sin una de las tres decisiones."></textarea>
+        <div class="char-ct"><span id="cc-204-e3">0</span> caracteres</div>
+      </div>
+      <div class="fill fill-obs">
+        <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
+        <textarea id="f-204-obs" data-save="f-204-obs" rows="4" placeholder="Comparte con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores."></textarea>
+        <div class="char-ct"><span id="cc-204-obs">0</span> caracteres</div>
+      </div>
+      <div class="submit-sec">
+        <h3>Envío del Experimento 2.04 — Cierre del Sprint 02</h3>
+        <p>La decisión capturada (S7), la matriz objeción↔hallazgo y el Reporte BAIP completo son la condición de entrada a la Sesión de Mentoring del sprint. Envía tu registro para habilitar el feedback de cierre del facilitador.</p>
+        <div class="submit-actions">
+          <button class="btn-sub" onclick="openModal('204')" id="btn-204">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
+            Enviar Experimento 2.04
+          </button>
+          <button class="btn-print" onclick="window.print()">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="4" y="2" width="12" height="8" rx="1"/><rect x="3" y="10" width="14" height="8" rx="1"/><rect x="7" y="13" width="6" height="5" rx="0.5" fill="currentColor" stroke="none"/></svg>
+            Guardar copia en PDF
+          </button>
+        </div>
+        <div class="sub-ok" id="ok-204">✓ Experimento 2.04 enviado correctamente.</div>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">19</div><div class="rule"></div></div>
+</div>
+<!-- ══════════════════════════════════
+     CONTRAPORTADA
+══════════════════════════════════ -->
+<section class="back-cover">
+  <div class="cover-visual">
+    <svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs><pattern id="dots2" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.2" fill="rgba(30,42,56,0.28)"/></pattern></defs>
+      <rect width="720" height="300" fill="#2e8b76"/><rect width="720" height="300" fill="url(#dots2)"/>
+      <circle cx="180" cy="150" r="70" fill="none" stroke="rgba(255,255,255,0.52)" stroke-width="2"/>
+      <circle cx="180" cy="150" r="45" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+      <circle cx="180" cy="150" r="20" fill="rgba(255,255,255,0.12)"/>
+      <text x="180" y="155" fill="rgba(255,255,255,0.88)" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">AIMT</text>
+      <circle cx="360" cy="150" r="70" fill="none" stroke="rgba(210,208,200,0.65)" stroke-width="2"/>
+      <circle cx="360" cy="150" r="45" fill="none" stroke="rgba(210,208,200,0.45)" stroke-width="1.5"/>
+      <circle cx="360" cy="150" r="20" fill="rgba(210,208,200,0.14)"/>
+      <text x="360" y="155" fill="rgba(210,208,200,0.92)" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">AILS</text>
+      <circle cx="540" cy="150" r="70" fill="none" stroke="rgba(30,42,56,0.78)" stroke-width="2"/>
+      <circle cx="540" cy="150" r="45" fill="none" stroke="rgba(30,42,56,0.55)" stroke-width="1.5"/>
+      <circle cx="540" cy="150" r="20" fill="rgba(30,42,56,0.20)"/>
+      <text x="540" y="155" fill="rgba(30,42,56,0.88)" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">AICD</text>
+      <path d="M 248 120 Q 270 100 290 120" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="1.5"/>
+      <path d="M 428 120 Q 450 100 470 120" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="1.5"/>
+      <circle cx="360" cy="280" r="8" fill="rgba(255,255,255,0.14)" stroke="rgba(255,255,255,0.38)" stroke-width="1"/>
+      <line x1="180" y1="218" x2="360" y2="272" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+      <line x1="540" y1="218" x2="360" y2="272" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+      <text x="360" y="285" fill="rgba(255,255,255,0.58)" font-family="sans-serif" font-size="8" font-weight="700" text-anchor="middle" letter-spacing="2">REPORTE BAIP · S1–S7</text>
+    </svg>
+  </div>
+  <div class="bc-band">
+    <div class="bc-sprint">Sprint Roadmap · 02</div>
+    <div class="bc-theme">Valoración y Análisis de la Brecha AI</div>
+  </div>
+  <div class="bc-spacer">
+    <img src="data:image/png;base64,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AKAywgEAAAAAAKiMcAAAAAAAACojHAAAAAAAgMoIBwAAAAAAoDLCAQAAAAAAqIxwAAAAAAAAKiMcAAAAAACAyggHAAAAAACgMsIBAAAAAACojHAAAAAAAAAqIxwAAAAAAIDKCAcAAAAAAKAywgEAAAAAAKiMcAAAAAAAACojHAAAAAAAgMoIBwAAAAAAoDLCAQAAAAAAqIxwAAAAAAAAKiMcAAAAAACAyggHAAAAAACgMsIBAAAAAACojHAAAAAAAAAqIxwAAAAAAIDKCAcAAAAAAKAywgEAAAAAAKiMcAAAAAAAACojHAAAAAAAgMoIBwAAAAAAoDLCAQAAAAAAqIxwAAAAAAAAKiMcAAAAAACAyggHAAAAAACgMsIBAAAAAACojHAAAAAAAAAqIxwAAAAAAIDKCAcAAAAAAKAywgEAAAAAAKiMcAAAAAAAACojHAAAAAAAgMoIBwAAAAAAoDLCAQAAAAAAqIxwAAAAAAAAKiMcAAAAAACAyggHAAAAAACgMsIBAAAAAACojHAAAAAAAAAqIxwAAAAAAIDKCAcAAAAAAKAywgEAAAAAAKiMcAAAAAAAACojHAAAAAAAgMoIBwAAAAAAoDLCAQAAAAAAqIxwAAAAAAAAKiMcAAAAAACAyggHAAAAAACgMsIBAAAAAACojHAAAAAAAAAqIxwAAAAAAIDKCAcAAAAAAKAywgEAAAAAAKiMcAAAAAAAACojHAAAAAAAgMoIBwAAAAAAoDLCAQAAAAAAqIxwAAAAAAAAKiMcAAAAAACAyggHAAAAAACgMsIBAAAAAACojHAAAAAAAAAqIxwAAAAAAIDKCAcAAAAAAKAywgEAAAAAAKiMcAAAAAAAACojHAAAAAAAgMoIBwAAAAAAoDLCAQAAAAAAqIxwAAAAAAAAKiMcAAAAAACAyggHAAAAAACgMsIBAAAAAACojHAAAAAAAAAqIxwAAAAAAIDKCAcAAAAAAKAywgEAAAAAAKiMcAAAAAAAACojHAAAAAAAgMoIBwAAAAAAoDLCAQAAAAAAqIxwAAAAAAAAKiMcAAAAAACAyggHAAAAAACgMsIBAAAAAACojHAAAAAAAAAqIxwAAAAAAIDKCAcAAAAAAKAy/w9oXWGNnNg9+gAAAABJRU5ErkJggg==" alt="Digital Change Advisors" style="width:380px;margin:0 auto;">
+  </div>
+  <div class="bc-foot">
+    <div class="bc-foot-t">Digital Change Advisors · Modelo ARIA</div>
+  </div>
+</section>
+
+</div><!-- /doc-wrap -->
+
+<!-- MODAL -->
+<div class="modal-ov" id="modal">
+  <div class="modal">
+    <div class="modal-title" id="modal-title">Resumen del Experimento</div>
+    <div class="modal-sub" id="modal-sub"></div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-actions">
+      <button class="btn-m p" onclick="copyModal()">📋 Copiar resumen</button>
+      <button class="btn-m p" onclick="mailModal()">✉ Abrir en correo</button>
+      <button class="btn-m s" onclick="closeModal()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══ AUTOSAVE ══════════════════════════════
+const SAVE_KEY = 'dca_aria_sprint02_v1';
+let saveTimer;
+const saveDot = document.getElementById('saveDot');
+
+function getData() { try { return JSON.parse(localStorage.getItem(SAVE_KEY) || '{}'); } catch(e) { return {}; } }
+
+function saveField(key, val) {
+  const d = getData(); d[key] = val; localStorage.setItem(SAVE_KEY, JSON.stringify(d));
+}
+
+function loadAll() {
+  const d = getData();
+  // Text/date inputs and textareas
+  document.querySelectorAll('[data-save]').forEach(el => {
+    const k = el.dataset.save;
+    if (d[k] !== undefined) {
+      el.value = d[k];
+      if (el.tagName === 'TEXTAREA' && d[k]) el.classList.add('filled');
+    }
+  });
+  // Radio buttons
+  document.querySelectorAll('[data-radio-save]').forEach(radio => {
+    const k = radio.dataset.radioSave;
+    if (d[k] === radio.value) radio.checked = true;
+  });
+  // Sync participant fields from cover
+  syncParticipant();
+  updateProgress();
+}
+
+// Sync participant name from cover to all RID blocks
+function syncParticipant() {
+  const nombre = document.getElementById('sf-nombre')?.value || '';
+  ['201','202','203','204'].forEach(n => {
+    const el = document.getElementById(`f-${n}-rid-part`);
+    if (el && !el.dataset.manually) el.value = nombre;
+  });
+}
+
+let saveTimer2;
+function autosave() {
+  saveDot.className = 'save-dot saving';
+  clearTimeout(saveTimer2);
+  saveTimer2 = setTimeout(() => {
+    saveDot.className = 'save-dot saved';
+    setTimeout(() => saveDot.className = 'save-dot', 2000);
+  }, 800);
+}
+
+document.querySelectorAll('[data-save]').forEach(el => {
+  el.addEventListener('input', () => {
+    saveField(el.dataset.save, el.value);
+    if (el.tagName === 'TEXTAREA') el.classList.toggle('filled', el.value.length > 0);
+    if (el.id === 'sf-nombre') syncParticipant();
+    autosave(); updateProgress(); updateCharCount(el);
+  });
+});
+document.querySelectorAll('[data-radio-save]').forEach(radio => {
+  radio.addEventListener('change', () => {
+    saveField(radio.dataset.radioSave, radio.value); autosave(); updateProgress();
+  });
+});
+
+// ══ CHAR COUNTERS ══════════════════════════
+function updateCharCount(el) {
+  const id = el.id;
+  const ccEl = document.getElementById('cc-' + id.replace('f-',''));
+  if (ccEl) ccEl.textContent = el.value.length;
+}
+document.querySelectorAll('textarea').forEach(ta => ta.addEventListener('input', () => updateCharCount(ta)));
+
+// ══ PROGRESS ════════════════════════════════
+function updateProgress() {
+  const allInputs = document.querySelectorAll('textarea[data-save], input[data-save]:not([type="radio"])');
+  const allRadioGroups = ['level-201','level-202','level-203','level-204'];
+  let total = allInputs.length + allRadioGroups.length;
+  let filled = 0;
+  allInputs.forEach(el => { if (el.value && el.value.trim()) filled++; });
+  allRadioGroups.forEach(grp => { if (document.querySelector(`input[name="${grp}"]:checked`)) filled++; });
+  const pct = Math.round((filled / total) * 100);
+  document.getElementById('pbFill').style.width = pct + '%';
+  document.getElementById('pbPct').textContent = pct + '%';
+}
+
+// ══ MODAL ════════════════════════════════════
+let currentExp = '', mailBody = '', mailSubject = '';
+
+const EXP_FIELDS = {
+  '201': [
+    { id: 'f-201-rid-unidad', label: 'Unidad medida (≥10 personas)' },
+    { id: 'f-201-rid-fecha',  label: 'Ventana de la campaña' },
+    { id: 'f-201-ctx',        label: 'Contexto de la unidad medida', type: 'radio', name: 'level-201' },
+    { id: 'f-201-e1', label: 'Ficha de cobertura (población, segmentación, ventana)' },
+    { id: 'f-201-e2', label: 'Encuadre de lanzamiento (emisor, mensaje, garantías)' },
+    { id: 'f-201-e3', label: 'Captura del panel de cobertura (tasa válida vs umbral)' },
+    { id: 'f-201-obs', label: 'Observaciones, hallazgos y comentarios adicionales' }
+  ],
+  '202': [
+    { id: 'f-202-rid-unidad', label: 'Unidad medida (≥10 personas)' },
+    { id: 'f-202-rid-fecha',  label: 'Fecha reporte' },
+    { id: 'f-202-ctx',        label: 'Contexto de la unidad medida', type: 'radio', name: 'level-202' },
+    { id: 'f-202-e1', label: 'Diagnóstico Integrado (S3) — patrón cruzado' },
+    { id: 'f-202-e2', label: 'Mapa de Causa Raíz (S4) — mini-ficha por causa' },
+    { id: 'f-202-e3', label: 'Prueba de valor (no autoevidente por separado)' },
+    { id: 'f-202-obs', label: 'Observaciones, hallazgos y comentarios adicionales' }
+  ],
+  '203': [
+    { id: 'f-203-rid-unidad', label: 'Unidad medida (≥10 personas)' },
+    { id: 'f-203-rid-fecha',  label: 'Fecha reporte' },
+    { id: 'f-203-ctx',        label: 'Contexto de la unidad medida', type: 'radio', name: 'level-203' },
+    { id: 'f-203-e1', label: 'Plan de Intervención 90 días (S5) — cuatro anclas' },
+    { id: 'f-203-e2', label: 'Modelo de Impacto 120 días (S6) — inacción, inversión, retorno' },
+    { id: 'f-203-e3', label: 'Tabla antes/después (benchmark vs promesa)' },
+    { id: 'f-203-obs', label: 'Observaciones, hallazgos y comentarios adicionales' }
+  ],
+  '204': [
+    { id: 'f-204-rid-unidad', label: 'Unidad medida (≥10 personas)' },
+    { id: 'f-204-rid-fecha',  label: 'Fecha reporte' },
+    { id: 'f-204-ctx',        label: 'Contexto de la unidad medida', type: 'radio', name: 'level-204' },
+    { id: 'f-204-e1', label: 'Síntesis Ejecutiva (S1) — cinco elementos + autocontención' },
+    { id: 'f-204-e2', label: 'Matriz de anticipación (objeción ↔ hallazgo)' },
+    { id: 'f-204-e3', label: 'Síntesis y Decisión (S7) — ENTREGABLE OBLIGATORIO' },
+    { id: 'f-204-obs', label: 'Observaciones, hallazgos y comentarios adicionales' }
+  ]
+};
+
+const expNames = { '201': 'Experimento 2.01 — Campaña a escala', '202': 'Experimento 2.02 — El cruce', '203': 'Experimento 2.03 — El plan y su caso de valor', '204': 'Experimento 2.04 — La defensa' };
+
+function getStudentInfo() {
+  return {
+    nombre:  document.getElementById('sf-nombre')?.value  || '(sin nombre)',
+    empresa: document.getElementById('sf-empresa')?.value || '(sin empresa)',
+    cohorte: document.getElementById('sf-cohorte')?.value || '(sin cohorte)'
+  };
+}
+
+function getRadioValue(name) {
+  const r = document.querySelector(`input[name="${name}"]:checked`);
+  return r ? r.value : '(no seleccionado)';
+}
+
+function openModal(exp) {
+  currentExp = exp;
+  const si = getStudentInfo();
+  const fields = EXP_FIELDS[exp] || [];
+
+  let summary = `════════════════════════════════════\n`;
+  summary += `SPRINT ROADMAP 02 · VALORACIÓN Y ANÁLISIS DE LA BRECHA AI\n`;
+  summary += `Analista BAIP — Brecha AI Personas · Digital Change Academy · DCA\n`;
+  summary += `════════════════════════════════════\n\n`;
+  summary += `IDENTIFICACIÓN\n`;
+  summary += `Certificación: Analista BAIP — Brecha AI Personas\n`;
+  summary += `Sprint: Sprint 02 — Valoración y Análisis de la Brecha AI\n`;
+  summary += `Experimento: ${expNames[exp].split('—')[0].trim()}\n`;
+  summary += `Participante: ${si.nombre}\n`;
+  summary += `Cohorte: ${si.cohorte}\n`;
+  summary += `Organización del participante: ${si.empresa}\n`;
+  summary += `Fecha de envío: ${new Date().toLocaleDateString('es-CO', { year:'numeric', month:'long', day:'numeric' })}\n`;
+  summary += `\n── ${expNames[exp]} ──\n\n`;
+
+  fields.forEach(f => {
+    let val;
+    if (f.type === 'radio') {
+      val = getRadioValue(f.name);
+    } else {
+      const el = document.getElementById(f.id);
+      val = el ? el.value.trim() : '';
+    }
+    summary += `▸ ${f.label}:\n${val || '(sin respuesta)'}\n\n`;
+  });
+
+  summary += `════════════════════════════════════\n`;
+  summary += `Modelo ARIA — Aceleración del Retorno de la IA\n`;
+  summary += `Desarrollado por Digital Change Advisors, LLC.\n`;
+  summary += `Licenciado bajo Creative Commons BY-SA 4.0.`;
+
+  mailSubject = `[ARIA Sprint 02] ${expNames[exp].split('—')[0].trim()} — ${si.nombre} | ${si.cohorte}`;
+  mailBody = summary;
+
+  document.getElementById('modal-title').textContent = expNames[exp].split('—')[0].trim();
+  document.getElementById('modal-sub').textContent = `${si.nombre} · ${si.empresa} · ${si.cohorte}`;
+  document.getElementById('modal-body').textContent = summary;
+  document.getElementById('modal').classList.add('open');
+}
+
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+function copyModal() {
+  const text = document.getElementById('modal-body').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.btn-m.p');
+    const orig = btn.textContent; btn.textContent = '✓ Copiado';
+    setTimeout(() => { btn.textContent = orig; }, 2000);
+    markSent(currentExp);
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+    markSent(currentExp);
+  });
+}
+
+function mailModal() {
+  window.open(`mailto:facilitador@digitalchangeadvisors.com?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`);
+  markSent(currentExp);
+}
+
+function markSent(exp) {
+  const btn = document.getElementById('btn-' + exp);
+  const ok  = document.getElementById('ok-' + exp);
+  if (btn) { btn.classList.add('done'); btn.textContent = '✓ Enviado'; }
+  if (ok)  { ok.classList.add('show'); }
+  const d = getData(); d['sent_' + exp] = true; localStorage.setItem(SAVE_KEY, JSON.stringify(d));
+  const navEl = document.getElementById('nav-' + exp);
+  if (navEl) navEl.classList.add('done');
+  closeModal();
+}
+
+document.getElementById('modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+
+// ══ INIT ════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  loadAll();
+  const d = getData();
+  ['201','202','203','204'].forEach(exp => {
+    if (d['sent_' + exp]) {
+      const btn = document.getElementById('btn-' + exp);
+      const ok  = document.getElementById('ok-' + exp);
+      if (btn) { btn.classList.add('done'); btn.textContent = '✓ Enviado'; }
+      if (ok)  { ok.classList.add('show'); }
+    }
+  });
+  document.querySelectorAll('textarea').forEach(ta => updateCharCount(ta));
+});
+</script>
+</body>
+</html>
