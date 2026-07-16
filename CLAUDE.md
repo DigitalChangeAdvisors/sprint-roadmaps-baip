@@ -24,6 +24,20 @@ Cada archivo es un Sprint Roadmap autónomo (CSS + JS inline, sin deps).
 - Atributos data-save y data-radio-save
 - Bloque @media print
 - SAVE_KEY
+- **Motor de envío** (submitExp, collectPayload, validarEnvio, alerta, markSent) y **printExp** (PDF)
+
+## Motor de envío + PDF + backend (canónico 2026-07-16)
+El botón «Enviar» realiza un envío REAL vía `fetch` a un Google Apps Script (`backend/Codigo.gs`),
+que registra en Sheets, genera un PDF de marca y despacha correo al facilitador (copia a ceo@ y al
+estudiante), devolviendo un recibo. La confirmación «✓ Enviado» **solo** se muestra con recibo del
+servidor — nunca por optimismo. `printExp()` genera un PDF con el contenido íntegro (no `window.print()`
+sobre el formulario, que recorta). Campo `sf-email` en portada es obligatorio.
+
+**Diseño genérico multi-sprint:** cada roadmap solo cambia 4 cosas — `const INSTRUMENT {id, sprintLabel,
+endpoint}`, `SAVE_KEY`, `expNames`, `EXP_FIELDS`. El motor es idéntico en todos. El backend es único para
+todos los sprints y NO se edita al crear uno nuevo (usa `expNombre` del payload). IDs por patrón
+sprint+exp (S01: 101–104, S02: 201–204). Guía completa: `Guia-Creacion-Sprint-Roadmaps-DCA.docx`.
+Endpoint del motor y estado de despliegue: ver memoria [[project_backend_envio]].
 
 ## Estructura de páginas (Sprint 01)
 - 20 páginas fijas `div.page` · 932 px pantalla / 10.1 in impresión
