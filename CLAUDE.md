@@ -25,6 +25,7 @@ Cada archivo es un Sprint Roadmap autónomo (CSS + JS inline, sin deps).
 - Bloque @media print
 - SAVE_KEY
 - **Motor de envío** (submitExp, collectPayload, validarEnvio, alerta, markSent) y **printExp** (PDF)
+- **Panel de Facilitador** (backend/Panel.gs, backend/PanelUI.html): gate por `PANEL_KEY`, funciones `listarEntregas`/`generarBorradorIA`/`enviarFeedback`, y el HTML debe llamarse `PanelUI`
 
 ## Motor de envío + PDF + backend (canónico 2026-07-16)
 El botón «Enviar» realiza un envío REAL vía `fetch` a un Google Apps Script (`backend/Codigo.gs`),
@@ -38,6 +39,17 @@ endpoint}`, `SAVE_KEY`, `expNames`, `EXP_FIELDS`. El motor es idéntico en todos
 todos los sprints y NO se edita al crear uno nuevo (usa `expNombre` del payload). IDs por patrón
 sprint+exp (S01: 101–104, S02: 201–204). Guía completa: `Guia-Creacion-Sprint-Roadmaps-DCA.docx`.
 Endpoint del motor y estado de despliegue: ver memoria [[project_backend_envio]].
+
+## Panel de Facilitador (canónico 2026-07-16, en producción)
+Cockpit web servido por el MISMO Apps Script (`backend/Panel.gs` + `backend/PanelUI.html`) en
+`.../exec?panel=1&key=<PANEL_KEY>`. El facilitador lee cada entrega, la evalúa con una rúbrica de 4
+criterios (1–5), genera un **borrador de feedback con IA** (`claude-sonnet-5`, salida estructurada,
+vía `UrlFetchApp`; clave en propiedad `ANTHROPIC_API_KEY`) que edita, y envía el feedback al estudiante
+por correo de marca DCA. Todo se registra en la Hoja (para BI). Guía: `backend/README-panel-facilitador.md`.
+Claves de despliegue (no volver a tropezar): acceso por **token `PANEL_KEY`** (no por cuenta de Google,
+que da vacío en deploy «Cualquier persona»); el HTML se llama **`PanelUI`** (no puede repetir el nombre
+de `Panel.gs`); al usar `UrlFetchApp` hay que re-autorizar el scope `script.external_request` ejecutando
+una función desde el editor. Detalle completo: memoria [[project_backend_envio]].
 
 ## Estructura de páginas (Sprint 01)
 - 20 páginas fijas `div.page` · 932 px pantalla / 10.1 in impresión
