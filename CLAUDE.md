@@ -100,6 +100,20 @@ Presente en la página intro de cada experimento, inmediatamente después del `d
 Usa la clase `.note` existente (borde dorado, etiqueta `note-hd` en caps).
 El texto exacto proviene del campo «Conexión con la fundamentación» del archivo `.md` canónico.
 
+## Guías de campo (field-guide) — NO volver a poner preguntas en el placeholder
+Las preguntas guía de cada campo van en un `<div class="field-guide">` **fijo y visible** entre
+el `.fill-lbl` y el `<textarea>`. NO en el `placeholder` (desaparecía al escribir y dificultaba
+responder completo — queja real de cohorte 1). El `textarea` lleva placeholder mínimo «Escribe aquí
+tu respuesta…». La guía se oculta en `@media print` (el PDF oficial lo arma `printExp` desde
+`EXP_FIELDS`, no del DOM). Aplica a S01 (19 campos) y S02 (16 campos). Convertido con script
+`scratchpad/fix_guides.py`. Al crear campos nuevos, seguir este patrón.
+
+## Glosario Nivel/Alcance (Sprint 01, pág. Instrucciones)
+Bloque `.note` «Cómo leer el reporte · Nivel y Alcance». **Nivel** (estado del obstáculo):
+Cautela → Vulnerable → Diestro → Óptimo. **Alcance** (definición oficial DCA): *extendido* /
+*foco senior* / *en la base*. Regla: nivel a secas = estado del grupo como unidad, no cobertura
+parcial; priorizar por «peso × nivel más bajo». S02 NO usa estos niveles (no lleva glosario).
+
 ## Fuente de verdad del contenido
 `Roadmap_Sprint01_BAIP_v1-1_ALINEADO.md` (en este repo) es la ÚNICA fuente de verdad
 para objetivo, contexto, paso a paso, métricas y rol de la IA de los 4 experimentos.
