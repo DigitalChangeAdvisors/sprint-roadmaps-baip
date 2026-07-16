@@ -193,6 +193,8 @@ textarea { width: 100%; min-height: 110px; border: 1.5px solid var(--platinum); 
 textarea:focus { border-color: var(--teal); background: white; }
 textarea.filled { border-color: var(--teal); background: white; }
 textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
+.field-guide { font-size: 11.5px; line-height: 1.6; color: rgba(30,42,56,.66); background: rgba(46,139,118,.05); border-left: 3px solid var(--teal); border-radius: 0 6px 6px 0; padding: 9px 12px; margin-bottom: 8px; }
+.fill-obs .field-guide { background: var(--gold-bg); border-left-color: var(--gold); }
 .char-ct { font-size: 10px; color: rgba(30,42,56,.35); text-align: right; margin-top: 3px; }
 
 /* ─── OBSERVATION FIELD ──────────────────── */
@@ -255,7 +257,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
   .page, .cover-page, .back-cover { height: 10.1in !important; min-height: unset !important; page-break-after: always; break-after: page; overflow: hidden; }
   .report-id-block { background: #1e2a38 !important; page-break-inside: avoid; break-inside: avoid; }
   .metric-pair, .ia-role, .step-list, .note, .gold-acc, .quote-band, .ni { page-break-inside: avoid; break-inside: avoid; }
-  .char-ct, .ip-guard { display: none !important; }
+  .char-ct, .ip-guard, .field-guide { display: none !important; }
   textarea { border: 1px solid #c0c4c2 !important; background: white !important; min-height: 50px !important; resize: none !important; overflow: visible !important; height: auto !important; }
   @page { size: letter portrait; margin: 0.45in; }
 }
@@ -417,7 +419,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
       <h1 class="sec-title">Instrucciones de Uso</h1>
       <div class="sec-sublabel">¿Cómo utilizar este documento de forma efectiva?</div>
       <div class="ni">
-        <div class="ni-head"><span class="nn">1.</span> Trabaje en la versión digital con autoguardado activo.</div>
+        <div class="ni-head"><span class="nn">1.</span> Trabaja en la versión digital con autoguardado activo.</div>
         <div class="ni-text">Este instrumento es HTML nativo con autoguardado automático. Tus registros se conservan en el dispositivo en tiempo real — no hay riesgo de perder el trabajo. Ten el documento abierto cuando recibas los reportes procesados de la Suite BAIP para registrar tus hallazgos inmediatamente.</div>
       </div>
       <div class="ni">
@@ -427,6 +429,12 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
       <div class="ni">
         <div class="ni-head"><span class="nn">3.</span> Envía cada experimento al completarlo — es obligatorio para la Mentoría.</div>
         <div class="ni-text">Al finalizar cada experimento encontrarás un botón de envío. El registro de evidencias enviado es la condición que habilita el feedback de seguimiento del facilitador y el requisito de acceso a la Sesión de Mentoría de Cohorte que cierra el Sprint 01.</div>
+      </div>
+      <div class="note">
+        <div class="note-hd">Cómo leer el reporte · Nivel y Alcance</div>
+        <p><strong>Nivel</strong> — el estado del obstáculo, de más frágil a más maduro: <strong>Cautela → Vulnerable → Diestro → Óptimo</strong>.</p>
+        <p><strong>Alcance</strong> — dónde se concentra ese estado en la unidad: <em>extendido</em> (transversal a toda la unidad) · <em>foco senior</em> (concentrado en los perfiles senior) · <em>en la base</em> (concentrado en la base de la pirámide).</p>
+        <p>Si el reporte nombra solo el nivel (p. ej. «Cautela») sin apellido de alcance, léelo como el estado del grupo <strong>como unidad</strong> para ese obstáculo — no como una cobertura parcial. Prioriza siempre por «mayor peso × nivel más bajo»; el alcance es contexto, no criterio de priorización.</p>
       </div>
       <div class="quote-band">
         <p>El analista no entrega un tablero de niveles: entrega un conjunto de causas raíz dirigido al responsable del retorno. Ese es el producto que este sprint le enseña a producir.</p>
@@ -523,12 +531,14 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
       </div>
       <div class="fill">
         <div class="fill-lbl">Hoja de clasificación — Señal → Familia → Nivel</div>
-        <textarea id="f-101-e1" data-save="f-101-e1" rows="8" placeholder="Para cada señal relevante del reporte AIMT, registra:&#10;• Señal detectada (descripción de la creencia o comportamiento observable)&#10;• Familia: estratégica / organizacional / psicológica&#10;• Nivel asignado por la plataforma: Cautela / Vulnerable / Diestro / Óptimo&#10;&#10;Ejemplo:&#10;'Espera directriz antes de actuar' → Estratégica (#1) → Cautela"></textarea>
+        <div class="field-guide">Para cada señal relevante del reporte AIMT, registra:<br>• Señal detectada (descripción de la creencia o comportamiento observable)<br>• Familia: estratégica / organizacional / psicológica<br>• Nivel asignado por la plataforma: Cautela / Vulnerable / Diestro / Óptimo<br><br>Ejemplo:<br>'Espera directriz antes de actuar' → Estratégica (#1) → Cautela</div>
+        <textarea id="f-101-e1" data-save="f-101-e1" rows="8" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-101-e1">0</span> caracteres</div>
       </div>
       <div class="fill">
         <div class="fill-lbl">Familia dominante — Identificación y justificación</div>
-        <textarea id="f-101-e2" data-save="f-101-e2" rows="5" placeholder="¿Cuál es la familia de mayor peso con el nivel más bajo? Justifica por qué esa combinación de peso y nivel la convierte en la prioridad de intervención — y no el promedio global del reporte."></textarea>
+        <div class="field-guide">¿Cuál es la familia de mayor peso con el nivel más bajo? Justifica por qué esa combinación de peso y nivel la convierte en la prioridad de intervención — y no el promedio global del reporte.</div>
+        <textarea id="f-101-e2" data-save="f-101-e2" rows="5" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-101-e2">0</span> caracteres</div>
       </div>
     </div>
@@ -544,17 +554,20 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
     <div class="p-body">
       <div class="fill">
         <div class="fill-lbl">Hipótesis de secuencia de intervención</div>
-        <textarea id="f-101-e3" data-save="f-101-e3" rows="5" placeholder="¿Qué creencia debe moverse antes de cualquier capacitación técnica? ¿Por qué capacitar primero, sobre esta familia en este nivel, desperdiciaría la inversión? Formula la hipótesis en lenguaje de retorno con términos de impacto, no de aprendizaje."></textarea>
+        <div class="field-guide">¿Qué creencia debe moverse antes de cualquier capacitación técnica? ¿Por qué capacitar primero, sobre esta familia en este nivel, desperdiciaría la inversión? Formula la hipótesis en lenguaje de retorno con términos de impacto, no de aprendizaje.</div>
+        <textarea id="f-101-e3" data-save="f-101-e3" rows="5" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-101-e3">0</span> caracteres</div>
       </div>
       <div class="fill">
         <div class="fill-lbl">Nota de contraste — ¿Freno de creencia o freno de capacidad?</div>
-        <textarea id="f-101-e4" data-save="f-101-e4" rows="4" placeholder="Registra el resultado del contraste con tu par o con el mentor: ¿qué cuestionaste? ¿qué ajustaste en tu clasificación o hipótesis? ¿cuál fue el veredicto final: creencia o capacidad?"></textarea>
+        <div class="field-guide">Registra el resultado del contraste con tu par o con el mentor: ¿qué cuestionaste? ¿qué ajustaste en tu clasificación o hipótesis? ¿cuál fue el veredicto final: creencia o capacidad?</div>
+        <textarea id="f-101-e4" data-save="f-101-e4" rows="4" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-101-e4">0</span> caracteres</div>
       </div>
       <div class="fill fill-obs">
         <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
-        <textarea id="f-101-obs" data-save="f-101-obs" rows="4" placeholder="Comparte con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores. Tu observación puede mejorar el instrumento y la formación de las próximas cohortes."></textarea>
+        <div class="field-guide">Comparte con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores. Tu observación puede mejorar el instrumento y la formación de las próximas cohortes.</div>
+        <textarea id="f-101-obs" data-save="f-101-obs" rows="4" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-101-obs">0</span> caracteres</div>
       </div>
       <div class="submit-sec">
@@ -667,12 +680,14 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
       </div>
       <div class="fill">
         <div class="fill-lbl">Mapa Lo Que Dice vs Lo Que Hace en cada C del LEIA</div>
-        <textarea id="f-102-e1" data-save="f-102-e1" rows="10" placeholder="Para cada una de las 5C, registra lo que el reporte refleja:&#10;&#10;Conexión:&#10;• Lo que el liderazgo declara: ...&#10;• Lo que el equipo observa: ...&#10;• Nivel obtenido: ...&#10;&#10;Confianza:&#10;• Declara: ... | Observa: ... | Nivel: ...&#10;&#10;Coherencia:&#10;• Declara: ... | Observa: ... | Nivel: ...&#10;&#10;Cocreación:&#10;• Declara: ... | Observa: ... | Nivel: ...&#10;&#10;Cuidado:&#10;• Declara: ... | Observa: ... | Nivel: ..."></textarea>
+        <div class="field-guide">Para cada una de las 5C, registra lo que el reporte refleja:<br><br>Conexión:<br>• Lo que el liderazgo declara: ...<br>• Lo que el equipo observa: ...<br>• Nivel obtenido: ...<br><br>Confianza:<br>• Declara: ... | Observa: ... | Nivel: ...<br><br>Coherencia:<br>• Declara: ... | Observa: ... | Nivel: ...<br><br>Cocreación:<br>• Declara: ... | Observa: ... | Nivel: ...<br><br>Cuidado:<br>• Declara: ... | Observa: ... | Nivel: ...</div>
+        <textarea id="f-102-e1" data-save="f-102-e1" rows="10" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-102-e1">0</span> caracteres</div>
       </div>
       <div class="fill">
         <div class="fill-lbl">La C más débil — Identificación y justificación</div>
-        <textarea id="f-102-e2" data-save="f-102-e2" rows="5" placeholder="¿Cuál de las 5C tiene el nivel más bajo y bloquea más la experimentación del equipo? ¿Es un freno de encendido (Conexión/Confianza) o de permanencia (Coherencia/Cocreación/Cuidado)? Justifica con evidencia del reporte — no con supuestos."></textarea>
+        <div class="field-guide">¿Cuál de las 5C tiene el nivel más bajo y bloquea más la experimentación del equipo? ¿Es un freno de encendido (Conexión/Confianza) o de permanencia (Coherencia/Cocreación/Cuidado)? Justifica con evidencia del reporte — no con supuestos.</div>
+        <textarea id="f-102-e2" data-save="f-102-e2" rows="5" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-102-e2">0</span> caracteres</div>
       </div>
     </div>
@@ -688,17 +703,20 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
     <div class="p-body">
       <div class="fill">
         <div class="fill-lbl">Veredicto — ¿Cuello de botella de liderazgo o de creencia?</div>
-        <textarea id="f-102-e3" data-save="f-102-e3" rows="5" placeholder="¿El freno para escalar la adopción de la IA es la creencia de las personas en la empresa (AIMT) o es el comportamiento del liderazgo (AILS)? Justifica con la evidencia cruzada de los dos reportes. Debes ser específico: no basta decir 'ambos'; nombra cuál pesa más y por qué."></textarea>
+        <div class="field-guide">¿El freno para escalar la adopción de la IA es la creencia de las personas en la empresa (AIMT) o es el comportamiento del liderazgo (AILS)? Justifica con la evidencia cruzada de los dos reportes. Debes ser específico: no basta decir 'ambos'; nombra cuál pesa más y por qué.</div>
+        <textarea id="f-102-e3" data-save="f-102-e3" rows="5" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-102-e3">0</span> caracteres</div>
       </div>
       <div class="fill">
         <div class="fill-lbl">Palanca de liderazgo observable recomendada</div>
-        <textarea id="f-102-e4" data-save="f-102-e4" rows="5" placeholder="¿Qué comportamiento concreto y observable debe volverse visible en el liderazgo para fortalecer la C más débil y liberar el flujo de conocimiento IA entre las áreas? Sé específico: no solo responde 'comunicar más', detalla qué hace, dónde, con qué frecuencia y ante qué situación."></textarea>
+        <div class="field-guide">¿Qué comportamiento concreto y observable debe volverse visible en el liderazgo para fortalecer la C más débil y liberar el flujo de conocimiento IA entre las áreas? Sé específico: no solo responde 'comunicar más', detalla qué hace, dónde, con qué frecuencia y ante qué situación.</div>
+        <textarea id="f-102-e4" data-save="f-102-e4" rows="5" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-102-e4">0</span> caracteres</div>
       </div>
       <div class="fill fill-obs">
         <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
-        <textarea id="f-102-obs" data-save="f-102-obs" rows="4" placeholder="Comparte con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores."></textarea>
+        <div class="field-guide">Comparte con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores.</div>
+        <textarea id="f-102-obs" data-save="f-102-obs" rows="4" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-102-obs">0</span> caracteres</div>
       </div>
       <div class="submit-sec">
@@ -808,12 +826,14 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
       </div>
       <div class="fill">
         <div class="fill-lbl">Lectura de marcadores AICD — Cultura vs Clima</div>
-        <textarea id="f-103-e1" data-save="f-103-e1" rows="9" placeholder="Para cada marcador relevante del reporte AICD, registra:&#10;• Marcador de ADN IA (descripción de lo que mide)&#10;• Nivel obtenido: Cautela / Vulnerable / Diestro / Óptimo&#10;• Tipo: CULTURA (hecho institucional verificable) o CLIMA (percepción puntual del grupo)&#10;&#10;Ejemplo:&#10;'Ausencia de rituales de compartición de aprendizajes de IA entre áreas' → Cautela → Cultura (no hay protocolo, no hay incentivos)&#10;'Percepción de que «acá no se comparte»' → Clima (percepción, no estructura)"></textarea>
+        <div class="field-guide">Para cada marcador relevante del reporte AICD, registra:<br>• Marcador de ADN IA (descripción de lo que mide)<br>• Nivel obtenido: Cautela / Vulnerable / Diestro / Óptimo<br>• Tipo: CULTURA (hecho institucional verificable) o CLIMA (percepción puntual del grupo)<br><br>Ejemplo:<br>'Ausencia de rituales de compartición de aprendizajes de IA entre áreas' → Cautela → Cultura (no hay protocolo, no hay incentivos)<br>'Percepción de que «acá no se comparte»' → Clima (percepción, no estructura)</div>
+        <textarea id="f-103-e1" data-save="f-103-e1" rows="9" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-103-e1">0</span> caracteres</div>
       </div>
       <div class="fill">
         <div class="fill-lbl">Mecanismo estructural identificado — ¿Hacé crónico o libera el freno individual?</div>
-        <textarea id="f-103-e2" data-save="f-103-e2" rows="6" placeholder="¿Qué mecanismo estructural específico — incentivo, ritual o norma — hace crónico un freno individual del AIMT (como el síndrome del impostor o el miedo al desplazamiento) o, alternativamente, lo libera? Nombra el mecanismo concreto: no respondas solo 'la cultura no apoya', sino qué estructura específica produce ese resultado."></textarea>
+        <div class="field-guide">¿Qué mecanismo estructural específico — incentivo, ritual o norma — hace crónico un freno individual del AIMT (como el síndrome del impostor o el miedo al desplazamiento) o, alternativamente, lo libera? Nombra el mecanismo concreto: no respondas solo 'la cultura no apoya', sino qué estructura específica produce ese resultado.</div>
+        <textarea id="f-103-e2" data-save="f-103-e2" rows="6" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-103-e2">0</span> caracteres</div>
       </div>
     </div>
@@ -829,12 +849,14 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
     <div class="p-body">
       <div class="fill">
         <div class="fill-lbl">Lectura de causa raíz cultural — Rasgo, obstáculo y palanca estructural</div>
-        <textarea id="f-103-e3" data-save="f-103-e3" rows="7" placeholder="Sintetiza en lenguaje ejecutivo: ¿qué marcador o rasgo de ADN IA tiene el nivel más bajo? ¿A qué obstáculo corporativo está conectado? ¿Qué palanca estructural concreta (no un taller, ni una charla) puede moverlo y con qué efecto esperado sobre el retorno de la IA?"></textarea>
+        <div class="field-guide">Sintetiza en lenguaje ejecutivo: ¿qué marcador o rasgo de ADN IA tiene el nivel más bajo? ¿A qué obstáculo corporativo está conectado? ¿Qué palanca estructural concreta (no un taller, ni una charla) puede moverlo y con qué efecto esperado sobre el retorno de la IA?</div>
+        <textarea id="f-103-e3" data-save="f-103-e3" rows="7" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-103-e3">0</span> caracteres</div>
       </div>
       <div class="fill fill-obs">
         <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
-        <textarea id="f-103-obs" data-save="f-103-obs" rows="5" placeholder="Comparte con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores."></textarea>
+        <div class="field-guide">Comparte con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores.</div>
+        <textarea id="f-103-obs" data-save="f-103-obs" rows="5" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-103-obs">0</span> caracteres</div>
       </div>
       <div class="submit-sec">
@@ -948,12 +970,14 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
       </div>
       <div class="fill">
         <div class="fill-lbl">Matriz de triangulación — Obstáculo × Lente × Nivel</div>
-        <textarea id="f-104-e1" data-save="f-104-e1" rows="10" placeholder="Para cada obstáculo relevante identificado en los tres reportes, registra:&#10;&#10;Obstáculo #__ [descripción] | Peso (Alto/Medio/Bajo)&#10;• AIMT: nivel ... | señal: ...&#10;• AILS: nivel ... | C afectada: ...&#10;• AICD: nivel ... | rasgo: ...&#10;• Convergencia: ¿refuerzo (los tres coinciden) o tensión (se contradicen)?&#10;&#10;Repite para cada obstáculo significativo. Identifica al final el de mayor peso × nivel más bajo a través de las tres lentes."></textarea>
+        <div class="field-guide">Para cada obstáculo relevante identificado en los tres reportes, registra:<br><br>Obstáculo #__ [descripción] | Peso (Alto/Medio/Bajo)<br>• AIMT: nivel ... | señal: ...<br>• AILS: nivel ... | C afectada: ...<br>• AICD: nivel ... | rasgo: ...<br>• Convergencia: ¿refuerzo (los tres coinciden) o tensión (se contradicen)?<br><br>Repite para cada obstáculo significativo. Identifica al final el de mayor peso × nivel más bajo a través de las tres lentes.</div>
+        <textarea id="f-104-e1" data-save="f-104-e1" rows="10" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-104-e1">0</span> caracteres</div>
       </div>
       <div class="fill">
         <div class="fill-lbl">Cuello de botella primario y secuencia de intervención</div>
-        <textarea id="f-104-e2" data-save="f-104-e2" rows="9" placeholder="¿Cuál es el obstáculo de mayor peso con el nivel más bajo a través de las tres lentes? Justifica ¿Por qué intervenir ese y no el promedio? ¿En qué secuencia se interviene — qué primero, qué después — y por qué ese orden? Justifica con evidencia de la matriz, no con base en tu intuición."></textarea>
+        <div class="field-guide">¿Cuál es el obstáculo de mayor peso con el nivel más bajo a través de las tres lentes? Justifica ¿Por qué intervenir ese y no el promedio? ¿En qué secuencia se interviene — qué primero, qué después — y por qué ese orden? Justifica con evidencia de la matriz, no con base en tu intuición.</div>
+        <textarea id="f-104-e2" data-save="f-104-e2" rows="9" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-104-e2">0</span> caracteres</div>
       </div>
     </div>
@@ -969,12 +993,14 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
     <div class="p-body">
       <div class="fill">
         <div class="fill-lbl">Reporte de causas raíz — Entregable obligatorio del Sprint 01</div>
-        <textarea id="f-104-e3" data-save="f-104-e3" rows="14" style="min-height:200px;" placeholder="Redacta el reporte de causas raíz para el responsable del retorno. Debe incluir, en una página:&#10;&#10;1. Qué bloquea el ROI de la IA en esta organización/grupo (el cuello de botella con evidencia de las tres lentes).&#10;2. Por qué ese bloqueo no se resuelve con capacitación ni con comunicación (el mecanismo causal).&#10;3. Qué palanca lo desbloquea (específica, no genérica).&#10;4. La magnitud del retorno en riesgo o desbloqueable (estimación en USD u otro KPI relevante)."></textarea>
+        <div class="field-guide">Redacta el reporte de causas raíz para el responsable del retorno. Debe incluir, en una página:<br><br>1. Qué bloquea el ROI de la IA en esta organización/grupo (el cuello de botella con evidencia de las tres lentes).<br>2. Por qué ese bloqueo no se resuelve con capacitación ni con comunicación (el mecanismo causal).<br>3. Qué palanca lo desbloquea (específica, no genérica).<br>4. La magnitud del retorno en riesgo o desbloqueable (estimación en USD u otro KPI relevante).</div>
+        <textarea id="f-104-e3" data-save="f-104-e3" rows="14" style="min-height:200px;" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-104-e3">0</span> caracteres</div>
       </div>
       <div class="fill">
         <div class="fill-lbl">Registro de validación del encuadre de retorno</div>
-        <textarea id="f-104-e4" data-save="f-104-e4" rows="12" placeholder="¿Cómo se validó el insight ante el mentor o ante un par de la cohorte? ¿Qué cuestionamientos surgieron? ¿Cómo respondiste? ¿El encuadre se sostuvo en lenguaje de retorno o se deslizó hacia capacitación o gestión humana? Registra los ajustes realizados."></textarea>
+        <div class="field-guide">¿Cómo se validó el insight ante el mentor o ante un par de la cohorte? ¿Qué cuestionamientos surgieron? ¿Cómo respondiste? ¿El encuadre se sostuvo en lenguaje de retorno o se deslizó hacia capacitación o gestión humana? Registra los ajustes realizados.</div>
+        <textarea id="f-104-e4" data-save="f-104-e4" rows="12" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-104-e4">0</span> caracteres</div>
       </div>
     </div>
@@ -990,7 +1016,8 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
     <div class="p-body">
       <div class="fill fill-obs">
         <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
-        <textarea id="f-104-obs" data-save="f-104-obs" rows="5" placeholder="Comparte con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores. Tu observación puede mejorar el instrumento y la formación de las próximas cohortes."></textarea>
+        <div class="field-guide">Comparte con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores. Tu observación puede mejorar el instrumento y la formación de las próximas cohortes.</div>
+        <textarea id="f-104-obs" data-save="f-104-obs" rows="5" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-104-obs">0</span> caracteres</div>
       </div>
       <div class="submit-sec">

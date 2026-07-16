@@ -200,6 +200,8 @@ textarea { width: 100%; min-height: 110px; border: 1.5px solid var(--platinum); 
 textarea:focus { border-color: var(--teal); background: white; }
 textarea.filled { border-color: var(--teal); background: white; }
 textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
+.field-guide { font-size: 11.5px; line-height: 1.6; color: rgba(30,42,56,.66); background: rgba(46,139,118,.05); border-left: 3px solid var(--teal); border-radius: 0 6px 6px 0; padding: 9px 12px; margin-bottom: 8px; }
+.fill-obs .field-guide { background: var(--gold-bg); border-left-color: var(--gold); }
 .char-ct { font-size: 10px; color: rgba(30,42,56,.35); text-align: right; margin-top: 3px; }
 
 /* ─── OBSERVATION FIELD ──────────────────── */
@@ -262,7 +264,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
   .page, .cover-page, .back-cover { height: 10.1in !important; min-height: unset !important; page-break-after: always; break-after: page; overflow: hidden; }
   .report-id-block { background: #1e2a38 !important; page-break-inside: avoid; break-inside: avoid; }
   .metric-pair, .ia-role, .step-list, .note, .gold-acc, .quote-band, .ni { page-break-inside: avoid; break-inside: avoid; }
-  .char-ct, .ip-guard { display: none !important; }
+  .char-ct, .ip-guard, .field-guide { display: none !important; }
   textarea { border: 1px solid #c0c4c2 !important; background: white !important; min-height: 50px !important; resize: none !important; overflow: visible !important; height: auto !important; }
   @page { size: letter portrait; margin: 0.45in; }
 }
@@ -547,12 +549,14 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
       </div>
       <div class="fill">
         <div class="fill-lbl">Ficha de cobertura</div>
-        <textarea id="f-201-e1" data-save="f-201-e1" rows="9" placeholder="Registra y justifica cada parámetro frente a la decisión:&#10;• Decisión de negocio que el diagnóstico debe sostener y su dueño (responsable del KPI)&#10;• Población elegible (nº de personas) y por qué esta unidad&#10;• Criterio de segmentación, incluyendo el criterio de exclusión (qué áreas de cultura distinta NO se agregan)&#10;• Ventana temporal de la campaña y umbral de representatividad"></textarea>
+        <div class="field-guide">Registra y justifica cada parámetro frente a la decisión:<br>• Decisión de negocio que el diagnóstico debe sostener y su dueño (responsable del KPI)<br>• Población elegible (nº de personas) y por qué esta unidad<br>• Criterio de segmentación, incluyendo el criterio de exclusión (qué áreas de cultura distinta NO se agregan)<br>• Ventana temporal de la campaña y umbral de representatividad</div>
+        <textarea id="f-201-e1" data-save="f-201-e1" rows="9" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-201-e1">0</span> caracteres</div>
       </div>
       <div class="fill">
         <div class="fill-lbl">Encuadre de lanzamiento</div>
-        <textarea id="f-201-e2" data-save="f-201-e2" rows="7" placeholder="Redacta el texto que el dueño del KPI firmará y emitirá:&#10;• Emisor = dueño del KPI (no Recursos Humanos)&#10;• Mensaje de diagnóstico de aceleración del retorno — no «auditoría de personas»&#10;• Dos garantías creíbles sobre el futuro del rol, para no disparar el miedo al desplazamiento (obstáculo #10)"></textarea>
+        <div class="field-guide">Redacta el texto que el dueño del KPI firmará y emitirá:<br>• Emisor = dueño del KPI (no Recursos Humanos)<br>• Mensaje de diagnóstico de aceleración del retorno — no «auditoría de personas»<br>• Dos garantías creíbles sobre el futuro del rol, para no disparar el miedo al desplazamiento (obstáculo #10)</div>
+        <textarea id="f-201-e2" data-save="f-201-e2" rows="7" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-201-e2">0</span> caracteres</div>
       </div>
     </div>
@@ -568,12 +572,14 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
     <div class="p-body">
       <div class="fill">
         <div class="fill-lbl">Captura del panel de cobertura</div>
-        <textarea id="f-201-e3" data-save="f-201-e3" rows="6" placeholder="Al cierre de la campaña, registra el dato del panel de la plataforma DCA:&#10;• Tasa de respuesta válida alcanzada frente al umbral definido en la ficha&#10;• ¿Se alcanzó la representatividad de la unidad? ¿Hubo reprocesos por cobertura?&#10;• Adjunta o describe la captura del panel de cobertura"></textarea>
+        <div class="field-guide">Al cierre de la campaña, registra el dato del panel de la plataforma DCA:<br>• Tasa de respuesta válida alcanzada frente al umbral definido en la ficha<br>• ¿Se alcanzó la representatividad de la unidad? ¿Hubo reprocesos por cobertura?<br>• Adjunta o describe la captura del panel de cobertura</div>
+        <textarea id="f-201-e3" data-save="f-201-e3" rows="6" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-201-e3">0</span> caracteres</div>
       </div>
       <div class="fill fill-obs">
         <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
-        <textarea id="f-201-obs" data-save="f-201-obs" rows="4" placeholder="Comparte con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores. Tu observación puede mejorar el instrumento y la formación de las próximas cohortes."></textarea>
+        <div class="field-guide">Comparte con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores. Tu observación puede mejorar el instrumento y la formación de las próximas cohortes.</div>
+        <textarea id="f-201-obs" data-save="f-201-obs" rows="4" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-201-obs">0</span> caracteres</div>
       </div>
       <div class="submit-sec">
@@ -700,12 +706,14 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
       </div>
       <div class="fill">
         <div class="fill-lbl">Diagnóstico Integrado (S3)</div>
-        <textarea id="f-202-e1" data-save="f-202-e1" rows="8" placeholder="Redacta el patrón cruzado que ningún reporte individual muestra, aplicando los tres principios de integración:&#10;• Triangulación: qué señal aparece en ≥2 lentes (AIMT / AILS / AICD)&#10;• Coherencia sistémica: cómo se refuerzan entre instrumentos&#10;• Tensión productiva: dónde un reporte contradice a otro y qué revela esa tensión"></textarea>
+        <div class="field-guide">Redacta el patrón cruzado que ningún reporte individual muestra, aplicando los tres principios de integración:<br>• Triangulación: qué señal aparece en ≥2 lentes (AIMT / AILS / AICD)<br>• Coherencia sistémica: cómo se refuerzan entre instrumentos<br>• Tensión productiva: dónde un reporte contradice a otro y qué revela esa tensión</div>
+        <textarea id="f-202-e1" data-save="f-202-e1" rows="8" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-202-e1">0</span> caracteres</div>
       </div>
       <div class="fill">
         <div class="fill-lbl">Mapa de Causa Raíz (S4)</div>
-        <textarea id="f-202-e2" data-save="f-202-e2" rows="8" placeholder="Mini-ficha por cada causa priorizada (≥2):&#10;• Evidencia: qué lente la vio&#10;• Magnitud&#10;• Costo de oportunidad sobre el retorno de la IA&#10;• Componente ARIA que la cierra (DMC, LED, MATCH, DIB, Visión 4.0…), nombrado sin su mecánica&#10;Recuerda: clasifica antes causa vs síntoma con la matriz de los diez obstáculos."></textarea>
+        <div class="field-guide">Mini-ficha por cada causa priorizada (≥2):<br>• Evidencia: qué lente la vio<br>• Magnitud<br>• Costo de oportunidad sobre el retorno de la IA<br>• Componente ARIA que la cierra (DMC, LED, MATCH, DIB, Visión 4.0…), nombrado sin su mecánica<br>Recuerda: clasifica antes causa vs síntoma con la matriz de los diez obstáculos.</div>
+        <textarea id="f-202-e2" data-save="f-202-e2" rows="8" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-202-e2">0</span> caracteres</div>
       </div>
     </div>
@@ -721,12 +729,14 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
     <div class="p-body">
       <div class="fill">
         <div class="fill-lbl">Prueba de valor</div>
-        <textarea id="f-202-e3" data-save="f-202-e3" rows="6" placeholder="Por cada causa priorizada, demuestra por qué NO era autoevidente leyendo los tres reportes por separado: ¿qué conclusión solo emerge del cruce? Si el cliente habría llegado a ella leyendo un reporte individual, no es una causa raíz integrada — revísala."></textarea>
+        <div class="field-guide">Por cada causa priorizada, demuestra por qué NO era autoevidente leyendo los tres reportes por separado: ¿qué conclusión solo emerge del cruce? Si el cliente habría llegado a ella leyendo un reporte individual, no es una causa raíz integrada — revísala.</div>
+        <textarea id="f-202-e3" data-save="f-202-e3" rows="6" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-202-e3">0</span> caracteres</div>
       </div>
       <div class="fill fill-obs">
         <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
-        <textarea id="f-202-obs" data-save="f-202-obs" rows="4" placeholder="Comparte con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores."></textarea>
+        <div class="field-guide">Comparte con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores.</div>
+        <textarea id="f-202-obs" data-save="f-202-obs" rows="4" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-202-obs">0</span> caracteres</div>
       </div>
       <div class="submit-sec">
@@ -853,12 +863,14 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
       </div>
       <div class="fill">
         <div class="fill-lbl">Plan de Intervención 90 días (S5)</div>
-        <textarea id="f-203-e1" data-save="f-203-e1" rows="9" placeholder="Por cada causa priorizada en S4, una acción con sus cuatro anclas:&#10;• Obstáculo que cierra&#10;• Componente ARIA (nombrado, sin mecánica)&#10;• Métrica dual de adopción (comportamiento y negocio)&#10;• Hito-rol (corte 30/60/90/120, dueño = responsable del KPI)&#10;Depura: nada de «capacitar / sensibilizar / socializar» sin las cuatro anclas."></textarea>
+        <div class="field-guide">Por cada causa priorizada en S4, una acción con sus cuatro anclas:<br>• Obstáculo que cierra<br>• Componente ARIA (nombrado, sin mecánica)<br>• Métrica dual de adopción (comportamiento y negocio)<br>• Hito-rol (corte 30/60/90/120, dueño = responsable del KPI)<br>Depura: nada de «capacitar / sensibilizar / socializar» sin las cuatro anclas.</div>
+        <textarea id="f-203-e1" data-save="f-203-e1" rows="9" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-203-e1">0</span> caracteres</div>
       </div>
       <div class="fill">
         <div class="fill-lbl">Modelo de Impacto 120 días (S6)</div>
-        <textarea id="f-203-e2" data-save="f-203-e2" rows="7" placeholder="Cada cifra trazada a un KPI del cliente:&#10;• Costo de inacción por trimestre (retorno que la inversión en IA deja de generar mientras la brecha sigue abierta)&#10;• Inversión del plan&#10;• Retorno proyectado a 120 días&#10;Mantén el benchmark del Modelo ARIA como referencia de categoría, nunca como promesa."></textarea>
+        <div class="field-guide">Cada cifra trazada a un KPI del cliente:<br>• Costo de inacción por trimestre (retorno que la inversión en IA deja de generar mientras la brecha sigue abierta)<br>• Inversión del plan<br>• Retorno proyectado a 120 días<br>Mantén el benchmark del Modelo ARIA como referencia de categoría, nunca como promesa.</div>
+        <textarea id="f-203-e2" data-save="f-203-e2" rows="7" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-203-e2">0</span> caracteres</div>
       </div>
     </div>
@@ -874,12 +886,14 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
     <div class="p-body">
       <div class="fill">
         <div class="fill-lbl">Tabla antes/después</div>
-        <textarea id="f-203-e3" data-save="f-203-e3" rows="7" placeholder="Contrasta dos columnas:&#10;• ANTES — acciones de actividad descartadas (verbos genéricos: capacitar, sensibilizar, socializar)&#10;• DESPUÉS — acciones ancladas (obstáculo + componente + métrica dual + hito-rol)&#10;Separa explícitamente el benchmark (referencia de categoría del Modelo ARIA) de la promesa (derivada de los KPI del cliente)."></textarea>
+        <div class="field-guide">Contrasta dos columnas:<br>• ANTES — acciones de actividad descartadas (verbos genéricos: capacitar, sensibilizar, socializar)<br>• DESPUÉS — acciones ancladas (obstáculo + componente + métrica dual + hito-rol)<br>Separa explícitamente el benchmark (referencia de categoría del Modelo ARIA) de la promesa (derivada de los KPI del cliente).</div>
+        <textarea id="f-203-e3" data-save="f-203-e3" rows="7" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-203-e3">0</span> caracteres</div>
       </div>
       <div class="fill fill-obs">
         <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
-        <textarea id="f-203-obs" data-save="f-203-obs" rows="4" placeholder="Comparte con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores."></textarea>
+        <div class="field-guide">Comparte con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores.</div>
+        <textarea id="f-203-obs" data-save="f-203-obs" rows="4" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-203-obs">0</span> caracteres</div>
       </div>
       <div class="submit-sec">
@@ -1008,12 +1022,14 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
       </div>
       <div class="fill">
         <div class="fill-lbl">Síntesis Ejecutiva (S1)</div>
-        <textarea id="f-204-e1" data-save="f-204-e1" rows="9" placeholder="Redacta los cinco elementos y pasa la prueba de autocontención:&#10;• Hallazgo central con magnitud&#10;• Costo de oportunidad sobre el retorno de la IA&#10;• Tres prioridades&#10;• Horizonte&#10;• Próxima decisión&#10;Prueba de autocontención: ¿decide el lector con solo esta página? Convierte cada título en un título que afirma la conclusión, no que nombra el tema."></textarea>
+        <div class="field-guide">Redacta los cinco elementos y pasa la prueba de autocontención:<br>• Hallazgo central con magnitud<br>• Costo de oportunidad sobre el retorno de la IA<br>• Tres prioridades<br>• Horizonte<br>• Próxima decisión<br>Prueba de autocontención: ¿decide el lector con solo esta página? Convierte cada título en un título que afirma la conclusión, no que nombra el tema.</div>
+        <textarea id="f-204-e1" data-save="f-204-e1" rows="9" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-204-e1">0</span> caracteres</div>
       </div>
       <div class="fill">
         <div class="fill-lbl">Matriz de anticipación</div>
-        <textarea id="f-204-e2" data-save="f-204-e2" rows="7" placeholder="Una fila por objeción probable del decisor:&#10;• Objeción → hallazgo del reporte que la responde (S2–S6)&#10;Ej. «¿la muestra es representativa?» → cobertura del Exp 2.01; «¿no será solo percepción?» → triangulación del Exp 2.02&#10;Declara los límites del diagnóstico donde no haya respuesta."></textarea>
+        <div class="field-guide">Una fila por objeción probable del decisor:<br>• Objeción → hallazgo del reporte que la responde (S2–S6)<br>Ej. «¿la muestra es representativa?» → cobertura del Exp 2.01; «¿no será solo percepción?» → triangulación del Exp 2.02<br>Declara los límites del diagnóstico donde no haya respuesta.</div>
+        <textarea id="f-204-e2" data-save="f-204-e2" rows="7" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-204-e2">0</span> caracteres</div>
       </div>
     </div>
@@ -1029,12 +1045,14 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
     <div class="p-body">
       <div class="fill">
         <div class="fill-lbl">Síntesis y Decisión (S7) — ENTREGABLE OBLIGATORIO</div>
-        <textarea id="f-204-e3" data-save="f-204-e3" rows="8" placeholder="Captura la decisión real del responsable del KPI:&#10;• Decisión: ¿AUTORIZA / AJUSTA / RECHAZA?&#10;• Próximos pasos concretos&#10;• Responsables&#10;• Fechas&#10;Si autoriza: recursos liberados y entrada al ciclo ReturnAI. No salgas de la sala sin una de las tres decisiones."></textarea>
+        <div class="field-guide">Captura la decisión real del responsable del KPI:<br>• Decisión: ¿AUTORIZA / AJUSTA / RECHAZA?<br>• Próximos pasos concretos<br>• Responsables<br>• Fechas<br>Si autoriza: recursos liberados y entrada al ciclo ReturnAI. No salgas de la sala sin una de las tres decisiones.</div>
+        <textarea id="f-204-e3" data-save="f-204-e3" rows="8" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-204-e3">0</span> caracteres</div>
       </div>
       <div class="fill fill-obs">
         <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
-        <textarea id="f-204-obs" data-save="f-204-obs" rows="4" placeholder="Comparte con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores."></textarea>
+        <div class="field-guide">Comparte con DCA cualquier hallazgo relevante, pregunta, dificultad o insight que haya surgido durante este experimento y que no esté capturado en los campos anteriores.</div>
+        <textarea id="f-204-obs" data-save="f-204-obs" rows="4" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-204-obs">0</span> caracteres</div>
       </div>
       <div class="submit-sec">
