@@ -230,6 +230,15 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
 .modal-sub { font-size: 12px; color: rgba(30,42,56,.55); margin-bottom: 22px; }
 .modal-body { background: #fafafa; border: 1px solid var(--platinum); border-radius: 8px; padding: 14px; font-size: 12px; line-height: 1.7; color: var(--carbon); white-space: pre-wrap; max-height: 220px; overflow-y: auto; font-family: monospace; margin-bottom: 20px; }
 .modal-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.modal-actions.sent #btn-send { background: var(--teal-dk); cursor: default; opacity: .85; }
+.modal-alert { display: none; }
+.modal-alert.show { display: block; border-radius: 8px; padding: 12px 14px; font-size: 12.5px; line-height: 1.6; margin-bottom: 16px; border-left: 4px solid; }
+.modal-alert ul { margin: 6px 0 0; padding-left: 18px; }
+.modal-alert li { margin-bottom: 3px; }
+.modal-alert .mini { font-size: 11px; opacity: .75; }
+.modal-alert.info { background: rgba(46,139,118,.07); border-color: var(--teal); color: var(--carbon); }
+.modal-alert.ok   { background: rgba(46,139,118,.12); border-color: var(--teal); color: var(--carbon); }
+.modal-alert.err  { background: rgba(194,89,63,.09);  border-color: #c2593f;     color: var(--carbon); }
 .btn-m { display: inline-flex; align-items: center; gap: 6px; font-family: var(--fb); font-weight: 700; font-size: 12px; padding: 10px 18px; border-radius: 8px; border: none; cursor: pointer; transition: all .2s; }
 .btn-m.p { background: var(--teal); color: white; } .btn-m.p:hover { background: var(--teal-dk); }
 .btn-m.s { background: transparent; color: var(--carbon); border: 1.5px solid var(--platinum); } .btn-m.s:hover { background: #f5f5f5; }
@@ -329,6 +338,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
     <div class="c-badge">Experimentos para la puesta en práctica de aprendizajes · DCA</div>
     <div class="student-row">
       <div class="s-field"><label>Participante</label><input type="text" id="sf-nombre" data-save="sf-nombre" placeholder="Nombre completo"></div>
+      <div class="s-field"><label>Correo electrónico</label><input type="email" id="sf-email" data-save="sf-email" placeholder="tu@empresa.com" autocomplete="email"></div>
       <div class="s-field"><label>Organización</label><input type="text" id="sf-empresa" data-save="sf-empresa" placeholder="Empresa"></div>
       <div class="s-field"><label>Cohorte</label><input type="text" id="sf-cohorte" data-save="sf-cohorte" placeholder="Ej. BAIP-2026-01"></div>
     </div>
@@ -574,7 +584,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
             <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
             Enviar Experimento 2.01
           </button>
-          <button class="btn-print" onclick="window.print()">
+          <button class="btn-print" onclick="printExp('201')">
             <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="4" y="2" width="12" height="8" rx="1"/><rect x="3" y="10" width="14" height="8" rx="1"/><rect x="7" y="13" width="6" height="5" rx="0.5" fill="currentColor" stroke="none"/></svg>
             Guardar copia en PDF
           </button>
@@ -727,7 +737,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
             <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
             Enviar Experimento 2.02
           </button>
-          <button class="btn-print" onclick="window.print()">
+          <button class="btn-print" onclick="printExp('202')">
             <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="4" y="2" width="12" height="8" rx="1"/><rect x="3" y="10" width="14" height="8" rx="1"/><rect x="7" y="13" width="6" height="5" rx="0.5" fill="currentColor" stroke="none"/></svg>
             Guardar copia en PDF
           </button>
@@ -880,7 +890,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
             <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
             Enviar Experimento 2.03
           </button>
-          <button class="btn-print" onclick="window.print()">
+          <button class="btn-print" onclick="printExp('203')">
             <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="4" y="2" width="12" height="8" rx="1"/><rect x="3" y="10" width="14" height="8" rx="1"/><rect x="7" y="13" width="6" height="5" rx="0.5" fill="currentColor" stroke="none"/></svg>
             Guardar copia en PDF
           </button>
@@ -1035,7 +1045,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
             <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
             Enviar Experimento 2.04
           </button>
-          <button class="btn-print" onclick="window.print()">
+          <button class="btn-print" onclick="printExp('204')">
             <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="4" y="2" width="12" height="8" rx="1"/><rect x="3" y="10" width="14" height="8" rx="1"/><rect x="7" y="13" width="6" height="5" rx="0.5" fill="currentColor" stroke="none"/></svg>
             Guardar copia en PDF
           </button>
@@ -1093,10 +1103,12 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
   <div class="modal">
     <div class="modal-title" id="modal-title">Resumen del Experimento</div>
     <div class="modal-sub" id="modal-sub"></div>
+    <div class="modal-alert" id="modal-alert"></div>
     <div class="modal-body" id="modal-body"></div>
-    <div class="modal-actions">
-      <button class="btn-m p" onclick="copyModal()">📋 Copiar resumen</button>
-      <button class="btn-m p" onclick="mailModal()">✉ Abrir en correo</button>
+    <div class="modal-actions" id="modal-actions">
+      <button class="btn-m p" id="btn-send" onclick="submitExp()">✈ Enviar ahora al facilitador</button>
+      <button class="btn-m s" onclick="printExp(currentExp)">⬇ Descargar PDF</button>
+      <button class="btn-m s" onclick="copyModal()">📋 Copiar resumen</button>
       <button class="btn-m s" onclick="closeModal()">Cerrar</button>
     </div>
   </div>
@@ -1105,6 +1117,14 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
 <script>
 // ══ AUTOSAVE ══════════════════════════════
 const SAVE_KEY = 'dca_aria_sprint02_v1';
+
+// ══ CONFIG DEL INSTRUMENTO ════════════════════════════════════════════
+// Único bloque que cambia entre sprints (junto con expNames y EXP_FIELDS).
+const INSTRUMENT = {
+  id: 'sprint-02-baip',
+  sprintLabel: 'Sprint Roadmap 02 · Valoración y Análisis de la Brecha AI',
+  endpoint: 'https://script.google.com/macros/s/AKfycbyQZPoW4T1KbLZi2eBJh9vyt0tWzeCiDFITXCemu6WyOTkehRBLDPkszJ9FkGGFI_HD-A/exec'
+};
 let saveTimer;
 const saveDot = document.getElementById('saveDot');
 
@@ -1235,6 +1255,7 @@ const expNames = { '201': 'Experimento 2.01 — Campaña a escala', '202': 'Expe
 function getStudentInfo() {
   return {
     nombre:  document.getElementById('sf-nombre')?.value  || '(sin nombre)',
+    email:   (document.getElementById('sf-email')?.value  || '').trim(),
     empresa: document.getElementById('sf-empresa')?.value || '(sin empresa)',
     cohorte: document.getElementById('sf-cohorte')?.value || '(sin cohorte)'
   };
@@ -1259,6 +1280,7 @@ function openModal(exp) {
   summary += `Sprint: Sprint 02 — Valoración y Análisis de la Brecha AI\n`;
   summary += `Experimento: ${expNames[exp].split('—')[0].trim()}\n`;
   summary += `Participante: ${si.nombre}\n`;
+  summary += `Correo: ${si.email || '(sin correo)'}\n`;
   summary += `Cohorte: ${si.cohorte}\n`;
   summary += `Organización del participante: ${si.empresa}\n`;
   summary += `Fecha de envío: ${new Date().toLocaleDateString('es-CO', { year:'numeric', month:'long', day:'numeric' })}\n`;
@@ -1286,39 +1308,250 @@ function openModal(exp) {
   document.getElementById('modal-title').textContent = expNames[exp].split('—')[0].trim();
   document.getElementById('modal-sub').textContent = `${si.nombre} · ${si.empresa} · ${si.cohorte}`;
   document.getElementById('modal-body').textContent = summary;
+
+  limpiarAlerta();
+  const acciones = document.getElementById('modal-actions');
+  const btnSend  = document.getElementById('btn-send');
+  acciones.classList.remove('sent');
+  btnSend.disabled = false;
+  btnSend.textContent = '✈ Enviar ahora al facilitador';
+
+  const dd = getData();
+  if (dd['sent_' + exp] && dd['recibo_' + exp]) {
+    alerta('Ya enviaste este experimento el ' +
+      new Date(dd['fecha_envio_' + exp]).toLocaleDateString('es-CO', { day:'numeric', month:'long', year:'numeric' }) +
+      ' · Recibo <b>' + dd['recibo_' + exp] + '</b>.<br>' +
+      'Si corregiste algo, puedes <b>volver a enviar</b>: tu facilitador verá la versión más reciente.', 'info');
+    btnSend.textContent = '↻ Enviar versión corregida';
+  }
+
   document.getElementById('modal').classList.add('open');
+}
+
+/* ══ GENERACIÓN DE PDF — CON TODO EL CONTENIDO (genérico) ══════════════ */
+function printExp(exp) {
+  const si = getStudentInfo();
+  const campos = (EXP_FIELDS[exp] || []).map(f => {
+    let value;
+    if (f.type === 'radio') {
+      const r = document.querySelector(`input[name="${f.name}"]:checked`);
+      value = r ? r.value : '';
+    } else {
+      const el = document.getElementById(f.id);
+      value = el ? el.value.trim() : '';
+    }
+    return { label: f.label, value: value };
+  });
+  const esc = s => String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  const d = getData();
+  const recibo = d['recibo_' + exp] || null;
+  const fecha = new Date().toLocaleDateString('es-CO', { day:'numeric', month:'long', year:'numeric' });
+  const totalChars = campos.reduce((s,c) => s + String(c.value||'').length, 0);
+  const llenos = campos.filter(c => String(c.value||'').trim()).length;
+  const bloques = campos.map(c => `
+    <div class="campo">
+      <div class="campo-lbl">${esc(c.label)}<span class="chars">${String(c.value||'').length} caracteres</span></div>
+      <div class="campo-val">${String(c.value||'').trim()
+        ? esc(c.value).replace(/\n/g,'<br>')
+        : '<em style="color:#9ca3af">— sin contenido —</em>'}</div>
+    </div>`).join('');
+  const html = `<!doctype html><html><head><meta charset="utf-8">
+  <title>${esc(expNames[exp].split('—')[0].trim())} · ${esc(si.nombre)}</title>
+  <style>
+    @page { size: letter portrait; margin: 0.6in 0.65in; }
+    *{box-sizing:border-box}
+    body{font-family:'Montserrat','Helvetica Neue',Helvetica,Arial,sans-serif;color:#1e2a38;font-size:10.5pt;line-height:1.55;margin:0}
+    .cab{background:#1e2a38;color:#fff;padding:18px 20px}
+    .cab-marca{font-size:8.5pt;letter-spacing:.14em;text-transform:uppercase;color:#a48111;font-weight:700}
+    .cab-tit{font-family:'Marcellus',Georgia,serif;font-size:19pt;margin:6px 0 2px}
+    .cab-sub{font-size:9.5pt;color:rgba(255,255,255,.72)}
+    .recibo{background:#2e8b76;color:#fff;padding:9px 20px;font-size:9.5pt;display:flex;justify-content:space-between}
+    .ident{background:#f3f3f3;padding:12px 20px;margin-bottom:16px;border-left:4px solid #a48111}
+    .ident table{width:100%;border-collapse:collapse}
+    .ident td{padding:2px 0;font-size:9.5pt;vertical-align:top}
+    .ident td.k{color:#6b7280;width:130px;text-transform:uppercase;font-size:8pt;letter-spacing:.06em;padding-top:4px}
+    .ident td.v{font-weight:600}
+    .wrap{padding:0 20px 20px}
+    .campo{margin-bottom:15px;page-break-inside:avoid}
+    .campo-lbl{font-size:8.5pt;text-transform:uppercase;letter-spacing:.07em;color:#2e8b76;font-weight:700;padding-bottom:4px;border-bottom:1.5px solid #2e8b76;margin-bottom:6px}
+    .chars{float:right;color:#6b7280;font-weight:400;text-transform:none;letter-spacing:0;font-size:7.5pt}
+    .campo-val{background:#fff;border:1px solid #dcdfe3;border-radius:4px;padding:9px 11px;font-size:10pt;white-space:pre-wrap;word-wrap:break-word}
+    .resumen{margin-top:18px;padding:10px 14px;background:#f3f3f3;border-radius:4px;font-size:8.5pt;color:#6b7280}
+    .aviso{margin-top:10px;padding:9px 14px;background:#f7e9e4;border-left:3px solid #c2593f;font-size:8.5pt;color:#1e2a38}
+    .pie{margin-top:16px;border-top:2px solid #a48111;padding-top:8px;font-size:7.5pt;color:#6b7280;text-align:center}
+  </style></head><body>
+  <div class="cab">
+    <div class="cab-marca">Certificación Analista BAIP · Modelo ARIA</div>
+    <div class="cab-tit">${esc(expNames[exp])}</div>
+    <div class="cab-sub">${esc(INSTRUMENT.sprintLabel)}</div>
+  </div>
+  <div class="recibo">
+    <span>${recibo ? 'Recibo <b>'+esc(recibo)+'</b>' : 'Copia de trabajo — aún no enviado'}</span>
+    <span>${fecha}</span>
+  </div>
+  <div class="wrap">
+    <div class="ident"><table>
+      <tr><td class="k">Analista BAIP</td><td class="v">${esc(si.nombre)}</td></tr>
+      <tr><td class="k">Correo</td><td class="v">${esc(si.email || '—')}</td></tr>
+      <tr><td class="k">Empresa</td><td class="v">${esc(si.empresa)}</td></tr>
+      <tr><td class="k">Cohorte</td><td class="v">${esc(si.cohorte)}</td></tr>
+    </table></div>
+    ${bloques}
+    <div class="resumen"><b>Resumen:</b> ${llenos} de ${campos.length} campos diligenciados · ${totalChars} caracteres en total</div>
+    ${recibo ? '' : '<div class="aviso"><b>Este PDF es una copia de trabajo.</b> Todavía no has enviado este experimento a tu facilitador. Para entregarlo, vuelve al roadmap y pulsa «Enviar ahora».</div>'}
+    <div class="pie">Digital Change Advisors, LLC · Modelo ARIA · Digital Change Academy<br>Licenciado bajo Creative Commons BY-SA 4.0.</div>
+  </div>
+  <script>window.onload=function(){window.print();}<\/script>
+  </body></html>`;
+  const w = window.open('', '_blank');
+  if (!w) { alerta('Tu navegador bloqueó la ventana del PDF. Permite las ventanas emergentes para este sitio e inténtalo de nuevo.', 'err'); return; }
+  w.document.write(html); w.document.close();
 }
 
 function closeModal() { document.getElementById('modal').classList.remove('open'); }
 
+/* ══ MOTOR DE ENVÍO REAL (genérico, idéntico en todos los sprints) ═══════
+   La confirmación NUNCA se muestra por optimismo: solo con recibo del servidor. */
+
+function collectPayload(exp) {
+  const si = getStudentInfo();
+  const campos = (EXP_FIELDS[exp] || []).map(f => {
+    let value;
+    if (f.type === 'radio') {
+      const r = document.querySelector(`input[name="${f.name}"]:checked`);
+      value = r ? r.value : '';
+    } else {
+      const el = document.getElementById(f.id);
+      value = el ? el.value.trim() : '';
+    }
+    return { id: f.id, label: f.label, value: value, type: f.type || 'text' };
+  });
+  return {
+    instrumento: INSTRUMENT.id,
+    sprintLabel: INSTRUMENT.sprintLabel,
+    exp: exp,
+    expNombre: expNames[exp],
+    participante: { nombre: si.nombre, email: si.email, empresa: si.empresa, cohorte: si.cohorte },
+    campos: campos,
+    meta: { userAgent: navigator.userAgent, origen: location.origin, enviadoEn: new Date().toISOString() }
+  };
+}
+
+function validarEnvio(p) {
+  const errs = [];
+  const si = p.participante;
+  if (!si.nombre || si.nombre.indexOf('(sin') === 0 || si.nombre.trim().length < 3)
+    errs.push('Escribe tu <b>nombre completo</b> en la portada.');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(si.email))
+    errs.push('Escribe un <b>correo electrónico válido</b> en la portada — ahí te llega tu copia.');
+  if (!si.cohorte || si.cohorte.indexOf('(sin') === 0)
+    errs.push('Indica tu <b>cohorte</b> en la portada.');
+  const vacios = p.campos.filter(c => !String(c.value || '').trim());
+  if (vacios.length === p.campos.length)
+    errs.push('Todos los campos están vacíos: no hay nada que enviar.');
+  return { errs, vacios };
+}
+
+function alerta(html, tipo) {
+  const el = document.getElementById('modal-alert');
+  if (!el) return;
+  el.className = 'modal-alert show ' + (tipo || '');
+  el.innerHTML = html;
+}
+function limpiarAlerta() {
+  const el = document.getElementById('modal-alert');
+  if (el) { el.className = 'modal-alert'; el.innerHTML = ''; }
+}
+
+async function submitExp() {
+  const exp = currentExp;
+  const btn = document.getElementById('btn-send');
+  const payload = collectPayload(exp);
+  const { errs, vacios } = validarEnvio(payload);
+
+  if (errs.length) {
+    alerta('<b>Antes de enviar, completa esto:</b><ul><li>' + errs.join('</li><li>') + '</li></ul>', 'err');
+    return;
+  }
+  if (vacios.length) {
+    const ok = confirm(
+      `Hay ${vacios.length} campo(s) sin diligenciar:\n\n` +
+      vacios.map(v => '· ' + v.label).join('\n') +
+      `\n\n¿Quieres enviarlo así de todos modos? Podrás volver a enviar una versión corregida más adelante.`
+    );
+    if (!ok) return;
+  }
+  if (!INSTRUMENT.endpoint || INSTRUMENT.endpoint.indexOf('PEGA_AQUI') === 0) {
+    alerta('<b>El envío todavía no está configurado.</b> Avisa a tu facilitador: falta conectar ' +
+           'el motor de recepción. Mientras tanto, descarga tu PDF para no perder tu trabajo.', 'err');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = '⏳ Enviando…';
+  alerta('Enviando tu experimento y generando tu PDF. Esto puede tardar unos segundos — no cierres esta ventana.', 'info');
+
+  try {
+    const res = await fetch(INSTRUMENT.endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload),
+      redirect: 'follow'
+    });
+    if (!res.ok) throw new Error('El servidor respondió ' + res.status);
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.mensaje || 'El servidor rechazó el envío.');
+
+    markSent(exp, data.reciboID);
+    alerta(
+      '<b>✓ Envío confirmado.</b><br>' +
+      'Tu experimento llegó a tu facilitador y quedó registrado.<br>' +
+      'Tu número de recibo es <b>' + data.reciboID + '</b>' +
+      (data.copiaEstudiante ? '<br>Te enviamos una copia en PDF a <b>' + payload.participante.email + '</b>.' : '') +
+      '<br><span class="mini">Guarda este número: es tu comprobante.</span>',
+      'ok'
+    );
+    btn.textContent = '✓ Enviado';
+    document.getElementById('modal-actions').classList.add('sent');
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = '↻ Reintentar envío';
+    alerta(
+      '<b>No pudimos completar el envío.</b><br>' +
+      'Motivo: ' + (err.message || 'error de conexión') + '<br><br>' +
+      '<b>Tu trabajo está a salvo</b> — sigue guardado en este navegador. Puedes:<br>' +
+      '· Revisar tu conexión y pulsar <b>Reintentar envío</b>.<br>' +
+      '· Descargar el PDF y enviarlo tú a <b>facilitador@digitalchangeadvisors.com</b>.',
+      'err'
+    );
+  }
+}
+
 function copyModal() {
   const text = document.getElementById('modal-body').textContent;
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = document.querySelector('.btn-m.p');
-    const orig = btn.textContent; btn.textContent = '✓ Copiado';
-    setTimeout(() => { btn.textContent = orig; }, 2000);
-    markSent(currentExp);
-  }).catch(() => {
+  const feedback = () => alerta('Resumen copiado al portapapeles. <b>Recuerda: copiar no es enviar</b> — ' +
+                                'usa «Enviar ahora» para que le llegue a tu facilitador.', 'info');
+  navigator.clipboard.writeText(text).then(feedback).catch(() => {
     const ta = document.createElement('textarea');
-    ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
-    markSent(currentExp);
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    feedback();
   });
 }
 
-function mailModal() {
-  window.open(`mailto:facilitador@digitalchangeadvisors.com?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`);
-  markSent(currentExp);
-}
-
-function markSent(exp) {
+function markSent(exp, reciboID) {
   const btn = document.getElementById('btn-' + exp);
   const ok  = document.getElementById('ok-' + exp);
-  if (btn) { btn.classList.add('done'); btn.textContent = '✓ Enviado'; }
+  if (btn) { btn.classList.add('done'); btn.textContent = '✓ Enviado · ' + reciboID; }
   if (ok)  { ok.classList.add('show'); }
-  const d = getData(); d['sent_' + exp] = true; localStorage.setItem(SAVE_KEY, JSON.stringify(d));
+  const d = getData();
+  d['sent_' + exp] = true;
+  d['recibo_' + exp] = reciboID;
+  d['fecha_envio_' + exp] = new Date().toISOString();
+  localStorage.setItem(SAVE_KEY, JSON.stringify(d));
   const navEl = document.getElementById('nav-' + exp);
   if (navEl) navEl.classList.add('done');
-  closeModal();
 }
 
 document.getElementById('modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
@@ -1327,12 +1560,15 @@ document.getElementById('modal').addEventListener('click', function(e) { if (e.t
 document.addEventListener('DOMContentLoaded', () => {
   loadAll();
   const d = getData();
-  ['201','202','203','204'].forEach(exp => {
+  Object.keys(EXP_FIELDS).forEach(exp => {
     if (d['sent_' + exp]) {
       const btn = document.getElementById('btn-' + exp);
       const ok  = document.getElementById('ok-' + exp);
-      if (btn) { btn.classList.add('done'); btn.textContent = '✓ Enviado'; }
+      const rec = d['recibo_' + exp];
+      if (btn) { btn.classList.add('done'); btn.textContent = rec ? '✓ Enviado · ' + rec : '✓ Enviado'; }
       if (ok)  { ok.classList.add('show'); }
+      const navEl = document.getElementById('nav-' + exp);
+      if (navEl) navEl.classList.add('done');
     }
   });
   document.querySelectorAll('textarea').forEach(ta => updateCharCount(ta));

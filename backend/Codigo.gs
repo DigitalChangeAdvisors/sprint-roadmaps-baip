@@ -57,13 +57,33 @@ const MARCA = {
   gris:   '#6b7280',
 };
 
-// Nombres legibles de cada experimento del Sprint 01.
+// Nombres de respaldo (fallback) del Sprint 01. YA NO es obligatorio editar
+// esto para sprints nuevos: el HTML envía el nombre del experimento en el
+// payload (expNombre) y el motor lo usa directamente. Este mapa solo cubre
+// envíos antiguos que no traigan expNombre.
 const EXPERIMENTOS = {
   '101': 'Experimento 1.01 — Clasificación de señales con AIMT',
   '102': 'Experimento 1.02 — Brecha dice-hace con AILS',
   '103': 'Experimento 1.03 — Causas raíz culturales con AICD',
   '104': 'Experimento 1.04 — Triangulación y reporte de causas raíz',
 };
+
+/**
+ * Nombre legible del experimento. Prioriza lo que envía el HTML (expNombre),
+ * cae al mapa de respaldo, y como último recurso arma un nombre genérico.
+ * Gracias a esto, un sprint nuevo NO requiere tocar el backend.
+ */
+function nombreExp(d) {
+  return (d.expNombre && String(d.expNombre).trim()) ||
+         EXPERIMENTOS[d.exp] ||
+         ('Experimento ' + (d.exp || '—'));
+}
+
+/** Etiqueta del sprint que envía el HTML, o una genérica si no viene. */
+function etiquetaSprint(d) {
+  return (d.sprintLabel && String(d.sprintLabel).trim()) ||
+         (d.instrumento ? 'Instrumento ' + d.instrumento : 'Sprint Roadmap');
+}
 
 // Columnas del registro. El orden define la Hoja: NO reordenar sin migrar.
 const COLUMNAS = [
@@ -160,7 +180,7 @@ function doGet() {
 
 // ══ VALIDACIÓN ════════════════════════════════════════════════════════════
 function validar(d) {
-  if (!d.exp || !EXPERIMENTOS[d.exp]) return 'Experimento no reconocido.';
+  if (!d.exp) return 'Falta el identificador del experimento.';
   if (!d.participante) return 'Faltan los datos del participante.';
 
   const p = d.participante;
@@ -218,7 +238,7 @@ function escribirFila(hoja, d, recibo, hash, reenvio, e) {
     recibo,
     d.instrumento || 'sprint-01-baip',
     d.exp,
-    EXPERIMENTOS[d.exp],
+    nombreExp(d),
     p.nombre, p.email, p.empresa || '', p.cohorte,
     val('-rid-grupo'), val('-rid-fecha'), val('-nivel'),
     val('-e1'), val('-e2'), val('-e3'), val('-e4'), val('-obs'),
@@ -231,11 +251,17 @@ function escribirFila(hoja, d, recibo, hash, reenvio, e) {
   ]);
 }
 
-/** Recibo legible y único: ARIA-01-101-0042 */
+/**
+ * Recibo legible y único, válido para cualquier sprint: ARIA-<sprint>-<exp>-<consec>
+ * El número de sprint se deriva del primer dígito del experimento
+ * ('101' → 01, '201' → 02, '304' → 03), así no hay que configurarlo por sprint.
+ */
 function generarReciboID(hoja, exp) {
   const n = Math.max(hoja.getLastRow(), 1); // fila 1 = encabezados
   const consecutivo = ('0000' + n).slice(-4);
-  return 'ARIA-01-' + exp + '-' + consecutivo;
+  const e = String(exp || '');
+  const sprint = e.length >= 3 ? ('0' + e.charAt(0)).slice(-2) : '00';
+  return 'ARIA-' + sprint + '-' + e + '-' + consecutivo;
 }
 
 /** Huella del contenido para detectar reenvíos idénticos. */
@@ -339,7 +365,7 @@ function plantillaReporteHTML(d, recibo) {
 
   <div class="cab">
     <div class="cab-marca">Certificación Analista BAIP · Modelo ARIA</div>
-    <div class="cab-tit">${escapar(EXPERIMENTOS[d.exp])}</div>
+    <div class="cab-tit">${escapar(nombreExp(d))}</div>
     <div class="cab-sub">Sprint Roadmap 01 · Identificación de Causas Raíz de los Obstáculos al ROI de la IA</div>
   </div>
 
@@ -390,7 +416,7 @@ function enviarAFacilitador(d, recibo, pdf) {
         <div style="color:${MARCA.oro};font-size:11px;letter-spacing:.14em;font-weight:700">
           NUEVO ENVÍO · CERTIFICACIÓN ANALISTA BAIP</div>
         <div style="color:#fff;font-size:18px;margin-top:5px;font-family:Georgia,serif">
-          ${escapar(EXPERIMENTOS[d.exp])}</div>
+          ${escapar(nombreExp(d))}</div>
       </div>
       <div style="background:${MARCA.teal};color:#fff;padding:8px 18px;font-size:13px">
         Recibo <b>${recibo}</b>
@@ -431,7 +457,7 @@ function enviarAFacilitador(d, recibo, pdf) {
 
 function enviarAlEstudiante(d, recibo, pdf) {
   const p = d.participante;
-  const asunto = `✓ Recibimos tu ${EXPERIMENTOS[d.exp].split('—')[0].trim()} · Recibo ${recibo}`;
+  const asunto = `✓ Recibimos tu ${nombreExp(d).split('—')[0].trim()} · Recibo ${recibo}`;
 
   const cuerpo = `
     <div style="font-family:Helvetica,Arial,sans-serif;color:${MARCA.carbon};max-width:600px">
@@ -447,7 +473,7 @@ function enviarAlEstudiante(d, recibo, pdf) {
       <div style="padding:18px">
         <p style="font-size:15px;line-height:1.6">Hola ${escapar(p.nombre.split(' ')[0])},</p>
         <p style="font-size:14px;line-height:1.6">
-          Recibimos tu <b>${escapar(EXPERIMENTOS[d.exp])}</b>. Ya está en manos de tu
+          Recibimos tu <b>${escapar(nombreExp(d))}</b>. Ya está en manos de tu
           facilitador y cuenta como entregado para el feedback de seguimiento y tu acceso
           a la Sesión de Mentoring colectivo del sprint.
         </p>
