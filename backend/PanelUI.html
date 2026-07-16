@@ -47,6 +47,19 @@
                     font-family:inherit; font-size:12px; }
   textarea{ width:100%; margin-top:10px; min-height:120px; padding:10px; border:1.5px solid #ddd;
             border-radius:8px; font-family:inherit; font-size:13px; line-height:1.5; resize:vertical; }
+  .mejlabel{ margin-top:16px; font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+             color:var(--oro); font-weight:700; }
+  .mejhint{ font-size:12px; color:var(--gris); margin:2px 0 0; }
+  .mejora{ background:#fff; border:1px solid #e7e7e7; border-radius:8px; padding:10px; margin-top:10px; }
+  .mejora-top{ display:flex; gap:8px; align-items:center; }
+  .mejora .mfoco{ flex:1; padding:6px 8px; border-radius:6px; border:1.5px solid #ddd;
+                  font-family:inherit; font-size:13px; font-weight:600; }
+  .mejora .mpor{ width:100%; margin-top:8px; padding:6px 8px; border-radius:6px; border:1.5px solid #ddd;
+                 font-family:inherit; font-size:12px; }
+  .mejora textarea{ min-height:70px; margin-top:8px; }
+  .mdel{ border:none; background:#f3f3f3; color:var(--terra); width:28px; height:28px; border-radius:6px;
+         cursor:pointer; font-size:17px; line-height:1; flex-shrink:0; }
+  .btn.addmej{ margin-top:10px; font-size:12px; padding:6px 12px; }
   .acciones{ display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; align-items:center; }
   .estado{ font-size:12px; color:var(--gris); }
   .estado.ok{ color:var(--teal-d); font-weight:700; }
@@ -80,6 +93,19 @@
   var ENTREGAS = [];
 
   function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function escA(s){ return esc(s).replace(/"/g,'&quot;'); }
+
+  function mejoraRowHtml(m){
+    m = m || {};
+    return '<div class="mejora">'
+      + '<div class="mejora-top">'
+      +   '<input class="mfoco" placeholder="Aspecto a mejorar (p. ej. Cuantificar la línea base)" value="'+escA(m.foco||'')+'">'
+      +   '<button type="button" class="mdel" title="Quitar" onclick="this.closest(\'.mejora\').remove()">×</button>'
+      + '</div>'
+      + '<textarea class="mejem" placeholder="Ejemplo modelo: así se vería más fuerte…">'+esc(m.ejemplo||'')+'</textarea>'
+      + '<input class="mpor" placeholder="Por qué funciona (una frase, opcional)" value="'+escA(m.porque||'')+'">'
+      + '</div>';
+  }
 
   function cargar(){
     document.getElementById('lista').innerHTML = '<div class="vacio"><span class="spin"></span> Cargando…</div>';
@@ -110,6 +136,8 @@
       return '<div class="campo"><div class="lbl">'+esc(c.etq)+'</div><div class="val">'+esc(c.val)+'</div></div>';
     }).join('');
 
+    var mejHtml = (e.mejorasGuardadas||[]).map(mejoraRowHtml).join('');
+
     var crit = RUBRICA.map(function(r){
       var saved = null;
       if(e.rubricaGuardada){ saved = e.rubricaGuardada.find(function(x){return x.clave===r.clave;}); }
@@ -137,6 +165,10 @@
     +       '<h4>Evaluación con rúbrica</h4>'
     +       crit
     +       '<textarea id="txt-'+e.recibo+'" placeholder="Comentario de feedback para el estudiante (tuteo)…">'+esc(e.feedbackTexto)+'</textarea>'
+    +       '<div class="mejlabel">Guía de mejora · ejemplos concretos para el estudiante</div>'
+    +       '<p class="mejhint">Por cada punto débil, un ejemplo modelo del «así se vería más fuerte». Edita, añade o quita los que quieras.</p>'
+    +       '<div class="mejoras" id="mej-'+e.recibo+'">'+mejHtml+'</div>'
+    +       '<button type="button" class="btn s addmej" onclick="addMejora(\''+e.recibo+'\')">+ Añadir ejemplo</button>'
     +       '<div class="acciones">'
     +         '<button class="btn g" onclick="borrador(\''+e.recibo+'\')">✨ Generar borrador con IA</button>'
     +         '<button class="btn p" onclick="enviar(\''+e.recibo+'\')">✉ '+(enviado?'Reenviar feedback':'Enviar feedback')+'</button>'
@@ -160,6 +192,23 @@
   }
   function estado(r, html, cls){ var el=document.getElementById('est-'+r); el.className='estado '+(cls||''); el.innerHTML=html; }
 
+  function addMejora(r){
+    var cont = document.getElementById('mej-'+r);
+    var tmp = document.createElement('div');
+    tmp.innerHTML = mejoraRowHtml({});
+    cont.appendChild(tmp.firstChild);
+  }
+  function leerMejoras(r){
+    var out = [];
+    document.querySelectorAll('#card-'+r+' .mejora').forEach(function(row){
+      var foco = row.querySelector('.mfoco').value.trim();
+      var ejemplo = row.querySelector('.mejem').value.trim();
+      var porque = row.querySelector('.mpor').value.trim();
+      if(foco || ejemplo){ out.push({ foco:foco, ejemplo:ejemplo, porque:porque }); }
+    });
+    return out;
+  }
+
   function borrador(r){
     estado(r, '<span class="spin"></span> La IA está redactando el borrador…');
     google.script.run
@@ -169,6 +218,7 @@
           var row = document.querySelector('#card-'+r+' .crit[data-clave="'+c.clave+'"]');
           if(row){ row.querySelector('.pj').value = c.puntaje; row.querySelector('.nota').value = c.nota||''; }
         });
+        document.getElementById('mej-'+r).innerHTML = (res.mejoras||[]).map(mejoraRowHtml).join('');
         estado(r, '✓ Borrador listo — revísalo y ajústalo antes de enviar.', 'ok');
       })
       .withFailureHandler(function(err){ estado(r, '⚠ '+esc(err.message||err), 'err'); })
@@ -188,7 +238,7 @@
         pill.className = 'pill done'; pill.textContent = '✓ Feedback enviado';
       })
       .withFailureHandler(function(err){ estado(r, '⚠ '+esc(err.message||err), 'err'); })
-      .enviarFeedback(TOKEN, { recibo: r, comentario: comentario, criterios: leerCrit(r) });
+      .enviarFeedback(TOKEN, { recibo: r, comentario: comentario, criterios: leerCrit(r), mejoras: leerMejoras(r) });
   }
 
   cargar();

@@ -27,7 +27,7 @@ const RUBRICA = [
 ];
 
 // Columnas de feedback que el panel gestiona en la Hoja «Envios».
-const COLS_FEEDBACK = ['RubricaJSON', 'PuntajeTotal', 'PuntajePromedio', 'FeedbackTexto', 'FeedbackEnviadoEn', 'FeedbackPor'];
+const COLS_FEEDBACK = ['RubricaJSON', 'PuntajeTotal', 'PuntajePromedio', 'FeedbackTexto', 'MejorasJSON', 'FeedbackEnviadoEn', 'FeedbackPor'];
 
 // ══ GATE DE ACCESO ════════════════════════════════════════════════════════
 // Dos formas de autorizar (basta una):
@@ -139,6 +139,7 @@ function _todasEntregas() {
       feedbackPor: String(g('FeedbackPor') || ''),
       feedbackTexto: String(g('FeedbackTexto') || ''),
       rubricaGuardada: (() => { try { return JSON.parse(g('RubricaJSON') || 'null'); } catch (e) { return null; } })(),
+      mejorasGuardadas: (() => { try { return JSON.parse(g('MejorasJSON') || 'null'); } catch (e) { return null; } })(),
       puntajePromedio: String(g('PuntajePromedio') || ''),
     };
   });
@@ -164,6 +165,11 @@ function generarBorradorIA(token, recibo) {
     'entrega contra una rúbrica de 4 criterios (escala 1 a 5) y redactas un feedback ' +
     'accionable de 4 a 6 frases: reconoce lo bien hecho, señala con precisión qué mejorar y por ' +
     'qué importa para el retorno de la IA, y cierra con un siguiente paso concreto. ' +
+    'No basta con señalar QUÉ mejorar: por cada punto débil relevante MUESTRA CÓMO se haría ' +
+    'mejor con un ejemplo modelo y concreto —una versión reescrita, redactada en primera persona ' +
+    'como si fueras el propio analista, del tipo «así se vería más fuerte»— para que aprenda el ' +
+    'estándar y no solo el diagnóstico. El ejemplo debe ser específico al contenido de esta ' +
+    'entrega (usa su empresa, sus datos, su caso), nunca genérico. ' +
     'Es un BORRADOR: el facilitador humano lo revisará y ajustará antes de enviarlo.';
 
   const usuario =
@@ -171,7 +177,17 @@ function generarBorradorIA(token, recibo) {
     'ANALISTA: ' + e.nombre + ' · Empresa: ' + e.empresa + ' · Cohorte: ' + e.cohorte + '\n\n' +
     'CRITERIOS DE LA RÚBRICA (asigna un puntaje 1–5 y una nota breve a cada uno):\n' + criterios + '\n\n' +
     'CONTENIDO ENTREGADO POR EL ANALISTA:\n' + contenido + '\n\n' +
-    'Devuelve la evaluación por criterio y un comentario de feedback en tuteo.';
+    'Devuelve tres cosas:\n' +
+    '1) La evaluación por criterio (puntaje 1–5 + nota breve).\n' +
+    '2) Un comentario de feedback en tuteo (4–6 frases).\n' +
+    '3) Una GUÍA DE MEJORA (campo «mejoras»): para cada aspecto por mejorar que detectes ' +
+    '(prioriza los criterios con puntaje 3 o menos, o cualquier debilidad concreta), un objeto con ' +
+    '«foco» (el aspecto en pocas palabras), «ejemplo» (una versión modelo y concreta de cómo se ' +
+    'vería bien hecho, redactada en tuteo/primera persona como lo escribiría el analista, lista ' +
+    'para usarse de referencia y anclada al caso real de esta entrega) y «porque» (una frase de ' +
+    'por qué esa versión es más fuerte y cómo impacta el retorno de la IA). Incluye entre 1 y 3 ' +
+    'ejemplos, los de mayor impacto. Si la entrega es sobresaliente y no hay nada relevante que ' +
+    'mejorar, devuelve «mejoras» como lista vacía.';
 
   const schema = {
     type: 'object', additionalProperties: false,
@@ -189,8 +205,20 @@ function generarBorradorIA(token, recibo) {
         },
       },
       comentario: { type: 'string' },
+      mejoras: {
+        type: 'array',
+        items: {
+          type: 'object', additionalProperties: false,
+          properties: {
+            foco:    { type: 'string' },
+            ejemplo: { type: 'string' },
+            porque:  { type: 'string' },
+          },
+          required: ['foco', 'ejemplo', 'porque'],
+        },
+      },
     },
-    required: ['criterios', 'comentario'],
+    required: ['criterios', 'comentario', 'mejoras'],
   };
 
   const out = _llamarClaude(system, usuario, schema);
@@ -202,7 +230,10 @@ function generarBorradorIA(token, recibo) {
     puntaje: (porClave[r.clave] && porClave[r.clave].puntaje) || 3,
     nota: (porClave[r.clave] && porClave[r.clave].nota) || '',
   }));
-  return { criterios: criteriosOrden, comentario: out.comentario || '' };
+  const mejoras = (out.mejoras || [])
+    .map(m => ({ foco: String((m && m.foco) || ''), ejemplo: String((m && m.ejemplo) || ''), porque: String((m && m.porque) || '') }))
+    .filter(m => m.foco || m.ejemplo);
+  return { criterios: criteriosOrden, comentario: out.comentario || '', mejoras: mejoras };
 }
 
 /** Llamada a la API de Claude (Anthropic) vía HTTP, con salida estructurada. */
@@ -253,8 +284,12 @@ function enviarFeedback(token, payload) {
   const suma = conNota.reduce((s, c) => s + c.puntaje, 0);
   const promedio = conNota.length ? (suma / conNota.length) : 0;
 
+  const mejoras = (payload.mejoras || [])
+    .map(m => ({ foco: String((m && m.foco) || '').trim(), ejemplo: String((m && m.ejemplo) || '').trim(), porque: String((m && m.porque) || '').trim() }))
+    .filter(m => m.foco || m.ejemplo);
+
   // 1) Enviar el correo de feedback al estudiante (responder-a facilitador).
-  _correoFeedback(e, criterios, payload.comentario, suma, promedio);
+  _correoFeedback(e, criterios, payload.comentario, suma, promedio, mejoras);
 
   // 2) Registrar en la Hoja.
   const hoja = _hojaEnvios();
@@ -263,6 +298,7 @@ function enviarFeedback(token, payload) {
   set('PuntajeTotal', suma);
   set('PuntajePromedio', Math.round(promedio * 100) / 100);
   set('FeedbackTexto', payload.comentario);
+  set('MejorasJSON', JSON.stringify(mejoras));
   set('FeedbackEnviadoEn', new Date());
   set('FeedbackPor', facilitadorActual());
 
@@ -274,7 +310,7 @@ function _buscarEntrega(recibo) {
   return lista.find(x => x.recibo === String(recibo)) || null;
 }
 
-function _correoFeedback(e, criterios, comentario, suma, promedio) {
+function _correoFeedback(e, criterios, comentario, suma, promedio, mejoras) {
   const esc = s => String(s == null ? '' : s)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   const primerNombre = (e.nombre || '').split(' ')[0] || 'Hola';
@@ -285,6 +321,21 @@ function _correoFeedback(e, criterios, comentario, suma, promedio) {
       <td style="padding:6px 10px;border-bottom:1px solid #eee;text-align:center;font-weight:700;color:${MARCA.teal}">${c.puntaje}/5</td>
       <td style="padding:6px 10px;border-bottom:1px solid #eee;color:${MARCA.gris};font-size:12px">${esc(c.nota)}</td>
     </tr>`).join('');
+
+  const guia = (mejoras && mejoras.length) ? `
+    <div style="margin-top:22px">
+      <div style="font-size:11px;letter-spacing:.12em;font-weight:700;color:${MARCA.teal};text-transform:uppercase;border-bottom:2px solid ${MARCA.oro};padding-bottom:6px">
+        Cómo llevarlo al siguiente nivel</div>
+      <p style="font-size:12px;color:${MARCA.gris};margin:8px 0 2px">Ejemplos concretos para que veas el estándar en acción:</p>
+      ${mejoras.map(m => `
+        <div style="border-left:3px solid ${MARCA.oro};padding:2px 0 2px 12px;margin-top:14px">
+          ${m.foco ? `<div style="font-weight:700;font-size:13px;color:${MARCA.carbon}">${esc(m.foco)}</div>` : ''}
+          ${m.ejemplo ? `<div style="background:${MARCA.platino};border-radius:6px;padding:10px 12px;margin-top:6px;font-size:13px;line-height:1.6">
+            <span style="font-size:10px;letter-spacing:.1em;color:${MARCA.gris};font-weight:700">EJEMPLO · ASÍ SE VE MÁS FUERTE</span><br>
+            ${esc(m.ejemplo).replace(/\n/g, '<br>')}</div>` : ''}
+          ${m.porque ? `<div style="font-size:12px;color:${MARCA.gris};margin-top:6px"><b style="color:${MARCA.carbon}">Por qué funciona:</b> ${esc(m.porque)}</div>` : ''}
+        </div>`).join('')}
+    </div>` : '';
 
   const cuerpo = `
     <div style="font-family:Helvetica,Arial,sans-serif;color:${MARCA.carbon};max-width:620px">
@@ -314,6 +365,7 @@ function _correoFeedback(e, criterios, comentario, suma, promedio) {
             <td></td>
           </tr>
         </table>` : ''}
+        ${guia}
         <p style="font-size:12px;color:${MARCA.gris};border-top:2px solid ${MARCA.oro};padding-top:10px;margin-top:18px">
           Puedes responder este correo si tienes preguntas — llega directo a tu facilitador.<br>
           Digital Change Advisors · Modelo ARIA

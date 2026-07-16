@@ -106,8 +106,8 @@ Deberías ver el **Panel de Facilitador** con la lista de entregas. Guárdalo co
 
 1. **Abre el panel.** Verás las entregas, las más recientes primero, con una etiqueta *Pendiente* o *✓ Feedback enviado*.
 2. **Haz clic en una entrega** para desplegar su contenido completo.
-3. **✨ Generar borrador con IA** (opcional): Claude lee la entrega, propone un puntaje por criterio con su nota y redacta un comentario en tuteo. **Es un borrador** — revísalo y ajústalo.
-4. **Ajusta** los puntajes (1–5) y el comentario a tu criterio. Tú tienes la última palabra, siempre.
+3. **✨ Generar borrador con IA** (opcional): Claude lee la entrega, propone un puntaje por criterio con su nota, redacta un comentario en tuteo y prepara una **Guía de mejora** — 1 a 3 ejemplos concretos del tipo «así se vería más fuerte», anclados al caso del estudiante, cada uno con el *foco*, el *ejemplo* modelo y el *por qué funciona*. **Es un borrador** — revísalo y ajústalo.
+4. **Ajusta** los puntajes (1–5), el comentario y los ejemplos de mejora a tu criterio (puedes editarlos, añadir con «+ Añadir ejemplo» o quitar con «×»). Tú tienes la última palabra, siempre.
 5. **✉ Enviar feedback**: el estudiante recibe un correo de marca DCA con tu comentario y la rúbrica. Al **Responder**, te escribe directo a ti.
 6. La entrega queda marcada como enviada y todo se registra en la Hoja.
 
