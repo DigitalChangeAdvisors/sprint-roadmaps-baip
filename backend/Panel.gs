@@ -250,16 +250,34 @@ function _llamarClaude(system, userText, schema) {
     messages: [{ role: 'user', content: userText }],
   };
 
-  const res = UrlFetchApp.fetch('https://api.anthropic.com/v1/messages', {
-    method: 'post',
-    contentType: 'application/json',
-    headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01' },
-    payload: JSON.stringify(body),
-    muteHttpExceptions: true,
-  });
+  // Reintentos con espera creciente ante saturación temporal de la API
+  // (529 Overloaded, 429 Rate limit, 500/502/503). No reintenta errores de
+  // cliente reales (p. ej. 400/401), que sí deben fallar de una.
+  const TRANSITORIOS = [429, 500, 502, 503, 529];
+  const ESPERAS_MS = [1500, 3000, 6000]; // 3 reintentos ⇒ 4 intentos en total
+  let res, code, data;
+  for (let intento = 0; intento <= ESPERAS_MS.length; intento++) {
+    res = UrlFetchApp.fetch('https://api.anthropic.com/v1/messages', {
+      method: 'post',
+      contentType: 'application/json',
+      headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01' },
+      payload: JSON.stringify(body),
+      muteHttpExceptions: true,
+    });
+    code = res.getResponseCode();
+    if (code === 200) break;
+    if (TRANSITORIOS.indexOf(code) !== -1 && intento < ESPERAS_MS.length) {
+      Utilities.sleep(ESPERAS_MS[intento]);
+      continue; // reintenta
+    }
+    break; // 200 no; y o no es transitorio o ya agotamos reintentos
+  }
 
-  const code = res.getResponseCode();
-  const data = JSON.parse(res.getContentText());
+  data = JSON.parse(res.getContentText());
+  if (code === 529 || code === 503) {
+    throw new Error('La IA está saturada en este momento (la API respondió ' + code +
+      '). Es temporal: espera unos segundos y vuelve a pulsar «Generar borrador con IA».');
+  }
   if (code !== 200) throw new Error('Claude API ' + code + ': ' + ((data.error && data.error.message) || ''));
   if (data.stop_reason === 'refusal') throw new Error('La IA declinó generar el borrador para esta entrega.');
   if (data.stop_reason === 'max_tokens') throw new Error('La respuesta de la IA se cortó por longitud (max_tokens). Vuelve a intentar; si persiste, sube max_tokens en _llamarClaude.');
