@@ -120,8 +120,9 @@ Cambia los criterios ahí y tanto el panel como la IA se adaptan solos (redespli
 ## Preguntas frecuentes
 
 **¿Cuánto cuesta la IA?** Cada borrador es una llamada a la API de Anthropic; el costo por entrega es
-de centavos. Usa el modelo `claude-opus-4-8` (máxima calidad). Para abaratar, en `Panel.gs` →
-`_llamarClaude` puedes cambiar `model` a `'claude-sonnet-5'`.
+de centavos. Usa el modelo `claude-sonnet-5` (excelente calidad y costo más bajo). Si en algún
+momento quieres la máxima capacidad, en `Panel.gs` → `_llamarClaude` puedes cambiar `model` a
+`'claude-opus-4-8'`.
 
 **¿La IA envía el feedback sola?** No. La IA solo **propone un borrador**. Nada sale al estudiante
 hasta que tú pulsas «Enviar feedback».

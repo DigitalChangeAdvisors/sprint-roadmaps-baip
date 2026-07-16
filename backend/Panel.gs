@@ -185,7 +185,7 @@ function _llamarClaude(system, userText, schema) {
   if (!key) throw new Error('Falta ANTHROPIC_API_KEY en las Propiedades del script. Ver el README del panel.');
 
   const body = {
-    model: 'claude-opus-4-8',      // Para bajar costo puedes cambiarlo a 'claude-sonnet-5'.
+    model: 'claude-sonnet-5',      // Modelo de la consulta. (Para máxima calidad: 'claude-opus-4-8'.)
     max_tokens: 2000,
     thinking: { type: 'adaptive' },
     output_config: { effort: 'medium', format: { type: 'json_schema', schema: schema } },
