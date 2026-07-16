@@ -72,7 +72,7 @@ function servirPanel(e) {
       '</div>'
     ).setTitle('DCA · Panel de Facilitador');
   }
-  const t = HtmlService.createTemplateFromFile('Panel');
+  const t = HtmlService.createTemplateFromFile('PanelUI');
   t.email = facilitadorActual() || 'facilitador';
   t.rubrica = RUBRICA;
   t.token = token; // el cliente lo reenvía en cada llamada al servidor

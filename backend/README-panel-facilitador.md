@@ -31,7 +31,7 @@ Panel de Facilitador  (…/exec?panel=1, solo para ti)
 
 1. Abre tu proyecto en [script.google.com](https://script.google.com) (el mismo del motor).
 2. **Nuevo archivo → Script**, nómbralo `Panel` y pega el contenido de **`backend/Panel.gs`**.
-3. **Nuevo archivo → HTML**, nómbralo `Panel` (exactamente `Panel`, Apps Script le pone `.html` solo) y pega el contenido de **`backend/Panel.html`**.
+3. **Nuevo archivo → HTML**, nómbralo `PanelUI` (así, sin espacios; Apps Script le pone `.html` solo) y pega el contenido de **`backend/PanelUI.html`**. *(Nombre distinto a `Panel.gs` a propósito: Apps Script no permite dos archivos con el mismo nombre.)*
 4. Reemplaza tu `Codigo.gs` con la versión actualizada de este repo (el `doGet` ahora enruta al panel).
 5. Guarda todo (`Cmd/Ctrl + S`).
 
