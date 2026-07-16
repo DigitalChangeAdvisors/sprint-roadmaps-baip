@@ -54,18 +54,26 @@ Panel de Facilitador  (…/exec?panel=1, solo para ti)
 
 ---
 
-## Paso 3 — Define quién puede abrir el panel
+## Paso 3 — Define la clave del panel (`PANEL_KEY`)
 
-En **`Panel.gs`**, arriba, está la lista de facilitadores autorizados:
+El panel se protege con una **clave secreta** que solo tú conoces (funciona en cualquier
+despliegue, sin depender de la cuenta de Google). Configúrala igual que la clave de la IA:
 
-```js
-const FACILITADORES = [
-  'ceo@digitalchangeadvisors.com',
-  'facilitador@digitalchangeadvisors.com',
-];
-```
+1. ⚙️ **Configuración del proyecto → Propiedades del script → Añadir propiedad**:
 
-Añade o quita correos según quién deba entrar. Cualquiera que no esté en la lista ve «Acceso restringido».
+   | Propiedad | Valor |
+   |---|---|
+   | `PANEL_KEY` | *(una cadena larga y difícil de adivinar que tú inventes, p. ej. `dca-panel-8f3k29xq7w`)* |
+
+2. **Guardar propiedades del script**.
+
+> Elige algo largo y único. Es como la contraseña del panel: cualquiera que tenga el enlace
+> **con** esa clave puede entrar; sin ella, no.
+
+**Alternativa por cuenta (opcional):** si prefieres autorizar por correo en vez de por clave,
+en `Panel.gs` está la lista `FACILITADORES`. Eso solo funciona si despliegas el panel con acceso
+restringido al dominio «Digital Change Advisors» (no «Cualquier persona»). Para el caso normal,
+usa la clave `PANEL_KEY` — es lo más simple y directo.
 
 ---
 
@@ -81,13 +89,14 @@ La URL `/exec` **no cambia**, así que el roadmap de los estudiantes sigue funci
 
 ## Paso 5 — Abre tu panel
 
-Pega en el navegador la URL del Apps Script **añadiendo `?panel=1`** al final:
+Pega en el navegador la URL del Apps Script **añadiendo `?panel=1&key=TU_CLAVE`** al final
+(reemplaza `TU_CLAVE` por la que pusiste en `PANEL_KEY`):
 
 ```
-https://script.google.com/macros/s/AKfycby…/exec?panel=1
+https://script.google.com/macros/s/AKfycby…/exec?panel=1&key=TU_CLAVE
 ```
 
-Deberías ver el **Panel de Facilitador** con la lista de entregas.
+Deberías ver el **Panel de Facilitador** con la lista de entregas. Guárdalo como favorito.
 
 > **Si ves el error de Google Drive** («No se pudo abrir el archivo»): es la peculiaridad de multicuenta de Google. Ábrelo en el **navegador/perfil donde estás logueado con tu cuenta DCA**, o en una ventana donde solo esa cuenta esté activa.
 

@@ -174,7 +174,7 @@ function doPost(e) {
  */
 function doGet(e) {
   if (e && e.parameter && e.parameter.panel === '1') {
-    return servirPanel(); // definido en Panel.gs
+    return servirPanel(e); // definido en Panel.gs
   }
   return responder({
     ok: true,

@@ -30,29 +30,52 @@ const RUBRICA = [
 const COLS_FEEDBACK = ['RubricaJSON', 'PuntajeTotal', 'PuntajePromedio', 'FeedbackTexto', 'FeedbackEnviadoEn', 'FeedbackPor'];
 
 // ══ GATE DE ACCESO ════════════════════════════════════════════════════════
+// Dos formas de autorizar (basta una):
+//  1) CLAVE SECRETA del panel: propiedad de script PANEL_KEY + ?key=... en la URL.
+//     Funciona en CUALQUIER despliegue (incluido «Cualquier persona»). Recomendado.
+//  2) CUENTA de facilitador: solo funciona en despliegues restringidos al dominio
+//     (donde Google sí entrega el correo del usuario).
 function facilitadorActual() {
-  return (Session.getActiveUser().getEmail() || '').toLowerCase();
+  try { return (Session.getActiveUser().getEmail() || '').toLowerCase(); }
+  catch (e) { return ''; }
 }
 function esFacilitador() {
-  return FACILITADORES.map(f => f.toLowerCase()).indexOf(facilitadorActual()) !== -1;
+  const correo = facilitadorActual();
+  return correo && FACILITADORES.map(f => f.toLowerCase()).indexOf(correo) !== -1;
 }
-function exigirFacilitador() {
-  if (!esFacilitador()) throw new Error('No autorizado. Inicia sesión con tu cuenta de facilitador DCA.');
+function _claveConfigurada() {
+  return PropertiesService.getScriptProperties().getProperty('PANEL_KEY') || '';
+}
+function _accesoOk(token) {
+  const clave = _claveConfigurada();
+  if (clave && token && String(token) === clave) return true; // por clave secreta
+  return esFacilitador();                                      // o por cuenta de dominio
+}
+function exigirAcceso(token) {
+  if (!_accesoOk(token)) throw new Error('No autorizado. Falta la clave del panel o tu cuenta no está autorizada.');
 }
 
-// ══ SERVIR EL PANEL (invocado desde doGet con ?panel=1) ═══════════════════
-function servirPanel() {
-  if (!esFacilitador()) {
+// ══ SERVIR EL PANEL (invocado desde doGet con ?panel=1&key=...) ═══════════
+function servirPanel(e) {
+  const token = (e && e.parameter && e.parameter.key) || '';
+  if (!_accesoOk(token)) {
+    const hayClave = !!_claveConfigurada();
     return HtmlService.createHtmlOutput(
-      '<div style="font-family:Montserrat,Arial,sans-serif;max-width:520px;margin:60px auto;text-align:center;color:#1e2a38">' +
+      '<div style="font-family:Montserrat,Arial,sans-serif;max-width:560px;margin:60px auto;text-align:center;color:#1e2a38">' +
       '<h2 style="color:#2e8b76">Acceso restringido</h2>' +
-      '<p>Este panel es solo para facilitadores de DCA. Inicia sesión con tu cuenta ' +
-      '<b>@digitalchangeadvisors.com</b> autorizada y vuelve a abrir el enlace.</p></div>'
+      '<p>Este panel es solo para facilitadores de DCA.</p>' +
+      (hayClave
+        ? '<p>Abre el enlace añadiendo tu <b>clave del panel</b> al final:<br>' +
+          '<code>…/exec?panel=1&amp;key=TU_CLAVE</code></p>'
+        : '<p>Aún no has configurado la clave del panel. Añade la propiedad de script ' +
+          '<b>PANEL_KEY</b> y abre el enlace con <code>?panel=1&amp;key=TU_CLAVE</code>.</p>') +
+      '</div>'
     ).setTitle('DCA · Panel de Facilitador');
   }
   const t = HtmlService.createTemplateFromFile('Panel');
-  t.email = facilitadorActual();
+  t.email = facilitadorActual() || 'facilitador';
   t.rubrica = RUBRICA;
+  t.token = token; // el cliente lo reenvía en cada llamada al servidor
   return t.evaluate()
     .setTitle('DCA · Panel de Facilitador')
     .addMetaTag('viewport', 'width=device-width, initial-scale=1');
@@ -77,8 +100,11 @@ function _asegurarColumna(hoja, header) {
 }
 
 // ══ LISTAR ENTREGAS (para el panel) ══════════════════════════════════════
-function listarEntregas() {
-  exigirFacilitador();
+function listarEntregas(token) {
+  exigirAcceso(token);
+  return _todasEntregas();
+}
+function _todasEntregas() {
   const hoja = _hojaEnvios();
   if (!hoja || hoja.getLastRow() < 2) return { rubrica: RUBRICA, entregas: [] };
 
@@ -123,8 +149,8 @@ function listarEntregas() {
 }
 
 // ══ BORRADOR DE FEEDBACK CON IA (Claude) ══════════════════════════════════
-function generarBorradorIA(recibo) {
-  exigirFacilitador();
+function generarBorradorIA(token, recibo) {
+  exigirAcceso(token);
   const e = _buscarEntrega(recibo);
   if (!e) throw new Error('No se encontró la entrega ' + recibo + '.');
 
@@ -211,8 +237,8 @@ function _llamarClaude(system, userText, schema) {
 }
 
 // ══ ENVIAR FEEDBACK AL ESTUDIANTE ════════════════════════════════════════
-function enviarFeedback(payload) {
-  exigirFacilitador();
+function enviarFeedback(token, payload) {
+  exigirAcceso(token);
   const recibo = payload && payload.recibo;
   const e = _buscarEntrega(recibo);
   if (!e) throw new Error('No se encontró la entrega ' + recibo + '.');
@@ -244,7 +270,7 @@ function enviarFeedback(payload) {
 }
 
 function _buscarEntrega(recibo) {
-  const lista = listarEntregas().entregas;
+  const lista = _todasEntregas().entregas;
   return lista.find(x => x.recibo === String(recibo)) || null;
 }
 

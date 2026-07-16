@@ -76,6 +76,7 @@
 
 <script>
   var RUBRICA = <?!= JSON.stringify(rubrica) ?>;
+  var TOKEN = <?!= JSON.stringify(token) ?>;
   var ENTREGAS = [];
 
   function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -87,7 +88,7 @@
       .withFailureHandler(function(err){
         document.getElementById('lista').innerHTML = '<div class="vacio" style="color:#c2593f">'+esc(err.message||err)+'</div>';
       })
-      .listarEntregas();
+      .listarEntregas(TOKEN);
   }
 
   function render(){
@@ -171,7 +172,7 @@
         estado(r, '✓ Borrador listo — revísalo y ajústalo antes de enviar.', 'ok');
       })
       .withFailureHandler(function(err){ estado(r, '⚠ '+esc(err.message||err), 'err'); })
-      .generarBorradorIA(r);
+      .generarBorradorIA(TOKEN, r);
   }
 
   function enviar(r){
@@ -187,7 +188,7 @@
         pill.className = 'pill done'; pill.textContent = '✓ Feedback enviado';
       })
       .withFailureHandler(function(err){ estado(r, '⚠ '+esc(err.message||err), 'err'); })
-      .enviarFeedback({ recibo: r, comentario: comentario, criterios: leerCrit(r) });
+      .enviarFeedback(TOKEN, { recibo: r, comentario: comentario, criterios: leerCrit(r) });
   }
 
   cargar();
