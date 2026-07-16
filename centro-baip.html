@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Centro de Ayuda · Certificación Analista BAIP · DCA</title>
+<meta name="description" content="Centro de ayuda vivo de la Certificación Analista BAIP — Digital Change Academy. Preguntas frecuentes de plataforma y contenido.">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     CENTRO DE AYUDA BAIP · DOCUMENTO VIVO
+     ▸ Para AÑADIR o EDITAR una pregunta NO necesitas tocar el diseño.
+       Baja hasta el bloque «const FAQ = [ ... ]» (buscá "EDITA AQUÍ" más abajo)
+       y copia la plantilla de una entrada. Eso es todo.
+     ▸ Marca DCA: Marcellus + Montserrat · teal #2e8b76 · oro #a48111 · carbón #1e2a38.
+════════════════════════════════════════════════════════════════════════════ -->
+<style>
+  :root{
+    --teal:#2e8b76; --teal-dk:#247060; --gold:#a48111; --carbon:#1e2a38;
+    --platinum:#dfe3e1; --teal-bg:rgba(46,139,118,.06); --teal-bd:rgba(46,139,118,.18);
+    --gold-bg:rgba(164,129,17,.06); --grey:#6b7280;
+    --fd:'Marcellus',Georgia,serif; --fb:'Montserrat','Helvetica Neue',sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:var(--fb);color:var(--carbon);background:#eef0ef;font-size:15px;line-height:1.7;}
+
+  /* ── Hero ── */
+  .hero{background:var(--carbon);padding:38px 22px 34px;}
+  .hero-in{max-width:840px;margin:0 auto;}
+  .hero .kicker{color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;}
+  .hero h1{font-family:var(--fd);font-weight:400;color:#fff;font-size:34px;margin:10px 0 6px;line-height:1.15;}
+  .hero p{color:rgba(255,255,255,.72);font-size:14px;margin:0;max-width:600px;}
+  .hero .visual{height:5px;width:70px;background:var(--teal);border-radius:3px;margin-top:18px;}
+
+  .wrap{max-width:840px;margin:0 auto;padding:26px 22px 70px;}
+
+  .intro{background:var(--teal-bg);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;
+         padding:14px 18px;font-size:13.5px;color:rgba(30,42,56,.82);margin-bottom:24px;}
+  .intro b{color:var(--carbon);}
+
+  /* ── Controles ── */
+  .controls{position:sticky;top:0;background:#eef0efe6;backdrop-filter:blur(6px);
+            padding:14px 0 12px;margin-bottom:8px;z-index:5;}
+  .search{width:100%;padding:13px 16px;border:1.5px solid var(--platinum);border-radius:10px;
+          font-family:inherit;font-size:15px;color:var(--carbon);background:#fff;outline:none;transition:border-color .2s;}
+  .search:focus{border-color:var(--teal);}
+  .search::placeholder{color:rgba(30,42,56,.4);}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+  .chips .lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);margin-right:2px;}
+  .chip{border:1.5px solid var(--platinum);background:#fff;color:var(--carbon);border-radius:20px;
+        padding:6px 14px;font-family:inherit;font-size:12.5px;font-weight:600;cursor:pointer;transition:all .18s;}
+  .chip:hover{border-color:var(--teal);}
+  .chip.on{background:var(--teal);border-color:var(--teal);color:#fff;}
+  .chip.on.gold{background:var(--gold);border-color:var(--gold);}
+  .sep{width:1px;align-self:stretch;background:var(--platinum);margin:0 4px;}
+
+  .count{font-size:12px;color:var(--grey);margin:6px 2px 16px;}
+
+  /* ── Entradas (acordeón) ── */
+  .item{background:#fff;border:1px solid #e6e8e7;border-radius:12px;margin-bottom:12px;overflow:hidden;
+        transition:box-shadow .2s;}
+  .item:hover{box-shadow:0 2px 14px rgba(30,42,56,.06);}
+  .q{display:flex;align-items:flex-start;gap:12px;padding:16px 18px;cursor:pointer;}
+  .q:hover{background:#fbfbfb;}
+  .q .txt{flex:1;}
+  .q .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px;}
+  .tag{font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:5px;}
+  .tag.plataforma{background:var(--teal-bg);color:var(--teal-dk);}
+  .tag.contenido{background:var(--gold-bg);color:var(--gold);}
+  .tag.sprint{background:#eef0ef;color:var(--grey);}
+  .q .pregunta{font-weight:600;font-size:15px;color:var(--carbon);line-height:1.45;}
+  .q .caret{color:var(--teal);font-size:18px;line-height:1;margin-top:2px;transition:transform .2s;flex-shrink:0;}
+  .item.open .caret{transform:rotate(90deg);}
+  .a{display:none;padding:0 18px 18px 18px;}
+  .item.open .a{display:block;}
+  .a-inner{border-top:1px solid #f0f0f0;padding-top:14px;}
+  .a p{margin:0 0 10px;font-size:14px;line-height:1.75;color:rgba(30,42,56,.88);}
+  .a p:last-child{margin-bottom:0;}
+  .a strong{color:var(--carbon);}
+  .a .upd{font-size:11px;color:var(--grey);margin-top:12px;font-style:italic;}
+
+  .empty{text-align:center;color:var(--grey);padding:50px 20px;font-size:14px;}
+
+  footer{border-top:1px solid var(--platinum);margin-top:40px;padding-top:20px;text-align:center;
+         font-size:12px;color:var(--grey);}
+  footer .gold{color:var(--gold);font-weight:600;}
+
+  @media (max-width:600px){
+    .hero h1{font-size:27px;} .wrap{padding:20px 16px 60px;}
+  }
+  @media print{
+    .controls,.hero .visual{display:none;} body{background:#fff;}
+    .item{break-inside:avoid;} .a{display:block!important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-in">
+    <div class="kicker">Digital Change Academy · Certificación Analista BAIP</div>
+    <h1>Centro de Ayuda</h1>
+    <p>Tu compañero de consulta durante la certificación. Respuestas a las dudas más frecuentes sobre la plataforma y el contenido de los sprints.</p>
+    <div class="visual"></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="intro">
+    <b>¿Cómo usar este centro?</b> Escribe una palabra en el buscador (p. ej. «niveles», «PDF», «envío») o filtra por frente y sprint. Haz clic en cualquier pregunta para ver la respuesta. Es un <b>documento vivo</b>: crece a medida que avanza la certificación. ¿No encuentras tu duda? Escríbele a tu facilitador.
+  </div>
+
+  <div class="controls">
+    <input id="search" class="search" placeholder="🔍  Busca por palabra clave…" oninput="render()">
+    <div class="chips">
+      <span class="lbl">Frente</span>
+      <button class="chip on" data-frente="todo" onclick="setFrente('todo')">Todo</button>
+      <button class="chip" data-frente="plataforma" onclick="setFrente('plataforma')">Plataforma</button>
+      <button class="chip" data-frente="contenido" onclick="setFrente('contenido')">Contenido</button>
+      <span class="sep"></span>
+      <span class="lbl">Sprint</span>
+      <span id="sprint-chips"></span>
+    </div>
+  </div>
+
+  <div class="count" id="count"></div>
+  <div id="list"></div>
+
+  <footer>
+    <div>Digital Change Advisors · Modelo ARIA</div>
+    <div class="gold">Documento vivo — se enriquece con cada cohorte.</div>
+  </footer>
+</div>
+
+<script>
+/* ════════════════════════════════════════════════════════════════════════════
+   ▼▼▼  EDITA AQUÍ  ▼▼▼   ·   CONTENIDO DEL CENTRO DE AYUDA
+   ───────────────────────────────────────────────────────────────────────────
+   Para AÑADIR una pregunta, copia esta plantilla dentro de la lista y rellénala:
+
+     {
+       sprint: "01",              // "01", "02", … o "General" (aplica a todos)
+       frente: "contenido",       // "plataforma"  ó  "contenido"
+       pregunta: "¿Tu pregunta?",
+       respuesta:
+         "Primer párrafo. Puedes usar **negrita** con dobles asteriscos.\n\n" +
+         "Segundo párrafo: separa párrafos con una línea en blanco (\\n\\n).",
+       actualizado: "2026-07-16"  // fecha AAAA-MM-DD
+     },
+
+   Reglas simples:
+   • El texto va entre comillas dobles "  ".  Si necesitas comillas dentro, usa « »  ó  ‘ ’.
+   • Cada entrada termina en coma  } ,
+   • **texto**  se ve en negrita.   \n\n  crea un párrafo nuevo.
+   ═══════════════════════════════════════════════════════════════════════════ */
+const FAQ = [
+
+  {
+    sprint: "General",
+    frente: "plataforma",
+    pregunta: "Al empezar a escribir, las preguntas guía dentro del recuadro desaparecen y ya no sé qué responder.",
+    respuesta:
+      "Es una observación muy justa y ya está corregida. Antes las preguntas guía aparecían como texto de ayuda **dentro** del recuadro y se ocultaban al escribir la primera letra —fue un límite de diseño, no un descuido tuyo—.\n\n" +
+      "En la versión actual las preguntas quedan **fijas y visibles** todo el tiempo, en un bloque justo encima del recuadro, así puedes consultarlas mientras redactas. Si abriste el documento antes de la actualización, **recárgalo** (tu trabajo se conserva por el autoguardado).\n\n" +
+      "Un consejo que siempre suma: si una respuesta es larga, esbózala por partes usando cada pregunta guía como subtítulo.",
+    actualizado: "2026-07-16"
+  },
+
+  {
+    sprint: "01",
+    frente: "contenido",
+    pregunta: "¿Cómo interpreto los niveles del reporte? Entiendo «extendido» o «foco senior», pero cuando dice solo «Cautela» o «Vulnerable», ¿qué significa?",
+    respuesta:
+      "Vale la pena separar dos cosas que el reporte junta. Una es el **nivel** —el estado de ese obstáculo en la escala **Cautela → Vulnerable → Diestro → Óptimo**, de más frágil a más maduro— y otra es el **alcance** —dónde se concentra ese estado: **extendido** (transversal a toda la unidad), **foco senior** (en los perfiles senior) o **en la base** (en la base de la pirámide)—.\n\n" +
+      "Cuando el reporte dice «Diestro en la base» te da las dos cosas: nivel + dónde. Cuando dice solo «Cautela» o «Vulnerable», sin apellido de alcance, léelo como el estado del grupo **como unidad** para ese obstáculo, no como algo repartido a medias: si hubiera un foco por segmento, el reporte lo nombraría, como sí hace con «senior» o «base».\n\n" +
+      "Para tu análisis lo que manda es el **nivel y el peso** del obstáculo (priorizas por «mayor peso × nivel más bajo»). El alcance es contexto adicional, **no** criterio de priorización — no lo sobre-interpretes o desviarás la conclusión.",
+    actualizado: "2026-07-16"
+  },
+
+  {
+    sprint: "General",
+    frente: "contenido",
+    pregunta: "En un caso real, ¿cómo se recolecta la información de contexto? ¿Cuántas entrevistas, quién las hace? De su calidad depende la calidad del análisis.",
+    respuesta:
+      "Excelente pregunta, y toca una **frontera de rol** que conviene tener clarísima. En BAIP tu trabajo como analista es leer el **consolidado ya procesado**: no diseñas ni ejecutas el levantamiento de información.\n\n" +
+      "Ese levantamiento —cómo se recoge el contexto, a quién se entrevista, con qué muestra— es responsabilidad de otro rol: el **Líder de Proyecto ReturnAI** que gestiona la cuenta de cada cliente. Es ese rol el que garantiza la calidad de la información de contexto (tienes toda la razón en que de ahí depende la calidad del análisis), siguiendo un protocolo estructurado que recibe como parte de su certificación **Champion ReturnAI**.\n\n" +
+      "A ti te llega el consolidado listo para analizar; tu valor está en leer las tres lentes (AIMT, AILS, AICD), triangular y traducir a **causa raíz** para el responsable del retorno. Así la cadena queda limpia: quien mide (Champion ReturnAI) y quien analiza (Analista BAIP) son roles distintos y complementarios.",
+    actualizado: "2026-07-16"
+  },
+
+];
+/* ▲▲▲  FIN DEL CONTENIDO  ▲▲▲  (de aquí para abajo es el motor; no hace falta tocarlo) */
+
+// ── Estado de filtros ──
+var estadoFrente = 'todo';
+var estadoSprint = 'todos';
+
+// Chips de sprint generados desde los datos (más "General" siempre)
+(function buildSprintChips(){
+  var sprints = FAQ.map(function(f){return f.sprint;})
+                   .filter(function(s){return s && s!=='General';});
+  var uniq = sprints.filter(function(s,i){return sprints.indexOf(s)===i;}).sort();
+  var html = '<button class="chip on gold" data-sprint="todos" onclick="setSprint(\'todos\')">Todos</button>';
+  uniq.forEach(function(s){
+    html += '<button class="chip" data-sprint="'+s+'" onclick="setSprint(\''+s+'\')">Sprint '+s+'</button>';
+  });
+  document.getElementById('sprint-chips').innerHTML = html;
+})();
+
+function setFrente(f){
+  estadoFrente=f;
+  document.querySelectorAll('.chip[data-frente]').forEach(function(c){
+    c.classList.toggle('on', c.getAttribute('data-frente')===f);
+  });
+  render();
+}
+function setSprint(s){
+  estadoSprint=s;
+  document.querySelectorAll('.chip[data-sprint]').forEach(function(c){
+    c.classList.toggle('on', c.getAttribute('data-sprint')===s);
+  });
+  render();
+}
+
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function fmt(txt){
+  return esc(txt).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .split(/\n\n+/).map(function(p){return '<p>'+p.replace(/\n/g,'<br>')+'</p>';}).join('');
+}
+function fecha(iso){
+  if(!iso) return '';
+  var m=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  var p=String(iso).split('-'); if(p.length<3) return iso;
+  return p[2].replace(/^0/,'')+' '+m[(+p[1])-1]+' '+p[0];
+}
+
+function render(){
+  var q=(document.getElementById('search').value||'').toLowerCase().trim();
+  var arr=FAQ.filter(function(f){
+    if(estadoFrente!=='todo' && f.frente!==estadoFrente) return false;
+    if(estadoSprint!=='todos' && f.sprint!==estadoSprint && f.sprint!=='General') return false;
+    if(q){ var hay=(f.pregunta+' '+f.respuesta).toLowerCase(); if(hay.indexOf(q)===-1) return false; }
+    return true;
+  });
+
+  var cont=document.getElementById('list');
+  document.getElementById('count').textContent =
+    arr.length+(arr.length===1?' pregunta':' preguntas')+(q?' para «'+q+'»':'');
+
+  if(!arr.length){
+    cont.innerHTML='<div class="empty">No hay preguntas que coincidan.<br>Prueba otra palabra o escríbele a tu facilitador — y esa duda entrará al centro.</div>';
+    return;
+  }
+
+  cont.innerHTML=arr.map(function(f,i){
+    var st = f.sprint==='General' ? 'General' : 'Sprint '+f.sprint;
+    return ''
+    +'<div class="item" id="it-'+i+'">'
+    +  '<div class="q" onclick="document.getElementById(\'it-'+i+'\').classList.toggle(\'open\')">'
+    +    '<div class="txt">'
+    +      '<div class="tags">'
+    +        '<span class="tag '+f.frente+'">'+(f.frente==='plataforma'?'Plataforma':'Contenido')+'</span>'
+    +        '<span class="tag sprint">'+esc(st)+'</span>'
+    +      '</div>'
+    +      '<div class="pregunta">'+esc(f.pregunta)+'</div>'
+    +    '</div>'
+    +    '<span class="caret">›</span>'
+    +  '</div>'
+    +  '<div class="a"><div class="a-inner">'+fmt(f.respuesta)
+    +    (f.actualizado?'<div class="upd">Actualizado: '+fecha(f.actualizado)+'</div>':'')
+    +  '</div></div>'
+    +'</div>';
+  }).join('');
+}
+
+render();
+</script>
+</body>
+</html>
