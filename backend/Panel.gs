@@ -243,7 +243,7 @@ function _llamarClaude(system, userText, schema) {
 
   const body = {
     model: 'claude-sonnet-5',      // Modelo de la consulta. (Para máxima calidad: 'claude-opus-4-8'.)
-    max_tokens: 2000,
+    max_tokens: 8000,              // Holgado: comentario + rúbrica + Guía de mejora + thinking adaptivo.
     thinking: { type: 'adaptive' },
     output_config: { effort: 'medium', format: { type: 'json_schema', schema: schema } },
     system: system,
@@ -262,9 +262,14 @@ function _llamarClaude(system, userText, schema) {
   const data = JSON.parse(res.getContentText());
   if (code !== 200) throw new Error('Claude API ' + code + ': ' + ((data.error && data.error.message) || ''));
   if (data.stop_reason === 'refusal') throw new Error('La IA declinó generar el borrador para esta entrega.');
+  if (data.stop_reason === 'max_tokens') throw new Error('La respuesta de la IA se cortó por longitud (max_tokens). Vuelve a intentar; si persiste, sube max_tokens en _llamarClaude.');
   const bloque = (data.content || []).find(b => b.type === 'text' && b.text);
   if (!bloque) throw new Error('La IA respondió sin contenido de texto.');
-  return JSON.parse(bloque.text);
+  try {
+    return JSON.parse(bloque.text);
+  } catch (err) {
+    throw new Error('La IA devolvió un JSON incompleto (posible corte por longitud). Vuelve a intentar. Detalle: ' + err.message);
+  }
 }
 
 // ══ ENVIAR FEEDBACK AL ESTUDIANTE ════════════════════════════════════════
