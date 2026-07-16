@@ -167,12 +167,19 @@ function doPost(e) {
   }
 }
 
-/** Chequeo de salud: abre la URL en el navegador para verificar que vive. */
-function doGet() {
+/**
+ * GET:
+ *   ?panel=1  → sirve el Panel de Facilitador (cockpit web, solo facilitadores).
+ *   (sin params) → chequeo de salud JSON.
+ */
+function doGet(e) {
+  if (e && e.parameter && e.parameter.panel === '1') {
+    return servirPanel(); // definido en Panel.gs
+  }
   return responder({
     ok: true,
     servicio: 'DCA · Motor de Recepción Sprint Roadmaps BAIP',
-    version: '1.0',
+    version: '1.1',
     estado: 'operativo',
     hora: new Date().toISOString(),
   });

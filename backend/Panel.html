@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<style>
+  :root{ --teal:#2e8b76; --teal-d:#236b5b; --oro:#a48111; --carbon:#1e2a38;
+         --platino:#f3f3f3; --terra:#c2593f; --gris:#6b7280; }
+  *{ box-sizing:border-box; }
+  body{ font-family:'Montserrat','Helvetica Neue',Arial,sans-serif; color:var(--carbon);
+        margin:0; background:#fafafa; font-size:14px; }
+  header{ background:var(--carbon); color:#fff; padding:14px 22px; display:flex;
+          align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+  header .marca{ color:var(--oro); font-size:11px; letter-spacing:.14em; font-weight:700; }
+  header h1{ font-family:Georgia,serif; font-weight:400; font-size:19px; margin:3px 0 0; }
+  header .quien{ font-size:12px; color:rgba(255,255,255,.7); }
+  .wrap{ max-width:900px; margin:0 auto; padding:18px 16px 60px; }
+  .barra{ display:flex; gap:10px; align-items:center; margin-bottom:14px; flex-wrap:wrap; }
+  .barra input{ flex:1; min-width:180px; padding:9px 12px; border:1.5px solid #ddd; border-radius:8px; font-size:13px; }
+  .btn{ border:none; border-radius:8px; padding:9px 16px; font-weight:700; font-size:13px;
+        cursor:pointer; font-family:inherit; }
+  .btn.p{ background:var(--teal); color:#fff; } .btn.p:hover{ background:var(--teal-d); }
+  .btn.s{ background:#fff; color:var(--carbon); border:1.5px solid #ddd; } .btn.s:hover{ background:#f5f5f5; }
+  .btn.g{ background:var(--oro); color:#fff; }
+  .btn:disabled{ opacity:.5; cursor:default; }
+  .card{ background:#fff; border:1px solid #e7e7e7; border-radius:10px; margin-bottom:12px; overflow:hidden; }
+  .card .head{ padding:12px 16px; display:flex; align-items:center; justify-content:space-between;
+               cursor:pointer; gap:10px; }
+  .card .head:hover{ background:#fbfbfb; }
+  .who{ font-weight:700; } .meta{ font-size:12px; color:var(--gris); margin-top:2px; }
+  .pill{ font-size:11px; padding:3px 9px; border-radius:20px; font-weight:700; white-space:nowrap; }
+  .pill.pend{ background:#fdf1ec; color:var(--terra); }
+  .pill.done{ background:#eaf2ef; color:var(--teal-d); }
+  .body{ display:none; padding:0 16px 16px; border-top:1px solid #f0f0f0; }
+  .body.open{ display:block; }
+  .campo{ margin-top:12px; }
+  .campo .lbl{ font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--teal);
+               font-weight:700; margin-bottom:3px; }
+  .campo .val{ background:#fbfbfb; border:1px solid #eee; border-radius:6px; padding:8px 10px;
+               white-space:pre-wrap; font-size:13px; line-height:1.5; }
+  .evalbox{ margin-top:16px; background:var(--platino); border-radius:8px; padding:14px; }
+  .evalbox h4{ margin:0 0 10px; color:var(--carbon); font-size:13px; }
+  .crit{ display:flex; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap; }
+  .crit .ct{ flex:1; min-width:150px; font-size:13px; font-weight:600; }
+  .crit select{ padding:5px 8px; border-radius:6px; border:1.5px solid #ddd; font-family:inherit; }
+  .crit input.nota{ flex:2; min-width:160px; padding:6px 8px; border-radius:6px; border:1.5px solid #ddd;
+                    font-family:inherit; font-size:12px; }
+  textarea{ width:100%; margin-top:10px; min-height:120px; padding:10px; border:1.5px solid #ddd;
+            border-radius:8px; font-family:inherit; font-size:13px; line-height:1.5; resize:vertical; }
+  .acciones{ display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; align-items:center; }
+  .estado{ font-size:12px; color:var(--gris); }
+  .estado.ok{ color:var(--teal-d); font-weight:700; }
+  .estado.err{ color:var(--terra); font-weight:700; }
+  .vacio{ text-align:center; color:var(--gris); padding:40px; }
+  .spin{ display:inline-block; width:14px; height:14px; border:2px solid #ccc;
+         border-top-color:var(--teal); border-radius:50%; animation:g .7s linear infinite; vertical-align:middle; }
+  @keyframes g{ to{ transform:rotate(360deg); } }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="marca">DIGITAL CHANGE ACADEMY · DCA</div>
+    <h1>Panel de Facilitador</h1>
+  </div>
+  <div class="quien">Sesión: <?= email ?></div>
+</header>
+
+<div class="wrap">
+  <div class="barra">
+    <input id="filtro" placeholder="Filtrar por nombre, empresa, cohorte o experimento…" oninput="render()">
+    <button class="btn s" onclick="cargar()">↻ Actualizar</button>
+  </div>
+  <div id="lista"><div class="vacio"><span class="spin"></span> Cargando entregas…</div></div>
+</div>
+
+<script>
+  var RUBRICA = <?!= JSON.stringify(rubrica) ?>;
+  var ENTREGAS = [];
+
+  function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function cargar(){
+    document.getElementById('lista').innerHTML = '<div class="vacio"><span class="spin"></span> Cargando…</div>';
+    google.script.run
+      .withSuccessHandler(function(res){ ENTREGAS = res.entregas || []; render(); })
+      .withFailureHandler(function(err){
+        document.getElementById('lista').innerHTML = '<div class="vacio" style="color:#c2593f">'+esc(err.message||err)+'</div>';
+      })
+      .listarEntregas();
+  }
+
+  function render(){
+    var q = (document.getElementById('filtro').value||'').toLowerCase();
+    var arr = ENTREGAS.filter(function(e){
+      return !q || (e.nombre+' '+e.empresa+' '+e.cohorte+' '+e.experimento+' '+e.recibo).toLowerCase().indexOf(q)!==-1;
+    });
+    var cont = document.getElementById('lista');
+    if(!arr.length){ cont.innerHTML = '<div class="vacio">No hay entregas'+(q?' que coincidan con el filtro.':' todavía.')+'</div>'; return; }
+    cont.innerHTML = arr.map(tarjeta).join('');
+  }
+
+  function tarjeta(e){
+    var enviado = !!e.feedbackEnviadoEn;
+    var pill = enviado
+      ? '<span class="pill done">✓ Feedback enviado</span>'
+      : '<span class="pill pend">Pendiente</span>';
+    var campos = e.campos.map(function(c){
+      return '<div class="campo"><div class="lbl">'+esc(c.etq)+'</div><div class="val">'+esc(c.val)+'</div></div>';
+    }).join('');
+
+    var crit = RUBRICA.map(function(r){
+      var saved = null;
+      if(e.rubricaGuardada){ saved = e.rubricaGuardada.find(function(x){return x.clave===r.clave;}); }
+      var pv = saved ? saved.puntaje : 3;
+      var nv = saved ? saved.nota : '';
+      var opts = [1,2,3,4,5].map(function(n){ return '<option value="'+n+'"'+(n===pv?' selected':'')+'>'+n+'/5</option>'; }).join('');
+      return '<div class="crit" data-clave="'+r.clave+'">'
+        + '<span class="ct">'+esc(r.titulo)+'</span>'
+        + '<select class="pj">'+opts+'</select>'
+        + '<input class="nota" placeholder="Nota breve (opcional)" value="'+esc(nv)+'">'
+        + '</div>';
+    }).join('');
+
+    return ''
+    + '<div class="card" id="card-'+e.recibo+'">'
+    +   '<div class="head" onclick="toggle(\''+e.recibo+'\')">'
+    +     '<div><div class="who">'+esc(e.nombre)+' · <span style="color:#6b7280;font-weight:400">'+esc(e.experimento)+'</span></div>'
+    +       '<div class="meta">'+esc(e.empresa)+' · '+esc(e.cohorte)+' · '+esc(e.email)+' · '+esc(e.fecha)+' · Recibo '+esc(e.recibo)+'</div></div>'
+    +     pill
+    +   '</div>'
+    +   '<div class="body" id="body-'+e.recibo+'">'
+    +     campos
+    +     (enviado ? '<div class="campo"><div class="lbl">Feedback ya enviado ('+esc(e.feedbackEnviadoEn)+' · '+esc(e.feedbackPor)+')</div></div>' : '')
+    +     '<div class="evalbox">'
+    +       '<h4>Evaluación con rúbrica</h4>'
+    +       crit
+    +       '<textarea id="txt-'+e.recibo+'" placeholder="Comentario de feedback para el estudiante (tuteo)…">'+esc(e.feedbackTexto)+'</textarea>'
+    +       '<div class="acciones">'
+    +         '<button class="btn g" onclick="borrador(\''+e.recibo+'\')">✨ Generar borrador con IA</button>'
+    +         '<button class="btn p" onclick="enviar(\''+e.recibo+'\')">✉ '+(enviado?'Reenviar feedback':'Enviar feedback')+'</button>'
+    +         '<span class="estado" id="est-'+e.recibo+'"></span>'
+    +       '</div>'
+    +     '</div>'
+    +   '</div>'
+    + '</div>';
+  }
+
+  function toggle(r){ document.getElementById('body-'+r).classList.toggle('open'); }
+
+  function leerCrit(r){
+    var out = [];
+    document.querySelectorAll('#card-'+r+' .crit').forEach(function(row){
+      out.push({ clave: row.getAttribute('data-clave'),
+                 puntaje: parseInt(row.querySelector('.pj').value,10),
+                 nota: row.querySelector('.nota').value });
+    });
+    return out;
+  }
+  function estado(r, html, cls){ var el=document.getElementById('est-'+r); el.className='estado '+(cls||''); el.innerHTML=html; }
+
+  function borrador(r){
+    estado(r, '<span class="spin"></span> La IA está redactando el borrador…');
+    google.script.run
+      .withSuccessHandler(function(res){
+        document.getElementById('txt-'+r).value = res.comentario || '';
+        (res.criterios||[]).forEach(function(c){
+          var row = document.querySelector('#card-'+r+' .crit[data-clave="'+c.clave+'"]');
+          if(row){ row.querySelector('.pj').value = c.puntaje; row.querySelector('.nota').value = c.nota||''; }
+        });
+        estado(r, '✓ Borrador listo — revísalo y ajústalo antes de enviar.', 'ok');
+      })
+      .withFailureHandler(function(err){ estado(r, '⚠ '+esc(err.message||err), 'err'); })
+      .generarBorradorIA(r);
+  }
+
+  function enviar(r){
+    var comentario = document.getElementById('txt-'+r).value.trim();
+    if(!comentario){ estado(r, '⚠ Escribe o genera un comentario antes de enviar.', 'err'); return; }
+    if(!confirm('¿Enviar este feedback al estudiante por correo?')) return;
+    estado(r, '<span class="spin"></span> Enviando…');
+    google.script.run
+      .withSuccessHandler(function(res){
+        estado(r, '✓ Enviado a '+esc(res.destinatario)+' ('+esc(res.enviadoEn)+')', 'ok');
+        var card = document.getElementById('card-'+r);
+        var pill = card.querySelector('.pill');
+        pill.className = 'pill done'; pill.textContent = '✓ Feedback enviado';
+      })
+      .withFailureHandler(function(err){ estado(r, '⚠ '+esc(err.message||err), 'err'); })
+      .enviarFeedback({ recibo: r, comentario: comentario, criterios: leerCrit(r) });
+  }
+
+  cargar();
+</script>
+</body>
+</html>
