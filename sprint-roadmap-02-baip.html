@@ -490,7 +490,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
           <span class="rid-title">Identificación del Expediente Analizado</span>
         </div>
         <div class="rid-fields">
-          <div class="rid-field"><label>Expediente / caso analizado</label><input type="text" id="f-201-rid-unidad" data-save="f-201-rid-unidad" placeholder="Ej. Nexforma Industrial S.A. — expediente del Sprint 01"></div>
+          <div class="rid-field"><label>Expediente analizado</label><input type="text" id="f-201-rid-unidad" data-save="f-201-rid-unidad" placeholder="Ej. Nexforma Industrial S.A. — expediente del Sprint 01"></div>
           <div class="rid-field"><label>Fecha de este dictamen</label><input type="text" id="f-201-rid-fecha" data-save="f-201-rid-fecha" placeholder="Ej. 25 ago 2026"></div>
           <div class="rid-field"><label>Analista BAIP</label><input type="text" id="f-201-rid-part" data-save="f-201-rid-part" placeholder="Se sincroniza desde portada"></div>
         </div>
@@ -646,7 +646,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
           <span class="rid-title">Identificación del Expediente Analizado</span>
         </div>
         <div class="rid-fields">
-          <div class="rid-field"><label>Expediente / caso analizado</label><input type="text" id="f-202-rid-unidad" data-save="f-202-rid-unidad" placeholder="El mismo expediente del Experimento 5"></div>
+          <div class="rid-field"><label>Expediente analizado</label><input type="text" id="f-202-rid-unidad" data-save="f-202-rid-unidad" placeholder="El mismo expediente del Experimento 5"></div>
           <div class="rid-field"><label>Fecha reporte</label><input type="date" id="f-202-rid-fecha" data-save="f-202-rid-fecha"></div>
           <div class="rid-field"><label>Analista BAIP</label><input type="text" id="f-202-rid-part" data-save="f-202-rid-part" placeholder="Se sincroniza desde portada"></div>
         </div>
@@ -802,7 +802,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
           <span class="rid-title">Identificación del Expediente Analizado</span>
         </div>
         <div class="rid-fields">
-          <div class="rid-field"><label>Expediente / caso analizado</label><input type="text" id="f-203-rid-unidad" data-save="f-203-rid-unidad" placeholder="El mismo expediente del diagnóstico (S4) del Experimento 6"></div>
+          <div class="rid-field"><label>Expediente analizado</label><input type="text" id="f-203-rid-unidad" data-save="f-203-rid-unidad" placeholder="El mismo expediente del diagnóstico (S4) del Experimento 6"></div>
           <div class="rid-field"><label>Fecha reporte</label><input type="date" id="f-203-rid-fecha" data-save="f-203-rid-fecha"></div>
           <div class="rid-field"><label>Analista BAIP</label><input type="text" id="f-203-rid-part" data-save="f-203-rid-part" placeholder="Se sincroniza desde portada"></div>
         </div>
@@ -960,7 +960,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
           <span class="rid-title">Identificación del Expediente Analizado</span>
         </div>
         <div class="rid-fields">
-          <div class="rid-field"><label>Expediente / caso analizado</label><input type="text" id="f-204-rid-unidad" data-save="f-204-rid-unidad" placeholder="El mismo expediente del Reporte BAIP (S1–S7)"></div>
+          <div class="rid-field"><label>Expediente analizado</label><input type="text" id="f-204-rid-unidad" data-save="f-204-rid-unidad" placeholder="El mismo expediente del Reporte BAIP (S1–S7)"></div>
           <div class="rid-field"><label>Fecha reporte</label><input type="date" id="f-204-rid-fecha" data-save="f-204-rid-fecha"></div>
           <div class="rid-field"><label>Analista BAIP</label><input type="text" id="f-204-rid-part" data-save="f-204-rid-part" placeholder="Se sincroniza desde portada"></div>
         </div>
@@ -1230,7 +1230,7 @@ let currentExp = '', mailBody = '', mailSubject = '';
 
 const EXP_FIELDS = {
   '201': [
-    { id: 'f-201-rid-unidad', label: 'Expediente / caso analizado' },
+    { id: 'f-201-rid-unidad', label: 'Expediente analizado' },
     { id: 'f-201-rid-fecha',  label: 'Fecha de este dictamen' },
     { id: 'f-201-ctx',        label: 'Origen del expediente analizado', type: 'radio', name: 'level-201' },
     { id: 'f-201-e1', label: 'Dictamen de anclaje de los cuatro parámetros' },
@@ -1239,7 +1239,7 @@ const EXP_FIELDS = {
     { id: 'f-201-obs', label: 'Observaciones, hallazgos y comentarios adicionales' }
   ],
   '202': [
-    { id: 'f-202-rid-unidad', label: 'Expediente / caso analizado' },
+    { id: 'f-202-rid-unidad', label: 'Expediente analizado' },
     { id: 'f-202-rid-fecha',  label: 'Fecha reporte' },
     { id: 'f-202-ctx',        label: 'Origen del expediente analizado', type: 'radio', name: 'level-202' },
     { id: 'f-202-e1', label: 'Matriz de Fundamentación de los diez obstáculos' },
@@ -1248,7 +1248,7 @@ const EXP_FIELDS = {
     { id: 'f-202-obs', label: 'Observaciones, hallazgos y comentarios adicionales' }
   ],
   '203': [
-    { id: 'f-203-rid-unidad', label: 'Expediente / caso analizado' },
+    { id: 'f-203-rid-unidad', label: 'Expediente analizado' },
     { id: 'f-203-rid-fecha',  label: 'Fecha reporte' },
     { id: 'f-203-ctx',        label: 'Origen del expediente analizado', type: 'radio', name: 'level-203' },
     { id: 'f-203-e1', label: 'Plan de Intervención 90 días (S5)' },
@@ -1257,7 +1257,7 @@ const EXP_FIELDS = {
     { id: 'f-203-obs', label: 'Observaciones, hallazgos y comentarios adicionales' }
   ],
   '204': [
-    { id: 'f-204-rid-unidad', label: 'Expediente / caso analizado' },
+    { id: 'f-204-rid-unidad', label: 'Expediente analizado' },
     { id: 'f-204-rid-fecha',  label: 'Fecha reporte' },
     { id: 'f-204-ctx',        label: 'Origen del expediente analizado', type: 'radio', name: 'level-204' },
     { id: 'f-204-e1', label: 'Síntesis Ejecutiva (S1)' },
