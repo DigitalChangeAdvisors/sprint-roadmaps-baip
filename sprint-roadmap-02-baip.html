@@ -529,10 +529,10 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
         <div class="metric-card beh">
           <div class="metric-card-lbl">Métrica de comportamiento</div>
           <dl class="metric-rows">
-            <div class="metric-row"><dt>Qué se mide</dt><dd>Proporción de los cuatro parámetros auditados que reciben un veredicto sostenido en una consecuencia verificable sobre la lectura, frente a los que reciben una opinión sin consecuencia demostrada.</dd></div>
+            <div class="metric-row"><dt>Qué se mide</dt><dd>Proporción de los tres parámetros auditados que reciben un veredicto sostenido en una consecuencia verificable sobre la lectura, frente a los que reciben una opinión sin consecuencia demostrada.</dd></div>
             <div class="metric-row"><dt>Cómo se mide</dt><dd>Conteo sobre el dictamen de anclaje y la auditoría contrafáctica redactados.</dd></div>
             <div class="metric-row"><dt>Línea base</dt><dd>Cero: el analista usó los reportes sin auditar la campaña.</dd></div>
-            <div class="metric-row"><dt>Valor objetivo</dt><dd>Los cuatro parámetros con veredicto y contrafáctico; al menos un veredicto «discutible» argumentado.</dd></div>
+            <div class="metric-row"><dt>Valor objetivo</dt><dd>Los tres parámetros con veredicto y contrafáctico; al menos un veredicto «discutible» argumentado.</dd></div>
           </dl>
         </div>
         <div class="metric-card biz">
@@ -550,7 +550,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
         <span><strong>Rol de la IA como andamiaje:</strong> La IA estresa el dictamen y contraargumenta cada veredicto; simula encuadres alternativos. El veredicto lo firma el analista. La IA no procesa instrumentos ni accede a reactivos, cálculos o baremos.</span>
       </div>
       <div class="fill">
-        <div class="fill-lbl">Dictamen de anclaje de los cuatro parámetros</div>
+        <div class="fill-lbl">Dictamen de anclaje de los tres parámetros</div>
         <div class="field-guide">Reconstruye la Ficha de Cobertura y emite el dictamen por parámetro:<br>• Decisión de negocio que el diagnóstico debe sostener y su dueño, con los tres parámetros (población, segmentación, ventana) y su justificación<br>• Veredicto por parámetro: bien establecido / discutible / mal establecido<br>• Resuelve los cuatro puntos de tensión obligatorios: por qué 40 y no ~850; por qué la segmentación generacional se aplicó solo al equipo de campo; por qué el liderazgo se observó y no se midió como población propia; y qué protegió la ventana</div>
         <textarea id="f-201-e1" data-save="f-201-e1" rows="9" placeholder="Escribe aquí tu respuesta…"></textarea>
         <div class="char-ct"><span id="cc-201-e1">0</span> caracteres</div>
@@ -1233,7 +1233,7 @@ const EXP_FIELDS = {
     { id: 'f-201-rid-unidad', label: 'Expediente analizado' },
     { id: 'f-201-rid-fecha',  label: 'Fecha de este dictamen' },
     { id: 'f-201-ctx',        label: 'Origen del expediente analizado', type: 'radio', name: 'level-201' },
-    { id: 'f-201-e1', label: 'Dictamen de anclaje de los cuatro parámetros' },
+    { id: 'f-201-e1', label: 'Dictamen de anclaje de los tres parámetros' },
     { id: 'f-201-e2', label: 'Auditoría contrafáctica y encuadre de lanzamiento' },
     { id: 'f-201-e3', label: 'Certificado de Límites de Validez del expediente' },
     { id: 'f-201-obs', label: 'Observaciones, hallazgos y comentarios adicionales' }
