@@ -348,7 +348,9 @@ const FAQ = [
        sprint: "02",                 // "01", "02", … o "General"
        definicion:
          "Explicación breve en tuteo, sin tecnicismos innecesarios. Puedes usar **negrita**.",
-       tambien: ""                   // opcional: variantes del término (p. ej. "encuadre de lanzamiento, encuadre de retorno")
+       tambien: "",                  // opcional: variantes del término (p. ej. "encuadre de lanzamiento, encuadre de retorno")
+       orden: null                   // opcional: número para forzar un orden manual frente a otros términos con «orden»
+                                      // (por defecto el glosario se ordena alfabéticamente por «termino»)
      },
 
    Para enlazar el término desde un roadmap, usa:
@@ -474,7 +476,8 @@ const GLOSARIO = [
     sprint: "02",
     definicion:
       "Cada uno de los diez obstáculos fijos y nombrados que el Modelo ARIA reconoce como las causas típicas que bloquean el retorno de la inversión en IA en una organización, agrupados en tres categorías: **Estratégicos, Organizacionales y Psicológicos**.\n\nEn el Experimento 6 los usas como lista de verificación: para cada uno emites un veredicto —causa, derivado, señuelo o no evidenciado— contrastado con la evidencia de tu propio cruce. Busca cada obstáculo por su nombre en este glosario para ver su definición completa y las herramientas del Modelo ARIA que lo cierran.",
-    tambien: "los diez obstáculos canónicos"
+    tambien: "los diez obstáculos canónicos",
+    orden: 0
   },
   {
     termino: "Keystone",
@@ -522,7 +525,8 @@ const GLOSARIO = [
     sprint: "02",
     definicion:
       "**Categoría: Estratégico.** Falta de claridad estratégica sobre los casos de uso de la IA: proliferan pilotos y pruebas de concepto sin priorización por ROI o KPI, y la organización queda sin foco operativo.\n\n**Herramientas del Modelo ARIA que lo cierran:** AINS — AI North Star (alinea a la alta dirección en una sola jornada sobre la arquitectura futura de la empresa en la era IA) + MVI — Matriz de Validación de Impacto (filtra la madurez y el potencial real de cada piloto antes de escalarlo, evitando el «purgatorio de los pilotos»).",
-    tambien: ""
+    tambien: "",
+    orden: 1
   },
   {
     termino: "Obstáculo 2 · Fricción de governance",
@@ -530,7 +534,8 @@ const GLOSARIO = [
     sprint: "02",
     definicion:
       "**Categoría: Estratégico.** Reglas, restricciones y aprobaciones confusas que hacen que la IA esté «disponible» en el papel pero prácticamente inaccesible en el día a día.\n\n**Herramientas del Modelo ARIA que lo cierran:** AINS — AI North Star + AIGC — AI Governance Canvas (co-crea con la alta dirección un marco normativo claro que equilibra agilidad con gestión de riesgo, y disuelve la ambigüedad regulatoria que paraliza la experimentación).",
-    tambien: ""
+    tambien: "",
+    orden: 2
   },
   {
     termino: "Obstáculo 3 · Desalineación del talento",
@@ -538,7 +543,8 @@ const GLOSARIO = [
     sprint: "02",
     definicion:
       "**Categoría: Estratégico.** Mensajes contradictorios entre «capacitar a la plantilla actual» o «contratar/reemplazar con talento nativo IA», que rompe el compromiso y congela la adopción.\n\n**Herramientas del Modelo ARIA que lo cierran:** AINS — AI North Star + MRT — Mapa de Rutas de Talento (traza para cada persona una de cuatro rutas claras frente a la IA: evolución, reinvención, inserción o transición).",
-    tambien: ""
+    tambien: "",
+    orden: 3
   },
   {
     termino: "Obstáculo 4 · Silos culturales",
@@ -546,7 +552,8 @@ const GLOSARIO = [
     sprint: "02",
     definicion:
       "**Categoría: Organizacional.** Cada área experimenta con IA de forma aislada, duplica esfuerzos y no comparte el aprendizaje, lo que impide escalar soluciones a nivel corporativo.\n\n**Herramientas del Modelo ARIA que lo cierran:** AICD — AI Culture Diagnostic (audita 28 marcadores de ADN AI para visibilizar las barreras estructurales que sabotean la innovación) + AINS — AI North Star.",
-    tambien: ""
+    tambien: "",
+    orden: 4
   },
   {
     termino: "Obstáculo 5 · Brecha generacional",
@@ -554,7 +561,8 @@ const GLOSARIO = [
     sprint: "02",
     definicion:
       "**Categoría: Organizacional.** Diferencias de creencias y hábitos entre generaciones —perfiles senior más escépticos, perfiles jóvenes más nativos digitales— que generan bloqueo, tensión y fuga de talento.\n\n**Herramientas del Modelo ARIA que lo cierran:** LEIA — Liderazgo para la Era IA (actualiza el ejercicio del mando con el modelo de las 5C: Conexión, Confianza, Coherencia, Cocreación, Cuidado) + PATH — Plan de Aseguramiento de la Transformación Humana (instala rituales y anclas que blindan los hábitos adquiridos contra el «efecto rebote»).",
-    tambien: ""
+    tambien: "",
+    orden: 5
   },
   {
     termino: "Obstáculo 6 · Liderazgo desconectado",
@@ -562,7 +570,8 @@ const GLOSARIO = [
     sprint: "02",
     definicion:
       "**Categoría: Organizacional.** El C-suite anuncia una visión «IA First» que no baja a decisiones, recursos ni rutinas concretas, dejando un vacío que se llena de rumores.\n\n**Herramientas del Modelo ARIA que lo cierran:** AILS — AI Leadership Style (audita 21 comportamientos críticos de mando y revela la brecha entre la gestión actual y el perfil que la era IA exige) + LEIA — Liderazgo para la Era IA (cierra esa brecha con el protocolo de las 5C).",
-    tambien: ""
+    tambien: "",
+    orden: 6
   },
   {
     termino: "Obstáculo 7 · Creencias limitantes",
@@ -570,7 +579,8 @@ const GLOSARIO = [
     sprint: "02",
     definicion:
       "**Categoría: Psicológico.** Marcos mentales heredados de la era industrial —experiencia sobre datos, identidad fija, perfeccionismo— que filtran y sabotean cualquier intento de adopción de la IA.\n\n**Herramientas del Modelo ARIA que lo cierran:** AIMT — AI Mindset Test (calibra 30 creencias habilitantes y convierte la «resistencia al cambio» en datos accionables) + AIMC — AI Mindset Canvas (reconfigura esas creencias mediante micro-experimentos de cambio validados en la realidad).",
-    tambien: ""
+    tambien: "",
+    orden: 7
   },
   {
     termino: "Obstáculo 8 · Síndrome del impostor digital",
@@ -578,7 +588,8 @@ const GLOSARIO = [
     sprint: "02",
     definicion:
       "**Categoría: Psicológico.** Baja autopercepción sobre el propio nivel de preparación digital: aunque haya capacitación, la persona no confía en su capacidad para usar o supervisar la IA en decisiones reales, y se auto-paraliza.\n\n**Herramientas del Modelo ARIA que lo cierran:** AIMT — AI Mindset Test + ADA — Activadores de Agencia (otorga «permisos de acción» explícitos que transforman la espera pasiva de instrucciones en autonomía ejecutiva con riesgos calculados).",
-    tambien: ""
+    tambien: "",
+    orden: 8
   },
   {
     termino: "Obstáculo 9 · Capacitación sin impacto",
@@ -586,7 +597,8 @@ const GLOSARIO = [
     sprint: "02",
     definicion:
       "**Categoría: Psicológico.** Entrenamientos genéricos «sobre la IA», sin práctica guiada de aplicación real en las tareas del rol, que no cambian el comportamiento de las personas.\n\n**Herramientas del Modelo ARIA que lo cierran:** DAS — Diseño Ágil de Soluciones (traduce la visión macro en microhabilidades priorizadas por valor) + MATCH — Modelo Ágil de Transformación Cultural y Humana (sustituye la formación estática por sprints de aprendizaje vinculados a los KPI del negocio).",
-    tambien: ""
+    tambien: "",
+    orden: 9
   },
   {
     termino: "Obstáculo 10 · Miedo al desplazamiento",
@@ -594,7 +606,8 @@ const GLOSARIO = [
     sprint: "02",
     definicion:
       "**Categoría: Psicológico.** Temor a ser reemplazado por la IA que dispara resistencia emocional pasiva, desconexión y uso oculto de la herramienta.\n\n**Herramientas del Modelo ARIA que lo cierran:** AICD — AI Culture Diagnostic + AIIB — AI Inspiration Board (sincroniza en una jornada el propósito personal del colaborador con los objetivos de la organización, resignificando la IA como vehículo de evolución y no como amenaza).",
-    tambien: ""
+    tambien: "",
+    orden: 10
   },
 
 ];
@@ -629,7 +642,10 @@ function renderGlosario(){
     if(!q) return true;
     var hay=(g.termino+' '+g.definicion+' '+(g.tambien||'')).toLowerCase();
     return hay.indexOf(q)!==-1;
-  }).slice().sort(function(a,b){return a.termino.localeCompare(b.termino,'es');});
+  }).slice().sort(function(a,b){
+    if(a.orden!=null && b.orden!=null) return a.orden-b.orden;
+    return a.termino.localeCompare(b.termino,'es');
+  });
 
   var cont=document.getElementById('g-list');
   document.getElementById('g-count').textContent =
