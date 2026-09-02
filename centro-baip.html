@@ -85,12 +85,32 @@
          font-size:12px;color:var(--grey);}
   footer .gold{color:var(--gold);font-weight:600;}
 
+  /* ── Selector de vista (FAQ / Glosario) ── */
+  .views{display:flex;gap:8px;margin-bottom:22px;}
+  .view-btn{flex:1;border:1.5px solid var(--platinum);background:#fff;color:var(--carbon);
+            border-radius:10px;padding:12px 14px;font-family:inherit;font-size:13.5px;font-weight:600;
+            cursor:pointer;transition:all .18s;text-align:center;}
+  .view-btn:hover{border-color:var(--teal);}
+  .view-btn.on{background:var(--carbon);border-color:var(--carbon);color:#fff;}
+
+  /* ── Glosario ── */
+  .g-item{background:#fff;border:1px solid #e6e8e7;border-left:3px solid var(--gold);border-radius:0 12px 12px 0;
+          margin-bottom:12px;padding:16px 18px;scroll-margin-top:96px;transition:box-shadow .2s,background .4s;}
+  .g-item:hover{box-shadow:0 2px 14px rgba(30,42,56,.06);}
+  .g-item.flash{background:var(--gold-bg);}
+  .g-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px;}
+  .g-term{font-family:var(--fd);font-size:17px;color:var(--carbon);}
+  .g-def{font-size:14px;line-height:1.7;color:rgba(30,42,56,.88);margin:0;}
+  .g-def strong{color:var(--carbon);}
+  .g-also{font-size:12px;color:var(--grey);margin-top:6px;font-style:italic;}
+
   @media (max-width:600px){
     .hero h1{font-size:27px;} .wrap{padding:20px 16px 60px;}
+    .views{flex-direction:column;}
   }
   @media print{
-    .controls,.hero .visual{display:none;} body{background:#fff;}
-    .item{break-inside:avoid;} .a{display:block!important;}
+    .controls,.hero .visual,.views{display:none;} body{background:#fff;}
+    .item,.g-item{break-inside:avoid;} .a{display:block!important;}
   }
 </style>
 </head>
@@ -107,24 +127,40 @@
 
 <div class="wrap">
   <div class="intro">
-    <b>¿Cómo usar este centro?</b> Escribe una palabra en el buscador (p. ej. «niveles», «PDF», «envío») o filtra por frente y sprint. Haz clic en cualquier pregunta para ver la respuesta. Es un <b>documento vivo</b>: crece a medida que avanza la certificación. ¿No encuentras tu duda? Escríbele a tu facilitador.
+    <b>¿Cómo usar este centro?</b> Escribe una palabra en el buscador (p. ej. «niveles», «PDF», «envío») o filtra por frente y sprint. Haz clic en cualquier pregunta para ver la respuesta. En el <b>Glosario</b> encuentras el significado de los términos técnicos del roadmap — también puedes llegar a un término haciendo clic en su enlace dentro del documento. Es un <b>documento vivo</b>: crece a medida que avanza la certificación. ¿No encuentras tu duda? Escríbele a tu facilitador.
   </div>
 
-  <div class="controls">
-    <input id="search" class="search" placeholder="🔍  Busca por palabra clave…" oninput="render()">
-    <div class="chips">
-      <span class="lbl">Frente</span>
-      <button class="chip on" data-frente="todo" onclick="setFrente('todo')">Todo</button>
-      <button class="chip" data-frente="plataforma" onclick="setFrente('plataforma')">Plataforma</button>
-      <button class="chip" data-frente="contenido" onclick="setFrente('contenido')">Contenido</button>
-      <span class="sep"></span>
-      <span class="lbl">Sprint</span>
-      <span id="sprint-chips"></span>
+  <div class="views">
+    <button class="view-btn on" id="vb-faq" onclick="showView('faq')">❓ Preguntas frecuentes</button>
+    <button class="view-btn" id="vb-glosario" onclick="showView('glosario')">📖 Glosario de términos</button>
+  </div>
+
+  <div id="view-faq">
+    <div class="controls">
+      <input id="search" class="search" placeholder="🔍  Busca por palabra clave…" oninput="render()">
+      <div class="chips">
+        <span class="lbl">Frente</span>
+        <button class="chip on" data-frente="todo" onclick="setFrente('todo')">Todo</button>
+        <button class="chip" data-frente="plataforma" onclick="setFrente('plataforma')">Plataforma</button>
+        <button class="chip" data-frente="contenido" onclick="setFrente('contenido')">Contenido</button>
+        <span class="sep"></span>
+        <span class="lbl">Sprint</span>
+        <span id="sprint-chips"></span>
+      </div>
     </div>
+
+    <div class="count" id="count"></div>
+    <div id="list"></div>
   </div>
 
-  <div class="count" id="count"></div>
-  <div id="list"></div>
+  <div id="view-glosario" hidden>
+    <div class="controls">
+      <input id="g-search" class="search" placeholder="🔍  Busca un término…" oninput="renderGlosario()">
+    </div>
+
+    <div class="count" id="g-count"></div>
+    <div id="g-list"></div>
+  </div>
 
   <footer>
     <div>Digital Change Advisors · Modelo ARIA</div>
@@ -300,6 +336,116 @@ const FAQ = [
   },
 
 ];
+
+/* ════════════════════════════════════════════════════════════════════════════
+   GLOSARIO DE TÉRMINOS TÉCNICOS
+   ───────────────────────────────────────────────────────────────────────────
+   Para AÑADIR un término, copia esta plantilla dentro de la lista:
+
+     {
+       termino: "Nombre del término",
+       slug: "nombre-del-termino",   // sin tildes ni espacios — se usa en el enlace #g-slug
+       sprint: "02",                 // "01", "02", … o "General"
+       definicion:
+         "Explicación breve en tuteo, sin tecnicismos innecesarios. Puedes usar **negrita**.",
+       tambien: ""                   // opcional: variantes del término (p. ej. "encuadre de lanzamiento, encuadre de retorno")
+     },
+
+   Para enlazar el término desde un roadmap, usa:
+     <a class="gloss-link" href="https://digitalchangeadvisors.com/centro-baip/#g-nombre-del-termino" target="_blank" rel="noopener">texto</a>
+   ═══════════════════════════════════════════════════════════════════════════ */
+const GLOSARIO = [
+
+  {
+    termino: "Encuadre",
+    slug: "encuadre",
+    sprint: "General",
+    definicion:
+      "La manera en que se presenta o enmarca una decisión, un dato o un hallazgo ante quien lo recibe. El mismo contenido puede sostenerse o perderse según cómo se encuadre: no es lo mismo lanzar una campaña con un encuadre que protege el dato que con uno que lo contamina, ni presentar tu reporte en **lenguaje de retorno** que dejarlo deslizar hacia capacitación.",
+    tambien: "encuadre de lanzamiento, encuadre de retorno"
+  },
+  {
+    termino: "Auditoría contrafáctica",
+    slug: "auditoria-contrafactica",
+    sprint: "02",
+    definicion:
+      "Ejercicio de preguntarte «¿qué habría pasado si esta decisión se hubiera tomado distinto?» para cada parámetro de la campaña, y declarar qué conclusión se habría perdido en ese escenario alternativo. No es una auditoría de errores: es una prueba de qué tan sólida es tu lectura frente a decisiones que pudieron ser otras.",
+    tambien: ""
+  },
+  {
+    termino: "Dictamen de anclaje",
+    slug: "dictamen-anclaje",
+    sprint: "02",
+    definicion:
+      "El veredicto que emites sobre cada parámetro de la campaña (población, segmentación, ventana): si quedó **bien establecido, discutible o mal establecido**, y por qué. «Anclaje» porque evalúa si la campaña quedó atada a un resultado de negocio real o si midió sin ese ancla.",
+    tambien: ""
+  },
+  {
+    termino: "Certificado de Límites de Validez",
+    slug: "certificado-limites-validez",
+    sprint: "02",
+    definicion:
+      "El documento con el que cierras el Experimento 5: una síntesis honesta de hasta dónde llega tu expediente y hasta dónde no —sus límites—, incluida la condición del AILS como señal indicativa. Es tu respuesta ya preparada a la objeción «¿la muestra es representativa?» que te encontrarás más adelante.",
+    tambien: ""
+  },
+  {
+    termino: "Ficha de Cobertura",
+    slug: "ficha-cobertura",
+    sprint: "02",
+    definicion:
+      "El registro de los tres parámetros con los que se lanzó la campaña —**población, segmentación y ventana**—, la decisión de negocio que debían sostener y quién la tomó. Reconstruirla es el primer paso del Experimento 5, antes de poder auditar si esos parámetros estuvieron bien puestos.",
+    tambien: ""
+  },
+  {
+    termino: "Paradoja de Simpson",
+    slug: "paradoja-simpson",
+    sprint: "02",
+    definicion:
+      "Fenómeno estadístico en el que una tendencia que aparece en varios grupos por separado se invierte o desaparece cuando esos grupos se juntan en uno solo. Por eso la unidad de análisis que elijas para tu campaña no es un detalle técnico: puede cambiar por completo la conclusión.",
+    tambien: ""
+  },
+  {
+    termino: "Validación psicométrica",
+    slug: "validacion-psicometrica",
+    sprint: "02",
+    definicion:
+      "El proceso mediante el cual un instrumento de medición (como AILS) demuestra estadísticamente que mide lo que dice medir, de forma consistente. Mientras un instrumento está **en proceso de validación psicométrica**, sus resultados se tratan como una **señal indicativa** —útil para orientar, pero no como una medición ya certificada— y así debes declararlo en tu Certificado de Límites de Validez.",
+    tambien: "señal indicativa"
+  },
+  {
+    termino: "Reactivos",
+    slug: "reactivos",
+    sprint: "02",
+    definicion:
+      "Las preguntas o ítems individuales que componen un instrumento de medición (por ejemplo, cada pregunta puntual dentro de AIMT, AILS o AICD). Como Analista BAIP nunca ves ni editas los reactivos: trabajas siempre sobre el reporte ya procesado, no sobre el instrumento en bruto.",
+    tambien: ""
+  },
+  {
+    termino: "Baremos",
+    slug: "baremos",
+    sprint: "02",
+    definicion:
+      "Las tablas de referencia que convierten una puntuación bruta de un instrumento en un nivel interpretable (por ejemplo, de Cautela a Óptimo). Son parte de la capa protegida del instrumento: tú lees el nivel ya calculado, no el baremo que lo produjo.",
+    tambien: ""
+  },
+  {
+    termino: "Matriz de triangulación",
+    slug: "matriz-triangulacion",
+    sprint: "General",
+    definicion:
+      "La tabla en la que cruzas **obstáculo × lente × nivel** para ver si las tres lentes (AIMT, AILS, AICD) coinciden en un mismo obstáculo (refuerzo) o se contradicen (tensión). Es la herramienta con la que triangulas —cruzas varias fuentes— antes de nombrar una causa raíz.",
+    tambien: ""
+  },
+  {
+    termino: "Caso de valor",
+    slug: "caso-de-valor",
+    sprint: "02",
+    definicion:
+      "La argumentación que conecta tu plan de intervención con un beneficio de negocio cuantificado —cuánto cuesta no actuar, cuánto se libera si se actúa—, dirigida a quien debe aprobar el plan. Es la versión en lenguaje de retorno de lo que en otros contextos se llama «business case».",
+    tambien: ""
+  },
+
+];
 /* ▲▲▲  FIN DEL CONTENIDO  ▲▲▲  (de aquí para abajo es el motor; no hace falta tocarlo) */
 
 // ── Estado de filtros ──
@@ -317,6 +463,56 @@ var estadoSprint = 'todos';
   });
   document.getElementById('sprint-chips').innerHTML = html;
 })();
+
+function showView(v){
+  document.getElementById('view-faq').hidden = (v!=='faq');
+  document.getElementById('view-glosario').hidden = (v!=='glosario');
+  document.getElementById('vb-faq').classList.toggle('on', v==='faq');
+  document.getElementById('vb-glosario').classList.toggle('on', v==='glosario');
+}
+
+function renderGlosario(){
+  var q=(document.getElementById('g-search').value||'').toLowerCase().trim();
+  var arr=GLOSARIO.filter(function(g){
+    if(!q) return true;
+    var hay=(g.termino+' '+g.definicion+' '+(g.tambien||'')).toLowerCase();
+    return hay.indexOf(q)!==-1;
+  }).slice().sort(function(a,b){return a.termino.localeCompare(b.termino,'es');});
+
+  var cont=document.getElementById('g-list');
+  document.getElementById('g-count').textContent =
+    arr.length+(arr.length===1?' término':' términos')+(q?' para «'+q+'»':'');
+
+  if(!arr.length){
+    cont.innerHTML='<div class="empty">No hay términos que coincidan.<br>Prueba otra palabra o escríbele a tu facilitador — y ese término entrará al glosario.</div>';
+    return;
+  }
+
+  cont.innerHTML=arr.map(function(g){
+    var st = g.sprint==='General' ? 'General' : 'Sprint '+g.sprint;
+    return ''
+    +'<div class="g-item" id="g-'+g.slug+'">'
+    +  '<div class="g-head">'
+    +    '<span class="g-term">'+esc(g.termino)+'</span>'
+    +    '<span class="tag sprint">'+esc(st)+'</span>'
+    +  '</div>'
+    +  '<p class="g-def">'+fmt(g.definicion).replace(/^<p>|<\/p>$/g,'')+'</p>'
+    +  (g.tambien?'<div class="g-also">También aparece como: '+esc(g.tambien)+'</div>':'')
+    +'</div>';
+  }).join('');
+}
+
+function irAGlosario(hash){
+  showView('glosario');
+  renderGlosario();
+  setTimeout(function(){
+    var el=document.getElementById(hash.replace('#',''));
+    if(!el) return;
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    el.classList.add('flash');
+    setTimeout(function(){el.classList.remove('flash');},1600);
+  },30);
+}
 
 function setFrente(f){
   estadoFrente=f;
@@ -385,6 +581,12 @@ function render(){
 }
 
 render();
+renderGlosario();
+
+if(location.hash.indexOf('#g-')===0) irAGlosario(location.hash);
+window.addEventListener('hashchange', function(){
+  if(location.hash.indexOf('#g-')===0) irAGlosario(location.hash);
+});
 </script>
 </body>
 </html>

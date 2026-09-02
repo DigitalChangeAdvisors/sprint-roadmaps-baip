@@ -44,6 +44,8 @@ body { font-family: var(--fb); font-size: 15px; line-height: 1.75; color: var(--
 .nav-right { display: flex; align-items: center; gap: 10px; margin-left: 12px; flex-shrink: 0; }
 .nav-help { color: var(--gold); text-decoration: none; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; padding: 5px 10px; border: 1px solid rgba(164,129,17,.45); border-radius: 5px; transition: all .15s; }
 .nav-help:hover { background: rgba(164,129,17,.15); color: #fff; }
+.gloss-link { color: var(--teal); text-decoration: none; border-bottom: 1px dotted var(--teal); cursor: help; }
+.gloss-link:hover { color: var(--teal-dk); border-bottom-style: solid; }
 .pb-wrap { width: 100px; height: 3px; background: rgba(255,255,255,.12); border-radius: 2px; }
 .pb-fill { height: 3px; background: var(--teal); border-radius: 2px; transition: width .4s ease; width: 0%; }
 .pb-pct { font-size: 10px; font-weight: 700; color: rgba(255,255,255,.45); min-width: 28px; }
@@ -403,8 +405,8 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
         <div>
           <div class="msg-title">Mensaje del Facilitador</div>
           <p>En el Sprint 01 leíste tres lentes por separado y cruzaste tu primera causa raíz sobre Nexforma. El Sprint 02 no abre un caso nuevo ni te pide operar ninguna plataforma en vivo: continúa exactamente donde dejaste el expediente, y te exige someter esa primera lectura a un examen que no te hiciste la primera vez.</p>
-          <p>Los Experimentos 5 a 8 son Auditoría, Fundamentación, Plan y Defensa. El Experimento 5 te devuelve a los tres parámetros de la campaña que produjo tus reportes y te pide un dictamen fundado sobre cada uno. El 6 no vuelve a triangular las lentes: somete tu propio cruce del Experimento 1.4 al marco de los diez obstáculos canónicos y a la prueba de distribución — y si el examen exige corregir tu conclusión, corregirla es el resultado esperado, no un fracaso. El 7 convierte ese diagnóstico ya corregido en un plan de 90 días con su caso de valor. El 8 lo defiende ante un comité representado hasta capturar una decisión real.</p>
-          <p>Sigues sin tocar reactivos, scoring ni baremos de los instrumentos — esa capa permanece protegida —, pero la fundamentación, el plan y la defensa del Reporte BAIP completo (S1–S7) son enteramente tuyos.</p>
+          <p>Los Experimentos 5 a 8 son Auditoría, Fundamentación, Plan y Defensa. El Experimento 5 te devuelve a los tres parámetros de la campaña que produjo tus reportes y te pide un dictamen fundado sobre cada uno. El 6 no vuelve a triangular las lentes: somete tu propio cruce del Experimento 1.4 al marco de los diez obstáculos canónicos y a la prueba de distribución — y si el examen exige corregir tu conclusión, corregirla es el resultado esperado, no un fracaso. El 7 convierte ese diagnóstico ya corregido en un plan de 90 días con su <a class="gloss-link" href="https://digitalchangeadvisors.com/centro-baip/#g-caso-de-valor" target="_blank" rel="noopener">caso de valor</a>. El 8 lo defiende ante un comité representado hasta capturar una decisión real.</p>
+          <p>Sigues sin tocar <a class="gloss-link" href="https://digitalchangeadvisors.com/centro-baip/#g-reactivos" target="_blank" rel="noopener">reactivos</a>, scoring ni <a class="gloss-link" href="https://digitalchangeadvisors.com/centro-baip/#g-baremos" target="_blank" rel="noopener">baremos</a> de los instrumentos — esa capa permanece protegida —, pero la fundamentación, el plan y la defensa del Reporte BAIP completo (S1–S7) son enteramente tuyos.</p>
           <p>No se trata de presentar un diagnóstico bonito. Se trata de salir de la sala con una decisión —autoriza, ajusta o rechaza— y nunca con un «lo revisamos y te avisamos».</p>
           <div class="sig-block">
             <div class="sig-line"></div>
@@ -430,7 +432,7 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
       <div class="sec-sublabel">¿Cómo utilizar este documento de forma efectiva?</div>
       <div class="ni">
         <div class="ni-head"><span class="nn">1.</span> Trabaja en la versión digital con autoguardado activo.</div>
-        <div class="ni-text">Este instrumento es HTML nativo con autoguardado automático. Tus registros se conservan en el dispositivo en tiempo real — no hay riesgo de perder el trabajo. Ten a la mano tu expediente Nexforma del Sprint 01 —las tres lecturas clínicas, la matriz de triangulación y el reporte de causas raíz de los Experimentos 1.1 a 1.4— mientras completas cada experimento.</div>
+        <div class="ni-text">Este instrumento es HTML nativo con autoguardado automático. Tus registros se conservan en el dispositivo en tiempo real — no hay riesgo de perder el trabajo. Ten a la mano tu expediente Nexforma del Sprint 01 —las tres lecturas clínicas, la <a class="gloss-link" href="https://digitalchangeadvisors.com/centro-baip/#g-matriz-triangulacion" target="_blank" rel="noopener">matriz de triangulación</a> y el reporte de causas raíz de los Experimentos 1.1 a 1.4— mientras completas cada experimento.</div>
       </div>
       <div class="ni">
         <div class="ni-head"><span class="nn">2.</span> Los cuatro experimentos continúan tu expediente Nexforma; ninguno abre un caso nuevo.</div>
@@ -467,8 +469,8 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
         <div class="note-hd">Conexión con la fundamentación</div>
         <p><strong>Temática 2.1</strong></p>
         <p>2.1.1 La campaña define la calidad del diagnóstico.</p>
-        <p>2.1.2 La unidad la define la decisión; paradoja de Simpson.</p>
-        <p>2.1.3 Lanzar es intervenir; el encuadre protege el dato.</p>
+        <p>2.1.2 La unidad la define la decisión; <a class="gloss-link" href="https://digitalchangeadvisors.com/centro-baip/#g-paradoja-simpson" target="_blank" rel="noopener">paradoja de Simpson</a>.</p>
+        <p>2.1.3 Lanzar es intervenir; el <a class="gloss-link" href="https://digitalchangeadvisors.com/centro-baip/#g-encuadre" target="_blank" rel="noopener">encuadre</a> protege el dato.</p>
       </div>
       <p><em>Los Experimentos 5 a 8 no abren un caso nuevo: continúan el expediente Nexforma que produjiste en los Experimentos 1.1 a 1.4 del Sprint 01. Este primer experimento te devuelve a los tres parámetros de la campaña que produjo esos reportes, para que audites si estuvieron bien establecidos y qué se habría perdido si no lo hubieran estado.</em></p>
       <p><strong>Objetivo de aprendizaje:</strong> Reconstruir y auditar los tres parámetros de la campaña que produjo los reportes de Nexforma —población, segmentación y ventana— junto con su encuadre de lanzamiento; emitir un dictamen fundado sobre si cada parámetro estuvo bien establecido y por qué; y demostrar contrafácticamente el efecto de cada decisión alternativa sobre la lectura que tú mismo produjiste en el Sprint 01.</p>
@@ -508,11 +510,11 @@ textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
       </div>
       <p style="font-weight:700;font-size:14px;color:var(--carbon);margin-bottom:12px;">Paso a paso</p>
       <ul class="step-list">
-        <li><span>Reconstruir la Ficha de Cobertura a partir del caso: la decisión de negocio, su dueño y los tres parámetros con su justificación.</span></li>
-        <li><span>Emitir el dictamen de anclaje por parámetro —bien establecido / discutible / mal establecido—, resolviendo los cuatro puntos de tensión obligatorios: por qué 40 y no 850; por qué la segmentación generacional se aplicó solo al equipo de campo; por qué el liderazgo se observó y no se midió como población propia; y qué protegió la ventana.</span></li>
-        <li><span>Construir la auditoría contrafáctica de tres escenarios de contaminación —población ampliada, segmentación ausente, encuadre amenazante— y declarar qué conclusión propia se habría perdido en cada uno.</span></li>
+        <li><span>Reconstruir la <a class="gloss-link" href="https://digitalchangeadvisors.com/centro-baip/#g-ficha-cobertura" target="_blank" rel="noopener">Ficha de Cobertura</a> a partir del caso: la decisión de negocio, su dueño y los tres parámetros con su justificación.</span></li>
+        <li><span>Emitir el <a class="gloss-link" href="https://digitalchangeadvisors.com/centro-baip/#g-dictamen-anclaje" target="_blank" rel="noopener">dictamen de anclaje</a> por parámetro —bien establecido / discutible / mal establecido—, resolviendo los cuatro puntos de tensión obligatorios: por qué 40 y no 850; por qué la segmentación generacional se aplicó solo al equipo de campo; por qué el liderazgo se observó y no se midió como población propia; y qué protegió la ventana.</span></li>
+        <li><span>Construir la <a class="gloss-link" href="https://digitalchangeadvisors.com/centro-baip/#g-auditoria-contrafactica" target="_blank" rel="noopener">auditoría contrafáctica</a> de tres escenarios de contaminación —población ampliada, segmentación ausente, encuadre amenazante— y declarar qué conclusión propia se habría perdido en cada uno.</span></li>
         <li><span>Redactar las dos versiones del encuadre de lanzamiento —correcta y amenazante— y el obstáculo que la segunda dispararía.</span></li>
-        <li><span>Emitir el Certificado de Límites de Validez del expediente, incluida la condición del AILS como señal indicativa.</span></li>
+        <li><span>Emitir el <a class="gloss-link" href="https://digitalchangeadvisors.com/centro-baip/#g-certificado-limites-validez" target="_blank" rel="noopener">Certificado de Límites de Validez</a> del expediente, incluida la condición del AILS como <a class="gloss-link" href="https://digitalchangeadvisors.com/centro-baip/#g-validacion-psicometrica" target="_blank" rel="noopener">señal indicativa</a>.</span></li>
       </ul>
     </div>
   </div>
