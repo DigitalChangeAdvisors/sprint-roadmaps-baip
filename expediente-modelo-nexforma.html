@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Expediente Modelo Nexforma · Analista BAIP · DCA</title>
+<meta name="description" content="Expediente modelo anotado del caso Nexforma Industrial: de la captura de los tres instrumentos al deck de junta. Certificación Analista BAIP — Digital Change Academy.">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#2e8b76; --teal-dk:#247060; --gold:#a48111; --carbon:#1e2a38;
+    --platinum:#dfe3e1; --teal-bg:rgba(46,139,118,.06); --teal-bd:rgba(46,139,118,.18);
+    --gold-bg:rgba(164,129,17,.07); --grey:#6b7280;
+    --c-caut:#C2593F; --c-vuln:#E67E22; --c-dies:#F4A500; --c-opt:#2E8B76;
+    --fd:'Marcellus',Georgia,serif; --fb:'Montserrat','Helvetica Neue',sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:var(--fb);color:var(--carbon);background:#eef0ef;font-size:15px;line-height:1.7;}
+  a{color:var(--teal-dk);}
+
+  .hero{background:var(--carbon);padding:40px 22px 36px;}
+  .hero-in{max-width:900px;margin:0 auto;}
+  .kicker{color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;}
+  .hero h1{font-family:var(--fd);font-weight:400;color:#fff;font-size:36px;margin:10px 0 8px;line-height:1.15;}
+  .hero p{color:rgba(255,255,255,.74);font-size:14px;margin:0;max-width:680px;}
+  .hero .bar{height:5px;width:70px;background:var(--teal);border-radius:3px;margin-top:18px;}
+
+  nav.toc{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--platinum);}
+  nav.toc div{max-width:900px;margin:0 auto;padding:8px 22px;display:flex;gap:6px;flex-wrap:wrap;}
+  nav.toc a{font-size:12px;font-weight:600;text-decoration:none;color:var(--carbon);padding:5px 12px;border-radius:16px;border:1.5px solid var(--platinum);}
+  nav.toc a:hover{border-color:var(--teal);color:var(--teal-dk);}
+
+  .wrap{max-width:900px;margin:0 auto;padding:26px 22px 70px;}
+  section{background:#fff;border:1px solid #e6e8e7;border-radius:12px;padding:28px 30px;margin-bottom:22px;}
+  h2{font-family:var(--fd);font-weight:400;font-size:25px;margin:0 0 4px;color:var(--carbon);}
+  h3{font-family:var(--fd);font-weight:400;font-size:19px;margin:24px 0 8px;color:var(--carbon);}
+  .part{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);}
+  p{margin:8px 0;}
+  ul{margin:8px 0;padding-left:22px;} li{margin:4px 0;}
+
+  .aviso{background:var(--gold-bg);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:14px 18px;font-size:13.5px;margin-bottom:22px;}
+  .aviso b{color:var(--carbon);}
+  .nota{background:var(--teal-bg);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:12px 16px;font-size:13.5px;margin:16px 0;}
+  .nota .hd{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-dk);margin-bottom:3px;}
+
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0;}
+  th{background:var(--carbon);color:#fff;font-weight:600;text-align:left;padding:8px 10px;font-size:12px;}
+  td{padding:8px 10px;border-bottom:1px solid #e6e8e7;vertical-align:top;}
+  tr:nth-child(even) td{background:#fafbfa;}
+  .tw{overflow-x:auto;}
+
+  .lvl{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:10px;color:#fff;white-space:nowrap;}
+  .lvl.c{background:var(--c-caut);} .lvl.v{background:var(--c-vuln);} .lvl.d{background:var(--c-dies);color:var(--carbon);} .lvl.o{background:var(--c-opt);} .lvl.n{background:#c9cdcb;color:var(--carbon);}
+
+  .kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:14px 0;}
+  .kpi div{border:1px solid #e6e8e7;border-radius:10px;padding:12px 14px;background:#fafbfa;}
+  .kpi b{display:block;font-family:var(--fd);font-weight:400;font-size:26px;color:var(--carbon);line-height:1.1;}
+  .kpi span{font-size:12px;color:var(--grey);}
+
+  .deck{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:16px;margin-top:14px;}
+  .slide{aspect-ratio:16/9;border:1px solid var(--platinum);border-radius:8px;background:#fff;padding:18px 22px 26px;display:flex;flex-direction:column;position:relative;}
+  .slide.dark{background:var(--carbon);color:#fff;border-color:var(--carbon);}
+  .slide .n{position:absolute;right:14px;bottom:8px;font-size:10px;color:var(--grey);}
+  .slide.dark .n{color:rgba(255,255,255,.5);}
+  .slide h4{font-family:var(--fd);font-weight:400;font-size:17px;line-height:1.25;margin:0 0 10px;}
+  .slide.dark h4{font-size:21px;}
+  .slide .body{font-size:11.5px;line-height:1.5;flex:1;}
+  .slide .body table{font-size:10.5px;margin:4px 0;} .slide .body th,.slide .body td{padding:3px 6px;}
+  .slide .tag{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px;}
+  .slide ul{padding-left:16px;margin:4px 0;} .slide li{margin:2px 0;}
+  @media (max-width:600px){ .hero h1{font-size:28px;} section{padding:20px 16px;} .deck{grid-template-columns:1fr;} }
+  @media print{ nav.toc{display:none;} body{background:#fff;} section{break-inside:avoid-page;border:none;} }
+</style>
+</head>
+<body>
+
+<div class="hero"><div class="hero-in">
+  <div class="kicker">Digital Change Academy · Certificación Analista BAIP</div>
+  <h1>Expediente Modelo · Nexforma Industrial</h1>
+  <p>Un caso completo de punta a punta: desde la captura de los tres instrumentos (AIMT, AILS y AICD) hasta el Reporte BAIP (S1–S7), el deck para la junta y la captura de la decisión. Con notas de calibración.</p>
+  <div class="bar"></div>
+</div></div>
+
+<nav class="toc"><div>
+  <a href="#leer">Cómo leerlo</a>
+  <a href="#captura">A · Captura</a>
+  <a href="#reporte">B · Reporte BAIP</a>
+  <a href="#deck">C · Deck de junta</a>
+  <a href="#defensa">D · Defensa y decisión</a>
+  <a href="#calibrar">E · Calibra tu expediente</a>
+</div></nav>
+
+<div class="wrap">
+
+<!-- ═══════════ CÓMO LEERLO ═══════════ -->
+<section id="leer">
+  <div class="part">Antes de empezar</div>
+  <h2>Cómo leer este expediente</h2>
+  <div class="aviso"><b>Este documento se libera después de tu última entrega.</b> Su propósito es que contrastes tu criterio con el de un caso completo, no que lo uses para construir el tuyo. Si ya estás leyendo esto, tu trabajo está enviado: ahora el ejercicio es comparar, no copiar.</div>
+  <p>Nexforma Industrial es el caso sintético que trabajaste en los Sprints 01 y 02: fabricante B2B de refrigeración comercial e industrial, ≈ 850 empleados, y un núcleo comercial de 40 personas donde se aplicó una suite de IA de <b>USD 1,4 millones</b>. Ninguna empresa real está representada.</p>
+  <p>El expediente sigue el mismo recorrido que hiciste tú:</p>
+  <ul>
+    <li><b>A · Captura:</b> qué se midió, a quién y qué dijo cada lente (lecturas clínicas del Sprint 01).</li>
+    <li><b>B · Reporte BAIP (S1–S7):</b> el cruce, la causa raíz, el plan, el modelo de impacto y la decisión solicitada.</li>
+    <li><b>C · Deck de junta:</b> el mismo reporte convertido en diez láminas con títulos que afirman la conclusión.</li>
+    <li><b>D · Defensa y decisión:</b> la matriz de anticipación de objeciones y el acta de captura (S7).</li>
+    <li><b>E · Calibra tu expediente:</b> preguntas para contrastar densidad, profundidad y continuidad con el tuyo.</li>
+  </ul>
+  <div class="nota"><div class="hd">Cómo leer las notas</div>Los recuadros verdes explican <b>por qué</b> una decisión está donde está. Léelos después de formarte tu propia opinión sobre cada sección. Los niveles usan la escala canónica:
+    <span class="lvl c">Cautela</span> <span class="lvl v">Vulnerable</span> <span class="lvl d">Diestro</span> <span class="lvl o">Óptimo</span>.</div>
+  <div class="nota"><div class="hd">Frontera de propiedad intelectual</div>Todo lo que ves son resultados procesados por la plataforma DCA: niveles, distribuciones y lecturas. No hay reactivos, scoring ni baremos. Los componentes del Modelo ARIA se nombran sin su mecánica, que es capa protegida y se obtiene con la solución ReturnAI. Los datos son sintéticos y las proyecciones son ilustrativas.</div>
+</section>
+
+<!-- ═══════════ A · CAPTURA ═══════════ -->
+<section id="captura">
+  <div class="part">Parte A</div>
+  <h2>Captura primaria y lecturas clínicas</h2>
+
+  <h3>A.1 · Ficha de cobertura</h3>
+  <div class="tw"><table>
+    <tr><th style="width:28%">Parámetro</th><th>Detalle</th></tr>
+    <tr><td>Decisión que sostiene el diagnóstico</td><td>Si se autoriza el desbloqueo de la suite de IA que hoy rinde casi cero sobre una inversión de USD 1,4 M.</td></tr>
+    <tr><td>Dueños del KPI</td><td>Esteban Pradilla (Director Comercial, dueño del plan) y Ricardo Mejía (COO, validador). No Recursos Humanos.</td></tr>
+    <tr><td>Población</td><td>Núcleo comercial: 40 personas. 8 de mando medio, 14 de operación y back-office, 18 de campo (12 jóvenes y 6 senior con más de 15 años).</td></tr>
+    <tr><td>Segmentación</td><td>Por función y por generación en el equipo de campo.</td></tr>
+    <tr><td>Ventana</td><td>14–25 de abril de 2026, protegida de los cierres de mes. Encuadre de lanzamiento firmado por el Director Comercial y el COO.</td></tr>
+    <tr><td>Instrumentos</td><td>AIMT (qué cree la gente), AILS (cómo se comporta el liderazgo) y AICD (qué institucionaliza el sistema), por la plataforma DCA.</td></tr>
+  </table></div>
+  <div class="nota"><div class="hd">Por qué 40 y no 850</div>La decisión se toma sobre el núcleo comercial, que es donde vive el KPI. Medir a los 850 habría mezclado culturas distintas (planta, finanzas, logística) y diluido la señal. El límite es honesto: el diagnóstico <b>no se extrapola</b> al resto de la empresa, y así se declara en el Certificado de Límites de Validez.</div>
+
+  <h3>A.2 · La línea base del KPI que importa</h3>
+  <div class="kpi">
+    <div><b>22%</b><span>uso activo de la suite (meta ≥ 75%)</span></div>
+    <div><b>8,6 d</b><span>ciclo cotización → pedido (base 9,0; meta 6,3)</span></div>
+    <div><b>20%</b><span>conversión (base 19%; meta 26%)</span></div>
+    <div><b>26%</b><span>MAPE del pronóstico (base 28%; meta 18%)</span></div>
+  </div>
+  <p>Catorce meses después de la compra, los tres KPIs de negocio están casi donde empezaron. El uso activo es el indicador adelantado: mientras no suba, los otros no se mueven.</p>
+  <div class="tw"><table>
+    <tr><th>Segmento</th><th>Personas</th><th>Uso activo</th></tr>
+    <tr><td>Campo senior</td><td>6</td><td>8%</td></tr>
+    <tr><td>Mando medio</td><td>8</td><td>18%</td></tr>
+    <tr><td>Operación y back-office</td><td>14</td><td>24%</td></tr>
+    <tr><td>Campo joven</td><td>12</td><td>28%</td></tr>
+  </table></div>
+
+  <h3>A.3 · Lectura clínica del AIMT (mentalidad)</h3>
+  <p><b>Qué reporta la lente.</b> Las creencias más consolidadas y extendidas a toda la unidad no son de miedo: son la dependencia del modelaje del líder (C14–C16) y el abandono de la herramienta ante la fricción de acceso (C5), todas en <span class="lvl c">Cautela</span>. El miedo al desplazamiento (C27–C28) y el sesgo generacional (C12–C13) también están en Cautela, pero solo en el polo senior. La base muestra señales <span class="lvl d">Diestro</span> en aprender haciendo (C26) y mentalidad de crecimiento (C24). Ninguna creencia llega a <span class="lvl o">Óptimo</span>.</p>
+  <p><b>Qué no ve.</b> Mide creencias, es decir, la sombra de la causa. No puede confirmar si el liderazgo realmente no usa la IA (conducta, lo ve el AILS) ni si la institución obstruye el acceso (estructura, lo ve el AICD).</p>
+
+  <h3>A.4 · Lectura clínica del AILS (liderazgo)</h3>
+  <div class="tw"><table>
+    <tr><th>Competencia (5Cs)</th><th>Nivel</th><th>Acuerdo entre observadores</th></tr>
+    <tr><td>Coherencia</td><td><span class="lvl c">Cautela crítica</span></td><td>Alto</td></tr>
+    <tr><td>Cuidado</td><td><span class="lvl c">Cautela</span></td><td>Alto</td></tr>
+    <tr><td>Cocreación</td><td><span class="lvl c">Cautela</span></td><td>Medio-alto</td></tr>
+    <tr><td>Confianza</td><td><span class="lvl v">Vulnerable</span></td><td>Medio</td></tr>
+    <tr><td>Conexión</td><td><span class="lvl v">Vulnerable</span></td><td>Disperso</td></tr>
+  </table></div>
+  <p><b>Qué reporta.</b> La línea de mando exige el uso de la suite sin usarla ni patrocinarla con recursos visibles: el say-do gap del Director Comercial. El acuerdo alto entre observadores justo en las competencias en brecha refuerza la señal.</p>
+  <p><b>Qué no ve, y la cautela.</b> Mide conducta, no estructura. Y el AILS v1.0 llega sin validación psicométrica formal: se lee como <b>señal indicativa</b>, que gana peso solo cuando el AIMT y el AICD la confirman.</p>
+
+  <h3>A.5 · Lectura clínica del AICD (cultura)</h3>
+  <p><b>Qué reporta.</b> 19 de los 28 rasgos de ADN AI están en <span class="lvl c">Cautela</span> y el resto en <span class="lvl v">Vulnerable</span>. No hay arquitectura de acceso por rol (R15), la latencia de habilitación es de varios días (R16), no existe un órgano de gobierno con mandato (R13), se premia la antigüedad sobre el resultado (R23) y no hay un proceso de error sin culpa (R26). Las herramientas existen; el sistema que las haría rendir, no.</p>
+  <p><b>Qué no ve.</b> Es host de siete obstáculos (#1, #2, #3, #4, #7, #8, #9). El liderazgo desconectado (#6), la brecha generacional (#5) y el miedo (#10) los lee solo por inferencia.</p>
+
+  <div class="nota"><div class="hd">Qué mirar al contrastar</div>Fíjate en que cada lectura termina diciendo <b>qué no puede ver</b>. Esa declaración de cobertura es lo que obliga a cruzar. Si tu lectura clínica de una lente concluía “la causa es X” sin declarar su límite, estabas leyendo una lente como si fueran tres.</div>
+</section>
+
+<!-- ═══════════ B · REPORTE BAIP ═══════════ -->
+<section id="reporte">
+  <div class="part">Parte B</div>
+  <h2>Reporte BAIP · Nexforma Industrial (S1–S7)</h2>
+  <p style="color:var(--grey);font-size:13px">El texto del reporte se dirige al responsable del KPI. Las notas verdes son para ti.</p>
+
+  <h3>S1 · Síntesis Ejecutiva</h3>
+  <div style="border:1px solid var(--platinum);border-radius:8px;padding:16px 20px;background:#fafbfa">
+    <p style="font-family:var(--fd);font-size:19px;line-height:1.35;margin:0 0 10px">La inversión de USD 1,4 M está varada en 22% de uso por una barrera de acceso sin dueño, amplificada por un liderazgo que exige la suite sin respaldarla. El miedo del equipo no es la causa.</p>
+    <p><b>Hallazgo central.</b> El uso activo es 22% frente a una meta de 75%. El activo rinde casi cero y los tres KPIs de negocio volvieron hacia su línea base. El freno no está en las personas: la base está dispuesta. Está en un sistema de acceso que no existe y en un liderazgo que no lo compensa.</p>
+    <p><b>Costo de oportunidad.</b> Cerrar la brecha de conversión (20% a 26%) sobre una facturación de ≈ USD 95 M anuales equivale a un techo teórico de ≈ USD 7 M de ventas por trimestre. Solo una fracción es atribuible a la suite, pero cada trimestre sin intervenir deja esa diferencia sobre la mesa.</p>
+    <p><b>Tres prioridades.</b> (1) Retirar la barrera de acceso y crear el gobierno de la iniciativa. (2) Que el liderazgo respalde el uso de forma visible, inmediatamente después. (3) Cerrar los silos y reemplazar la capacitación de aula por práctica en el flujo real.</p>
+    <p><b>Horizonte.</b> Plan 30/60/90 con primer movimiento medible a los 30 días. Proyección de impacto a 120 días.</p>
+    <p><b>Próxima decisión.</b> Autorizar, ítem por ítem, los frentes de acceso, gobierno y respaldo del liderazgo, y definir si se continúa con los demás sprints de la solución ReturnAI (ver S7).</p>
+  </div>
+  <div class="nota"><div class="hd">Por qué está así</div>La pregunta es la prueba de autocontención: ¿decide el lector con solo esta página? Observa que (a) abre con la conclusión, no con los 40 datos; (b) el costo de oportunidad usa la <b>pérdida recurrente</b>, no “lo que ya se gastó” (eso sería costo hundido); y (c) la cifra de ≈ USD 7 M se declara como <b>techo teórico</b>, porque un pipeline cotizado no es ingreso en riesgo. Su derivación: ≈ USD 95 M ÷ 20% de conversión ≈ USD 475 M de pipeline anual cotizado; a 26% serían ≈ USD 123,5 M, es decir ≈ USD 28,5 M al año y ≈ USD 7 M por trimestre, suponiendo el mismo volumen de cotización.</div>
+
+  <h3>S2 · Ficha técnica de la medición</h3>
+  <p>Unidad de 40 personas del núcleo comercial, de ≈ 850 empleados. Instrumentos AIMT, AILS y AICD aplicados por la plataforma DCA del 14 al 25 de abril de 2026, con ventana protegida de cierres de mes y encuadre firmado por el Director Comercial y el COO. Marco de lectura: los diez obstáculos canónicos, en la escala Cautela · Vulnerable · Diestro · Óptimo.</p>
+  <p><b>Límites de validez.</b> (1) El diagnóstico describe al núcleo comercial y no se extrapola al resto de la empresa. (2) El AILS v1.0 es señal indicativa, sostenida aquí por su coincidencia con el AIMT y el AICD. (3) El rasgo R28 del AICD es un constructo provisional.</p>
+  <div class="nota"><div class="hd">Por qué está así</div>Esta ficha es la respuesta documentada a “¿la muestra es representativa?”. No se escribe para defender el estudio, sino para <b>delimitar lo que afirma</b>. Un límite declarado con claridad protege más que un silencio.</div>
+
+  <h3>S3 · Diagnóstico Integrado</h3>
+  <div class="tw"><table>
+    <tr><th>Obstáculo</th><th>AIMT</th><th>AILS</th><th>AICD</th></tr>
+    <tr><td>#1 Claridad de valor</td><td><span class="lvl v">Vulnerable</span></td><td><span class="lvl v">Vulnerable</span></td><td><span class="lvl v">Vulnerable</span></td></tr>
+    <tr><td><b>#2 Fricción de governance</b></td><td><span class="lvl c">Cautela</span></td><td><span class="lvl v">Vulnerable</span></td><td><span class="lvl c">Cautela</span></td></tr>
+    <tr><td>#3 Políticas de talento</td><td><span class="lvl v">Vulnerable</span></td><td><span class="lvl n">—</span></td><td><span class="lvl v">Vulnerable</span></td></tr>
+    <tr><td>#4 Silos culturales</td><td><span class="lvl v">Vulnerable</span></td><td><span class="lvl c">Cautela</span></td><td><span class="lvl c">Cautela</span></td></tr>
+    <tr><td>#5 Brecha generacional</td><td><span class="lvl c">Cautela · senior</span></td><td><span class="lvl v">Vulnerable</span></td><td><span class="lvl n">inferido</span></td></tr>
+    <tr><td><b>#6 Liderazgo desconectado</b></td><td><span class="lvl c">Cautela · extendido</span></td><td><span class="lvl c">Cautela crítica</span></td><td><span class="lvl n">residual</span></td></tr>
+    <tr><td>#7 Creencias limitantes</td><td><span class="lvl v">Vulnerable</span></td><td><span class="lvl n">—</span></td><td><span class="lvl c">Cautela</span></td></tr>
+    <tr><td>#8 Seguridad para experimentar</td><td><span class="lvl v">Vulnerable</span></td><td><span class="lvl c">Cautela</span></td><td><span class="lvl c">Cautela</span></td></tr>
+    <tr><td>#9 Capacitación sin impacto</td><td><span class="lvl d">Diestro</span></td><td><span class="lvl n">—</span></td><td><span class="lvl c">Cautela</span></td></tr>
+    <tr><td>#10 Miedo al desplazamiento</td><td><span class="lvl c">Cautela · senior</span></td><td><span class="lvl c">Cautela</span></td><td><span class="lvl n">residual</span></td></tr>
+  </table></div>
+  <p><b>Los tres cruces.</b></p>
+  <ul>
+    <li><b>Triangulación.</b> Un obstáculo se confirma cuando lo señalan dos o más lentes. La fricción de governance aparece en las tres; el AIMT la ve como abandono ante la fricción, el AILS como remoción parcial y el AICD como ausencia de arquitectura de acceso.</li>
+    <li><b>Coherencia sistémica.</b> Creencia (dependencia del líder), conducta (say-do gap) y estructura (sin órgano de gobierno) se refuerzan entre sí. Ese refuerzo multiplica la severidad y se nombra en el reporte.</li>
+    <li><b>Tensión productiva.</b> La base ya está dispuesta (AIMT en Diestro para aprender haciendo). Las personas van más adelante que el sistema. El cuello de botella no es preparar a la gente: es desbloquear lo que la frena.</li>
+  </ul>
+  <div class="nota"><div class="hd">Por qué está así</div>Mira la fila #6: es la <b>más fuerte</b> de la tabla (Cautela en las tres lentes). Por eso seduce, y es el señuelo de segundo orden. La fila #2 parece menos dramática, pero la prueba de distribución de S4 la ubica primero. La señal más fuerte no siempre es la causa: es el efecto más visible de la causa.</div>
+
+  <h3>S4 · Mapa de Causa Raíz</h3>
+  <div class="tw"><table>
+    <tr><th>Nivel causal</th><th>Obstáculo</th><th>Componentes ARIA</th><th>Por qué está aquí</th></tr>
+    <tr><td><b>Keystone</b></td><td>#2 Fricción de governance</td><td>AINS + AIGC</td><td>Sin acceso por rol y con latencia de días, nadie puede usar la suite aunque quiera. Es el freno estructural directo al 22%.</td></tr>
+    <tr><td>Amplificado</td><td>#6 Liderazgo desconectado</td><td>AILS + Framework LEIA</td><td>Real y severo. El say-do gap le retira al equipo la razón para atravesar la barrera. Va segundo en la secuencia, no último.</td></tr>
+    <tr><td>Co-causa</td><td>#4 Silos culturales</td><td>AICD + AINS</td><td>Lo que una zona aprende no llega a la otra; sin incentivo ni mecanismo para compartir.</td></tr>
+    <tr><td>Agravante</td><td>#9 Capacitación sin impacto</td><td>DAS + MATCH</td><td>La base quiere aprender haciendo; la institución dio un webinar hace 14 meses.</td></tr>
+    <tr><td>Señuelo (1.er orden)</td><td>#10 Miedo · #5 Generacional</td><td>AICD + AIIB</td><td>Real pero localizado en 6 de 40. Es lo que la dirección cree que es la causa.</td></tr>
+  </table></div>
+  <h3>La prueba de distribución</h3>
+  <svg viewBox="0 0 560 190" width="100%" role="img" aria-label="Uso activo por segmento: senior 8%, mando medio 18%, back-office 24%, campo joven 28%, meta 75%" style="max-width:560px">
+    <g font-family="Montserrat,sans-serif" font-size="11" fill="#1e2a38">
+      <line x1="120" y1="10" x2="120" y2="170" stroke="#dfe3e1"/>
+      <text x="0" y="36">Campo senior (6)</text><rect x="120" y="22" width="48" height="20" fill="#C2593F"/><text x="174" y="37" font-weight="700">8%</text>
+      <text x="0" y="76">Mando medio (8)</text><rect x="120" y="62" width="108" height="20" fill="#a48111"/><text x="234" y="77" font-weight="700">18%</text>
+      <text x="0" y="116">Back-office (14)</text><rect x="120" y="102" width="144" height="20" fill="#a48111"/><text x="270" y="117" font-weight="700">24%</text>
+      <text x="0" y="156">Campo joven (12)</text><rect x="120" y="142" width="168" height="20" fill="#a48111"/><text x="294" y="157" font-weight="700">28%</text>
+      <line x1="450" y1="10" x2="450" y2="170" stroke="#2e8b76" stroke-width="2" stroke-dasharray="4 3"/>
+      <text x="400" y="186" fill="#247060" font-weight="700">Meta 75%</text>
+    </g>
+  </svg>
+  <p>Descontado el polo senior, los tres segmentos restantes usan la suite en una banda de 18% a 28%, todos muy por debajo de la meta y todos por igual. Un freno de liderazgo decae con la distancia al líder: el mando medio, que lo ve cada semana en el comité, y el back-office, que apenas lo ve, no podrían mostrar niveles comparables. Un freno de acceso no discrimina: golpea a todo el que intente usar la herramienta. La uniformidad del uso bajo es la huella de la fricción de governance.</p>
+  <div class="nota"><div class="hd">Por qué está así</div>Hay <b>dos señuelos encajados</b>. El de primer orden (“le temen a la IA”) lo desmiente la distribución: 6 de 40. El de segundo orden es más difícil: el liderazgo es un hallazgo verdadero, pero está mal ubicado en la cadena. La gobernanza fija el costo estructural de usar la herramienta; el liderazgo determina si alguien está dispuesto a pagarlo. La secuencia correcta es retirar la barrera y, de inmediato, respaldar. Invertirla quema la palanca más costosa de la empresa con la barrera todavía en pie.</div>
+
+  <h3>S5 · Plan de Intervención (30/60/90)</h3>
+  <div class="tw"><table>
+    <tr><th>#</th><th>Obstáculo que cierra</th><th>Componentes</th><th>Métrica de adopción</th><th>Corte</th><th>Hecho auditable</th></tr>
+    <tr><td>1</td><td>#2 Fricción de governance (keystone)</td><td>AINS + AIGC</td><td>Tiempo de acceso efectivo; solicitudes resueltas sin aprobación excepcional</td><td>30</td><td>Matriz de accesos por rol aprobada (R15) con SLA de habilitación publicado (R16) y decreto que crea el comité de gobierno de la iniciativa de IA, con mandato y presupuesto (R13)</td></tr>
+    <tr><td>2</td><td>#6 Liderazgo desconectado (amplificado)</td><td>AILS + Framework LEIA</td><td>Decisiones comerciales tomadas con la suite a la vista del equipo, por semana</td><td>60</td><td>Norma de comités basada en datos (R24): el comité semanal abre el pronóstico de la suite, con acta</td></tr>
+    <tr><td>3</td><td>#4 Silos culturales (co-causa)</td><td>AICD + AINS</td><td>Prácticas de IA replicadas de un frente comercial a otro</td><td>60</td><td>Repositorio oficial de prácticas con responsable (R2) y reglamento de incentivos intersilo aprobado (R3)</td></tr>
+    <tr><td>4</td><td>#9 Capacitación sin impacto (agravante)</td><td>DAS + MATCH</td><td>Aplicaciones de la suite ejecutadas en el flujo real de cotización</td><td>90</td><td>Itinerario de práctica firmado, con tiempo protegido (R7)</td></tr>
+    <tr><td>5</td><td>#10 Miedo al desplazamiento (señuelo)</td><td>AICD + AIIB</td><td>Uso declarado, no oculto, en el polo senior</td><td>90</td><td>Comunicación formal del futuro de los roles (R20) con ruta de reskilling (R21), firmada por Gestión Humana</td></tr>
+  </table></div>
+  <p><b>Delegación.</b> El COO aprueba los decretos de política; la ejecución táctica la asumen el Director Comercial (acciones 1 a 4) y Gestión Humana (acción 5). El COO no interviene en el seguimiento de bajo nivel.</p>
+  <div class="nota"><div class="hd">Por qué está así</div>Ninguna acción dice “capacitar”, “sensibilizar” o “reunir”. Cada una nombra su obstáculo, sus componentes, un comportamiento que cambia y un <b>hecho que existe y se puede verificar</b>. Si una fila no pasa la prueba de las cuatro preguntas (¿existe?, ¿tiene dueño?, ¿tiene fecha?, ¿se puede verificar?), sigue siendo una actividad. La acción 5 va al final porque el miedo es el síntoma, no el punto de entrada.</div>
+
+  <h3>S6 · Modelo de Impacto y Caso de Valor</h3>
+  <p><b>Cadena causal.</b> Acción del plan → métrica de adopción (indicador adelantado) → KPI de negocio (indicadores rezagados). El primer movimiento se espera de la gobernanza, al corte de 30 días: es el que hace creíble todo lo demás.</p>
+  <div class="tw"><table>
+    <tr><th>Indicador</th><th>Hoy</th><th>Conservador</th><th>Realista</th><th>Optimista</th></tr>
+    <tr><td>Uso activo (adelantado)</td><td>22%</td><td>40–45%</td><td>55–65%</td><td>70–75%</td></tr>
+    <tr><td>Ciclo cotización → pedido</td><td>8,6 d</td><td>8,0–7,6 d</td><td>7,2–6,8 d</td><td>6,6–6,3 d</td></tr>
+    <tr><td>Tasa de conversión</td><td>20%</td><td>21–22%</td><td>22–24%</td><td>25–26%</td></tr>
+    <tr><td>MAPE del pronóstico</td><td>26%</td><td>25–24%</td><td>22–20%</td><td>19–18%</td></tr>
+  </table></div>
+  <p style="font-size:12.5px;color:var(--grey)">Proyección ilustrativa a 120 días sobre el caso sintético. No es una garantía.</p>
+  <p><b>Caso de valor.</b> (1) <i>KPI que importa:</i> ciclo de cotización y conversión; la suite de USD 1,4 M se compró para mover esos números. (2) <i>Costo de la inacción:</i> con 22% de uso frente a 75%, cerca del 70% de la capacidad adquirida (≈ USD 1,0 M de los 1,4 M) no está rindiendo; lo que se pierde cada trimestre es retorno, no gasto pasado. (3) <i>Benchmark:</i> se cita como referencia de categoría, nunca como promesa.</p>
+  <div class="nota"><div class="hd">Por qué está así</div>Cada cifra se rastrea a un KPI del cliente y se declara como proyección. La primera línea del modelo es la <b>adopción</b>, no el KPI de negocio, porque prometer que el ciclo baje directamente sería mentir sobre el mecanismo. El modelo no proyecta un salto de adopción desde la intervención de liderazgo: eso sería prometer movimiento contra una barrera que sigue en pie.</div>
+
+  <h3>S6 bis · Dos caminos para el cliente</h3>
+  <div class="tw"><table>
+    <tr><th>Plan 30/60/90 (S5)</th><th>Solución ReturnAI a 120 días</th></tr>
+    <tr><td>Secuencia de acciones sugeridas para destrabar la causa raíz y empezar a evidenciar que fluye el valor de la inversión en IA. Resuelve el desafío inmediato. <b>No deja transferencia de tecnología ni plan de continuidad.</b></td><td>Resuelve de forma sistémica todos los obstáculos, no solo los de causa raíz, y <b>sí deja transferencia y sostenimiento</b>. Son 6 sprints en 120 días: el primero, Brecha AI Personas, queda hecho con este diagnóstico; faltan 5 sprints en las siguientes 17 semanas.</td></tr>
+  </table></div>
+  <p>Si el cliente puede invertir en ReturnAI, ese es el camino ideal. Si tiene restricciones de presupuesto, se le sugiere implementar tantas acciones del plan 30/60/90 como pueda. El analista no cambia la solución: la da a conocer.</p>
+
+  <h3>S7 · Síntesis y Decisión</h3>
+  <p><b>Decisión solicitada, ítem por ítem.</b></p>
+  <div class="tw"><table>
+    <tr><th>#</th><th>Qué se solicita autorizar</th><th>Recursos</th><th>Responsable</th><th>Fecha</th></tr>
+    <tr><td>1</td><td>Matriz de accesos por rol y SLA de habilitación de la suite</td><td>Tiempo de TI; sin inversión nueva en licencias (ya cubren a los 40)</td><td>Director Comercial, con TI</td><td>Semana 1 (cierre a los 30 días)</td></tr>
+    <tr><td>2</td><td>Comité de gobierno de la iniciativa de IA, con mandato y presupuesto</td><td>A definir por el COO</td><td>COO (decreto) y Director Comercial</td><td>Semana 2</td></tr>
+    <tr><td>3</td><td>Norma de comités basada en datos: el comité semanal abre el pronóstico de la suite</td><td>Sin costo</td><td>Director Comercial</td><td>Semana 4</td></tr>
+    <tr><td>4</td><td>Frentes de silos, práctica en el flujo y comunicación de roles (acciones 3 a 5)</td><td>A definir</td><td>Director Comercial y Gestión Humana</td><td>Cortes 60 y 90</td></tr>
+    <tr><td>5</td><td>Continuidad: ¿se avanza con los 5 sprints restantes de la solución ReturnAI, o se ejecuta solo el plan 30/60/90 con recursos propios?</td><td>Según la opción elegida</td><td>COO</td><td>Semana 4</td></tr>
+  </table></div>
+  <p><b>Alcance.</b> Este registro documenta la decisión del responsable del KPI sobre una recomendación sustentada. No es un compromiso contractual. El cliente puede contratar las acciones propuestas con DCA o con cualquier otro proveedor que considere conveniente.</p>
+  <p><b>Delegación.</b> El COO aprueba los decretos de política y delega la ejecución táctica en el Director Comercial y en Gestión Humana, según se indica en S1 y en este registro.</p>
+  <p><b>Riesgo de no actuar.</b> Cada trimestre sin intervenir, el activo sigue varado y el costo de oportunidad se acumula. Además, la base dispuesta, que es el activo más valioso del diagnóstico, se desengancha; recuperarla cuesta mucho más que aprovecharla ahora.</p>
+  <div class="nota"><div class="hd">Por qué está así</div>La decisión es <b>específica</b> (qué, con qué recursos, para cuándo), no “considerar las recomendaciones”. Cada ítem de S7 aparece en S1 con las mismas palabras: esa es la coherencia 1:1 que verifica el checklist del Centro de Ayuda. La delegación va explícita en S1 y S7 para que quien firma sepa que no tendrá que intervenir en el seguimiento operativo.</div>
+</section>
+
+<!-- ═══════════ C · DECK ═══════════ -->
+<section id="deck">
+  <div class="part">Parte C</div>
+  <h2>Deck para la junta directiva</h2>
+  <p>El mismo reporte en diez láminas, para unos 20 minutos de presentación y el resto para la conversación. Cada título afirma la conclusión; ninguno nombra solo el tema.</p>
+  <div class="deck">
+
+    <div class="slide dark"><div class="tag">Nexforma Industrial · Brecha AI Personas</div><h4>La inversión de USD 1,4 M está varada, no perdida</h4><div class="body">Y se puede desbloquear en 30 días con una decisión de esta sala.<br><br>Presenta: Analista BAIP · Digital Change Advisors</div><span class="n">1</span></div>
+
+    <div class="slide"><div class="tag">Hallazgo central</div><h4>La suite se usa al 22%, frente a una meta de 75%: el activo rinde casi cero</h4><div class="body"><table><tr><th>KPI</th><th>Base</th><th>Meta</th><th>Real</th></tr><tr><td>Ciclo (días)</td><td>9,0</td><td>6,3</td><td>8,6</td></tr><tr><td>Conversión</td><td>19%</td><td>26%</td><td>20%</td></tr><tr><td>MAPE</td><td>28%</td><td>18%</td><td>26%</td></tr></table>Catorce meses después, los KPIs están casi donde empezaron.</div><span class="n">2</span></div>
+
+    <div class="slide"><div class="tag">El señuelo</div><h4>El miedo a la IA es real, pero está en 6 de 40 personas</h4><div class="body"><ul><li>Es el 15% de la unidad: el polo senior.</li><li>El 85% restante está dispuesto: aprende haciendo.</li><li>Intervenir el miedo movería a 6 personas y dejaría intacto el freno de las otras 34.</li></ul></div><span class="n">3</span></div>
+
+    <div class="slide"><div class="tag">Triangulación</div><h4>Tres instrumentos independientes señalan la misma barrera: el acceso</h4><div class="body"><ul><li><b>Mentalidad:</b> la gente abandona la suite cuando acceder cuesta.</li><li><b>Liderazgo:</b> remoción de fricciones solo parcial.</li><li><b>Cultura:</b> sin arquitectura de acceso ni órgano de gobierno.</li></ul></div><span class="n">4</span></div>
+
+    <div class="slide"><div class="tag">La prueba</div><h4>El uso es igual de bajo en segmentos con distinta cercanía al líder</h4><div class="body">Mando medio 18% · Back-office 24% · Campo joven 28%.<br><br>Un freno de liderazgo decae con la distancia. Un freno de acceso no discrimina: golpea a todos por igual.</div><span class="n">5</span></div>
+
+    <div class="slide"><div class="tag">Cadena causal</div><h4>El liderazgo es el segundo frente, no el primero</h4><div class="body">El say-do gap es real y severo. Pero respaldar el uso de una herramienta inaccesible quema la credibilidad directiva sin mover el indicador.<br><br><b>Primero se retira la barrera; de inmediato, se respalda.</b></div><span class="n">6</span></div>
+
+    <div class="slide"><div class="tag">Plan</div><h4>En 90 días: se retira la barrera, se respalda y se instala la práctica</h4><div class="body"><table><tr><th>Corte</th><th>Frente</th></tr><tr><td>30</td><td>Acceso por rol, SLA y comité de gobierno</td></tr><tr><td>60</td><td>Respaldo visible y silos</td></tr><tr><td>90</td><td>Práctica en el flujo y futuro de los roles</td></tr></table></div><span class="n">7</span></div>
+
+    <div class="slide"><div class="tag">Impacto</div><h4>Si el uso sube, los KPIs la siguen: escenario realista a 120 días</h4><div class="body"><table><tr><th></th><th>Hoy</th><th>Realista</th></tr><tr><td>Uso activo</td><td>22%</td><td>55–65%</td></tr><tr><td>Ciclo</td><td>8,6 d</td><td>7,2–6,8 d</td></tr><tr><td>Conversión</td><td>20%</td><td>22–24%</td></tr></table>Proyección, no garantía.</div><span class="n">8</span></div>
+
+    <div class="slide"><div class="tag">Opción superior</div><h4>ReturnAI convierte el desbloqueo en retorno sostenido</h4><div class="body">6 sprints en 120 días; el primero ya está hecho con este diagnóstico. Deja transferencia y continuidad, que el plan 30/60/90 no deja.<br><br>Con restricciones de presupuesto: tantas acciones del 30/60/90 como se pueda.</div><span class="n">9</span></div>
+
+    <div class="slide dark"><div class="tag">Decisión</div><h4>Hoy solicitamos autorizar cinco ítems, con responsable y fecha</h4><div class="body"><ul><li>Accesos por rol y SLA (semana 1)</li><li>Comité de gobierno (semana 2)</li><li>Norma de comités con datos (semana 4)</li><li>Silos, práctica y roles (cortes 60 y 90)</li><li>Continuidad con ReturnAI, o plan 30/60/90 propio (semana 4)</li></ul></div><span class="n">10</span></div>
+  </div>
+  <div class="nota"><div class="hd">Por qué está así</div>La lámina 3 va antes de la 5 y la 6 a propósito: primero se descarta lo que el decisor ya “sabe” (el miedo), después se demuestra la causa, y recién entonces se concede lo que tiene razón (el liderazgo) y se ordena. Las láminas 8 y 9 separan la <b>proyección</b> de la <b>opción superior</b>. Nada de la mecánica de los componentes ARIA aparece en el deck.</div>
+</section>
+
+<!-- ═══════════ D · DEFENSA ═══════════ -->
+<section id="defensa">
+  <div class="part">Parte D</div>
+  <h2>Defensa y captura de la decisión</h2>
+
+  <h3>D.1 · Matriz de anticipación</h3>
+  <div class="tw"><table>
+    <tr><th>Objeción probable</th><th>Tipo</th><th>Hallazgo que la responde</th></tr>
+    <tr><td>“La gente le teme a la IA.”</td><td>Descarta una causa</td><td>La distribución: el miedo (#10) está en 6 de 40; el 22% de uso no cae por miedo generalizado, sino por fricción de acceso.</td></tr>
+    <tr><td>“Ya capacitamos y no funcionó.”</td><td>Descarta una causa</td><td>El AIMT: la base está en Diestro para aprender haciendo. Falló el formato (#9), no la disposición. El cierre es práctica en el flujo, no más capacitación.</td></tr>
+    <tr><td>“Es un problema generacional.”</td><td>Descarta una causa</td><td>Lo generacional (#5) coincide con los 6 senior: es parte del señuelo.</td></tr>
+    <tr><td>“¿La muestra es representativa?”</td><td>Descarta una causa</td><td>El Certificado de Límites de Validez (S2): 40 personas del núcleo comercial, sin extrapolar.</td></tr>
+    <tr><td>“¿No será solo percepción?”</td><td>Descarta una causa</td><td>La fundamentación obstáculo por obstáculo y la triangulación de tres métodos independientes.</td></tr>
+    <tr><td><b>“El problema es el liderazgo; corrijamos eso primero.”</b></td><td><b>Reordena una causa verdadera</b></td><td>Se concede el hallazgo y se sostiene el orden: el liderazgo (#6) es real y severo, por eso va segundo y no último. Pero el uso bajo es parejo (18% a 28%) entre segmentos con exposición muy distinta al líder: eso es la huella de un freno de acceso.</td></tr>
+  </table></div>
+  <div class="nota"><div class="hd">Por qué está así</div>Las primeras cinco respuestas <b>descartan</b> una causa. La última es distinta: el decisor tiene razón en el hallazgo y se equivoca en el orden. Aquí no se le dice que se equivoca; se concede y se sostiene en la misma frase. Es la única objeción del caso donde conceder y sostener van juntos, y la que más se entrena.</div>
+
+  <h3>D.2 · Acta de captura (S7), con los tres desenlaces redactados de antemano</h3>
+  <div class="tw"><table>
+    <tr><th>Desenlace</th><th>Texto que registraría el acta</th></tr>
+    <tr><td><b>Autoriza</b></td><td>“El COO y el Director Comercial autorizan los ítems 1 a 5 de S7 en los términos y fechas indicados. Responsables: [nombre y rol]. Primer corte: [fecha]. Ruta de continuidad elegida: [ReturnAI / plan 30/60/90 con recursos propios].”</td></tr>
+    <tr><td><b>Ajusta</b></td><td>“Se autorizan los ítems [lista]. Se ajustan los ítems [lista] así: [cambio]. Quedan fuera por ahora los ítems [lista], con revisión el [fecha]. Responsables y fechas: [detalle].”</td></tr>
+    <tr><td><b>Rechaza</b></td><td>“No se autoriza la intervención en esta etapa. Motivo expresado: [motivo]. Condición bajo la cual se reconsideraría: [condición]. Fecha de reapertura: [fecha].”</td></tr>
+  </table></div>
+  <p>Un “no” documentado cierra el ciclo y deja al analista en pie. Un “lo revisamos” indefinido lo deja esperando una decisión que no llegará. Ofrece el rechazo como opción legítima para que el decisor no se refugie en la ambigüedad.</p>
+  <div class="nota"><div class="hd">Por qué el interlocutor es este</div>La decisión es del Director Comercial y el COO porque ellos responden por el ciclo de cotización, la conversión y el pronóstico, y liberan el presupuesto. Gestión Humana participa en la ejecución (acción 5), pero no es quien decide sobre el KPI.</div>
+</section>
+
+<!-- ═══════════ E · CALIBRA ═══════════ -->
+<section id="calibrar">
+  <div class="part">Parte E</div>
+  <h2>Calibra tu expediente</h2>
+  <p>Con tu expediente al lado, contrasta estos puntos. No son una regla: son preguntas para calibrar densidad, profundidad y continuidad narrativa.</p>
+
+  <h3>Densidad (referencia aproximada, no norma)</h3>
+  <div class="tw"><table>
+    <tr><th>Sección</th><th>Referencia</th><th>Pregunta para ti</th></tr>
+    <tr><td>S1 Síntesis Ejecutiva</td><td>1 página</td><td>¿Decide el lector con solo esta página?</td></tr>
+    <tr><td>S2 Ficha técnica</td><td>½ página</td><td>¿Declara los límites, o solo describe el proceso?</td></tr>
+    <tr><td>S3 Diagnóstico Integrado</td><td>2 páginas</td><td>¿Integras o yuxtapones las tres lecturas?</td></tr>
+    <tr><td>S4 Mapa de Causa Raíz</td><td>1 página</td><td>¿Separas causa de señuelo, con la distribución como prueba?</td></tr>
+    <tr><td>S5 Plan</td><td>1 a 2 páginas</td><td>¿Cada acción tiene obstáculo, componente, métrica y hecho auditable?</td></tr>
+    <tr><td>S6 Impacto y valor</td><td>1 a 2 páginas</td><td>¿Cada cifra se rastrea a un KPI y está declarada como proyección?</td></tr>
+    <tr><td>S7 Decisión</td><td>1 página</td><td>¿Cada ítem está en S1 con las mismas palabras?</td></tr>
+  </table></div>
+
+  <h3>Profundidad entre sprints</h3>
+  <ul>
+    <li>¿Tu S3 dice algo que ninguna lectura clínica del Sprint 01 decía por separado?</li>
+    <li>¿Corregiste tu conclusión del Sprint 01 si la evidencia lo exigía, y lo documentaste como resultado esperado?</li>
+    <li>¿Tu S4 podría haber sido inferido por el cliente leyendo los tres reportes sueltos? Si sí, falta valor diferencial.</li>
+  </ul>
+
+  <h3>Continuidad narrativa</h3>
+  <ul>
+    <li>Sigue una cifra: el 22% aparece en S1, S3, S4 y S6. ¿Es el mismo en tu expediente?</li>
+    <li>Sigue un obstáculo: el keystone de S4 debe ser la fila 1 de S5 y la primera línea de S6.</li>
+    <li>Sigue un nombre: los responsables de S5 son los mismos de S7.</li>
+  </ul>
+
+  <div class="nota"><div class="hd">Para seguir</div>Usa también las guías del Centro de Ayuda: la <a href="https://digitalchangeadvisors.com/centro-baip/#q-matriz-actividades-hechos-auditables">conversión de actividades a hechos auditables</a> y el <a href="https://digitalchangeadvisors.com/centro-baip/#q-checklist-s1-s7">checklist de coherencia S1 vs. S7</a>.</div>
+</section>
+
+</div>
+
+<footer style="max-width:900px;margin:0 auto;padding:0 22px 40px;font-size:12px;color:var(--grey);text-align:center">
+  Digital Change Advisors · Modelo ARIA · Caso sintético de aprendizaje: datos ficticios de agregado; ninguna empresa real está representada.
+</footer>
+</body>
+</html>
