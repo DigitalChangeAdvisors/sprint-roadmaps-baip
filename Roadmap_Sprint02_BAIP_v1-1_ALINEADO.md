@@ -181,7 +181,7 @@ El Mapa de Causa Raíz priorizado (S4) del Exp 2 y los KPI reales de la unidad o
 
 **Paso a paso (≤5)**
 
-1. Por cada causa priorizada en S4, redactar una acción de S5 con sus cuatro anclas: obstáculo que cierra, componente ARIA (nombrado, sin mecánica), métrica dual de adopción (comportamiento y negocio) e hito-rol (corte 30/60/90/120 y dueño = responsable del KPI).
+1. Por cada causa priorizada en S4, redactar una acción de S5 con sus cuatro anclas: obstáculo que cierra, componente ARIA (nombrado, sin mecánica), métrica dual de adopción (comportamiento y negocio) e hito-rol (corte 30/60/90 y dueño = responsable del KPI).
 2. Depurar el plan: eliminar toda acción de actividad genérica —«capacitar», «sensibilizar», «socializar»— que no nombre obstáculo, componente y métrica.
 3. Cuantificar el costo de inacción por trimestre: el retorno que la inversión en IA ya hecha deja de generar mientras la brecha sigue abierta, leído en el KPI del cliente.
 4. Estimar la inversión del plan y el retorno proyectado a 120 días, cada cifra rastreada a un KPI del cliente; dejar el benchmark del Modelo ARIA como referencia de categoría, nunca como promesa.
