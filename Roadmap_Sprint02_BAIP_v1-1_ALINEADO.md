@@ -184,7 +184,7 @@ El Mapa de Causa Raíz priorizado (S4) del Exp 2 y los KPI reales de la unidad o
 1. Por cada causa priorizada en S4, redactar una acción de S5 con sus cuatro anclas: obstáculo que cierra, componente ARIA (nombrado, sin mecánica), métrica dual de adopción (comportamiento y negocio) e hito-rol (corte 30/60/90 y dueño = responsable del KPI).
 2. Depurar el plan: eliminar toda acción de actividad genérica —«capacitar», «sensibilizar», «socializar»— que no nombre obstáculo, componente y métrica.
 3. Cuantificar el costo de inacción por trimestre: el retorno que la inversión en IA ya hecha deja de generar mientras la brecha sigue abierta, leído en el KPI del cliente.
-4. Estimar la inversión del plan y el retorno proyectado a 120 días, cada cifra rastreada a un KPI del cliente; dejar el benchmark del Modelo ARIA como referencia de categoría, nunca como promesa.
+4. Estimar la inversión del plan —a tarifas de referencia de mercado de firmas MBB y Big Four, como estimativo razonable y no como cotización— y el retorno proyectado a 120 días, cada cifra rastreada a un KPI del cliente; dejar el benchmark del Modelo ARIA como referencia de categoría, nunca como promesa.
 5. Redactar el caso de valor en clave de costo de inacción (marco de pérdida) y verificar la trazabilidad de cada número al negocio del cliente.
 
 **Métrica de comportamiento**
@@ -281,7 +281,7 @@ Hasta una semana: preparación de S1 y de la matriz en 2–3 días; reunión y c
 
 **Alcance de S7**
 
-S7 registra la decisión del cliente sobre una recomendación sustentada; no es un compromiso contractual. Su alcance es lo solicitado de forma específica (qué autorizar, con qué recursos, para cuándo). El analista puede decir —o dejar por escrito— que el cliente puede contratar las acciones propuestas con DCA o con cualquier otro proveedor.
+S7 registra la decisión del cliente sobre una recomendación sustentada; no es un compromiso contractual. Su alcance es lo solicitado de forma específica (qué autorizar, con qué recursos, para cuándo). El analista puede decir —o dejar por escrito— que el cliente puede contratar las acciones propuestas con DCA o con cualquier otro proveedor. Los valores presentados son estimativos razonables calculados a tarifas de referencia de mercado de firmas MBB y Big Four; el rol comercial es independiente de la sesión de presentación. Si el cliente desea una propuesta económica de DCA, se elabora y se presenta en otra sesión, que puede conducir el mismo analista.
 
 **Rol de la IA como andamiaje**
 
