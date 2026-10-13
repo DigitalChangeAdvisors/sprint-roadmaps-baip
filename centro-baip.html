@@ -54,6 +54,14 @@
   .chip.on.gold{background:var(--gold);border-color:var(--gold);}
   .sep{width:1px;align-self:stretch;background:var(--platinum);margin:0 4px;}
 
+  .tag.nuevo{background:var(--gold);color:#fff;}
+  .item.flash{box-shadow:0 0 0 2px var(--gold);}
+  .nov{background:#fff;border:1px solid var(--teal-bd);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;
+       padding:14px 18px;margin-bottom:20px;}
+  .nov h2{font-family:var(--fb);font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:0 0 8px;}
+  .nov a{display:block;font-size:14px;font-weight:600;color:var(--carbon);text-decoration:none;padding:5px 0;line-height:1.4;}
+  .nov a:hover{color:var(--teal-dk);}
+  .nov a small{font-weight:400;color:var(--grey);font-size:11.5px;margin-left:6px;}
   .count{font-size:12px;color:var(--grey);margin:6px 2px 16px;}
 
   /* ── Entradas (acordeón) ── */
@@ -129,6 +137,8 @@
   <div class="intro">
     <b>¿Cómo usar este centro?</b> Escribe una palabra en el buscador (p. ej. «niveles», «PDF», «envío») o filtra por frente y sprint. Haz clic en cualquier pregunta para ver la respuesta. En el <b>Glosario</b> encuentras el significado de los términos técnicos del roadmap — también puedes llegar a un término haciendo clic en su enlace dentro del documento. Es un <b>documento vivo</b>: crece a medida que avanza la certificación. ¿No encuentras tu duda? Escríbele a tu facilitador.
   </div>
+
+  <div id="novedades"></div>
 
   <div class="views">
     <button class="view-btn on" id="vb-faq" onclick="showView('faq')">❓ Preguntas frecuentes</button>
@@ -348,6 +358,7 @@ const FAQ = [
   },
 
   {
+    slug: "momento-entrega-reporte",
     sprint: "02",
     frente: "contenido",
     pregunta: "¿En qué momento se entrega el Reporte BAIP al cliente? ¿Es un hito de cierre del diagnóstico o se presenta en la sesión de decisión?",
@@ -359,6 +370,7 @@ const FAQ = [
   },
 
   {
+    slug: "alcance-decision-s7",
     sprint: "02",
     frente: "contenido",
     pregunta: "¿Qué alcance tiene la decisión que el responsable del KPI firma en S7? ¿Es un compromiso contractual o solo de gobernanza?",
@@ -371,6 +383,7 @@ const FAQ = [
   },
 
   {
+    slug: "plan-90-vs-impacto-120",
     sprint: "02",
     frente: "contenido",
     pregunta: "El plan de intervención dura 90 días, pero el modelo de impacto proyecta 120 días. ¿No es una contradicción?",
@@ -384,6 +397,7 @@ const FAQ = [
   },
 
   {
+    slug: "expediente-modelo",
     sprint: "General",
     frente: "contenido",
     pregunta: "¿Hay un ejemplo de Reporte BAIP completo, de punta a punta, para calibrar mi propio trabajo?",
@@ -676,6 +690,22 @@ const GLOSARIO = [
 var estadoFrente = 'todo';
 var estadoSprint = 'todos';
 
+// Slug estable por pregunta (explícito en «slug», o derivado del texto) y orden: más reciente primero
+function slugify(t){
+  return String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').split('-').slice(0,7).join('-');
+}
+FAQ.forEach(function(f,i){ f._i=i; f._slug=f.slug||slugify(f.pregunta); });
+FAQ.sort(function(a,b){
+  var da=a.actualizado||'', db=b.actualizado||'';
+  return da<db?1:da>db?-1:a._i-b._i;
+});
+function esNuevo(f){
+  if(!f.actualizado) return false;
+  var d=new Date(f.actualizado+'T12:00:00');
+  return (Date.now()-d.getTime())/864e5 <= 14;
+}
+
 // Chips de sprint generados desde los datos (más "General" siempre)
 (function buildSprintChips(){
   var sprints = FAQ.map(function(f){return f.sprint;})
@@ -768,6 +798,33 @@ function fecha(iso){
   return p[2].replace(/^0/,'')+' '+m[(+p[1])-1]+' '+p[0];
 }
 
+function renderNovedades(){
+  var nuevos=FAQ.filter(esNuevo).slice(0,5);
+  var el=document.getElementById('novedades');
+  if(!nuevos.length){el.innerHTML='';return;}
+  el.innerHTML='<div class="nov"><h2>Novedades</h2>'+nuevos.map(function(f){
+    var st=f.sprint==='General'?'General':'Sprint '+f.sprint;
+    return '<a href="#q-'+f._slug+'">'+esc(f.pregunta)+'<small>'+st+' · '+fecha(f.actualizado)+'</small></a>';
+  }).join('')+'</div>';
+}
+
+function irAPregunta(hash){
+  var id=hash.replace('#','');
+  showView('faq');
+  var el=document.getElementById(id);
+  if(!el){ // limpia filtros por si la pregunta quedó oculta
+    document.getElementById('search').value='';
+    estadoFrente='todo'; estadoSprint='todos';
+    document.querySelectorAll('.chip[data-frente]').forEach(function(c){c.classList.toggle('on',c.getAttribute('data-frente')==='todo');});
+    document.querySelectorAll('.chip[data-sprint]').forEach(function(c){c.classList.toggle('on',c.getAttribute('data-sprint')==='todos');});
+    render(); el=document.getElementById(id);
+  }
+  if(!el) return;
+  el.classList.add('open','flash');
+  setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'center'});},30);
+  setTimeout(function(){el.classList.remove('flash');},2200);
+}
+
 function render(){
   var q=(document.getElementById('search').value||'').toLowerCase().trim();
   var arr=FAQ.filter(function(f){
@@ -788,13 +845,15 @@ function render(){
 
   cont.innerHTML=arr.map(function(f,i){
     var st = f.sprint==='General' ? 'General' : 'Sprint '+f.sprint;
+    var iid='q-'+f._slug;
     return ''
-    +'<div class="item" id="it-'+i+'">'
-    +  '<div class="q" onclick="document.getElementById(\'it-'+i+'\').classList.toggle(\'open\')">'
+    +'<div class="item" id="'+iid+'">'
+    +  '<div class="q" onclick="document.getElementById(\''+iid+'\').classList.toggle(\'open\')">'
     +    '<div class="txt">'
     +      '<div class="tags">'
     +        '<span class="tag '+f.frente+'">'+(f.frente==='plataforma'?'Plataforma':'Contenido')+'</span>'
     +        '<span class="tag sprint">'+esc(st)+'</span>'
+    +        (esNuevo(f)?'<span class="tag nuevo">Nuevo</span>':'')
     +      '</div>'
     +      '<div class="pregunta">'+esc(f.pregunta)+'</div>'
     +    '</div>'
@@ -808,12 +867,15 @@ function render(){
 }
 
 render();
+renderNovedades();
 renderGlosario();
 
-if(location.hash.indexOf('#g-')===0) irAGlosario(location.hash);
-window.addEventListener('hashchange', function(){
+function irAHash(){
   if(location.hash.indexOf('#g-')===0) irAGlosario(location.hash);
-});
+  else if(location.hash.indexOf('#q-')===0) irAPregunta(location.hash);
+}
+irAHash();
+window.addEventListener('hashchange', irAHash);
 </script>
 </body>
 </html>
