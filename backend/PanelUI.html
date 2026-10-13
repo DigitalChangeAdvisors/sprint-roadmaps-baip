@@ -68,6 +68,14 @@
   .spin{ display:inline-block; width:14px; height:14px; border:2px solid #ccc;
          border-top-color:var(--teal); border-radius:50%; animation:g .7s linear infinite; vertical-align:middle; }
   @keyframes g{ to{ transform:rotate(360deg); } }
+  .pond{ margin:8px 0 2px; font-size:13px; font-weight:700; color:var(--oro); }
+  .ver{ display:flex; gap:10px; align-items:center; margin-top:10px; flex-wrap:wrap; }
+  .ver select{ padding:6px 10px; border-radius:6px; border:1.5px solid #ddd; font-family:inherit; font-weight:700; }
+  .ianotas{ margin-top:12px; background:#fff; border:1px dashed var(--oro); border-radius:8px; padding:10px 12px; font-size:12px; line-height:1.55; }
+  .ianotas b{ color:var(--carbon); }
+  .ianotas .alerta{ color:var(--terra); font-weight:700; }
+  .recib{ font-size:12px; color:var(--gris); margin-top:10px; }
+  .pill.cons{ background:#eef3fb; color:#35507a; }
 </style>
 </head>
 <body>
@@ -125,6 +133,7 @@
     var cont = document.getElementById('lista');
     if(!arr.length){ cont.innerHTML = '<div class="vacio">No hay entregas'+(q?' que coincidan con el filtro.':' todavía.')+'</div>'; return; }
     cont.innerHTML = arr.map(tarjeta).join('');
+    arr.forEach(function(e){ if(e.esCierre) recalc(e.recibo); });
   }
 
   function tarjeta(e){
@@ -138,45 +147,110 @@
 
     var mejHtml = (e.mejorasGuardadas||[]).map(mejoraRowHtml).join('');
 
-    var crit = RUBRICA.map(function(r){
+    var R = e.rubrica || RUBRICA;
+    var crit = R.map(function(r){
       var saved = null;
       if(e.rubricaGuardada){ saved = e.rubricaGuardada.find(function(x){return x.clave===r.clave;}); }
       var pv = saved ? saved.puntaje : 3;
       var nv = saved ? saved.nota : '';
       var opts = [1,2,3,4,5].map(function(n){ return '<option value="'+n+'"'+(n===pv?' selected':'')+'>'+n+'/5</option>'; }).join('');
       return '<div class="crit" data-clave="'+r.clave+'">'
-        + '<span class="ct">'+esc(r.titulo)+'</span>'
-        + '<select class="pj">'+opts+'</select>'
+        + '<span class="ct">'+esc(r.titulo)+(r.peso?' <span style="color:#6b7280;font-weight:400">('+r.peso+'%)</span>':'')+'</span>'
+        + '<select class="pj" onchange="recalc(\''+e.recibo+'\')">'+opts+'</select>'
         + '<input class="nota" placeholder="Nota breve (opcional)" value="'+esc(nv)+'">'
         + '</div>';
     }).join('');
 
+    var pillTxt = enviado ? '<span class="pill done">✓ '+(e.esConsulta?'Respondida':(e.veredicto?('Resultado: '+esc(e.veredicto)):'Feedback enviado'))+'</span>'
+                          : '<span class="pill pend">Pendiente</span>';
+    if(e.esConsulta){ pillTxt = enviado ? '<span class="pill done">✓ Respondida</span>' : '<span class="pill cons">Consulta por responder</span>'; }
+    var cuerpoEval = evalHtml(e, enviado, crit, mejHtml);
     return ''
     + '<div class="card" id="card-'+e.recibo+'">'
     +   '<div class="head" onclick="toggle(\''+e.recibo+'\')">'
     +     '<div><div class="who">'+esc(e.nombre)+' · <span style="color:#6b7280;font-weight:400">'+esc(e.experimento)+'</span></div>'
     +       '<div class="meta">'+esc(e.empresa)+' · '+esc(e.cohorte)+' · '+esc(e.email)+' · '+esc(e.fecha)+' · Recibo '+esc(e.recibo)+'</div></div>'
-    +     pill
+    +     pillTxt
     +   '</div>'
     +   '<div class="body" id="body-'+e.recibo+'">'
     +     campos
     +     (enviado ? '<div class="campo"><div class="lbl">Feedback ya enviado ('+esc(e.feedbackEnviadoEn)+' · '+esc(e.feedbackPor)+')</div></div>' : '')
-    +     '<div class="evalbox">'
-    +       '<h4>Evaluación con rúbrica</h4>'
-    +       crit
-    +       '<textarea id="txt-'+e.recibo+'" placeholder="Comentario de feedback para el estudiante (tuteo)…">'+esc(e.feedbackTexto)+'</textarea>'
-    +       '<div class="mejlabel">Guía de mejora · ejemplos concretos para el estudiante</div>'
-    +       '<p class="mejhint">Por cada punto débil, un ejemplo modelo del «así se vería más fuerte». Edita, añade o quita los que quieras.</p>'
-    +       '<div class="mejoras" id="mej-'+e.recibo+'">'+mejHtml+'</div>'
-    +       '<button type="button" class="btn s addmej" onclick="addMejora(\''+e.recibo+'\')">+ Añadir ejemplo</button>'
-    +       '<div class="acciones">'
-    +         '<button class="btn g" onclick="borrador(\''+e.recibo+'\')">✨ Generar borrador con IA</button>'
-    +         '<button class="btn p" onclick="enviar(\''+e.recibo+'\')">✉ '+(enviado?'Reenviar feedback':'Enviar feedback')+'</button>'
-    +         '<span class="estado" id="est-'+e.recibo+'"></span>'
-    +       '</div>'
-    +     '</div>'
+    +     cuerpoEval
     +   '</div>'
     + '</div>';
+  }
+
+  function evalHtml(e, enviado, crit, mejHtml){
+    if(e.esConsulta){
+      return '<div class="evalbox"><h4>Responder consulta</h4>'
+        + '<p class="mejhint">La respuesta le llega al estudiante por correo (responder-a: facilitador). Las respuestas de interés general puedes publicarlas, anonimizadas, en el Centro de Ayuda.</p>'
+        + '<textarea id="resp-'+e.recibo+'" placeholder="Tu respuesta (tuteo)…">'+esc(e.feedbackTexto)+'</textarea>'
+        + '<div class="acciones"><button class="btn p" onclick="responder(\''+e.recibo+'\')">✉ '+(enviado?'Enviar otra respuesta':'Responder consulta')+'</button>'
+        + '<span class="estado" id="est-'+e.recibo+'"></span></div></div>';
+    }
+    if(e.esAudicion && !e.esCierre){
+      return '<div class="evalbox"><h4>Evaluación</h4><p class="mejhint">La audición se evalúa en la entrega de <b>Cierre</b> (905), que reúne los cuatro entregables más recientes del estudiante.</p></div>';
+    }
+    var extra = '', recibidos = '';
+    if(e.esCierre){
+      var lista = ['901','902','903','904','905'].map(function(k){
+        var ok = ENTREGAS.some(function(x){ return x.instrumento===e.instrumento && x.email===e.email && x.exp===k; });
+        return '<span style="margin-right:8px;color:'+(ok?'#236b5b':'#c2593f')+'">'+k+(ok?' ✓':' ✗')+'</span>';
+      }).join('');
+      recibidos = '<div class="recib">Entregables recibidos: '+lista+'</div>';
+      var vs = ['','aprobado','aplazado','rechazado'].map(function(v){ return '<option value="'+v+'"'+(v===(e.veredicto||'')?' selected':'')+'>'+(v||'— elige —')+'</option>'; }).join('');
+      extra = '<div class="pond" id="pond-'+e.recibo+'"></div>'
+        + '<div class="ver"><b>Veredicto:</b><select id="ver-'+e.recibo+'">'+vs+'</select>'
+        + '<span class="mejhint">Sin «aprobado condicional»: para aprobar, los siete criterios deben tener 3 o más.</span></div>'
+        + '<div class="ianotas" id="ia-'+e.recibo+'" style="display:none"></div>';
+    }
+    return '<div class="evalbox">'
+      + '<h4>Evaluación con rúbrica'+(e.esCierre?' · 7 criterios ponderados':'')+'</h4>'
+      + recibidos + crit + extra
+      + '<textarea id="txt-'+e.recibo+'" placeholder="Comentario de feedback para el estudiante (tuteo)…">'+esc(e.feedbackTexto)+'</textarea>'
+      + '<div class="mejlabel">Guía de mejora · ejemplos concretos para el estudiante</div>'
+      + '<p class="mejhint">Por cada punto débil, un ejemplo modelo del «así se vería más fuerte». Edita, añade o quita los que quieras.</p>'
+      + '<div class="mejoras" id="mej-'+e.recibo+'">'+mejHtml+'</div>'
+      + '<button type="button" class="btn s addmej" onclick="addMejora(\''+e.recibo+'\')">+ Añadir ejemplo</button>'
+      + '<div class="acciones">'
+      +   '<button class="btn g" onclick="borrador(\''+e.recibo+'\')">✨ Generar borrador con IA</button>'
+      +   '<button class="btn p" onclick="enviar(\''+e.recibo+'\')">✉ '+(enviado?'Reenviar resultado':(e.esCierre?'Enviar resultado':'Enviar feedback'))+'</button>'
+      +   '<span class="estado" id="est-'+e.recibo+'"></span>'
+      + '</div></div>';
+  }
+
+  function pesosDe(r){
+    var out = {};
+    document.querySelectorAll('#card-'+r+' .crit').forEach(function(row){
+      var t = row.querySelector('.ct').textContent;
+      var m = t.match(/\((\d+)%\)/);
+      out[row.getAttribute('data-clave')] = m ? parseInt(m[1],10) : 0;
+    });
+    return out;
+  }
+  function recalc(r){
+    var el = document.getElementById('pond-'+r); if(!el) return;
+    var pesos = pesosDe(r), pct = 0, bajos = [];
+    document.querySelectorAll('#card-'+r+' .crit').forEach(function(row){
+      var cl = row.getAttribute('data-clave'), pj = parseInt(row.querySelector('.pj').value,10);
+      pct += (pesos[cl]||0) * (pj/5);
+      if(pj<=2) bajos.push(row.querySelector('.ct').textContent.replace(/\(\d+%\)/,'').trim());
+    });
+    el.innerHTML = 'Puntaje ponderado: '+(Math.round(pct*10)/10)+'%'
+      + (bajos.length ? ' · <span style="color:#c2593f">Criterios en nivel insuficiente: '+bajos.map(esc).join('; ')+'</span>' : '');
+  }
+  function responder(r){
+    var texto = document.getElementById('resp-'+r).value.trim();
+    if(!texto){ estado(r,'⚠ Escribe la respuesta antes de enviar.','err'); return; }
+    if(!confirm('¿Enviar esta respuesta al estudiante por correo?')) return;
+    estado(r,'<span class="spin"></span> Enviando…');
+    google.script.run
+      .withSuccessHandler(function(res){
+        estado(r,'✓ Enviada a '+esc(res.destinatario)+' ('+esc(res.enviadoEn)+')','ok');
+        var pill = document.querySelector('#card-'+r+' .pill'); pill.className='pill done'; pill.textContent='✓ Respondida';
+      })
+      .withFailureHandler(function(err){ estado(r,'⚠ '+esc(err.message||err),'err'); })
+      .responderConsulta(TOKEN, { recibo:r, respuesta:texto });
   }
 
   function toggle(r){ document.getElementById('body-'+r).classList.toggle('open'); }
@@ -219,7 +293,18 @@
           if(row){ row.querySelector('.pj').value = c.puntaje; row.querySelector('.nota').value = c.nota||''; }
         });
         document.getElementById('mej-'+r).innerHTML = (res.mejoras||[]).map(mejoraRowHtml).join('');
-        estado(r, '✓ Borrador listo — revísalo y ajústalo antes de enviar.', 'ok');
+        var vsel = document.getElementById('ver-'+r);
+        if(vsel && res.veredicto){ vsel.value = res.veredicto; }
+        var ia = document.getElementById('ia-'+r);
+        if(ia && (res.errores||res.exclusion||res.alertas)){
+          var h = '<b>Notas de la IA para ti (no se envían al estudiante)</b><br>';
+          if(res.exclusion){ h += '<b>Regla de exclusión:</b> '+(res.exclusion.activada?'<span class="alerta">ACTIVADA</span>':'no activada')+' — '+esc(res.exclusion.motivo||'')+'<br>'; }
+          if((res.errores||[]).length){ h += '<b>Errores del borrador:</b><br>'+res.errores.map(function(x){ return '· Error '+x.numero+': '+esc(x.estado)+' — '+esc(x.nota); }).join('<br>')+'<br>'; }
+          if((res.alertas||[]).length){ h += '<b>Alertas:</b><br>'+res.alertas.map(function(a){ return '<span class="alerta">⚠ '+esc(a)+'</span>'; }).join('<br>'); }
+          ia.innerHTML = h; ia.style.display = 'block';
+        }
+        recalc(r);
+        estado(r, '✓ Borrador listo — revísalo, ajústalo y decide tú el veredicto antes de enviar.', 'ok');
       })
       .withFailureHandler(function(err){ estado(r, '⚠ '+esc(err.message||err), 'err'); })
       .generarBorradorIA(TOKEN, r);
@@ -238,7 +323,8 @@
         pill.className = 'pill done'; pill.textContent = '✓ Feedback enviado';
       })
       .withFailureHandler(function(err){ estado(r, '⚠ '+esc(err.message||err), 'err'); })
-      .enviarFeedback(TOKEN, { recibo: r, comentario: comentario, criterios: leerCrit(r), mejoras: leerMejoras(r) });
+      .enviarFeedback(TOKEN, { recibo: r, comentario: comentario, criterios: leerCrit(r), mejoras: leerMejoras(r),
+                               veredicto: (document.getElementById('ver-'+r)||{}).value || '' });
   }
 
   cargar();

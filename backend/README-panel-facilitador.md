@@ -153,3 +153,33 @@ registra la versión más reciente.
 **¿Dónde veo lo que envié?** En la misma Hoja «Envios», en las columnas `FeedbackTexto`,
 `PuntajeTotal`, `PuntajePromedio`, `FeedbackEnviadoEn` y `FeedbackPor`. Perfecto para BI: distribución
 de puntajes por experimento, por cohorte, ritmo de feedback, etc.
+
+---
+
+## Audición de certificación (caso Vertecsa) — qué cambia en el panel
+
+El panel ahora reconoce el instrumento `audicion-baip` (HTML `audicion-certificacion-baip.html`).
+Todo lo anterior (Sprints 01 y 02) funciona igual.
+
+**Entregas que verás** (recibo `ARIA-09-9xx-…`):
+
+| Exp | Qué es | Qué haces en el panel |
+|---|---|---|
+| 901–904 | Entregables 1 a 4 | Solo lectura; se evalúan juntos en el cierre |
+| 905 | Cierre y solicitud de calificación | **Aquí evalúas**: rúbrica de 7 criterios ponderados, veredicto y envío del resultado |
+| 990 | Mesa de consultas | «Responder consulta»: la respuesta le llega al estudiante por correo |
+
+**Rúbrica (peso):** C1 Precisión y causa raíz 35 · C2 Integración 30 · C3 Plan S5 12 · C5 Modelo de impacto S6 8 · C6 Defensibilidad por escrito 7 · C4 Claridad 4 · C7 Viabilidad 4.
+Escala 1–5 (1–2 insuficiente, 3–4 suficiente, 5 sobresaliente). El panel calcula el puntaje ponderado.
+**Reglas:** sin «aprobado condicional» — el panel no deja enviar «aprobado» si algún criterio es 1–2. Aplazado = nueva entrega ≤60 días sobre un caso alterno; rechazado = re-cursado.
+
+**Borrador con IA para la audición:** lee los cuatro entregables más recientes + el cierre del estudiante y la
+**clave maestra**, y devuelve puntaje por criterio, cuáles de los cinco errores del borrador identificó, si se activó la
+regla de exclusión, alertas de autoría y un veredicto sugerido. Tú decides todo. El texto al estudiante **no revela** la clave.
+
+### Puesta en marcha (una sola vez)
+1. Pega el contenido actualizado de `Panel.gs` y `PanelUI.html` en el proyecto de Apps Script (no cambia `Codigo.gs`).
+2. **Implementar → Administrar implementaciones → Editar → Nueva versión → Implementar** (la URL no cambia).
+3. Propiedades del script: añade `CLAVE_AUDICION_1`, `CLAVE_AUDICION_2`, … con los trozos de la carpeta local
+   `Audición de Certificación/clave_para_el_panel/` (ver el LEEME de esa carpeta). **La clave nunca va al repositorio.**
+4. Prueba: envía un entregable de ensayo desde el HTML de la audición y ábrelo en el panel; en el cierre pulsa «Generar borrador con IA».

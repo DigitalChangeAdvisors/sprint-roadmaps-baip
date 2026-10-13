@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audición de Certificación · Analista BAIP · Digital Change Advisors</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   SISTEMA DE DISEÑO DCA 2026
+═══════════════════════════════════════════════ */
+:root {
+  --teal:      #2e8b76;
+  --teal-dk:   #247060;
+  --gold:      #a48111;
+  --carbon:    #1e2a38;
+  --platinum:  #dfe3e1;
+  --white:     #ffffff;
+  --teal-bg:   rgba(46,139,118,0.06);
+  --teal-bd:   rgba(46,139,118,0.18);
+  --gold-bg:   rgba(164,129,17,0.05);
+  --fd:        'Marcellus', Georgia, serif;
+  --fb:        'Montserrat', 'Helvetica Neue', sans-serif;
+  --tab:       36px;
+  --doc:       720px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--fb); font-size: 15px; line-height: 1.75; color: var(--carbon); background: #d8dbd9; }
+
+/* ─── TOP NAV ──────────────────────────────── */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  background: var(--carbon); height: 50px;
+  display: flex; align-items: center; padding: 0 20px; gap: 0;
+  box-shadow: 0 2px 16px rgba(0,0,0,.35);
+}
+.nav-brand { font-family: var(--fd); font-size: 14px; color: white; white-space: nowrap; margin-right: 16px; padding-right: 16px; border-right: 1px solid rgba(255,255,255,.15); }
+.nav-brand span { color: var(--gold); }
+.nav-links { display: flex; gap: 2px; flex: 1; overflow-x: auto; }
+.nav-links::-webkit-scrollbar { display: none; }
+.nav-links a { color: rgba(255,255,255,.55); text-decoration: none; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 5px 9px; border-radius: 4px; white-space: nowrap; transition: all .15s; flex-shrink: 0; }
+.nav-links a:hover { color: white; background: rgba(255,255,255,.09); }
+.nav-links a.done { color: var(--teal); }
+.nav-right { display: flex; align-items: center; gap: 10px; margin-left: 12px; flex-shrink: 0; }
+.nav-help { color: var(--gold); text-decoration: none; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; padding: 5px 10px; border: 1px solid rgba(164,129,17,.45); border-radius: 5px; transition: all .15s; }
+.nav-help:hover { background: rgba(164,129,17,.15); color: #fff; }
+.gloss-link { color: var(--teal); text-decoration: none; border-bottom: 1px dotted var(--teal); cursor: help; }
+.gloss-link:hover { color: var(--teal-dk); border-bottom-style: solid; }
+.pb-wrap { width: 100px; height: 3px; background: rgba(255,255,255,.12); border-radius: 2px; }
+.pb-fill { height: 3px; background: var(--teal); border-radius: 2px; transition: width .4s ease; width: 0%; }
+.pb-pct { font-size: 10px; font-weight: 700; color: rgba(255,255,255,.45); min-width: 28px; }
+.save-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.2); transition: background .3s; }
+.save-dot.saving { background: var(--gold); }
+.save-dot.saved  { background: var(--teal); }
+
+/* ─── DOCUMENT WRAPPER ─────────────────────── */
+.doc-wrap { max-width: var(--doc); margin: 68px auto 80px; display: flex; flex-direction: column; gap: 3px; }
+.doc-wrap > * { box-shadow: 0 2px 20px rgba(0,0,0,.13); }
+/* ─── FIXED PAGE CONTAINERS ─────────────── */
+.page { min-height: 932px; background: white; display: flex; flex-direction: column; }
+.page .p-layout { flex: 1; }
+
+/* ─── RUNNING HEADER ─────────────────────── */
+.run-header { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(30,42,56,.35); text-align: center; padding: 12px 0 10px; border-bottom: 1px solid var(--platinum); }
+
+/* ─── PAGE LAYOUT ─────────────────────────── */
+.p-layout { display: flex; background: white; position: relative; }
+.s-tab { flex: 0 0 var(--tab); background: var(--teal); display: flex; align-items: center; justify-content: center; min-height: 180px; }
+.s-tab .lbl { writing-mode: vertical-rl; transform: rotate(180deg); font-weight: 700; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: white; white-space: nowrap; }
+.p-body { flex: 1; padding: 36px 40px 36px 28px; }
+
+/* ─── PAGE FOOTER ─────────────────────────── */
+.p-footer { background: white; display: flex; align-items: center; padding: 8px 40px 10px calc(var(--tab) + 28px); gap: 14px; border-top: 1px solid var(--platinum); }
+.p-footer .rule { flex: 1; height: 1px; background: var(--platinum); }
+.p-footer .pnum { font-size: 10px; font-weight: 700; color: white; background: var(--teal); width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+/* ─── COVER ────────────────────────────────── */
+.cover-page { background: white; min-height: 932px; display: flex; flex-direction: column; }
+.cover-visual { height: 300px; background: var(--teal); position: relative; overflow: hidden; }
+.cover-visual svg { width: 100%; height: 100%; display: block; }
+.cover-band { background: var(--carbon); padding: 26px 44px 30px; }
+.c-sprint-lbl { font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: 10px; }
+.c-theme { font-family: var(--fd); font-size: 34px; color: white; line-height: 1.2; letter-spacing: -.01em; }
+.cover-body { padding: 24px 44px 16px; background: white; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+.c-program { font-size: 22px; font-weight: 700; color: var(--carbon); margin-bottom: 10px; }
+.c-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--teal); border: 1.5px solid var(--teal); padding: 4px 14px; border-radius: 30px; margin-bottom: 24px; }
+.student-row { display: flex; gap: 14px; flex-wrap: wrap; padding: 20px 0 4px; border-top: 1px solid var(--platinum); }
+.s-field { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 140px; }
+.s-field label { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(30,42,56,.45); }
+.s-field input { border: 1.5px solid var(--platinum); border-radius: 6px; padding: 8px 12px; font-family: var(--fb); font-size: 14px; font-weight: 500; color: var(--carbon); background: #fafafa; outline: none; transition: border-color .2s; }
+.s-field input:focus { border-color: var(--teal); background: white; }
+.s-field input::placeholder { color: rgba(30,42,56,.28); }
+.cover-foot { background: var(--carbon); padding: 12px 44px; display: flex; align-items: center; justify-content: space-between; }
+.cf-text { font-size: 12px; font-weight: 500; color: rgba(255,255,255,.6); }
+.cf-text strong { color: white; }
+
+/* ─── SECTION TYPOGRAPHY ─────────────────── */
+.sec-title { font-family: var(--fd); font-size: 30px; color: var(--carbon); line-height: 1.25; letter-spacing: -.01em; border-bottom: 2px solid var(--platinum); padding-bottom: 12px; margin-bottom: 22px; }
+.sec-sublabel { font-size: 12px; font-weight: 600; letter-spacing: .06em; color: var(--teal); margin-bottom: 8px; }
+p { margin-bottom: 15px; } p:last-child { margin-bottom: 0; } strong { font-weight: 700; }
+
+/* ─── TOC ────────────────────────────────── */
+.toc-entry { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0; border-bottom: 1px solid var(--teal-bg); }
+.toc-entry:last-child { border-bottom: none; }
+.toc-group { margin-bottom: 28px; }
+.toc-group-head { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--carbon); margin-bottom: 2px; }
+.toc-name { font-size: 15px; color: rgba(30,42,56,.75); }
+.toc-pg { font-weight: 700; font-size: 13px; color: var(--teal); }
+
+/* ─── MENSAJE ────────────────────────────── */
+.msg-layout { display: grid; grid-template-columns: 180px 1fr; gap: 36px; align-items: start; }
+.msg-img { background: var(--teal-bg); border: 1px solid var(--platinum); border-radius: 8px; aspect-ratio: 3/4; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.msg-title { font-family: var(--fd); font-size: 24px; color: var(--teal); margin-bottom: 8px; }
+.sig-block { margin-top: 22px; }
+.sig-line { width: 80px; height: 1px; background: var(--carbon); margin-bottom: 5px; }
+.sig-name { font-size: 12px; font-weight: 700; color: var(--carbon); }
+.sig-role { font-size: 11px; color: rgba(30,42,56,.55); }
+
+/* ─── INSTRUCCIONES ─────────────────────── */
+.ni { margin-bottom: 26px; }
+.ni-head { font-size: 15px; font-weight: 700; color: var(--carbon); margin-bottom: 8px; }
+.ni-head .nn { color: var(--teal); margin-right: 4px; }
+.ni-text { padding-left: 22px; font-size: 14px; line-height: 1.75; color: rgba(30,42,56,.82); }
+.quote-band { margin-top: 36px; padding: 18px 24px; border-left: 4px solid var(--gold); background: var(--gold-bg); border-radius: 0 8px 8px 0; }
+.quote-band p { font-style: italic; font-size: 14px; color: var(--carbon); margin: 0; }
+.quote-band p::before { content: '\201C'; } .quote-band p::after { content: '\201D'; }
+
+/* ─── EXPERIMENT SHARED ──────────────────── */
+.exp-lbl { font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+.sdiv { height: 1px; background: var(--platinum); margin: 28px 0; }
+.gold-acc { border-left: 4px solid var(--gold); padding: 14px 18px 14px 22px; background: var(--gold-bg); border-radius: 0 8px 8px 0; margin: 18px 0; }
+.gold-acc p { font-style: italic; font-size: 14px; color: var(--carbon); margin: 0; }
+.note { margin: 16px 0; padding: 12px 16px; background: var(--gold-bg); border-left: 3px solid var(--gold); border-radius: 0 6px 6px 0; }
+.note-hd { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--gold); margin-bottom: 4px; }
+.note p { font-size: 12px; line-height: 1.65; color: rgba(30,42,56,.72); margin: 0; }
+
+/* ─── REPORT IDENTIFICATION BLOCK ─────── */
+.report-id-block { background: var(--carbon); border-radius: 10px; padding: 20px 24px; margin-bottom: 28px; }
+.rid-head { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.rid-badge { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: white; background: var(--teal); padding: 4px 12px; border-radius: 20px; flex-shrink: 0; }
+.rid-title { font-size: 11px; font-weight: 600; color: rgba(255,255,255,.55); letter-spacing: .08em; text-transform: uppercase; }
+.rid-fields { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.rid-field { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 155px; }
+.rid-field label { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45); }
+.rid-field input[type="text"], .rid-field input[type="date"] { border: 1.5px solid rgba(30,42,56,.18); border-radius: 6px; padding: 8px 12px; background: #d2d0c8; font-family: var(--fb); font-size: 13px; font-weight: 500; color: var(--carbon); outline: none; transition: border-color .2s, background .2s; }
+.rid-field input:focus { border-color: var(--teal); background: #e4e2da; }
+.rid-field input::placeholder { color: rgba(30,42,56,.38); }
+.rid-field input[type="date"]::-webkit-calendar-picker-indicator { opacity: .5; }
+.rid-level { border-top: 1px solid rgba(255,255,255,.1); padding-top: 14px; }
+.rid-level-lbl { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 10px; }
+.level-opts { display: flex; gap: 10px; flex-wrap: wrap; }
+.level-opt { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 8px; border: 1.5px solid rgba(255,255,255,.12); cursor: pointer; transition: all .2s; }
+.level-opt:hover { border-color: var(--teal); background: rgba(46,139,118,.12); }
+.level-opt input[type="radio"] { accent-color: var(--teal); width: 15px; height: 15px; cursor: pointer; }
+.level-opt span { font-size: 12px; font-weight: 600; color: rgba(255,255,255,.7); }
+
+/* ─── IP GUARDRAIL ───────────────────────── */
+.ip-guard { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; background: rgba(164,129,17,.07); border: 1px solid rgba(164,129,17,.2); border-radius: 8px; margin-bottom: 24px; }
+.ip-guard-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+.ip-guard span { font-size: 12px; color: rgba(30,42,56,.7); line-height: 1.65; }
+
+/* ─── EXP META ROW ───────────────────────── */
+.exp-meta-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.exp-lente { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: .06em; }
+.lente-aimt { background: rgba(46,139,118,.1); color: var(--teal); border: 1px solid var(--teal-bd); }
+.lente-ails { background: rgba(164,129,17,.08); color: var(--gold); border: 1px solid rgba(164,129,17,.25); }
+.lente-aicd { background: rgba(194,89,63,.08); color: #c2593f; border: 1px solid rgba(194,89,63,.25); }
+.lente-int  { background: rgba(30,42,56,.07); color: var(--carbon); border: 1px solid var(--platinum); }
+.entregable-badge { padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: .06em; background: rgba(194,89,63,.1); color: #c2593f; border: 1px solid rgba(194,89,63,.25); }
+
+/* ─── STEP LIST ──────────────────────────── */
+.step-list { list-style: none; counter-reset: sc; margin: 0 0 20px; }
+.step-list li { counter-increment: sc; display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; padding: 11px 14px; background: #fafafa; border: 1px solid var(--platinum); border-radius: 8px; }
+.step-list li::before { content: counter(sc); flex: 0 0 26px; height: 26px; background: var(--carbon); color: white; font-weight: 700; font-size: 12px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.step-list li span { font-size: 13px; line-height: 1.65; color: rgba(30,42,56,.82); padding-top: 2px; }
+
+/* ─── IA ROLE BLOCK ──────────────────────── */
+.ia-role { display: flex; align-items: flex-start; gap: 10px; padding: 11px 14px; background: var(--teal-bg); border: 1px solid var(--teal-bd); border-radius: 8px; margin: 16px 0 24px; }
+.ia-role-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+.ia-role span { font-size: 12px; color: rgba(30,42,56,.75); line-height: 1.65; }
+
+/* ─── METRIC CARDS ───────────────────────── */
+.metric-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0; }
+.metric-card { padding: 14px 16px; border-radius: 8px; background: #fafafa; border: 1px solid var(--platinum); }
+.metric-card.beh { border-top: 3px solid var(--teal); }
+.metric-card.biz { border-top: 3px solid var(--gold); }
+.metric-card-lbl { font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 6px; }
+.metric-card.beh .metric-card-lbl { color: var(--teal); }
+.metric-card.biz .metric-card-lbl { color: var(--gold); }
+.metric-card p { font-size: 13px; line-height: 1.65; color: rgba(30,42,56,.8); margin: 0; }
+.metric-rows { margin: 0; }
+.metric-row { display: grid; grid-template-columns: 88px 1fr; gap: 8px; padding: 6px 0; border-top: 1px solid var(--platinum); }
+.metric-row:first-child { border-top: none; padding-top: 2px; }
+.metric-row dt { font-size: 9px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: rgba(30,42,56,.5); line-height: 1.4; }
+.metric-card.biz .metric-row dt { color: rgba(164,129,17,.7); }
+.metric-card.beh .metric-row dt { color: rgba(46,139,118,.8); }
+.metric-row dd { font-size: 12px; line-height: 1.55; color: rgba(30,42,56,.8); margin: 0; }
+
+/* ─── FILL AREAS ─────────────────────────── */
+.fill { margin: 14px 0 22px; }
+.fill-lbl { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--carbon); margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
+.fill-lbl::after { content: ''; flex: 1; height: 1px; background: var(--platinum); }
+textarea { width: 100%; min-height: 110px; border: 1.5px solid var(--platinum); border-radius: 8px; padding: 12px 14px; font-family: var(--fb); font-size: 13px; line-height: 1.7; color: var(--carbon); background: #fafafa; resize: vertical; outline: none; transition: border-color .2s, background .2s; }
+textarea:focus { border-color: var(--teal); background: white; }
+textarea.filled { border-color: var(--teal); background: white; }
+textarea::placeholder { color: rgba(30,42,56,.28); font-style: italic; }
+.field-guide { font-size: 11.5px; line-height: 1.6; color: rgba(30,42,56,.66); background: rgba(46,139,118,.05); border-left: 3px solid var(--teal); border-radius: 0 6px 6px 0; padding: 9px 12px; margin-bottom: 8px; }
+.fill-obs .field-guide { background: var(--gold-bg); border-left-color: var(--gold); }
+.char-ct { font-size: 10px; color: rgba(30,42,56,.35); text-align: right; margin-top: 3px; }
+
+/* ─── OBSERVATION FIELD ──────────────────── */
+.fill-obs { border-top: 1px dashed var(--platinum); padding-top: 20px; margin-top: 8px; }
+.fill-obs .fill-lbl { color: var(--gold); }
+.fill-obs .fill-lbl::after { background: rgba(164,129,17,.25); }
+.fill-obs textarea { border-color: rgba(164,129,17,.2); }
+.fill-obs textarea:focus { border-color: var(--gold); background: white; }
+
+/* ─── SUBMIT SECTION ─────────────────────── */
+.submit-sec { margin-top: 36px; padding: 24px 28px; background: var(--teal-bg); border: 1px solid var(--teal-bd); border-radius: 10px; }
+.submit-sec h3 { font-weight: 700; font-size: 15px; color: var(--carbon); margin-bottom: 6px; }
+.submit-sec p { font-size: 13px; color: rgba(30,42,56,.7); margin-bottom: 18px; }
+.submit-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 4px; }
+.btn-sub { display: inline-flex; align-items: center; gap: 8px; background: var(--teal); color: white; font-family: var(--fb); font-weight: 700; font-size: 13px; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; transition: background .2s; }
+.btn-sub:hover { background: var(--teal-dk); }
+.btn-sub.done { background: #2a6b50; }
+.btn-print { display: inline-flex; align-items: center; gap: 7px; background: transparent; color: var(--teal); font-family: var(--fb); font-weight: 700; font-size: 13px; padding: 12px 20px; border: 1.5px solid var(--teal); border-radius: 8px; cursor: pointer; transition: all .2s; }
+.btn-print:hover { background: var(--teal-bg); }
+.sub-ok { margin-top: 10px; font-size: 12px; color: var(--teal); font-weight: 700; display: none; }
+.sub-ok.show { display: block; }
+
+/* ─── MODAL ──────────────────────────────── */
+.modal-ov { display: none; position: fixed; inset: 0; background: rgba(30,42,56,.8); z-index: 9999; align-items: center; justify-content: center; }
+.modal-ov.open { display: flex; }
+.modal { background: white; border-radius: 12px; padding: 32px 36px; max-width: 560px; width: 90%; max-height: 82vh; overflow-y: auto; }
+.modal-title { font-family: var(--fd); font-size: 20px; color: var(--carbon); margin-bottom: 6px; }
+.modal-sub { font-size: 12px; color: rgba(30,42,56,.55); margin-bottom: 22px; }
+.modal-body { background: #fafafa; border: 1px solid var(--platinum); border-radius: 8px; padding: 14px; font-size: 12px; line-height: 1.7; color: var(--carbon); white-space: pre-wrap; max-height: 220px; overflow-y: auto; font-family: monospace; margin-bottom: 20px; }
+.modal-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.modal-actions.sent #btn-send { background: var(--teal-dk); cursor: default; opacity: .85; }
+.modal-alert { display: none; }
+.modal-alert.show { display: block; border-radius: 8px; padding: 12px 14px; font-size: 12.5px; line-height: 1.6; margin-bottom: 16px; border-left: 4px solid; }
+.modal-alert ul { margin: 6px 0 0; padding-left: 18px; }
+.modal-alert li { margin-bottom: 3px; }
+.modal-alert .mini { font-size: 11px; opacity: .75; }
+.modal-alert.info { background: rgba(46,139,118,.07); border-color: var(--teal); color: var(--carbon); }
+.modal-alert.ok   { background: rgba(46,139,118,.12); border-color: var(--teal); color: var(--carbon); }
+.modal-alert.err  { background: rgba(194,89,63,.09);  border-color: #c2593f;     color: var(--carbon); }
+.btn-m { display: inline-flex; align-items: center; gap: 6px; font-family: var(--fb); font-weight: 700; font-size: 12px; padding: 10px 18px; border-radius: 8px; border: none; cursor: pointer; transition: all .2s; }
+.btn-m.p { background: var(--teal); color: white; } .btn-m.p:hover { background: var(--teal-dk); }
+.btn-m.s { background: transparent; color: var(--carbon); border: 1.5px solid var(--platinum); } .btn-m.s:hover { background: #f5f5f5; }
+
+/* ─── BACK COVER ─────────────────────────── */
+.back-cover { background: white; min-height: 932px; display: flex; flex-direction: column; }
+.bc-band { background: var(--carbon); padding: 26px 44px 30px; }
+.bc-sprint { font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: 10px; }
+.bc-theme { font-family: var(--fd); font-size: 34px; color: white; line-height: 1.2; letter-spacing: -.01em; }
+.bc-spacer { flex: 1; background: white; display: flex; align-items: center; justify-content: center; }
+.bc-foot { background: var(--gold); padding: 14px 44px; display: flex; justify-content: center; align-items: center; }
+.bc-foot-t { font-size: 12px; font-weight: 600; color: rgba(255,255,255,.90); letter-spacing: .04em; }
+
+/* ─── PRINT / PDF ────────────────────────── */
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .top-nav, .modal-ov, .btn-print, .submit-actions, .submit-sec, .pb-wrap, .pb-pct, .save-dot { display: none !important; }
+  body { background: white !important; }
+  .doc-wrap { margin: 0 !important; max-width: 100% !important; gap: 0 !important; }
+  .doc-wrap > * { box-shadow: none !important; }
+  .page, .cover-page, .back-cover { height: 10.1in !important; min-height: unset !important; page-break-after: always; break-after: page; overflow: hidden; }
+  .report-id-block { background: #1e2a38 !important; page-break-inside: avoid; break-inside: avoid; }
+  .metric-pair, .ia-role, .step-list, .note, .gold-acc, .quote-band, .ni { page-break-inside: avoid; break-inside: avoid; }
+  .char-ct, .ip-guard, .field-guide { display: none !important; }
+  textarea { border: 1px solid #c0c4c2 !important; background: white !important; min-height: 50px !important; resize: none !important; overflow: visible !important; height: auto !important; }
+  @page { size: letter portrait; margin: 0.45in; }
+}
+@media (max-width: 600px) {
+  .msg-layout { grid-template-columns: 1fr; } .msg-img { display: none; }
+  .s-tab { display: none; } .p-body { padding: 28px 22px; }
+  .metric-pair { grid-template-columns: 1fr; }
+  .rid-fields { flex-direction: column; } .level-opts { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-brand">DCA · <span>ARIA</span></div>
+  <div class="nav-links">
+    <a href="#portada">Portada</a>
+    <a href="#instrucciones">Instrucciones</a>
+    <a href="#documentos">Documentos</a>
+    <a href="#ent-901" id="nav-901">Entregable 1</a>
+    <a href="#ent-902" id="nav-902">Entregable 2</a>
+    <a href="#ent-903" id="nav-903">Entregable 3</a>
+    <a href="#ent-904" id="nav-904">Entregable 4</a>
+    <a href="#cierre" id="nav-905">Cierre</a>
+    <a href="#consultas">Consultas</a>
+  </div>
+  <div class="nav-right">
+    <a class="nav-help" href="https://digitalchangeadvisors.com/centro-baip/" target="_blank" rel="noopener">Centro de Ayuda ↗</a>
+    <div class="pb-wrap"><div class="pb-fill" id="pbFill"></div></div>
+    <span class="pb-pct" id="pbPct">0%</span>
+    <div class="save-dot" id="saveDot"></div>
+  </div>
+</nav>
+
+<div class="doc-wrap">
+
+<section class="cover-page" id="portada">
+  <div class="cover-visual">
+    <svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs><pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.2" fill="rgba(30,42,56,0.28)"/></pattern></defs>
+      <rect width="720" height="300" fill="#2e8b76"/><rect width="720" height="300" fill="url(#dots)"/>
+      <!-- Three lenses visualization -->
+      <circle cx="180" cy="150" r="70" fill="none" stroke="rgba(255,255,255,0.52)" stroke-width="2"/>
+      <circle cx="180" cy="150" r="45" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+      <circle cx="180" cy="150" r="20" fill="rgba(255,255,255,0.12)"/>
+      <text x="180" y="155" fill="rgba(255,255,255,0.88)" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">AIMT</text>
+      <circle cx="360" cy="150" r="70" fill="none" stroke="rgba(210,208,200,0.65)" stroke-width="2"/>
+      <circle cx="360" cy="150" r="45" fill="none" stroke="rgba(210,208,200,0.45)" stroke-width="1.5"/>
+      <circle cx="360" cy="150" r="20" fill="rgba(210,208,200,0.14)"/>
+      <text x="360" y="155" fill="rgba(210,208,200,0.92)" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">AILS</text>
+      <circle cx="540" cy="150" r="70" fill="none" stroke="rgba(30,42,56,0.78)" stroke-width="2"/>
+      <circle cx="540" cy="150" r="45" fill="none" stroke="rgba(30,42,56,0.55)" stroke-width="1.5"/>
+      <circle cx="540" cy="150" r="20" fill="rgba(30,42,56,0.20)"/>
+      <text x="540" y="155" fill="rgba(30,42,56,0.88)" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">AICD</text>
+      <!-- Connecting arcs -->
+      <path d="M 248 120 Q 270 100 290 120" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="1.5"/>
+      <path d="M 428 120 Q 450 100 470 120" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="1.5"/>
+      <!-- Triangulation point -->
+      <circle cx="360" cy="280" r="8" fill="rgba(255,255,255,0.14)" stroke="rgba(255,255,255,0.38)" stroke-width="1"/>
+      <line x1="180" y1="218" x2="360" y2="272" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+      <line x1="540" y1="218" x2="360" y2="272" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+      <text x="360" y="285" fill="rgba(255,255,255,0.58)" font-family="sans-serif" font-size="8" font-weight="700" text-anchor="middle" letter-spacing="2">REPORTE BAIP · S1–S7</text>
+    </svg>
+  </div>
+  <div class="cover-band">
+    <div class="c-sprint-lbl">Audición de Certificación</div>
+    <div class="c-theme">Caso Vertecsa Group · Criterio analítico</div>
+  </div>
+  <div class="cover-body">
+    <div class="c-program">Certificación Analista BAIP — Brecha AI Personas</div>
+    <div class="c-badge">Prueba final de la certificación · DCA</div>
+    <div class="student-row">
+      <div class="s-field"><label>Participante</label><input type="text" id="sf-nombre" data-save="sf-nombre" placeholder="Nombre completo"></div>
+      <div class="s-field"><label>Correo electrónico</label><input type="email" id="sf-email" data-save="sf-email" placeholder="tu@empresa.com" autocomplete="email"></div>
+      <div class="s-field"><label>Organización</label><input type="text" id="sf-empresa" data-save="sf-empresa" placeholder="Empresa"></div>
+      <div class="s-field"><label>Cohorte</label><input type="text" id="sf-cohorte" data-save="sf-cohorte" placeholder="Ej. BAIP-2026-01"></div>
+    </div>
+  </div>
+  <div class="cover-foot">
+    <div class="cf-text"><strong>Facilitador:</strong> César Lozano</div>
+    <div class="cf-text"><strong>Digital Change Advisors</strong> · Modelo ARIA</div>
+  </div>
+</section>
+
+<div class="page" id="contenido">
+  <div class="run-header">Audición de Certificación &mdash; Caso Vertecsa Group &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Contenido</span></div>
+    <div class="p-body">
+      <h1 class="sec-title">¿Qué encontrarás en esta audición?</h1>
+      <div class="toc-group">
+        <div class="toc-entry"><span class="toc-name">Mensaje del Facilitador</span><span class="toc-pg">02</span></div>
+        <div class="toc-entry"><span class="toc-name">Instrucciones, reglas y rúbrica</span><span class="toc-pg">03</span></div>
+        <div class="toc-entry"><span class="toc-name">Los documentos del caso Vertecsa</span><span class="toc-pg">05</span></div>
+      </div>
+      <div class="toc-group">
+        <div class="toc-group-head">Cuatro entregables · Se envían uno a uno, como los experimentos</div>
+        <div class="toc-entry"><span class="toc-name">Entregable 1 · Auditoría del borrador</span><span class="toc-pg">06</span></div>
+        <div class="toc-entry"><span class="toc-name">Entregable 2 · Diagnóstico integrado y causa raíz</span><span class="toc-pg">09</span></div>
+        <div class="toc-entry"><span class="toc-name">Entregable 3 · Plan y modelo de impacto</span><span class="toc-pg">12</span></div>
+        <div class="toc-entry"><span class="toc-name">Entregable 4 · Síntesis, defensa y decisión</span><span class="toc-pg">15</span></div>
+      </div>
+      <div class="toc-group">
+        <div class="toc-group-head">Cierre y apoyo</div>
+        <div class="toc-entry"><span class="toc-name">Cierre: declaración y solicitud de calificación final</span><span class="toc-pg">18</span></div>
+        <div class="toc-entry"><span class="toc-name">Mesa de consultas</span><span class="toc-pg">20</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">1</div><div class="rule"></div></div>
+</div>
+<div class="page" id="mensaje">
+  <div class="run-header">Audición de Certificación &mdash; Caso Vertecsa Group &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Mensaje</span></div>
+    <div class="p-body">
+      <div class="msg-layout">
+        <div class="msg-img">
+          <img src="Images/Imagen mensaje facilitador.png" alt="Analista con tres lentes diagnósticas" style="width:100%;height:100%;object-fit:contain;display:block;">
+        </div>
+        <div>
+          <div class="msg-title">Mensaje del Facilitador</div>
+          <p>Llegaste al cierre del camino. En los Sprints 01 y 02 trabajaste sobre un caso que recorrimos juntos. En esta audición trabajas solo y sobre un caso que no has visto: <strong>Vertecsa Group</strong>. No hay socialización con pares ni mentoría de por medio: lo que está en juego es tu criterio.</p>
+          <p>Recibes un expediente completo —la descripción del caso y los tres reportes de lente— y un <strong>borrador de Reporte BAIP</strong> elaborado por otro analista, que aplicó bien los tres instrumentos pero cometió errores en el paso que más importa: el cruce. Tu trabajo es auditar ese borrador, reconstruir el diagnóstico, diseñar el plan y defender tu decisión por escrito, en cuatro entregables que envías como los experimentos.</p>
+          <p>No voy a mirar si tu reporte es elegante. Voy a mirar si tu diagnóstico resiste: si separas la causa del síntoma con evidencia, si cruzas las lentes en lugar de sumarlas y si cada acción de tu plan es algo que existe y se puede verificar. Todo lo que el programa te enseñó sobre el señuelo aplica aquí.</p>
+          <p>Tienes tres semanas y la Mesa de consultas para dudas de proceso, criterios y técnica. Confío en lo que ya construiste. Esta es la oportunidad de demostrarlo.</p>
+          <div class="sig-block">
+            <div class="sig-line"></div>
+            <div class="sig-name">César Lozano</div>
+            <div class="sig-role">Facilitador · Digital Change Advisors</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">2</div><div class="rule"></div></div>
+</div>
+<div class="page" id="instrucciones">
+  <div class="run-header">Audición de Certificación &mdash; Caso Vertecsa Group &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Instrucciones</span></div>
+    <div class="p-body">
+      <h1 class="sec-title">Instrucciones de Uso</h1>
+      <div class="sec-sublabel">¿Cómo funciona esta audición?</div>
+      <div class="ni">
+        <div class="ni-head"><span class="nn">1.</span> Trabaja en este documento: tiene autoguardado y envío por entregable.</div>
+        <div class="ni-text">Funciona exactamente como los Sprint Roadmaps: HTML nativo con autoguardado en tu dispositivo y un botón de envío al final de cada entregable. Para enviar necesitas tu nombre, un correo válido y tu cohorte en la portada. Solo verás «Enviado» cuando el servidor confirme el recibo; si algo falla, tu trabajo sigue guardado. Trabaja siempre desde el mismo computador y navegador, y <strong>envía cada entregable al terminarlo</strong>.</div>
+      </div>
+      <div class="ni">
+        <div class="ni-head"><span class="nn">2.</span> Tienes tres semanas y un ritmo sugerido.</div>
+        <div class="ni-text">La ventana es de tres semanas calendario desde la fecha de apertura que tu facilitador te confirma por correo. Un ritmo que funciona: semana 1, Entregables 1 y 2; semana 2, Entregable 3; semana 3, Entregable 4 y cierre. Puedes enviar versiones corregidas de un entregable mientras la ventana esté abierta: se evalúa la más reciente.</div>
+      </div>
+      <div class="ni">
+        <div class="ni-head"><span class="nn">3.</span> El trabajo es 100% individual y confidencial.</div>
+        <div class="ni-text">No hay ejercicios de socialización con pares en esta audición. No compartas ni discutas el caso, el borrador ni tus respuestas con otros participantes. Las dudas van a la Mesa de consultas: ahí respondo cuestiones de <strong>proceso, criterios y técnica</strong>, pero no sobre el contenido del análisis, para que todos trabajen en igualdad de condiciones.</div>
+      </div>
+      <div class="ni">
+        <div class="ni-head"><span class="nn">4.</span> Usa la IA como andamiaje, no como sustituto.</div>
+        <div class="ni-text">Puedes usarla para estresar tu razonamiento, contraargumentar tu jerarquía de causas y pulir la redacción. La priorización, el veredicto y las decisiones son tuyos. En el cierre declaras cómo la usaste. Un trabajo que no puedas sostener como propio, o una declaración de uso que no corresponda con lo entregado, es causal de rechazo.</div>
+      </div>
+      <div class="quote-band">
+        <p>La prueba no es producir un reporte. Es demostrar que tu diagnóstico resiste cuando alguien con razón en parte te propone una causa equivocada.</p>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">3</div><div class="rule"></div></div>
+</div>
+<div class="page" id="rubrica">
+  <div class="run-header">Audición de Certificación &mdash; Caso Vertecsa Group &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Rúbrica</span></div>
+    <div class="p-body">
+      <h1 class="sec-title">Cómo se evalúa tu audición</h1>
+      <div class="sec-sublabel">Rúbrica abierta: criterios, pesos y reglas de resultado</div>
+      <p style="margin-bottom:12px">Cada criterio se califica de 1 a 5: 1–2 es insuficiente, 3–4 es suficiente y 5 es sobresaliente. Estos son los siete criterios y su peso en la evaluación:</p>
+      <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px"><tr><td style="padding:6px 8px;border-bottom:1px solid #e1e4e2;font-weight:700;color:var(--teal)">1</td><td style="padding:6px 8px;border-bottom:1px solid #e1e4e2">Precisión del diagnóstico y jerarquía de causa raíz</td><td style="padding:6px 8px;border-bottom:1px solid #e1e4e2;text-align:right;font-weight:700">35%</td></tr><tr><td style="padding:6px 8px;border-bottom:1px solid #e1e4e2;font-weight:700;color:var(--teal)">2</td><td style="padding:6px 8px;border-bottom:1px solid #e1e4e2">Integración de los tres instrumentos (el cruce)</td><td style="padding:6px 8px;border-bottom:1px solid #e1e4e2;text-align:right;font-weight:700">30%</td></tr><tr><td style="padding:6px 8px;border-bottom:1px solid #e1e4e2;font-weight:700;color:var(--teal)">3</td><td style="padding:6px 8px;border-bottom:1px solid #e1e4e2">Calidad del plan de intervención (S5)</td><td style="padding:6px 8px;border-bottom:1px solid #e1e4e2;text-align:right;font-weight:700">12%</td></tr><tr><td style="padding:6px 8px;border-bottom:1px solid #e1e4e2;font-weight:700;color:var(--teal)">5</td><td style="padding:6px 8px;border-bottom:1px solid #e1e4e2">Modelo de impacto (S6) con inversión estimada</td><td style="padding:6px 8px;border-bottom:1px solid #e1e4e2;text-align:right;font-weight:700">8%</td></tr><tr><td style="padding:6px 8px;border-bottom:1px solid #e1e4e2;font-weight:700;color:var(--teal)">6</td><td style="padding:6px 8px;border-bottom:1px solid #e1e4e2">Defensibilidad ante audiencia C-Level (por escrito)</td><td style="padding:6px 8px;border-bottom:1px solid #e1e4e2;text-align:right;font-weight:700">7%</td></tr><tr><td style="padding:6px 8px;border-bottom:1px solid #e1e4e2;font-weight:700;color:var(--teal)">4</td><td style="padding:6px 8px;border-bottom:1px solid #e1e4e2">Claridad ejecutiva del reporte</td><td style="padding:6px 8px;border-bottom:1px solid #e1e4e2;text-align:right;font-weight:700">4%</td></tr><tr><td style="padding:6px 8px;border-bottom:1px solid #e1e4e2;font-weight:700;color:var(--teal)">7</td><td style="padding:6px 8px;border-bottom:1px solid #e1e4e2">Viabilidad operativa del plan</td><td style="padding:6px 8px;border-bottom:1px solid #e1e4e2;text-align:right;font-weight:700">4%</td></tr></table>
+      <div class="note">
+        <div class="note-hd">Regla de exclusión</div>
+        <p>Si en el Criterio 1 tratas un síntoma como si fuera la causa raíz, el entregable es insuficiente de forma automática, sin importar la calidad del resto. Por eso en este caso importa tanto probar tu jerarquía con la distribución de los datos y no con la intuición ni con el hallazgo más fuerte.</p>
+      </div>
+      <p style="font-weight:700;font-size:14px;margin:14px 0 6px">Reglas de resultado</p>
+      <ul class="step-list">
+        <li><span><strong>Aprobado:</strong> los siete criterios en nivel suficiente o superior.</span></li>
+        <li><span><strong>Aplazado:</strong> uno o más criterios en nivel insuficiente sobre un trabajo realmente ejecutado. Recibes acciones correctivas y una nueva entrega en un plazo máximo de 60 días, sobre un caso alterno.</span></li>
+        <li><span><strong>Rechazado:</strong> el trabajo no fue ejecutado o no se sostiene como propio. Implica re-cursar el módulo en falla.</span></li>
+      </ul>
+      <p style="margin-top:10px;font-size:13px;color:rgba(30,42,56,.72)">No existe el «aprobado con observaciones». Recibirás una devolución personalizada con tu puntaje por criterio y una guía de mejora con ejemplos concretos.</p>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">4</div><div class="rule"></div></div>
+</div>
+<div class="page" id="documentos">
+  <div class="run-header">Audición de Certificación &mdash; Caso Vertecsa Group &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Documentos</span></div>
+    <div class="p-body">
+      <h1 class="sec-title">Los documentos del caso Vertecsa</h1>
+      <div class="sec-sublabel">Descárgalos y léelos en este orden: 01 → 02, 03 y 04 → 05</div>
+      <div class="ni" style="margin-bottom:14px">
+        <div class="ni-head"><span class="nn">01.</span> Descripción del caso</div>
+        <div class="ni-text">Informe de levantamiento diagnóstico: perfil de Vertecsa, KPIs, utilización por nivel y por equipo, y once situaciones relevadas.<br><a class="gloss-link" href="docs/Vertecsa_01_Descripcion_Caso_v2.docx" download style="font-weight:700">⬇ Descargar documento (.docx)</a></div>
+      </div>
+      <div class="ni" style="margin-bottom:14px">
+        <div class="ni-head"><span class="nn">02.</span> Reporte AIMT · Lente de mentalidad</div>
+        <div class="ni-text">Creencias individuales y su conexión con los diez obstáculos.<br><a class="gloss-link" href="docs/Vertecsa_02_Reporte_AIMT_v2.docx" download style="font-weight:700">⬇ Descargar documento (.docx)</a></div>
+      </div>
+      <div class="ni" style="margin-bottom:14px">
+        <div class="ni-head"><span class="nn">03.</span> Reporte AILS · Lente de liderazgo</div>
+        <div class="ni-text">Conducta observable del liderazgo (5Cs). Señal indicativa: tríangulala.<br><a class="gloss-link" href="docs/Vertecsa_03_Reporte_AILS_v2.docx" download style="font-weight:700">⬇ Descargar documento (.docx)</a></div>
+      </div>
+      <div class="ni" style="margin-bottom:14px">
+        <div class="ni-head"><span class="nn">04.</span> Reporte AICD · Lente de cultura</div>
+        <div class="ni-text">Los 28 marcadores de ADN AI y su conexión con los obstáculos.<br><a class="gloss-link" href="docs/Vertecsa_04_Reporte_AICD_v2.docx" download style="font-weight:700">⬇ Descargar documento (.docx)</a></div>
+      </div>
+      <div class="ni" style="margin-bottom:14px">
+        <div class="ni-head"><span class="nn">05.</span> Borrador de Reporte BAIP con errores</div>
+        <div class="ni-text">El documento que vas a auditar y reconstruir.<br><a class="gloss-link" href="docs/Vertecsa_05_BAIP_Borrador_Senuelo_v2.docx" download style="font-weight:700">⬇ Descargar documento (.docx)</a></div>
+      </div>
+      <div class="note">
+        <div class="note-hd">Antes de empezar</div>
+        <p>Trabaja solo con estos cinco documentos: no hay información adicional. Los tres reportes ya están procesados por la plataforma DCA; tú los lees e interpretas, no accedes a reactivos, scoring ni baremos. Los datos son sintéticos y ninguna empresa real está representada.</p>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">5</div><div class="rule"></div></div>
+</div>
+<div class="page" id="ent-901">
+  <div class="run-header">Audición de Certificación &mdash; Caso Vertecsa Group &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Entregable 1</span></div>
+    <div class="p-body">
+      <div class="exp-lbl">Entregable 1</div>
+      <h1 class="sec-title">Auditoría del borrador</h1>
+      <div class="exp-meta-row">
+        <span class="exp-lente lente-int">Criterios 1 y 2 · Precisión e integración</span>
+        <span class="exp-lente lente-int">Caso Vertecsa Group</span>
+      </div>
+      <p><em>Otro analista aplicó bien los tres instrumentos y se equivocó en el cruce. Antes de construir tu propio diagnóstico, demuestra que ves dónde y por qué.</em></p>
+      <p><strong>Objetivo:</strong> Identificar, con evidencia citada de los reportes y del caso, cada error de integración del borrador, aplicar la prueba de distribución a los datos de utilización y declarar tu keystone provisional con los señuelos que descartas.</p>
+      <p><strong>Qué entregas:</strong> la lista de errores con su evidencia, tu lectura de la distribución y tu hipótesis de causa raíz.</p>
+      <div class="metric-pair">
+        <div class="metric-card beh">
+          <div class="metric-card-lbl">Qué se observa</div>
+          <dl class="metric-rows">
+            <div class="metric-row"><dt>Qué se observa</dt><dd>Que cada error identificado esté respaldado con evidencia citada de los reportes y del caso, y que la distribución —no la intuición— sostenga tu hipótesis.</dd></div>
+            <div class="metric-row"><dt>Cómo se mide</dt><dd>Conteo de errores sustentados frente a afirmaciones sin evidencia, contrastado con las lecturas de cada lente.</dd></div>
+          </dl>
+        </div>
+        <div class="metric-card biz">
+          <div class="metric-card-lbl">Por qué importa al negocio</div>
+          <dl class="metric-rows">
+            <div class="metric-row"><dt>Por qué importa</dt><dd>Un diagnóstico que acepta un cruce falso conduce a una intervención dirigida al lugar equivocado y gasta el presupuesto del cliente sin mover el KPI.</dd></div>
+            <div class="metric-row"><dt>Señal de calidad</dt><dd>Tu keystone se defiende contra al menos dos hipótesis rivales con datos.</dd></div>
+          </dl>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">6</div><div class="rule"></div></div>
+</div>
+<div class="page">
+  <div class="run-header">Audición de Certificación &mdash; Caso Vertecsa Group &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Entregable 1</span></div>
+    <div class="p-body">
+      <div class="report-id-block">
+        <div class="rid-head">
+          <span class="rid-badge">Entregable 1</span>
+          <span class="rid-title">Identificación del caso</span>
+        </div>
+        <div class="rid-fields">
+          <div class="rid-field"><label>Caso analizado</label><input type="text" id="f-901-rid-unidad" data-save="f-901-rid-unidad" data-noprogress="1" value="Vertecsa Group"></div>
+          <div class="rid-field"><label>Fecha de este entregable</label><input type="text" id="f-901-rid-fecha" data-save="f-901-rid-fecha" placeholder="Ej. 26 oct 2026"></div>
+          <div class="rid-field"><label>Analista BAIP</label><input type="text" id="f-901-rid-part" data-save="f-901-rid-part" placeholder="Se sincroniza desde portada"></div>
+        </div>
+      </div>
+      <div class="ip-guard"><span class="ip-guard-icon">🔒</span><span>Trabajas sobre resultados procesados. No manipulas reactivos, scoring ni baremos. Cada afirmación se respalda con evidencia del caso o de un reporte, citando documento, sección o dato.</span></div>
+      <p style="font-weight:700;font-size:14px;color:var(--carbon);margin-bottom:12px;">Paso a paso</p>
+      <ul class="step-list">
+        <li><span>Lee el caso y los tres reportes completos antes de abrir el borrador.</span></li>
+        <li><span>Identifica cada error de integración del borrador y cita la evidencia específica que lo refuta (reporte, sección, dato).</span></li>
+        <li><span>Aplica tu propia prueba de distribución: qué muestran la utilización por nivel de seniority y por equipo, y qué hipótesis rivales descarta cada patrón.</span></li>
+        <li><span>Declara cuál lectura del borrador es el señuelo de primer orden y cuál el de segundo orden, y por qué cada uno seduce.</span></li>
+        <li><span>Enuncia tu keystone provisional con la evidencia mínima que lo sostiene.</span></li>
+      </ul>
+      <div class="ia-role">
+        <span class="ia-role-icon">🤖</span>
+        <span><strong>Rol de la IA como andamiaje:</strong> Puedes usarla para estresar tu razonamiento, contraargumentar tu jerarquía y pulir la redacción. La priorización, el veredicto y las decisiones son tuyos: la IA no tiene el criterio para generar este entregable por ti. Declararás cómo la usaste en el cierre.</span>
+      </div>
+      <div class="fill">
+        <div class="fill-lbl">Errores de integración identificados</div>
+        <div class="field-guide">Por cada error: qué dice el borrador · por qué es un error · evidencia que lo refuta (documento, sección, dato). No se indica cuántos errores hay.</div>
+        <textarea id="f-901-e1" data-save="f-901-e1" rows="10" placeholder="Escribe aquí tu respuesta…"></textarea>
+        <div class="char-ct"><span id="cc-901-e1">0</span> caracteres</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">7</div><div class="rule"></div></div>
+</div>
+<div class="page">
+  <div class="run-header">Audición de Certificación &mdash; Caso Vertecsa Group &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Entregable 1</span></div>
+    <div class="p-body">
+      <div class="fill">
+        <div class="fill-lbl">Prueba de distribución</div>
+        <div class="field-guide">Qué muestran la utilización por nivel y por equipo. Qué patrón producirían las hipótesis rivales y cuál de ellas queda falsificada por los datos.</div>
+        <textarea id="f-901-e2" data-save="f-901-e2" rows="8" placeholder="Escribe aquí tu respuesta…"></textarea>
+        <div class="char-ct"><span id="cc-901-e2">0</span> caracteres</div>
+      </div>
+      <div class="fill">
+        <div class="fill-lbl">Tu keystone y los señuelos que descartas</div>
+        <div class="field-guide">• Tu keystone provisional y la evidencia mínima<br>• El señuelo de primer orden y el de segundo orden, y por qué seducen<br>• Qué predeciría cada hipótesis rival que los datos no muestran</div>
+        <textarea id="f-901-e3" data-save="f-901-e3" rows="7" placeholder="Escribe aquí tu respuesta…"></textarea>
+        <div class="char-ct"><span id="cc-901-e3">0</span> caracteres</div>
+      </div>
+      <div class="fill fill-obs">
+        <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
+        <div class="field-guide">Comparte con DCA cualquier hallazgo relevante, dificultad o insight que no esté capturado en los campos anteriores. Tu observación puede mejorar la audición de las próximas cohortes.</div>
+        <textarea id="f-901-obs" data-save="f-901-obs" rows="4" placeholder="Escribe aquí tu respuesta…"></textarea>
+        <div class="char-ct"><span id="cc-901-obs">0</span> caracteres</div>
+      </div>
+      <div class="submit-sec">
+        <h3>Envío del Entregable 1</h3>
+        <p>Revisa que cada error esté respaldado con evidencia específica. Puedes enviar una versión corregida mientras la ventana esté abierta: se evalúa la más reciente.</p>
+        <div class="submit-actions">
+          <button class="btn-sub" onclick="openModal('901')" id="btn-901">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
+            Enviar Entregable 1
+          </button>
+          <button class="btn-print" onclick="printExp('901')">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="4" y="2" width="12" height="8" rx="1"/><rect x="3" y="10" width="14" height="8" rx="1"/><rect x="7" y="13" width="6" height="5" rx="0.5" fill="currentColor" stroke="none"/></svg>
+            Guardar copia en PDF
+          </button>
+        </div>
+        <div class="sub-ok" id="ok-901">✓ Envío confirmado.</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">8</div><div class="rule"></div></div>
+</div>
+<div class="page" id="ent-902">
+  <div class="run-header">Audición de Certificación &mdash; Caso Vertecsa Group &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Entregable 2</span></div>
+    <div class="p-body">
+      <div class="exp-lbl">Entregable 2</div>
+      <h1 class="sec-title">Diagnóstico integrado y causa raíz</h1>
+      <div class="exp-meta-row">
+        <span class="exp-lente lente-int">Criterios 1 y 2 · Precisión e integración</span>
+        <span class="exp-lente lente-int">Secciones S3 y S4 del Reporte BAIP</span>
+      </div>
+      <p><em>Un diagnóstico integrado no pone las tres lecturas en fila: encuentra el punto donde se cruzan, separa la causa del síntoma y lo conecta con la intervención.</em></p>
+      <p><strong>Objetivo:</strong> Reconstruir las Secciones 3 y 4 del Reporte BAIP de Vertecsa con el diagnóstico correcto: la tabla multi-lente, los tres cruces con sus contradicciones reconciliadas y el mapa de causa raíz con su jerarquía completa.</p>
+      <p><strong>Qué entregas:</strong> S3 (diagnóstico integrado) y S4 (mapa de causa raíz con componentes ARIA nombrados, sin mecánica).</p>
+      <div class="metric-pair">
+        <div class="metric-card beh">
+          <div class="metric-card-lbl">Qué se observa</div>
+          <dl class="metric-rows">
+            <div class="metric-row"><dt>Qué se observa</dt><dd>Que el cruce triangule en lugar de sumar, que cada contradicción de los datos quede reconciliada y que la jerarquía separe la causa del síntoma.</dd></div>
+            <div class="metric-row"><dt>Cómo se mide</dt><dd>Contraste entre tu S3/S4 y cada lectura de lente por separado.</dd></div>
+          </dl>
+        </div>
+        <div class="metric-card biz">
+          <div class="metric-card-lbl">Por qué importa al negocio</div>
+          <dl class="metric-rows">
+            <div class="metric-row"><dt>Por qué importa</dt><dd>El valor diferencial del diagnóstico está en lo que ninguna lente muestra sola. Si el cliente lo habría inferido leyendo los tres reportes, no hay valor.</dd></div>
+            <div class="metric-row"><dt>Señal de calidad</dt><dd>Cada causa tiene evidencia de al menos dos fuentes.</dd></div>
+          </dl>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">9</div><div class="rule"></div></div>
+</div>
+<div class="page">
+  <div class="run-header">Audición de Certificación &mdash; Caso Vertecsa Group &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Entregable 2</span></div>
+    <div class="p-body">
+      <div class="report-id-block">
+        <div class="rid-head">
+          <span class="rid-badge">Entregable 2</span>
+          <span class="rid-title">Identificación del caso</span>
+        </div>
+        <div class="rid-fields">
+          <div class="rid-field"><label>Caso analizado</label><input type="text" id="f-902-rid-unidad" data-save="f-902-rid-unidad" data-noprogress="1" value="Vertecsa Group"></div>
+          <div class="rid-field"><label>Fecha de este entregable</label><input type="text" id="f-902-rid-fecha" data-save="f-902-rid-fecha" placeholder="Ej. 26 oct 2026"></div>
+          <div class="rid-field"><label>Analista BAIP</label><input type="text" id="f-902-rid-part" data-save="f-902-rid-part" placeholder="Se sincroniza desde portada"></div>
+        </div>
+      </div>
+      <p style="font-weight:700;font-size:14px;color:var(--carbon);margin-bottom:12px;">Paso a paso</p>
+      <ul class="step-list">
+        <li><span>Arma la tabla multi-lente: el nivel de cada lente por obstáculo, lado a lado, con la lectura integrada.</span></li>
+        <li><span>Construye los tres cruces —triangulación, coherencia sistémica y tensión productiva— y reconcilia las contradicciones que los datos presentan.</span></li>
+        <li><span>Jerarquiza: keystone, aceleradores, co-causas, agravantes y señuelos, cada uno con su evidencia.</span></li>
+        <li><span>Conecta cada causa con su par de componentes del Modelo ARIA, nombrados sin su mecánica.</span></li>
+        <li><span>Aplica la prueba de valor: confirma que cada causa priorizada no es lo que el cliente habría inferido leyendo los reportes por separado.</span></li>
+      </ul>
+      <div class="ia-role">
+        <span class="ia-role-icon">🤖</span>
+        <span><strong>Rol de la IA como andamiaje:</strong> Puedes usarla para estresar tu razonamiento, contraargumentar tu jerarquía y pulir la redacción. La priorización, el veredicto y las decisiones son tuyos: la IA no tiene el criterio para generar este entregable por ti. Declararás cómo la usaste en el cierre.</span>
+      </div>
+      <div class="fill">
+        <div class="fill-lbl">Diagnóstico Integrado (S3): tabla multi-lente</div>
+        <div class="field-guide">Por obstáculo: nivel en AIMT, AILS y AICD, y lectura integrada. Usa los marcadores y comportamientos como evidencia (R, D, C). Los diez obstáculos con veredicto.</div>
+        <textarea id="f-902-e1" data-save="f-902-e1" rows="10" placeholder="Escribe aquí tu respuesta…"></textarea>
+        <div class="char-ct"><span id="cc-902-e1">0</span> caracteres</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">10</div><div class="rule"></div></div>
+</div>
+<div class="page">
+  <div class="run-header">Audición de Certificación &mdash; Caso Vertecsa Group &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Entregable 2</span></div>
+    <div class="p-body">
+      <div class="fill">
+        <div class="fill-lbl">Los tres cruces y la reconciliación de contradicciones</div>
+        <div class="field-guide">• Triangulación: qué obstáculo aparece desde al menos dos lentes y por qué la coincidencia no es suma<br>• Coherencia sistémica y tensión productiva<br>• Cada contradicción de los datos y cómo tu jerarquía la explica</div>
+        <textarea id="f-902-e2" data-save="f-902-e2" rows="8" placeholder="Escribe aquí tu respuesta…"></textarea>
+        <div class="char-ct"><span id="cc-902-e2">0</span> caracteres</div>
+      </div>
+      <div class="fill">
+        <div class="fill-lbl">Mapa de Causa Raíz (S4)</div>
+        <div class="field-guide">• Keystone y por qué<br>• Aceleradores, co-causas, agravantes y señuelos, con evidencia<br>• Par de componentes ARIA por causa (nombrados, sin mecánica)<br>• Prueba de valor: por qué no era autoevidente</div>
+        <textarea id="f-902-e3" data-save="f-902-e3" rows="9" placeholder="Escribe aquí tu respuesta…"></textarea>
+        <div class="char-ct"><span id="cc-902-e3">0</span> caracteres</div>
+      </div>
+      <div class="fill fill-obs">
+        <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
+        <div class="field-guide">Comparte con DCA cualquier hallazgo relevante, dificultad o insight que no esté capturado en los campos anteriores. Tu observación puede mejorar la audición de las próximas cohortes.</div>
+        <textarea id="f-902-obs" data-save="f-902-obs" rows="4" placeholder="Escribe aquí tu respuesta…"></textarea>
+        <div class="char-ct"><span id="cc-902-obs">0</span> caracteres</div>
+      </div>
+      <div class="submit-sec">
+        <h3>Envío del Entregable 2</h3>
+        <p>Revisa que tu jerarquía explique todas las contradicciones del caso y que cada causa tenga evidencia de al menos dos fuentes.</p>
+        <div class="submit-actions">
+          <button class="btn-sub" onclick="openModal('902')" id="btn-902">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
+            Enviar Entregable 2
+          </button>
+          <button class="btn-print" onclick="printExp('902')">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="4" y="2" width="12" height="8" rx="1"/><rect x="3" y="10" width="14" height="8" rx="1"/><rect x="7" y="13" width="6" height="5" rx="0.5" fill="currentColor" stroke="none"/></svg>
+            Guardar copia en PDF
+          </button>
+        </div>
+        <div class="sub-ok" id="ok-902">✓ Envío confirmado.</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">11</div><div class="rule"></div></div>
+</div>
+<div class="page" id="ent-903">
+  <div class="run-header">Audición de Certificación &mdash; Caso Vertecsa Group &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Entregable 3</span></div>
+    <div class="p-body">
+      <div class="exp-lbl">Entregable 3</div>
+      <h1 class="sec-title">Plan y modelo de impacto</h1>
+      <div class="exp-meta-row">
+        <span class="exp-lente lente-int">Criterios 3, 5 y 7 · Plan, impacto y viabilidad</span>
+        <span class="exp-lente lente-int">Secciones S5 y S6 del Reporte BAIP</span>
+      </div>
+      <div class="note">
+        <div class="note-hd">Plan de 90 días y solución ReturnAI a 120 días</div>
+        <p>El <strong>plan 30/60/90 (S5)</strong> es una secuencia de acciones para destrabar la causa raíz y evidenciar que fluye el valor de la inversión en IA; no deja transferencia ni plan de continuidad. La <strong>solución ReturnAI a 120 días</strong> es un producto de estructura definida que el analista no cambia: la das a conocer. Su valor estándar es de USD 55.000. <a class="gloss-link" href="https://digitalchangeadvisors.com/centro-baip/#q-solucion-returnai-estructura" target="_blank" rel="noopener">Ver la estructura en el Centro de Ayuda</a>.</p>
+      </div>
+      <p><em>Un plan sin anclaje es una lista de deseos, y un plan sin caso de inversión es un gasto. Convierte tu diagnóstico en acciones que existen, se pueden verificar y tienen un costo que el cliente puede comparar con el de no actuar.</em></p>
+      <p><strong>Objetivo:</strong> Convertir tu mapa de causa raíz en un Plan de Intervención de 90 días con cada acción anclada a un obstáculo, un hecho auditable, un dueño y una fecha, y construir el Modelo de Impacto de Vertecsa con inversión estimada y costo de la inacción.</p>
+      <div class="metric-pair">
+        <div class="metric-card beh">
+          <div class="metric-card-lbl">Qué se observa</div>
+          <dl class="metric-rows">
+            <div class="metric-row"><dt>Qué se observa</dt><dd>Que cada acción sea un hecho que existe, tiene dueño y fecha y puede verificarse, y que cada cifra se derive de un dato del caso.</dd></div>
+            <div class="metric-row"><dt>Cómo se mide</dt><dd>Conteo de acciones ancladas frente a verbos de actividad; trazabilidad de cada cifra.</dd></div>
+          </dl>
+        </div>
+        <div class="metric-card biz">
+          <div class="metric-card-lbl">Por qué importa al negocio</div>
+          <dl class="metric-rows">
+            <div class="metric-row"><dt>Por qué importa</dt><dd>Sin una cifra de inversión con derivación, pedir recursos deja al decisor sin con qué comparar el valor del plan.</dd></div>
+            <div class="metric-row"><dt>Señal de calidad</dt><dd>Esfuerzo × tarifa de referencia, contrastado con el costo de la inacción.</dd></div>
+          </dl>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">12</div><div class="rule"></div></div>
+</div>
+<div class="page">
+  <div class="run-header">Audición de Certificación &mdash; Caso Vertecsa Group &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Entregable 3</span></div>
+    <div class="p-body">
+      <div class="report-id-block">
+        <div class="rid-head">
+          <span class="rid-badge">Entregable 3</span>
+          <span class="rid-title">Identificación del caso</span>
+        </div>
+        <div class="rid-fields">
+          <div class="rid-field"><label>Caso analizado</label><input type="text" id="f-903-rid-unidad" data-save="f-903-rid-unidad" data-noprogress="1" value="Vertecsa Group"></div>
+          <div class="rid-field"><label>Fecha de este entregable</label><input type="text" id="f-903-rid-fecha" data-save="f-903-rid-fecha" placeholder="Ej. 26 oct 2026"></div>
+          <div class="rid-field"><label>Analista BAIP</label><input type="text" id="f-903-rid-part" data-save="f-903-rid-part" placeholder="Se sincroniza desde portada"></div>
+        </div>
+      </div>
+      <p style="font-weight:700;font-size:14px;color:var(--carbon);margin-bottom:12px;">Paso a paso</p>
+      <ul class="step-list">
+        <li><span>Por cada causa priorizada en tu S4, redacta una acción con sus cuatro anclas: obstáculo que cierra, componentes ARIA, métrica de adopción y hito-rol (30/60/90), con el keystone primero y sus aceleradores encadenados de inmediato.</span></li>
+        <li><span>Depura el plan de toda actividad genérica («capacitar», «sensibilizar», «reunir») y conviértela en un hecho que existe, tiene dueño, fecha y puede verificarse.</span></li>
+        <li><span>Construye el Modelo de Impacto: utilización del asistente (adelantado) y los KPI rezagados (ciclo de entrega, defectos, horas de documentación), cada cifra trazada a un KPI del caso.</span></li>
+        <li><span>Cuantifica el costo de la inacción por trimestre sobre los USD 380.000 invertidos, sin falacia de costo hundido, en tres escenarios declarados como proyección.</span></li>
+        <li><span>Estima la inversión del plan a tarifas de referencia de mercado de firmas MBB y Big Four (estimativo, no cotización), con esfuerzo y tarifa explícitos.</span></li>
+      </ul>
+      <div class="ia-role">
+        <span class="ia-role-icon">🤖</span>
+        <span><strong>Rol de la IA como andamiaje:</strong> Puedes usarla para estresar tu razonamiento, contraargumentar tu jerarquía y pulir la redacción. La priorización, el veredicto y las decisiones son tuyos: la IA no tiene el criterio para generar este entregable por ti. Declararás cómo la usaste en el cierre. La IA no inventa cifras: cada una se deriva de los KPI del caso.</span>
+      </div>
+      <div class="fill">
+        <div class="fill-lbl">Plan de Intervención 90 días (S5)</div>
+        <div class="field-guide">Por cada causa priorizada, una acción con sus cuatro anclas:<br>• Obstáculo que cierra<br>• Par de componentes ARIA (nombrados, sin mecánica)<br>• Métrica de adopción y hecho auditable (existe, dueño, fecha, verificable)<br>• Hito-rol (corte 30/60/90)<br>El keystone va primero y sus aceleradores se encadenan de inmediato.</div>
+        <textarea id="f-903-e1" data-save="f-903-e1" rows="10" placeholder="Escribe aquí tu respuesta…"></textarea>
+        <div class="char-ct"><span id="cc-903-e1">0</span> caracteres</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">13</div><div class="rule"></div></div>
+</div>
+<div class="page">
+  <div class="run-header">Audición de Certificación &mdash; Caso Vertecsa Group &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Entregable 3</span></div>
+    <div class="p-body">
+      <div class="fill">
+        <div class="fill-lbl">Modelo de Impacto (S6)</div>
+        <div class="field-guide">• Cadena: acción → métrica de adopción → KPI rezagado<br>• Costo de la inacción por trimestre en tres escenarios (proyección)<br>• Inversión estimada del plan: esfuerzo × tarifa de referencia de mercado, declarada como estimativo y no como cotización<br>• Benchmark del Modelo ARIA solo como referencia de categoría, nunca como promesa</div>
+        <textarea id="f-903-e2" data-save="f-903-e2" rows="9" placeholder="Escribe aquí tu respuesta…"></textarea>
+        <div class="char-ct"><span id="cc-903-e2">0</span> caracteres</div>
+      </div>
+      <div class="fill">
+        <div class="fill-lbl">Caso de valor (una página)</div>
+        <div class="field-guide">Redáctalo para el decisor: el KPI que mueve cada acción, el costo de la inacción contrastado con la inversión estimada y la ruta que recomiendas. Reutiliza lo producido en S6.</div>
+        <textarea id="f-903-e3" data-save="f-903-e3" rows="6" placeholder="Escribe aquí tu respuesta…"></textarea>
+        <div class="char-ct"><span id="cc-903-e3">0</span> caracteres</div>
+      </div>
+      <div class="fill fill-obs">
+        <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
+        <div class="field-guide">Comparte con DCA cualquier hallazgo relevante, dificultad o insight que no esté capturado en los campos anteriores. Tu observación puede mejorar la audición de las próximas cohortes.</div>
+        <textarea id="f-903-obs" data-save="f-903-obs" rows="4" placeholder="Escribe aquí tu respuesta…"></textarea>
+        <div class="char-ct"><span id="cc-903-obs">0</span> caracteres</div>
+      </div>
+      <div class="submit-sec">
+        <h3>Envío del Entregable 3</h3>
+        <p>Verifica que cada acción sea un hecho auditable, que cada cifra se derive de un dato del caso y que la inversión estimada tenga su derivación.</p>
+        <div class="submit-actions">
+          <button class="btn-sub" onclick="openModal('903')" id="btn-903">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
+            Enviar Entregable 3
+          </button>
+          <button class="btn-print" onclick="printExp('903')">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="4" y="2" width="12" height="8" rx="1"/><rect x="3" y="10" width="14" height="8" rx="1"/><rect x="7" y="13" width="6" height="5" rx="0.5" fill="currentColor" stroke="none"/></svg>
+            Guardar copia en PDF
+          </button>
+        </div>
+        <div class="sub-ok" id="ok-903">✓ Envío confirmado.</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">14</div><div class="rule"></div></div>
+</div>
+<div class="page" id="ent-904">
+  <div class="run-header">Audición de Certificación &mdash; Caso Vertecsa Group &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Entregable 4</span></div>
+    <div class="p-body">
+      <div class="exp-lbl">Entregable 4</div>
+      <h1 class="sec-title">Síntesis, defensa y decisión</h1>
+      <div class="exp-meta-row">
+        <span class="exp-lente lente-int">Criterios 4, 6 y 7 · Claridad, defensibilidad y viabilidad</span>
+        <span class="exp-lente lente-int">Secciones S1 y S7 del Reporte BAIP</span>
+      </div>
+      <div class="note">
+        <div class="note-hd">Qué registra S7 (y qué no)</div>
+        <p>S7 registra la decisión del cliente sobre una <strong>recomendación sustentada</strong>; <strong>no es un compromiso contractual</strong>. Su alcance es exactamente lo que solicitas: qué autorizar, con qué recursos y para cuándo; por eso enumera cada ítem. Los valores del plan son estimativos razonables a tarifas de mercado; si el cliente quiere una propuesta económica de DCA, se presenta en otra sesión. El cliente puede contratar las acciones con DCA o con cualquier otro proveedor. Si delegas la ejecución táctica, déjalo explícito en S1 y S7.</p>
+      </div>
+      <p><em>El reporte que no hace decidir desde la primera página se archiva. En esta audición no hay sala ni jurado en vivo: tu defensa es escrita, y tiene que resistir las objeciones de un CTO y un CFO que no te conocen.</em></p>
+      <p><strong>Objetivo:</strong> Redactar la Síntesis Ejecutiva (S1) autocontenida, anticipar por escrito las objeciones de un CTO y un CFO simulados con un hallazgo para cada una, y solicitar en S7 la decisión específica, ítem por ítem.</p>
+      <div class="metric-pair">
+        <div class="metric-card beh">
+          <div class="metric-card-lbl">Qué se observa</div>
+          <dl class="metric-rows">
+            <div class="metric-row"><dt>Qué se observa</dt><dd>Que cada objeción se responda con un hallazgo y no con autoridad; que la objeción que reordena una causa verdadera se resuelva concediendo y sosteniendo a la vez.</dd></div>
+            <div class="metric-row"><dt>Cómo se mide</dt><dd>Proporción de objeciones respondidas con un hallazgo específico del reporte.</dd></div>
+          </dl>
+        </div>
+        <div class="metric-card biz">
+          <div class="metric-card-lbl">Por qué importa al negocio</div>
+          <dl class="metric-rows">
+            <div class="metric-row"><dt>Por qué importa</dt><dd>El producto de un diagnóstico es una decisión específica, no un reporte. Una solicitud vaga termina en «lo revisamos y te avisamos».</dd></div>
+            <div class="metric-row"><dt>Señal de calidad</dt><dd>Cada ítem de S7 aparece en S1 con las mismas palabras.</dd></div>
+          </dl>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">15</div><div class="rule"></div></div>
+</div>
+<div class="page">
+  <div class="run-header">Audición de Certificación &mdash; Caso Vertecsa Group &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Entregable 4</span></div>
+    <div class="p-body">
+      <div class="report-id-block">
+        <div class="rid-head">
+          <span class="rid-badge">Entregable 4</span>
+          <span class="rid-title">Identificación del caso</span>
+        </div>
+        <div class="rid-fields">
+          <div class="rid-field"><label>Caso analizado</label><input type="text" id="f-904-rid-unidad" data-save="f-904-rid-unidad" data-noprogress="1" value="Vertecsa Group"></div>
+          <div class="rid-field"><label>Fecha de este entregable</label><input type="text" id="f-904-rid-fecha" data-save="f-904-rid-fecha" placeholder="Ej. 26 oct 2026"></div>
+          <div class="rid-field"><label>Analista BAIP</label><input type="text" id="f-904-rid-part" data-save="f-904-rid-part" placeholder="Se sincroniza desde portada"></div>
+        </div>
+      </div>
+      <p style="font-weight:700;font-size:14px;color:var(--carbon);margin-bottom:12px;">Paso a paso</p>
+      <ul class="step-list">
+        <li><span>Redacta la Síntesis Ejecutiva (S1) con sus cinco elementos —hallazgo central con magnitud, costo de oportunidad, tres prioridades, horizonte y próxima decisión— y sométela a la prueba de autocontención: ¿decide el lector con solo esta página?</span></li>
+        <li><span>Convierte cada título del reporte en un título que afirma la conclusión.</span></li>
+        <li><span>Construye la matriz de anticipación con al menos cinco objeciones probables de un CTO y un CFO, clasificadas en las que descartan una causa y las que reordenan una causa verdadera; cada una con el hallazgo que la responde y los límites del diagnóstico declarados.</span></li>
+        <li><span>Solicita en S7 la decisión específica: qué autorizar, con qué recursos (estimativo) y para cuándo, ítem por ítem.</span></li>
+        <li><span>Deja explícita la delegación de la ejecución táctica y que S7 es una recomendación sustentada, no un compromiso contractual.</span></li>
+      </ul>
+      <div class="ia-role">
+        <span class="ia-role-icon">🤖</span>
+        <span><strong>Rol de la IA como andamiaje:</strong> Puedes usarla para estresar tu razonamiento, contraargumentar tu jerarquía y pulir la redacción. La priorización, el veredicto y las decisiones son tuyos: la IA no tiene el criterio para generar este entregable por ti. Declararás cómo la usaste en el cierre. En esta prueba la IA genera el banco de objeciones; tú respondes con hallazgos reales del caso, no con un guion.</span>
+      </div>
+      <div class="fill">
+        <div class="fill-lbl">Síntesis Ejecutiva (S1)</div>
+        <div class="field-guide">Los cinco elementos y la prueba de autocontención:<br>• Hallazgo central con magnitud<br>• Costo de oportunidad sobre el retorno de la IA<br>• Tres prioridades<br>• Horizonte<br>• Próxima decisión<br>Convierte cada título en un título que afirma la conclusión.</div>
+        <textarea id="f-904-e1" data-save="f-904-e1" rows="9" placeholder="Escribe aquí tu respuesta…"></textarea>
+        <div class="char-ct"><span id="cc-904-e1">0</span> caracteres</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">16</div><div class="rule"></div></div>
+</div>
+<div class="page">
+  <div class="run-header">Audición de Certificación &mdash; Caso Vertecsa Group &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Entregable 4</span></div>
+    <div class="p-body">
+      <div class="fill">
+        <div class="fill-lbl">Matriz de anticipación</div>
+        <div class="field-guide">Al menos cinco objeciones probables de un CTO y un CFO. Por cada una: tipo (descarta una causa / reordena una causa verdadera) → hallazgo que la responde. En la que reordena, concede el hallazgo y sostén el orden en la misma frase, con la distribución. Declara los límites del diagnóstico donde no haya respuesta.</div>
+        <textarea id="f-904-e2" data-save="f-904-e2" rows="10" placeholder="Escribe aquí tu respuesta…"></textarea>
+        <div class="char-ct"><span id="cc-904-e2">0</span> caracteres</div>
+      </div>
+      <div class="fill">
+        <div class="fill-lbl">Síntesis y Decisión (S7)</div>
+        <div class="field-guide">• Decisión solicitada ítem por ítem (qué autorizar, con qué recursos estimados, para cuándo)<br>• Responsables y fechas<br>• Delegación explícita de la ejecución táctica<br>• Ruta: plan 30/60/90 y solución ReturnAI como opción superior<br>• Aclaración: recomendación sustentada, no compromiso contractual</div>
+        <textarea id="f-904-e3" data-save="f-904-e3" rows="9" placeholder="Escribe aquí tu respuesta…"></textarea>
+        <div class="char-ct"><span id="cc-904-e3">0</span> caracteres</div>
+      </div>
+      <div class="fill fill-obs">
+        <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
+        <div class="field-guide">Comparte con DCA cualquier hallazgo relevante, dificultad o insight que no esté capturado en los campos anteriores. Tu observación puede mejorar la audición de las próximas cohortes.</div>
+        <textarea id="f-904-obs" data-save="f-904-obs" rows="4" placeholder="Escribe aquí tu respuesta…"></textarea>
+        <div class="char-ct"><span id="cc-904-obs">0</span> caracteres</div>
+      </div>
+      <div class="submit-sec">
+        <h3>Envío del Entregable 4</h3>
+        <p>Comprueba que cada ítem de S7 aparezca en S1 con las mismas palabras y que cada objeción tenga un hallazgo concreto.</p>
+        <div class="submit-actions">
+          <button class="btn-sub" onclick="openModal('904')" id="btn-904">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
+            Enviar Entregable 4
+          </button>
+          <button class="btn-print" onclick="printExp('904')">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="4" y="2" width="12" height="8" rx="1"/><rect x="3" y="10" width="14" height="8" rx="1"/><rect x="7" y="13" width="6" height="5" rx="0.5" fill="currentColor" stroke="none"/></svg>
+            Guardar copia en PDF
+          </button>
+        </div>
+        <div class="sub-ok" id="ok-904">✓ Envío confirmado.</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">17</div><div class="rule"></div></div>
+</div>
+<div class="page" id="cierre">
+  <div class="run-header">Audición de Certificación &mdash; Caso Vertecsa Group &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Cierre</span></div>
+    <div class="p-body">
+      <div class="exp-lbl">Cierre</div>
+      <h1 class="sec-title">Declaración y solicitud de calificación final</h1>
+      <p><em>Esta es la entrega que activa tu evaluación. Cuando la envías, tu facilitador revisa todos tus entregables juntos y emite el resultado.</em></p>
+      <div class="report-id-block">
+        <div class="rid-head">
+          <span class="rid-badge">Cierre</span>
+          <span class="rid-title">Identificación del caso</span>
+        </div>
+        <div class="rid-fields">
+          <div class="rid-field"><label>Caso analizado</label><input type="text" id="f-905-rid-unidad" data-save="f-905-rid-unidad" data-noprogress="1" value="Vertecsa Group"></div>
+          <div class="rid-field"><label>Fecha de este entregable</label><input type="text" id="f-905-rid-fecha" data-save="f-905-rid-fecha" placeholder="Ej. 26 oct 2026"></div>
+          <div class="rid-field"><label>Analista BAIP</label><input type="text" id="f-905-rid-part" data-save="f-905-rid-part" placeholder="Se sincroniza desde portada"></div>
+        </div>
+      </div>
+      <div class="note">
+        <div class="note-hd">Antes de enviar el cierre</div>
+        <p>Verifica que hayas enviado los cuatro entregables y que el recibo de cada uno aparezca en pantalla («✓ Enviado»). El cierre no sustituye a ninguno.</p>
+      </div>
+      <div class="fill">
+        <div class="fill-lbl">Declaración de uso de IA</div>
+        <div class="field-guide">Empieza con una palabra: <strong>NINGUNO</strong> si no usaste IA, o <strong>ANDAMIAJE</strong> si la usaste. En este último caso describe qué hizo la IA (por ejemplo, contraargumentar tu jerarquía o pulir redacción) y qué decidiste tú.</div>
+        <textarea id="f-905-e1" data-save="f-905-e1" rows="5" placeholder="Escribe aquí tu respuesta…"></textarea>
+        <div class="char-ct"><span id="cc-905-e1">0</span> caracteres</div>
+      </div>
+      <div class="fill">
+        <div class="fill-lbl">Autoevaluación contra la rúbrica</div>
+        <div class="field-guide">Tu criterio más fuerte y el más frágil, cada uno con la evidencia de tus entregables. Si pudieras reescribir una sola sección, ¿cuál y por qué?</div>
+        <textarea id="f-905-e2" data-save="f-905-e2" rows="6" placeholder="Escribe aquí tu respuesta…"></textarea>
+        <div class="char-ct"><span id="cc-905-e2">0</span> caracteres</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">18</div><div class="rule"></div></div>
+</div>
+<div class="page">
+  <div class="run-header">Audición de Certificación &mdash; Caso Vertecsa Group &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Cierre</span></div>
+    <div class="p-body">
+      <div class="fill">
+        <div class="fill-lbl">Declaración de autoría y solicitud de calificación</div>
+        <div class="field-guide">Escribe textualmente: «Declaro que estos entregables son de mi autoría y que la declaración de uso de IA corresponde con mi trabajo. Solicito la calificación final de mi audición.» Si necesitas aclarar algo, hazlo a continuación.</div>
+        <textarea id="f-905-e3" data-save="f-905-e3" rows="5" placeholder="Escribe aquí tu respuesta…"></textarea>
+        <div class="char-ct"><span id="cc-905-e3">0</span> caracteres</div>
+      </div>
+      <div class="fill fill-obs">
+        <div class="fill-lbl">Observaciones, hallazgos y comentarios adicionales para DCA</div>
+        <div class="field-guide">Comparte con DCA cualquier hallazgo relevante, dificultad o insight que no esté capturado en los campos anteriores. Tu observación puede mejorar la audición de las próximas cohortes.</div>
+        <textarea id="f-905-obs" data-save="f-905-obs" rows="4" placeholder="Escribe aquí tu respuesta…"></textarea>
+        <div class="char-ct"><span id="cc-905-obs">0</span> caracteres</div>
+      </div>
+      <div class="submit-sec">
+        <h3>Envío del cierre</h3>
+        <p>Al enviar esta declaración, tus entregables pasan a evaluación. Recibirás una devolución personalizada con tu puntaje por criterio y el resultado de la audición.</p>
+        <div class="submit-actions">
+          <button class="btn-sub" onclick="openModal('905')" id="btn-905">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
+            Enviar solicitud de calificación final
+          </button>
+          <button class="btn-print" onclick="printExp('905')">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="4" y="2" width="12" height="8" rx="1"/><rect x="3" y="10" width="14" height="8" rx="1"/><rect x="7" y="13" width="6" height="5" rx="0.5" fill="currentColor" stroke="none"/></svg>
+            Guardar copia en PDF
+          </button>
+        </div>
+        <div class="sub-ok" id="ok-905">✓ Envío confirmado.</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">19</div><div class="rule"></div></div>
+</div>
+<div class="page" id="consultas">
+  <div class="run-header">Audición de Certificación &mdash; Caso Vertecsa Group &mdash; Analista BAIP · Digital Change Advisors</div>
+  <div class="p-layout">
+    <div class="s-tab"><span class="lbl">Consultas</span></div>
+    <div class="p-body">
+      <div class="exp-lbl">Mesa de consultas</div>
+      <h1 class="sec-title">Tu canal individual con el facilitador</h1>
+      <p><em>Aquí preguntas lo que necesites durante la preparación. Tu consulta llega solo a tu facilitador y la respuesta te llega a tu correo, normalmente en menos de 48 horas.</em></p>
+      <div class="note">
+        <div class="note-hd">Qué puedes preguntar</div>
+        <p><strong>Sí:</strong> proceso (cómo enviar, plazos, qué entregar), criterios (cómo se evalúa algo de la rúbrica) y técnica (un problema con esta página o con el envío).<br><strong>No:</strong> el contenido del análisis (por ejemplo, «¿es esta la causa raíz?»). Para que todos trabajen en igualdad de condiciones, esas consultas no se responden. Las respuestas de interés general se publican de forma anónima en el Centro de Ayuda.</p>
+      </div>
+      <div class="fill">
+        <div class="fill-lbl">Tipo de consulta</div>
+        <div class="field-guide">Escribe una palabra: proceso, criterios o técnica.</div>
+        <textarea id="f-990-e1" data-save="f-990-e1" rows="2" placeholder="Escribe aquí tu respuesta…" data-noprogress="1"></textarea>
+        <div class="char-ct"><span id="cc-990-e1">0</span> caracteres</div>
+      </div>
+      <div class="fill">
+        <div class="fill-lbl">Tu consulta</div>
+        <div class="field-guide">Sé específico: qué entregable, qué criterio o qué problema. Si es técnica, indica tu navegador y qué viste en pantalla.</div>
+        <textarea id="f-990-e2" data-save="f-990-e2" rows="7" placeholder="Escribe aquí tu respuesta…" data-noprogress="1"></textarea>
+        <div class="char-ct"><span id="cc-990-e2">0</span> caracteres</div>
+      </div>
+      <div class="submit-sec">
+        <h3>Enviar consulta</h3>
+        <p>Para que te llegue la respuesta necesitas tu correo en la portada. Puedes enviar tantas consultas como necesites.</p>
+        <div class="submit-actions">
+          <button class="btn-sub" onclick="openModal('990')" id="btn-990">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 10l7-7 7 7M10 3v14"/></svg>
+            Enviar consulta
+          </button>
+        </div>
+        <div class="sub-ok" id="ok-990">✓ Consulta enviada. Te respondo a tu correo.</div>
+      </div>
+    </div>
+  </div>
+  <div class="p-footer"><div class="rule"></div><div class="pnum">20</div><div class="rule"></div></div>
+</div>
+
+<section class="back-cover">
+  <div class="cover-visual">
+    <svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs><pattern id="dots2" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.2" fill="rgba(30,42,56,0.28)"/></pattern></defs>
+      <rect width="720" height="300" fill="#2e8b76"/><rect width="720" height="300" fill="url(#dots2)"/>
+      <circle cx="180" cy="150" r="70" fill="none" stroke="rgba(255,255,255,0.52)" stroke-width="2"/>
+      <circle cx="180" cy="150" r="45" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+      <circle cx="180" cy="150" r="20" fill="rgba(255,255,255,0.12)"/>
+      <text x="180" y="155" fill="rgba(255,255,255,0.88)" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">AIMT</text>
+      <circle cx="360" cy="150" r="70" fill="none" stroke="rgba(210,208,200,0.65)" stroke-width="2"/>
+      <circle cx="360" cy="150" r="45" fill="none" stroke="rgba(210,208,200,0.45)" stroke-width="1.5"/>
+      <circle cx="360" cy="150" r="20" fill="rgba(210,208,200,0.14)"/>
+      <text x="360" y="155" fill="rgba(210,208,200,0.92)" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">AILS</text>
+      <circle cx="540" cy="150" r="70" fill="none" stroke="rgba(30,42,56,0.78)" stroke-width="2"/>
+      <circle cx="540" cy="150" r="45" fill="none" stroke="rgba(30,42,56,0.55)" stroke-width="1.5"/>
+      <circle cx="540" cy="150" r="20" fill="rgba(30,42,56,0.20)"/>
+      <text x="540" y="155" fill="rgba(30,42,56,0.88)" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">AICD</text>
+      <path d="M 248 120 Q 270 100 290 120" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="1.5"/>
+      <path d="M 428 120 Q 450 100 470 120" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="1.5"/>
+      <circle cx="360" cy="280" r="8" fill="rgba(255,255,255,0.14)" stroke="rgba(255,255,255,0.38)" stroke-width="1"/>
+      <line x1="180" y1="218" x2="360" y2="272" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+      <line x1="540" y1="218" x2="360" y2="272" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+      <text x="360" y="285" fill="rgba(255,255,255,0.58)" font-family="sans-serif" font-size="8" font-weight="700" text-anchor="middle" letter-spacing="2">REPORTE BAIP · S1–S7</text>
+    </svg>
+  </div>
+  <div class="bc-band">
+    <div class="bc-sprint">Audición de Certificación</div>
+    <div class="bc-theme">Caso Vertecsa Group · Criterio analítico</div>
+  </div>
+  <div class="bc-spacer">
+    <img src="data:image/png;base64,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AKAywgEAAAAAAKiMcAAAAAAAACojHAAAAAAAgMoIBwAAAAAAoDLCAQAAAAAAqIxwAAAAAAAAKiMcAAAAAACAyggHAAAAAACgMsIBAAAAAACojHAAAAAAAAAqIxwAAAAAAIDKCAcAAAAAAKAywgEAAAAAAKiMcAAAAAAAACojHAAAAAAAgMoIBwAAAAAAoDLCAQAAAAAAqIxwAAAAAAAAKiMcAAAAAACAyggHAAAAAACgMsIBAAAAAACojHAAAAAAAAAqIxwAAAAAAIDKCAcAAAAAAKAywgEAAAAAAKiMcAAAAAAAACojHAAAAAAAgMoIBwAAAAAAoDLCAQAAAAAAqIxwAAAAAAAAKiMcAAAAAACAyggHAAAAAACgMsIBAAAAAACojHAAAAAAAAAqIxwAAAAAAIDKCAcAAAAAAKAywgEAAAAAAKiMcAAAAAAAACojHAAAAAAAgMoIBwAAAAAAoDLCAQAAAAAAqIxwAAAAAAAAKiMcAAAAAACAyggHAAAAAACgMsIBAAAAAACojHAAAAAAAAAqIxwAAAAAAIDKCAcAAAAAAKAywgEAAAAAAKiMcAAAAAAAACojHAAAAAAAgMoIBwAAAAAAoDLCAQAAAAAAqIxwAAAAAAAAKiMcAAAAAACAyggHAAAAAACgMsIBAAAAAACojHAAAAAAAAAqIxwAAAAAAIDKCAcAAAAAAKAywgEAAAAAAKiMcAAAAAAAACojHAAAAAAAgMoIBwAAAAAAoDLCAQAAAAAAqIxwAAAAAAAAKiMcAAAAAACAyggHAAAAAACgMsIBAAAAAACojHAAAAAAAAAqIxwAAAAAAIDKCAcAAAAAAKAywgEAAAAAAKiMcAAAAAAAACojHAAAAAAAgMoIBwAAAAAAoDLCAQAAAAAAqIxwAAAAAAAAKiMcAAAAAACAyggHAAAAAACgMsIBAAAAAACojHAAAAAAAAAqIxwAAAAAAIDKCAcAAAAAAKAywgEAAAAAAKiMcAAAAAAAACojHAAAAAAAgMoIBwAAAAAAoDLCAQAAAAAAqIxwAAAAAAAAKiMcAAAAAACAyggHAAAAAACgMsIBAAAAAACojHAAAAAAAAAqIxwAAAAAAIDKCAcAAAAAAKAy/w9oXWGNnNg9+gAAAABJRU5ErkJggg==" alt="Digital Change Advisors" style="width:380px;margin:0 auto;">
+  </div>
+  <div class="bc-foot">
+    <div class="bc-foot-t">Digital Change Advisors · Modelo ARIA</div>
+  </div>
+</section>
+
+</div><!-- /doc-wrap -->
+
+<!-- MODAL -->
+<div class="modal-ov" id="modal">
+  <div class="modal">
+    <div class="modal-title" id="modal-title">Resumen del Experimento</div>
+    <div class="modal-sub" id="modal-sub"></div>
+    <div class="modal-alert" id="modal-alert"></div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-actions" id="modal-actions">
+      <button class="btn-m p" id="btn-send" onclick="submitExp()">✈ Enviar ahora al facilitador</button>
+      <button class="btn-m s" onclick="printExp(currentExp)">⬇ Descargar PDF</button>
+      <button class="btn-m s" onclick="copyModal()">📋 Copiar resumen</button>
+      <button class="btn-m s" onclick="closeModal()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══ AUTOSAVE ══════════════════════════════
+const SAVE_KEY = 'dca_aria_audicion_v1';
+
+// ══ CONFIG DEL INSTRUMENTO ════════════════════════════════════════════
+// Único bloque que cambia entre sprints (junto con expNames y EXP_FIELDS).
+const INSTRUMENT = {
+  id: 'audicion-baip',
+  sprintLabel: 'Audición de Certificación · Analista BAIP · Caso Vertecsa Group',
+  endpoint: 'https://script.google.com/macros/s/AKfycbyQZPoW4T1KbLZi2eBJh9vyt0tWzeCiDFITXCemu6WyOTkehRBLDPkszJ9FkGGFI_HD-A/exec'
+};
+let saveTimer;
+const saveDot = document.getElementById('saveDot');
+
+function getData() { try { return JSON.parse(localStorage.getItem(SAVE_KEY) || '{}'); } catch(e) { return {}; } }
+
+function saveField(key, val) {
+  const d = getData(); d[key] = val; localStorage.setItem(SAVE_KEY, JSON.stringify(d));
+}
+
+function loadAll() {
+  const d = getData();
+  // Text/date inputs and textareas
+  document.querySelectorAll('[data-save]').forEach(el => {
+    const k = el.dataset.save;
+    if (d[k] !== undefined) {
+      el.value = d[k];
+      if (el.tagName === 'TEXTAREA' && d[k]) el.classList.add('filled');
+    }
+  });
+  // Radio buttons
+  document.querySelectorAll('[data-radio-save]').forEach(radio => {
+    const k = radio.dataset.radioSave;
+    if (d[k] === radio.value) radio.checked = true;
+  });
+  // Sync participant fields from cover
+  syncParticipant();
+  updateProgress();
+}
+
+// Sync participant name from cover to all RID blocks
+function syncParticipant() {
+  const nombre = document.getElementById('sf-nombre')?.value || '';
+  ['901','902','903','904','905'].forEach(n => {
+    const el = document.getElementById(`f-${n}-rid-part`);
+    if (el && !el.dataset.manually) el.value = nombre;
+  });
+}
+
+let saveTimer2;
+function autosave() {
+  saveDot.className = 'save-dot saving';
+  clearTimeout(saveTimer2);
+  saveTimer2 = setTimeout(() => {
+    saveDot.className = 'save-dot saved';
+    setTimeout(() => saveDot.className = 'save-dot', 2000);
+  }, 800);
+}
+
+document.querySelectorAll('[data-save]').forEach(el => {
+  el.addEventListener('input', () => {
+    saveField(el.dataset.save, el.value);
+    if (el.tagName === 'TEXTAREA') el.classList.toggle('filled', el.value.length > 0);
+    if (el.id === 'sf-nombre') syncParticipant();
+    autosave(); updateProgress(); updateCharCount(el);
+  });
+});
+document.querySelectorAll('[data-radio-save]').forEach(radio => {
+  radio.addEventListener('change', () => {
+    saveField(radio.dataset.radioSave, radio.value); autosave(); updateProgress();
+  });
+});
+
+// ══ CHAR COUNTERS ══════════════════════════
+function updateCharCount(el) {
+  const id = el.id;
+  const ccEl = document.getElementById('cc-' + id.replace('f-',''));
+  if (ccEl) ccEl.textContent = el.value.length;
+}
+document.querySelectorAll('textarea').forEach(ta => ta.addEventListener('input', () => updateCharCount(ta)));
+
+// ══ PROGRESS ════════════════════════════════
+function updateProgress() {
+  const allInputs = document.querySelectorAll('textarea[data-save]:not([data-noprogress]), input[data-save]:not([type="radio"]):not([data-noprogress])');
+  const allRadioGroups = [];
+  let total = allInputs.length + allRadioGroups.length;
+  let filled = 0;
+  allInputs.forEach(el => { if (el.value && el.value.trim()) filled++; });
+  allRadioGroups.forEach(grp => { if (document.querySelector(`input[name="${grp}"]:checked`)) filled++; });
+  const pct = Math.round((filled / total) * 100);
+  document.getElementById('pbFill').style.width = pct + '%';
+  document.getElementById('pbPct').textContent = pct + '%';
+}
+
+// ══ MODAL ════════════════════════════════════
+let currentExp = '', mailBody = '', mailSubject = '';
+
+const EXP_FIELDS = {
+  '901': [
+    { id: 'f-901-rid-unidad', label: 'Caso analizado' },
+    { id: 'f-901-rid-fecha',  label: 'Fecha de este entregable' },
+    { id: 'f-901-e1', label: 'Errores de integración identificados' },
+    { id: 'f-901-e2', label: 'Prueba de distribución' },
+    { id: 'f-901-e3', label: 'Tu keystone y los señuelos que descartas' },
+    { id: 'f-901-obs', label: 'Observaciones, hallazgos y comentarios adicionales' }
+  ],
+  '902': [
+    { id: 'f-902-rid-unidad', label: 'Caso analizado' },
+    { id: 'f-902-rid-fecha',  label: 'Fecha de este entregable' },
+    { id: 'f-902-e1', label: 'Diagnóstico Integrado (S3): tabla multi-lente' },
+    { id: 'f-902-e2', label: 'Los tres cruces y la reconciliación de contradicciones' },
+    { id: 'f-902-e3', label: 'Mapa de Causa Raíz (S4)' },
+    { id: 'f-902-obs', label: 'Observaciones, hallazgos y comentarios adicionales' }
+  ],
+  '903': [
+    { id: 'f-903-rid-unidad', label: 'Caso analizado' },
+    { id: 'f-903-rid-fecha',  label: 'Fecha de este entregable' },
+    { id: 'f-903-e1', label: 'Plan de Intervención 90 días (S5)' },
+    { id: 'f-903-e2', label: 'Modelo de Impacto (S6)' },
+    { id: 'f-903-e3', label: 'Caso de valor (una página)' },
+    { id: 'f-903-obs', label: 'Observaciones, hallazgos y comentarios adicionales' }
+  ],
+  '904': [
+    { id: 'f-904-rid-unidad', label: 'Caso analizado' },
+    { id: 'f-904-rid-fecha',  label: 'Fecha de este entregable' },
+    { id: 'f-904-e1', label: 'Síntesis Ejecutiva (S1)' },
+    { id: 'f-904-e2', label: 'Matriz de anticipación' },
+    { id: 'f-904-e3', label: 'Síntesis y Decisión (S7)' },
+    { id: 'f-904-obs', label: 'Observaciones, hallazgos y comentarios adicionales' }
+  ],
+  '905': [
+    { id: 'f-905-rid-unidad', label: 'Caso analizado' },
+    { id: 'f-905-rid-fecha',  label: 'Fecha de este entregable' },
+    { id: 'f-905-e1', label: 'Declaración de uso de IA' },
+    { id: 'f-905-e2', label: 'Autoevaluación contra la rúbrica' },
+    { id: 'f-905-e3', label: 'Declaración de autoría y solicitud de calificación' },
+    { id: 'f-905-obs', label: 'Observaciones, hallazgos y comentarios adicionales' }
+  ],
+  '990': [
+    { id: 'f-990-e1', label: 'Tipo de consulta' },
+    { id: 'f-990-e2', label: 'Tu consulta' }
+  ]
+};
+
+const expNames = { '901': 'Entregable 1 — Auditoría del borrador', '902': 'Entregable 2 — Diagnóstico integrado y causa raíz', '903': 'Entregable 3 — Plan y modelo de impacto', '904': 'Entregable 4 — Síntesis, defensa y decisión', '905': 'Cierre — Declaración y solicitud de calificación final', '990': 'Mesa de consultas' };
+
+function getStudentInfo() {
+  return {
+    nombre:  document.getElementById('sf-nombre')?.value  || '(sin nombre)',
+    email:   (document.getElementById('sf-email')?.value  || '').trim(),
+    empresa: document.getElementById('sf-empresa')?.value || '(sin empresa)',
+    cohorte: document.getElementById('sf-cohorte')?.value || '(sin cohorte)'
+  };
+}
+
+function getRadioValue(name) {
+  const r = document.querySelector(`input[name="${name}"]:checked`);
+  return r ? r.value : '(no seleccionado)';
+}
+
+function openModal(exp) {
+  currentExp = exp;
+  const si = getStudentInfo();
+  const fields = EXP_FIELDS[exp] || [];
+
+  let summary = `════════════════════════════════════\n`;
+  summary += `AUDICIÓN DE CERTIFICACIÓN · ANALISTA BAIP · CASO VERTECSA GROUP\n`;
+  summary += `Analista BAIP — Brecha AI Personas · Digital Change Academy · DCA\n`;
+  summary += `════════════════════════════════════\n\n`;
+  summary += `IDENTIFICACIÓN\n`;
+  summary += `Certificación: Analista BAIP — Brecha AI Personas\n`;
+  summary += `Instrumento: Audición de Certificación — Caso Vertecsa Group\n`;
+  summary += `Entregable: ${expNames[exp].split('—')[0].trim()}\n`;
+  summary += `Participante: ${si.nombre}\n`;
+  summary += `Correo: ${si.email || '(sin correo)'}\n`;
+  summary += `Cohorte: ${si.cohorte}\n`;
+  summary += `Organización del participante: ${si.empresa}\n`;
+  summary += `Fecha de envío: ${new Date().toLocaleDateString('es-CO', { year:'numeric', month:'long', day:'numeric' })}\n`;
+  summary += `\n── ${expNames[exp]} ──\n\n`;
+
+  fields.forEach(f => {
+    let val;
+    if (f.type === 'radio') {
+      val = getRadioValue(f.name);
+    } else {
+      const el = document.getElementById(f.id);
+      val = el ? el.value.trim() : '';
+    }
+    summary += `▸ ${f.label}:\n${val || '(sin respuesta)'}\n\n`;
+  });
+
+  summary += `════════════════════════════════════\n`;
+  summary += `Modelo ARIA — Aceleración del Retorno de la IA\n`;
+  summary += `Desarrollado por Digital Change Advisors, LLC.\n`;
+  summary += `Licenciado bajo Creative Commons BY-SA 4.0.`;
+
+  mailSubject = `[ARIA Audición] ${expNames[exp].split('—')[0].trim()} — ${si.nombre} | ${si.cohorte}`;
+  mailBody = summary;
+
+  document.getElementById('modal-title').textContent = expNames[exp].split('—')[0].trim();
+  document.getElementById('modal-sub').textContent = `${si.nombre} · ${si.empresa} · ${si.cohorte}`;
+  document.getElementById('modal-body').textContent = summary;
+
+  limpiarAlerta();
+  const acciones = document.getElementById('modal-actions');
+  const btnSend  = document.getElementById('btn-send');
+  acciones.classList.remove('sent');
+  btnSend.disabled = false;
+  btnSend.textContent = '✈ Enviar ahora al facilitador';
+
+  const dd = getData();
+  if (dd['sent_' + exp] && dd['recibo_' + exp]) {
+    alerta('Ya enviaste este experimento el ' +
+      new Date(dd['fecha_envio_' + exp]).toLocaleDateString('es-CO', { day:'numeric', month:'long', year:'numeric' }) +
+      ' · Recibo <b>' + dd['recibo_' + exp] + '</b>.<br>' +
+      'Si corregiste algo, puedes <b>volver a enviar</b>: tu facilitador verá la versión más reciente.', 'info');
+    btnSend.textContent = '↻ Enviar versión corregida';
+  }
+
+  document.getElementById('modal').classList.add('open');
+}
+
+/* ══ GENERACIÓN DE PDF — CON TODO EL CONTENIDO (genérico) ══════════════ */
+function printExp(exp) {
+  const si = getStudentInfo();
+  const campos = (EXP_FIELDS[exp] || []).map(f => {
+    let value;
+    if (f.type === 'radio') {
+      const r = document.querySelector(`input[name="${f.name}"]:checked`);
+      value = r ? r.value : '';
+    } else {
+      const el = document.getElementById(f.id);
+      value = el ? el.value.trim() : '';
+    }
+    return { label: f.label, value: value };
+  });
+  const esc = s => String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  const d = getData();
+  const recibo = d['recibo_' + exp] || null;
+  const fecha = new Date().toLocaleDateString('es-CO', { day:'numeric', month:'long', year:'numeric' });
+  const totalChars = campos.reduce((s,c) => s + String(c.value||'').length, 0);
+  const llenos = campos.filter(c => String(c.value||'').trim()).length;
+  const bloques = campos.map(c => `
+    <div class="campo">
+      <div class="campo-lbl">${esc(c.label)}<span class="chars">${String(c.value||'').length} caracteres</span></div>
+      <div class="campo-val">${String(c.value||'').trim()
+        ? esc(c.value).replace(/\n/g,'<br>')
+        : '<em style="color:#9ca3af">— sin contenido —</em>'}</div>
+    </div>`).join('');
+  const html = `<!doctype html><html><head><meta charset="utf-8">
+  <title>${esc(expNames[exp].split('—')[0].trim())} · ${esc(si.nombre)}</title>
+  <style>
+    @page { size: letter portrait; margin: 0.6in 0.65in; }
+    *{box-sizing:border-box}
+    body{font-family:'Montserrat','Helvetica Neue',Helvetica,Arial,sans-serif;color:#1e2a38;font-size:10.5pt;line-height:1.55;margin:0}
+    .cab{background:#1e2a38;color:#fff;padding:18px 20px}
+    .cab-marca{font-size:8.5pt;letter-spacing:.14em;text-transform:uppercase;color:#a48111;font-weight:700}
+    .cab-tit{font-family:'Marcellus',Georgia,serif;font-size:19pt;margin:6px 0 2px}
+    .cab-sub{font-size:9.5pt;color:rgba(255,255,255,.72)}
+    .recibo{background:#2e8b76;color:#fff;padding:9px 20px;font-size:9.5pt;display:flex;justify-content:space-between}
+    .ident{background:#f3f3f3;padding:12px 20px;margin-bottom:16px;border-left:4px solid #a48111}
+    .ident table{width:100%;border-collapse:collapse}
+    .ident td{padding:2px 0;font-size:9.5pt;vertical-align:top}
+    .ident td.k{color:#6b7280;width:130px;text-transform:uppercase;font-size:8pt;letter-spacing:.06em;padding-top:4px}
+    .ident td.v{font-weight:600}
+    .wrap{padding:0 20px 20px}
+    .campo{margin-bottom:15px;page-break-inside:avoid}
+    .campo-lbl{font-size:8.5pt;text-transform:uppercase;letter-spacing:.07em;color:#2e8b76;font-weight:700;padding-bottom:4px;border-bottom:1.5px solid #2e8b76;margin-bottom:6px}
+    .chars{float:right;color:#6b7280;font-weight:400;text-transform:none;letter-spacing:0;font-size:7.5pt}
+    .campo-val{background:#fff;border:1px solid #dcdfe3;border-radius:4px;padding:9px 11px;font-size:10pt;white-space:pre-wrap;word-wrap:break-word}
+    .resumen{margin-top:18px;padding:10px 14px;background:#f3f3f3;border-radius:4px;font-size:8.5pt;color:#6b7280}
+    .aviso{margin-top:10px;padding:9px 14px;background:#f7e9e4;border-left:3px solid #c2593f;font-size:8.5pt;color:#1e2a38}
+    .pie{margin-top:16px;border-top:2px solid #a48111;padding-top:8px;font-size:7.5pt;color:#6b7280;text-align:center}
+  </style></head><body>
+  <div class="cab">
+    <div class="cab-marca">Certificación Analista BAIP · Modelo ARIA</div>
+    <div class="cab-tit">${esc(expNames[exp])}</div>
+    <div class="cab-sub">${esc(INSTRUMENT.sprintLabel)}</div>
+  </div>
+  <div class="recibo">
+    <span>${recibo ? 'Recibo <b>'+esc(recibo)+'</b>' : 'Copia de trabajo — aún no enviado'}</span>
+    <span>${fecha}</span>
+  </div>
+  <div class="wrap">
+    <div class="ident"><table>
+      <tr><td class="k">Analista BAIP</td><td class="v">${esc(si.nombre)}</td></tr>
+      <tr><td class="k">Correo</td><td class="v">${esc(si.email || '—')}</td></tr>
+      <tr><td class="k">Empresa</td><td class="v">${esc(si.empresa)}</td></tr>
+      <tr><td class="k">Cohorte</td><td class="v">${esc(si.cohorte)}</td></tr>
+    </table></div>
+    ${bloques}
+    <div class="resumen"><b>Resumen:</b> ${llenos} de ${campos.length} campos diligenciados · ${totalChars} caracteres en total</div>
+    ${recibo ? '' : '<div class="aviso"><b>Este PDF es una copia de trabajo.</b> Todavía no has enviado este experimento a tu facilitador. Para entregarlo, vuelve al roadmap y pulsa «Enviar ahora».</div>'}
+    <div class="pie">Digital Change Advisors, LLC · Modelo ARIA · Digital Change Academy<br>Licenciado bajo Creative Commons BY-SA 4.0.</div>
+  </div>
+  <script>window.onload=function(){window.print();}<\/script>
+  </body></html>`;
+  const w = window.open('', '_blank');
+  if (!w) { alerta('Tu navegador bloqueó la ventana del PDF. Permite las ventanas emergentes para este sitio e inténtalo de nuevo.', 'err'); return; }
+  w.document.write(html); w.document.close();
+}
+
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+/* ══ MOTOR DE ENVÍO REAL (genérico, idéntico en todos los sprints) ═══════
+   La confirmación NUNCA se muestra por optimismo: solo con recibo del servidor. */
+
+function collectPayload(exp) {
+  const si = getStudentInfo();
+  const campos = (EXP_FIELDS[exp] || []).map(f => {
+    let value;
+    if (f.type === 'radio') {
+      const r = document.querySelector(`input[name="${f.name}"]:checked`);
+      value = r ? r.value : '';
+    } else {
+      const el = document.getElementById(f.id);
+      value = el ? el.value.trim() : '';
+    }
+    return { id: f.id, label: f.label, value: value, type: f.type || 'text' };
+  });
+  return {
+    instrumento: INSTRUMENT.id,
+    sprintLabel: INSTRUMENT.sprintLabel,
+    exp: exp,
+    expNombre: expNames[exp],
+    participante: { nombre: si.nombre, email: si.email, empresa: si.empresa, cohorte: si.cohorte },
+    campos: campos,
+    meta: { userAgent: navigator.userAgent, origen: location.origin, enviadoEn: new Date().toISOString() }
+  };
+}
+
+function validarEnvio(p) {
+  const errs = [];
+  const si = p.participante;
+  if (!si.nombre || si.nombre.indexOf('(sin') === 0 || si.nombre.trim().length < 3)
+    errs.push('Escribe tu <b>nombre completo</b> en la portada.');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(si.email))
+    errs.push('Escribe un <b>correo electrónico válido</b> en la portada — ahí te llega tu copia.');
+  if (!si.cohorte || si.cohorte.indexOf('(sin') === 0)
+    errs.push('Indica tu <b>cohorte</b> en la portada.');
+  const vacios = p.campos.filter(c => !String(c.value || '').trim());
+  if (vacios.length === p.campos.length)
+    errs.push('Todos los campos están vacíos: no hay nada que enviar.');
+  return { errs, vacios };
+}
+
+function alerta(html, tipo) {
+  const el = document.getElementById('modal-alert');
+  if (!el) return;
+  el.className = 'modal-alert show ' + (tipo || '');
+  el.innerHTML = html;
+}
+function limpiarAlerta() {
+  const el = document.getElementById('modal-alert');
+  if (el) { el.className = 'modal-alert'; el.innerHTML = ''; }
+}
+
+async function submitExp() {
+  const exp = currentExp;
+  const btn = document.getElementById('btn-send');
+  const payload = collectPayload(exp);
+  const { errs, vacios } = validarEnvio(payload);
+
+  if (errs.length) {
+    alerta('<b>Antes de enviar, completa esto:</b><ul><li>' + errs.join('</li><li>') + '</li></ul>', 'err');
+    return;
+  }
+  if (vacios.length) {
+    const ok = confirm(
+      `Hay ${vacios.length} campo(s) sin diligenciar:\n\n` +
+      vacios.map(v => '· ' + v.label).join('\n') +
+      `\n\n¿Quieres enviarlo así de todos modos? Podrás volver a enviar una versión corregida más adelante.`
+    );
+    if (!ok) return;
+  }
+  if (!INSTRUMENT.endpoint || INSTRUMENT.endpoint.indexOf('PEGA_AQUI') === 0) {
+    alerta('<b>El envío todavía no está configurado.</b> Avisa a tu facilitador: falta conectar ' +
+           'el motor de recepción. Mientras tanto, descarga tu PDF para no perder tu trabajo.', 'err');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = '⏳ Enviando…';
+  alerta('Enviando tu experimento y generando tu PDF. Esto puede tardar unos segundos — no cierres esta ventana.', 'info');
+
+  try {
+    const res = await fetch(INSTRUMENT.endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload),
+      redirect: 'follow'
+    });
+    if (!res.ok) throw new Error('El servidor respondió ' + res.status);
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.mensaje || 'El servidor rechazó el envío.');
+
+    markSent(exp, data.reciboID);
+    alerta(
+      '<b>✓ Envío confirmado.</b><br>' +
+      'Tu experimento llegó a tu facilitador y quedó registrado.<br>' +
+      'Tu número de recibo es <b>' + data.reciboID + '</b>' +
+      (data.copiaEstudiante ? '<br>Te enviamos una copia en PDF a <b>' + payload.participante.email + '</b>.' : '') +
+      '<br><span class="mini">Guarda este número: es tu comprobante.</span>',
+      'ok'
+    );
+    btn.textContent = '✓ Enviado';
+    document.getElementById('modal-actions').classList.add('sent');
+    if (exp === '990') {
+      ['e1','e2'].forEach(k => { const el = document.getElementById('f-990-' + k); if (el) { el.value = ''; saveField(el.dataset.save, ''); el.classList.remove('filled'); updateCharCount(el); } });
+      const d2 = getData(); delete d2['sent_990']; delete d2['recibo_990']; localStorage.setItem(SAVE_KEY, JSON.stringify(d2));
+      const b990 = document.getElementById('btn-990'); if (b990) { b990.classList.remove('done'); b990.lastChild.textContent = ' Enviar consulta'; }
+    }
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = '↻ Reintentar envío';
+    alerta(
+      '<b>No pudimos completar el envío.</b><br>' +
+      'Motivo: ' + (err.message || 'error de conexión') + '<br><br>' +
+      '<b>Tu trabajo está a salvo</b> — sigue guardado en este navegador. Puedes:<br>' +
+      '· Revisar tu conexión y pulsar <b>Reintentar envío</b>.<br>' +
+      '· Descargar el PDF y enviarlo tú a <b>facilitador@digitalchangeadvisors.com</b>.',
+      'err'
+    );
+  }
+}
+
+function copyModal() {
+  const text = document.getElementById('modal-body').textContent;
+  const feedback = () => alerta('Resumen copiado al portapapeles. <b>Recuerda: copiar no es enviar</b> — ' +
+                                'usa «Enviar ahora» para que le llegue a tu facilitador.', 'info');
+  navigator.clipboard.writeText(text).then(feedback).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    feedback();
+  });
+}
+
+function markSent(exp, reciboID) {
+  const btn = document.getElementById('btn-' + exp);
+  const ok  = document.getElementById('ok-' + exp);
+  if (btn) { btn.classList.add('done'); btn.textContent = '✓ Enviado · ' + reciboID; }
+  if (ok)  { ok.classList.add('show'); }
+  const d = getData();
+  d['sent_' + exp] = true;
+  d['recibo_' + exp] = reciboID;
+  d['fecha_envio_' + exp] = new Date().toISOString();
+  localStorage.setItem(SAVE_KEY, JSON.stringify(d));
+  const navEl = document.getElementById('nav-' + exp);
+  if (navEl) navEl.classList.add('done');
+}
+
+document.getElementById('modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+
+// ══ INIT ════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  loadAll();
+  const d = getData();
+  Object.keys(EXP_FIELDS).forEach(exp => {
+    if (exp !== '990' && d['sent_' + exp]) {
+      const btn = document.getElementById('btn-' + exp);
+      const ok  = document.getElementById('ok-' + exp);
+      const rec = d['recibo_' + exp];
+      if (btn) { btn.classList.add('done'); btn.textContent = rec ? '✓ Enviado · ' + rec : '✓ Enviado'; }
+      if (ok)  { ok.classList.add('show'); }
+      const navEl = document.getElementById('nav-' + exp);
+      if (navEl) navEl.classList.add('done');
+    }
+  });
+  document.querySelectorAll('textarea').forEach(ta => updateCharCount(ta));
+});
+</script>
+</body>
+</html>

@@ -486,6 +486,56 @@ const FAQ = [
     actualizado: "2026-10-13"
   },
 
+  {
+    slug: "audicion-como-funciona",
+    sprint: "Audición",
+    frente: "contenido",
+    pregunta: "¿Cómo funciona la audición de certificación?",
+    respuesta:
+      "Es la prueba final de la certificación y se hace **100% de forma individual**, sobre un **caso sintético nuevo** (Vertecsa Group) que no has visto. No hay socialización con pares.\n\nRecibes **un enlace de acceso a tu propio documento HTML**, con el mismo formato de los Sprint Roadmaps: ahí encuentras las instrucciones, los documentos del caso para descargar, los espacios donde registras tus entregables (con autoguardado y copia en PDF) y los botones de envío. No tienes que aprender una herramienta nueva.\n\nLa ventana es de **tres semanas**. Trabajas en **cuatro entregables** que envías uno a uno (auditoría del borrador, diagnóstico integrado y causa raíz, plan y modelo de impacto, y síntesis, defensa y decisión) y un **cierre** donde declaras el uso de IA y solicitas tu calificación final. Cuando llegan los cuatro entregables y el cierre, tu facilitador los evalúa juntos y recibes una **devolución personalizada** por criterio.",
+    actualizado: "2026-10-13"
+  },
+
+  {
+    slug: "audicion-rubrica",
+    sprint: "Audición",
+    frente: "contenido",
+    pregunta: "¿Cómo se evalúa la audición? ¿Cuál es la rúbrica?",
+    respuesta:
+      "La rúbrica es **abierta**: conoces los criterios y los pesos desde el principio. Son siete, y cada uno se califica de 1 a 5 (1–2 insuficiente, 3–4 suficiente, 5 sobresaliente):\n\n**1.** Precisión del diagnóstico y jerarquía de causa raíz · 35%\n**2.** Integración de los tres instrumentos (el cruce) · 30%\n**3.** Calidad del plan de intervención (S5) · 12%\n**5.** Modelo de impacto (S6) con inversión estimada · 8%\n**6.** Defensibilidad ante audiencia C-Level, por escrito · 7%\n**4.** Claridad ejecutiva del reporte · 4%\n**7.** Viabilidad operativa del plan · 4%\n\nHay una **regla de exclusión** en el Criterio 1: tratar un síntoma como si fuera la causa raíz hace insuficiente el entregable sin importar la calidad del resto. Por eso importa tanto probar tu jerarquía con la distribución de los datos y no con el hallazgo más ruidoso.\n\n**Resultados posibles:** aprobado (los siete criterios en 3 o más), aplazado o rechazado. No existe el «aprobado con observaciones».",
+    actualizado: "2026-10-13"
+  },
+
+  {
+    slug: "audicion-uso-ia",
+    sprint: "Audición",
+    frente: "contenido",
+    pregunta: "¿Puedo usar IA durante la audición?",
+    respuesta:
+      "Sí, **como andamiaje**: para estresar tu razonamiento, contraargumentar tu jerarquía de causas y pulir la redacción. **No como sustituto:** la priorización, el veredicto y las decisiones son tuyos, y la IA no tiene el criterio para producir estos entregables por ti.\n\nEn el cierre **declaras cómo la usaste** (ninguno o andamiaje, con una descripción de qué hizo la IA y qué decidiste tú). Un trabajo que no puedas sostener como propio, o una declaración que no corresponda con lo entregado, es causal de rechazo.",
+    actualizado: "2026-10-13"
+  },
+
+  {
+    slug: "audicion-si-no-apruebo",
+    sprint: "Audición",
+    frente: "contenido",
+    pregunta: "¿Qué pasa si no apruebo la audición?",
+    respuesta:
+      "Hay dos caminos, según la profundidad del defecto y no según la simpatía:\n\n**Aplazado:** uno o más criterios en nivel insuficiente sobre un trabajo realmente ejecutado. Recibes acciones correctivas concretas y una **nueva entrega en un plazo máximo de 60 días**, sobre un caso alterno.\n\n**Rechazado:** el trabajo no fue ejecutado o no se sostiene como propio. Implica re-cursar el módulo en falla.\n\nEn ambos casos recibes una devolución con tu puntaje por criterio y ejemplos concretos de cómo llevar cada punto al siguiente nivel.",
+    actualizado: "2026-10-13"
+  },
+
+  {
+    slug: "audicion-mesa-consultas",
+    sprint: "Audición",
+    frente: "contenido",
+    pregunta: "¿Qué puedo preguntar durante la preparación y cómo lo hago?",
+    respuesta:
+      "En tu documento de audición hay una **Mesa de consultas**: un canal individual con tu facilitador. Tu consulta llega solo a él y la respuesta te llega a tu correo, normalmente en menos de 48 horas.\n\n**Sí puedes preguntar:** proceso (cómo enviar, plazos, qué entregar), criterios (cómo se evalúa algo de la rúbrica) y técnica (un problema con el documento o con el envío).\n\n**No se responden** consultas sobre el contenido del análisis (por ejemplo, «¿esta es la causa raíz?»): así todos trabajan en igualdad de condiciones. Las respuestas de interés general se publican de forma anónima en esta sección del Centro de Ayuda.",
+    actualizado: "2026-10-13"
+  },
+
 ];
 
 /* ════════════════════════════════════════════════════════════════════════════
@@ -791,7 +841,7 @@ function esNuevo(f){
   var uniq = sprints.filter(function(s,i){return sprints.indexOf(s)===i;}).sort();
   var html = '<button class="chip on gold" data-sprint="todos" onclick="setSprint(\'todos\')">Todos</button>';
   uniq.forEach(function(s){
-    html += '<button class="chip" data-sprint="'+s+'" onclick="setSprint(\''+s+'\')">Sprint '+s+'</button>';
+    html += '<button class="chip" data-sprint="'+s+'" onclick="setSprint(\''+s+'\')">'+(/^\d+$/.test(s)?'Sprint '+s:s)+'</button>';
   });
   document.getElementById('sprint-chips').innerHTML = html;
 })();
@@ -922,7 +972,7 @@ function render(){
   }
 
   cont.innerHTML=arr.map(function(f,i){
-    var st = f.sprint==='General' ? 'General' : 'Sprint '+f.sprint;
+    var st = f.sprint==='General' ? 'General' : (/^\d+$/.test(f.sprint) ? 'Sprint '+f.sprint : f.sprint);
     var iid='q-'+f._slug;
     return ''
     +'<div class="item" id="'+iid+'">'
