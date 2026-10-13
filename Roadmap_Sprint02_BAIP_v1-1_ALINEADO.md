@@ -221,7 +221,7 @@ La IA estructura el plan, propone formulaciones de métrica dual y ayuda a model
 
 **Conexión con el siguiente experimento**
 
-Plan 30/60/90 vs. solución ReturnAI a 120 días: el plan 30/60/90 (S5) es una secuencia de acciones sugeridas para destrabar la causa raíz y evidenciar el flujo de valor, sin transferencia de tecnología ni plan de continuidad; la solución ReturnAI (6 sprints en 120 días; el primero, Brecha AI Personas, ya cubierto por el diagnóstico) resuelve sistémicamente todos los obstáculos y sí deja transferencia y sostenimiento. El Modelo de Impacto (S6) proyecta a 120 días con cortes cada 30 para que el cliente ejecute según sus recursos; con restricción de presupuesto, se sugiere implementar tantas acciones del plan 30/60/90 como pueda.
+Plan 30/60/90 vs. solución ReturnAI a 120 días: el plan 30/60/90 (S5) es una secuencia de acciones sugeridas para destrabar la causa raíz y evidenciar el flujo de valor, sin transferencia de tecnología ni plan de continuidad; la solución ReturnAI (6 sprints en 120 días; el primero, Brecha AI Personas, ya cubierto por el diagnóstico) resuelve sistémicamente todos los obstáculos y sí deja transferencia y sostenimiento. La solución ReturnAI es un producto de estructura definida que el analista no cambia: debe conocerla leyendo la novela ReturnAI o visitando el sitio web de DCA. El Modelo de Impacto (S6) proyecta a 120 días y el cliente decide cuánto ejecutar según sus recursos; con restricción de presupuesto, se sugiere implementar tantas acciones del plan 30/60/90 como pueda.
 
 El costo de inacción de S6 encabeza la Síntesis Ejecutiva (S1) y es el gancho de la defensa en el Exp 4; el plan es lo que el responsable del KPI autoriza, ajusta o rechaza.
 
