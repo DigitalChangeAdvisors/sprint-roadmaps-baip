@@ -221,6 +221,8 @@ La IA estructura el plan, propone formulaciones de métrica dual y ayuda a model
 
 **Conexión con el siguiente experimento**
 
+Plan 30/60/90 vs. solución ReturnAI a 120 días: el plan 30/60/90 (S5) es una secuencia de acciones sugeridas para destrabar la causa raíz y evidenciar el flujo de valor, sin transferencia de tecnología ni plan de continuidad; la solución ReturnAI (6 sprints en 120 días; el primero, Brecha AI Personas, ya cubierto por el diagnóstico) resuelve sistémicamente todos los obstáculos y sí deja transferencia y sostenimiento. El Modelo de Impacto (S6) proyecta a 120 días con cortes cada 30 para que el cliente ejecute según sus recursos; con restricción de presupuesto, se sugiere implementar tantas acciones del plan 30/60/90 como pueda.
+
 El costo de inacción de S6 encabeza la Síntesis Ejecutiva (S1) y es el gancho de la defensa en el Exp 4; el plan es lo que el responsable del KPI autoriza, ajusta o rechaza.
 
 ---
@@ -262,7 +264,7 @@ El Reporte BAIP completo (S1–S7) producido en los Exp 1–3 sobre la unidad re
 
 | Parámetro | Detalle |
 |---|---|
-| KPI afectado | Captura de la decisión del responsable del KPI (autoriza/ajusta/rechaza) —la conversión del diagnóstico en decisión— y, si autoriza, recursos liberados y entrada al ciclo ReturnAI. |
+| KPI afectado | Captura de la decisión del responsable del KPI (autoriza/ajusta/rechaza) —la conversión del diagnóstico en decisión— y, si autoriza, recursos liberados y la ruta elegida (acciones del plan 30/60/90 y/o continuidad con los demás sprints de la solución ReturnAI). |
 | Cómo se captura | Registro de S7 firmado o confirmado por el dueño del KPI. |
 | Línea base | Presentación sin decisión capturada: «lo revisamos y te avisamos». |
 | Valor objetivo | Decisión capturada en la sala —cualquiera de las tres—; nunca salir sin decisión. |
@@ -276,6 +278,10 @@ El Reporte BAIP completo (S1–S7) producido en los Exp 1–3 sobre la unidad re
 **Duración**
 
 Hasta una semana: preparación de S1 y de la matriz en 2–3 días; reunión y captura de la decisión dentro de la semana.
+
+**Alcance de S7**
+
+S7 registra la decisión del cliente sobre una recomendación sustentada; no es un compromiso contractual. Su alcance es lo solicitado de forma específica (qué autorizar, con qué recursos, para cuándo). El analista puede decir —o dejar por escrito— que el cliente puede contratar las acciones propuestas con DCA o con cualquier otro proveedor.
 
 **Rol de la IA como andamiaje**
 
