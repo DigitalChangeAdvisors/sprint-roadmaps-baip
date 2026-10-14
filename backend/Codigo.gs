@@ -79,6 +79,34 @@ function nombreExp(d) {
          ('Experimento ' + (d.exp || '—'));
 }
 
+/**
+ * Etiqueta corta para el asunto del correo, derivada del instrumento y del experimento.
+ * Sprint 01/02…: «Sprint 02 · Exp 203». Audición: «Audición · Entregable 3», «Audición · Cierre»,
+ * «Audición · Consulta». Así el asunto nunca queda fijo en un sprint.
+ */
+function etiquetaCorta(d) {
+  const exp = String(d.exp || '');
+  if (d.instrumento === 'audicion-baip') {
+    if (exp === '905') return 'Audición · Cierre';
+    if (exp === '990') return 'Audición · Consulta';
+    const n = Number(exp) - 900;
+    return n >= 1 && n <= 4 ? 'Audición · Entregable ' + n : 'Audición · Exp ' + exp;
+  }
+  const sprint = exp.length >= 3 ? ('0' + exp.charAt(0)).slice(-2) : '';
+  return sprint ? 'Sprint ' + sprint + ' · Exp ' + exp : 'Exp ' + exp;
+}
+
+/** Texto de confirmación al estudiante, según el instrumento y el envío. */
+function textoConfirmacion(d) {
+  const exp = String(d.exp || '');
+  if (d.instrumento === 'audicion-baip') {
+    if (exp === '990') return 'Tu consulta llegó a tu facilitador y te responderá a tu correo.';
+    if (exp === '905') return 'Tu audición pasa a evaluación en la semana 3. Recibirás una devolución personalizada con tu resultado.';
+    return 'Ya está en manos de tu facilitador y recibirás un ⚡ Flash Feedback breve para orientar el siguiente entregable.';
+  }
+  return 'Ya está en manos de tu facilitador y cuenta como entregado para el feedback de seguimiento y tu acceso a la Sesión de Mentoring colectivo del sprint.';
+}
+
 /** Etiqueta del sprint que envía el HTML, o una genérica si no viene. */
 function etiquetaSprint(d) {
   return (d.sprintLabel && String(d.sprintLabel).trim()) ||
@@ -379,7 +407,7 @@ function plantillaReporteHTML(d, recibo) {
   <div class="cab">
     <div class="cab-marca">Certificación Analista BAIP · Modelo ARIA</div>
     <div class="cab-tit">${escapar(nombreExp(d))}</div>
-    <div class="cab-sub">Sprint Roadmap 01 · Identificación de Causas Raíz de los Obstáculos al ROI de la IA</div>
+    <div class="cab-sub">${escapar(etiquetaSprint(d))}</div>
   </div>
 
   <div class="recibo">
@@ -421,7 +449,7 @@ function escapar(s) {
 // ══ CORREOS ═══════════════════════════════════════════════════════════════
 function enviarAFacilitador(d, recibo, pdf) {
   const p = d.participante;
-  const asunto = `[ARIA Sprint 01 · Exp ${d.exp}] ${p.nombre} — ${p.cohorte} · ${recibo}`;
+  const asunto = `[ARIA ${etiquetaCorta(d)}] ${p.nombre} — ${p.cohorte} · ${recibo}`;
 
   const cuerpo = `
     <div style="font-family:Helvetica,Arial,sans-serif;color:${MARCA.carbon};max-width:600px">
@@ -486,17 +514,16 @@ function enviarAlEstudiante(d, recibo, pdf) {
       <div style="padding:18px">
         <p style="font-size:15px;line-height:1.6">Hola ${escapar(p.nombre.split(' ')[0])},</p>
         <p style="font-size:14px;line-height:1.6">
-          Recibimos tu <b>${escapar(nombreExp(d))}</b>. Ya está en manos de tu
-          facilitador y cuenta como entregado para el feedback de seguimiento y tu acceso
-          a la Sesión de Mentoring colectivo del sprint.
+          Recibimos tu <b>${escapar(nombreExp(d))}</b>. ${textoConfirmacion(d)}
         </p>
         <p style="font-size:14px;line-height:1.6">
           Adjuntamos tu reporte en PDF para tu archivo personal. Guarda este correo:
           el número de recibo <b>${recibo}</b> es tu comprobante.
         </p>
         <p style="font-size:14px;line-height:1.6">
-          Si necesitas corregir algo, puedes volver al roadmap, ajustar tus respuestas y
-          enviar de nuevo. Registramos la versión más reciente.
+          ${d.instrumento === 'audicion-baip' && String(d.exp) === '990'
+            ? 'Puedes enviar tantas consultas como necesites desde tu documento de audición.'
+            : 'Si necesitas corregir algo, puedes volver a tu documento, ajustar tus respuestas y enviar de nuevo. Registramos la versión más reciente.'}
         </p>
         <p style="font-size:12px;color:${MARCA.gris};border-top:2px solid ${MARCA.oro};padding-top:10px;margin-top:18px">
           Digital Change Advisors · Modelo ARIA<br>
