@@ -59,7 +59,7 @@ const ETIQUETAS_AUDICION = {
   '905': ['Declaración de uso de IA', 'Autoevaluación contra la rúbrica', 'Declaración de autoría y solicitud de calificación'],
   '990': ['Tipo de consulta', 'Consulta', ''],
 };
-const VEREDICTOS = ['aprobado', 'aplazado', 'rechazado'];
+const VEREDICTOS = ['aprobado', 'ajustes', 'no_aprobado'];
 // Flash Feedback: retroalimentación breve tras cada entregable (901–904). No califica; orienta.
 const FLASH_EXPS = ['901', '902', '903', '904'];
 const FLASH_CRITERIOS = { '901': ['c1', 'c2'], '902': ['c1', 'c2'], '903': ['c3', 'c5', 'c7'], '904': ['c4', 'c6', 'c7'] };
@@ -531,7 +531,7 @@ function _borradorAudicion(e) {
     'MUY IMPORTANTE: el comentario y la guía de mejora van dirigidos al estudiante (tuteo, voz consultiva, rigurosa, sin adular). NO reveles la clave maestra ni nombres el keystone correcto: señala qué tipo de error cometió y qué evidencia del caso debía reconsiderar, sin darle la respuesta. ' +
     'Detecta además señales de autoría dudosa, contradicciones con la declaración de uso de IA, entregables ausentes o incompletos y regístralas en «alertas». ' +
     'Si hay entregables «NO ENTREGADO», evalúa solo lo entregado y refleja la ausencia en los puntajes y en las alertas. ' +
-    'Reglas de resultado para el veredicto sugerido: aprobado = todos los criterios en 3 o más; aplazado = algún criterio en 1–2 sobre un trabajo realmente ejecutado; rechazado = el trabajo no fue ejecutado o no se sostiene como propio. No existe el aprobado condicional.';
+    'Reglas de resultado para el veredicto sugerido: aprobado = todos los criterios en 3 o más; ajustes = algún criterio en 1–2 sobre un trabajo realmente ejecutado y corregible dentro de la semana 3 (la estudiante hace los ajustes y reenvía los entregables afectados, y luego se emite el veredicto final); no_aprobado = el trabajo no fue ejecutado, no se sostiene como propio, o los ajustes no resolvieron los criterios insuficientes. No existe el aprobado condicional ni plazos posteriores: todo se resuelve en la semana 3 y la cohorte se cierra.';
 
   const usuario =
     'ESTUDIANTE: ' + e.nombre + ' · ' + e.empresa + ' · Cohorte ' + e.cohorte + '\n\n' +
@@ -588,7 +588,7 @@ function _borradorAudicion(e) {
 /** Envía el resultado de la audición (devolución personalizada) y lo registra. */
 function _enviarResultadoAudicion(e, payload) {
   const veredicto = String(payload.veredicto || '').toLowerCase();
-  if (VEREDICTOS.indexOf(veredicto) === -1) throw new Error('Elige el veredicto: aprobado, aplazado o rechazado.');
+  if (VEREDICTOS.indexOf(veredicto) === -1) throw new Error('Elige el veredicto: aprobado, ajustes o no aprobado.');
   const criterios = RUBRICA_AUDICION.map(r => {
     const c = (payload.criterios || []).find(x => x.clave === r.clave);
     return { clave: r.clave, titulo: r.titulo, peso: r.peso, puntaje: c ? Number(c.puntaje) || 0 : 0, nota: c ? String(c.nota || '') : '' };
@@ -596,7 +596,7 @@ function _enviarResultadoAudicion(e, payload) {
   if (criterios.some(c => c.puntaje < 1)) throw new Error('Califica los siete criterios (1 a 5) antes de enviar.');
   // Reglas de resultado: sin aprobado condicional.
   if (veredicto === 'aprobado' && criterios.some(c => c.puntaje <= 2))
-    throw new Error('No se puede aprobar con un criterio en nivel insuficiente (1–2). Elige «aplazado» o corrige el puntaje.');
+    throw new Error('No se puede aprobar con un criterio en nivel insuficiente (1–2). Elige «ajustes» o corrige el puntaje.');
   const ponderado = _puntajePonderado(criterios);
   const mejoras = (payload.mejoras || [])
     .map(m => ({ foco: String((m && m.foco) || '').trim(), ejemplo: String((m && m.ejemplo) || '').trim(), porque: String((m && m.porque) || '').trim() }))
@@ -624,8 +624,8 @@ function _correoResultadoAudicion(e, criterios, comentario, ponderado, veredicto
   const TERRA = '#c2593f';
   const cfg = {
     aprobado:  { color: MARCA.teal, titulo: 'Aprobado', texto: 'Superaste la audición de certificación. Te contactaremos con los pasos de emisión de tu certificado y tu incorporación al ecosistema de analistas certificados.' },
-    aplazado:  { color: MARCA.oro,  titulo: 'Aplazado', texto: 'Tu trabajo tiene aspectos corregibles. Recibes las acciones correctivas de esta devolución y una nueva entrega en un plazo máximo de 60 días, sobre un caso alterno que te haremos llegar.' },
-    rechazado: { color: TERRA,      titulo: 'Rechazado', texto: 'El módulo no se ejecutó en los términos de la audición. Conversemos sobre el re-cursado del módulo en falla; escríbeme respondiendo este correo.' },
+    ajustes:   { color: MARCA.oro,  titulo: 'Ajustes requeridos', texto: 'Tu trabajo tiene aspectos puntuales que se resuelven esta misma semana 3. Haz los ajustes que indica esta devolución, reenvía los entregables afectados desde tu documento de audición y luego te comunico el veredicto final.' },
+    no_aprobado: { color: TERRA,    titulo: 'No aprobado', texto: 'Tu trabajo no alcanzó el estándar de certificación en esta audición. Responde este correo y conversamos los pasos siguientes.' },
   }[veredicto];
 
   const filas = criterios.map(c => `

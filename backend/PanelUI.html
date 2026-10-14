@@ -166,7 +166,7 @@
         + '</div>';
     }).join('');
 
-    var pillTxt = enviado ? '<span class="pill done">✓ '+(e.esConsulta?'Respondida':(e.veredicto?('Resultado: '+esc(e.veredicto)):'Feedback enviado'))+'</span>'
+    var pillTxt = enviado ? '<span class="pill done">✓ '+(e.esConsulta?'Respondida':(e.veredicto?('Resultado: '+esc(String(e.veredicto).replace('_',' '))):'Feedback enviado'))+'</span>'
                           : '<span class="pill pend">Pendiente</span>';
     if(e.esConsulta){ pillTxt = enviado ? '<span class="pill done">✓ Respondida</span>' : '<span class="pill cons">Consulta por responder</span>'; }
     if(e.esFlash){ pillTxt = enviado ? '<span class="pill done">⚡ Flash enviado</span>' : '<span class="pill flash">⚡ Flash por enviar</span>'; }
@@ -225,10 +225,11 @@
         return '<span style="margin-right:8px;color:'+(ok?'#236b5b':'#c2593f')+'">'+k+(ok?' ✓':' ✗')+'</span>';
       }).join('');
       recibidos = '<div class="recib">Entregables recibidos: '+lista+'</div>';
-      var vs = ['','aprobado','aplazado','rechazado'].map(function(v){ return '<option value="'+v+'"'+(v===(e.veredicto||'')?' selected':'')+'>'+(v||'— elige —')+'</option>'; }).join('');
+      var VL = {'':'— elige —','aprobado':'Aprobado (certificación)','ajustes':'Requiere ajustes (semana 3)','no_aprobado':'No aprobado'};
+      var vs = ['','aprobado','ajustes','no_aprobado'].map(function(v){ return '<option value="'+v+'"'+(v===(e.veredicto||'')?' selected':'')+'>'+VL[v]+'</option>'; }).join('');
       extra = '<div class="pond" id="pond-'+e.recibo+'"></div>'
         + '<div class="ver"><b>Veredicto:</b><select id="ver-'+e.recibo+'">'+vs+'</select>'
-        + '<span class="mejhint">Sin «aprobado condicional»: para aprobar, los siete criterios deben tener 3 o más.</span></div>'
+        + '<span class="mejhint">Sin «aprobado condicional»: para aprobar, los siete criterios deben tener 3 o más. «Ajustes»: la estudiante los hace en la semana 3 y tú emites el veredicto final.</span></div>'
         + '<div class="ianotas" id="ia-'+e.recibo+'" style="display:none"></div>';
     }
     return '<div class="evalbox">'

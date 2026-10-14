@@ -171,7 +171,7 @@ Todo lo anterior (Sprints 01 y 02) funciona igual.
 
 **Rúbrica (peso):** C1 Precisión y causa raíz 35 · C2 Integración 30 · C3 Plan S5 12 · C5 Modelo de impacto S6 8 · C6 Defensibilidad por escrito 7 · C4 Claridad 4 · C7 Viabilidad 4.
 Escala 1–5 (1–2 insuficiente, 3–4 suficiente, 5 sobresaliente). El panel calcula el puntaje ponderado.
-**Reglas:** sin «aprobado condicional» — el panel no deja enviar «aprobado» si algún criterio es 1–2. Aplazado = nueva entrega ≤60 días sobre un caso alterno; rechazado = re-cursado.
+**Veredictos:** aprobado (los siete criterios ≥3) · ajustes (la estudiante los resuelve en la semana 3 y tú emites el veredicto final desde el mismo cierre, reevaluando con los entregables reenviados) · no aprobado. Sin «aprobado condicional»: el panel no deja enviar «aprobado» si algún criterio es 1–2. La semana 3 reemplaza cualquier plazo posterior: todo se resuelve ahí y la cohorte se cierra.
 
 **Borrador con IA para la audición:** lee los cuatro entregables más recientes + el cierre del estudiante y la
 **clave maestra**, y devuelve puntaje por criterio, cuáles de los cinco errores del borrador identificó, si se activó la

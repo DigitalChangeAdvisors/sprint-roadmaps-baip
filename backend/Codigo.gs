@@ -116,6 +116,12 @@ function doPost(e) {
       return responder({ ok: false, error: 'VALIDACION', mensaje: problema });
     }
 
+    // ── Orden de entregables (solo audición): no se salta ningún entregable previo ──
+    const fueraDeOrden = verificarOrdenAudicion(datos);
+    if (fueraDeOrden) {
+      return responder({ ok: false, error: 'ORDEN', mensaje: fueraDeOrden });
+    }
+
     // ── Candado: un solo envío a la vez para no corromper la numeración ──
     const candado = LockService.getScriptLock();
     candado.waitLock(30000);
@@ -558,4 +564,51 @@ function pruebaDeEnvio() {
 
   const res = doPost({ postData: { contents: JSON.stringify(demo) } });
   Logger.log(res.getContent());
+}
+
+
+// ══ ORDEN SECUENCIAL DE LA AUDICIÓN ═══════════════════════════════════════
+/**
+ * Los entregables de la audición (901–904) y el cierre (905) se envían en orden.
+ * La verificación es en el servidor, no en el navegador: así funciona aunque la estudiante
+ * cambie de computador o navegador, y no bloquea a nadie por error. Solo mira a la misma
+ * persona (por correo) en el mismo instrumento. Los demás sprints y la mesa de consultas (990)
+ * no se ven afectados.
+ */
+const AUDICION_ORDEN = {
+  instrumento: 'audicion-baip',
+  secuencia: ['901', '902', '903', '904', '905'],
+  nombres: {
+    '901': 'Entregable 1 — Auditoría del borrador',
+    '902': 'Entregable 2 — Diagnóstico integrado y causa raíz',
+    '903': 'Entregable 3 — Plan y modelo de impacto',
+    '904': 'Entregable 4 — Síntesis, defensa y decisión',
+  },
+};
+
+function verificarOrdenAudicion(d) {
+  if (!d || d.instrumento !== AUDICION_ORDEN.instrumento) return null;
+  const i = AUDICION_ORDEN.secuencia.indexOf(String(d.exp));
+  if (i <= 0) return null; // el primero y la mesa de consultas no tienen previo
+  const hoja = obtenerHoja(CONFIG.HOJA_REGISTRO, COLUMNAS);
+  const enviados = {};
+  if (hoja.getLastRow() >= 2) {
+    const cI = COLUMNAS.indexOf('Instrumento'), cE = COLUMNAS.indexOf('Experimento'), cM = COLUMNAS.indexOf('Email');
+    const filas = hoja.getRange(2, 1, hoja.getLastRow() - 1, COLUMNAS.length).getValues();
+    const mail = String((d.participante && d.participante.email) || '').trim().toLowerCase();
+    filas.forEach(f => {
+      if (String(f[cI]) === AUDICION_ORDEN.instrumento && String(f[cM] || '').trim().toLowerCase() === mail) {
+        enviados[String(f[cE])] = true;
+      }
+    });
+  }
+  for (let k = 0; k < i; k++) {
+    const previo = AUDICION_ORDEN.secuencia[k];
+    if (!enviados[previo]) {
+      return 'Antes de enviar este entregable, envía primero «' + AUDICION_ORDEN.nombres[previo] +
+             '». Cada entregable construye sobre el anterior y se envían en orden. ' +
+             'Si ya lo enviaste, revisa que usaste el mismo correo en la portada.';
+    }
+  }
+  return null;
 }
