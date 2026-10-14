@@ -76,6 +76,11 @@
   .ianotas .alerta{ color:var(--terra); font-weight:700; }
   .recib{ font-size:12px; color:var(--gris); margin-top:10px; }
   .pill.cons{ background:#eef3fb; color:#35507a; }
+  .pill.flash{ background:#fbf3d9; color:#7a5f0a; }
+  .fcrit{ display:flex; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap; }
+  .fcrit .ct{ flex:1; min-width:150px; font-size:13px; font-weight:600; }
+  .fcrit select{ padding:5px 8px; border-radius:6px; border:1.5px solid #ddd; font-family:inherit; }
+  .fcrit input.nota{ flex:2; min-width:160px; padding:6px 8px; border-radius:6px; border:1.5px solid #ddd; font-family:inherit; font-size:12px; }
 </style>
 </head>
 <body>
@@ -164,6 +169,7 @@
     var pillTxt = enviado ? '<span class="pill done">✓ '+(e.esConsulta?'Respondida':(e.veredicto?('Resultado: '+esc(e.veredicto)):'Feedback enviado'))+'</span>'
                           : '<span class="pill pend">Pendiente</span>';
     if(e.esConsulta){ pillTxt = enviado ? '<span class="pill done">✓ Respondida</span>' : '<span class="pill cons">Consulta por responder</span>'; }
+    if(e.esFlash){ pillTxt = enviado ? '<span class="pill done">⚡ Flash enviado</span>' : '<span class="pill flash">⚡ Flash por enviar</span>'; }
     var cuerpoEval = evalHtml(e, enviado, crit, mejHtml);
     return ''
     + '<div class="card" id="card-'+e.recibo+'">'
@@ -186,6 +192,27 @@
         + '<p class="mejhint">La respuesta le llega al estudiante por correo (responder-a: facilitador). Las respuestas de interés general puedes publicarlas, anonimizadas, en el Centro de Ayuda.</p>'
         + '<textarea id="resp-'+e.recibo+'" placeholder="Tu respuesta (tuteo)…">'+esc(e.feedbackTexto)+'</textarea>'
         + '<div class="acciones"><button class="btn p" onclick="responder(\''+e.recibo+'\')">✉ '+(enviado?'Enviar otra respuesta':'Responder consulta')+'</button>'
+        + '<span class="estado" id="est-'+e.recibo+'"></span></div></div>';
+    }
+    if(e.esFlash){
+      var NIV = [['','— elige —'],['buen_camino','En buen camino'],['ajustar','Ajustar'],['replantear','Replantear']];
+      var saved = e.rubricaGuardada || [];
+      var frows = (e.criteriosFlash||[]).map(function(c){
+        var sv = saved.find ? saved.find(function(x){return x.clave===c.clave;}) : null;
+        var opts = NIV.map(function(n){ return '<option value="'+n[0]+'"'+((sv&&sv.nivel===n[0])?' selected':'')+'>'+n[1]+'</option>'; }).join('');
+        return '<div class="fcrit" data-clave="'+c.clave+'"><span class="ct">'+esc(c.titulo)+'</span><select class="fn">'+opts+'</select>'
+          + '<input class="nota" placeholder="Orientación breve (opcional)" value="'+escA(sv?sv.nota:'')+'"></div>';
+      }).join('');
+      return '<div class="evalbox"><h4>⚡ Flash Feedback · orientación breve (no califica)</h4>'
+        + '<p class="mejhint">Un comentario corto y un nivel por criterio para orientar el siguiente entregable. La calificación se emite una sola vez, en el cierre.</p>'
+        + frows
+        + '<div class="ianotas" id="ia-'+e.recibo+'" style="display:none"></div>'
+        + '<textarea id="txt-'+e.recibo+'" style="min-height:90px" placeholder="Flash Feedback para el estudiante (tuteo, máximo 5 frases)…">'+esc(e.feedbackTexto)+'</textarea>'
+        + '<div class="mejlabel">Una mejora concreta (opcional)</div>'
+        + '<div class="mejoras" id="mej-'+e.recibo+'">'+mejHtml+'</div>'
+        + '<button type="button" class="btn s addmej" onclick="addMejora(\''+e.recibo+'\')">+ Añadir ejemplo</button>'
+        + '<div class="acciones"><button class="btn g" onclick="borrador(\''+e.recibo+'\')">✨ Generar Flash con IA</button>'
+        + '<button class="btn p" onclick="enviarFlash(\''+e.recibo+'\')">⚡ '+(enviado?'Reenviar Flash Feedback':'Enviar Flash Feedback')+'</button>'
         + '<span class="estado" id="est-'+e.recibo+'"></span></div></div>';
     }
     if(e.esAudicion && !e.esCierre){
@@ -287,6 +314,21 @@
     estado(r, '<span class="spin"></span> La IA está redactando el borrador…');
     google.script.run
       .withSuccessHandler(function(res){
+        if(res.flash){
+          document.getElementById('txt-'+r).value = res.comentario || '';
+          (res.indicadores||[]).forEach(function(c){
+            var row = document.querySelector('#card-'+r+' .fcrit[data-clave="'+c.clave+'"]');
+            if(row){ row.querySelector('.fn').value = c.nivel; row.querySelector('.nota').value = c.nota||''; }
+          });
+          document.getElementById('mej-'+r).innerHTML = (res.mejoras||[]).map(mejoraRowHtml).join('');
+          var iaf = document.getElementById('ia-'+r);
+          if(iaf && (res.alertas||[]).length){
+            iaf.innerHTML = '<b>Alertas de la IA para ti (no se envían)</b><br>'+res.alertas.map(function(a){ return '<span class="alerta">⚠ '+esc(a)+'</span>'; }).join('<br>');
+            iaf.style.display = 'block';
+          }
+          estado(r, '✓ Flash listo — revísalo y ajústalo antes de enviar.', 'ok');
+          return;
+        }
         document.getElementById('txt-'+r).value = res.comentario || '';
         (res.criterios||[]).forEach(function(c){
           var row = document.querySelector('#card-'+r+' .crit[data-clave="'+c.clave+'"]');
@@ -308,6 +350,25 @@
       })
       .withFailureHandler(function(err){ estado(r, '⚠ '+esc(err.message||err), 'err'); })
       .generarBorradorIA(TOKEN, r);
+  }
+
+  function enviarFlash(r){
+    var comentario = document.getElementById('txt-'+r).value.trim();
+    if(!comentario){ estado(r, '⚠ Escribe o genera el Flash Feedback antes de enviar.', 'err'); return; }
+    var ind = [];
+    document.querySelectorAll('#card-'+r+' .fcrit').forEach(function(row){
+      ind.push({ clave: row.getAttribute('data-clave'), nivel: row.querySelector('.fn').value, nota: row.querySelector('.nota').value });
+    });
+    if(ind.some(function(i){ return !i.nivel; })){ estado(r, '⚠ Elige un nivel para cada criterio.', 'err'); return; }
+    if(!confirm('¿Enviar este Flash Feedback al estudiante por correo?')) return;
+    estado(r, '<span class="spin"></span> Enviando…');
+    google.script.run
+      .withSuccessHandler(function(res){
+        estado(r, '✓ Flash enviado a '+esc(res.destinatario)+' ('+esc(res.enviadoEn)+')', 'ok');
+        var pill = document.querySelector('#card-'+r+' .pill'); pill.className='pill done'; pill.textContent='⚡ Flash enviado';
+      })
+      .withFailureHandler(function(err){ estado(r, '⚠ '+esc(err.message||err), 'err'); })
+      .enviarFeedback(TOKEN, { recibo:r, comentario:comentario, indicadores:ind, mejoras:leerMejoras(r) });
   }
 
   function enviar(r){

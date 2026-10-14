@@ -165,7 +165,7 @@ Todo lo anterior (Sprints 01 y 02) funciona igual.
 
 | Exp | Qué es | Qué haces en el panel |
 |---|---|---|
-| 901–904 | Entregables 1 a 4 | Solo lectura; se evalúan juntos en el cierre |
+| 901–904 | Entregables 1 a 4 | Envías un **⚡ Flash Feedback** (orientación breve, no califica): nivel por criterio —En buen camino / Ajustar / Replantear—, comentario de máx. 5 frases y, si aporta, una mejora. La IA lo redacta como borrador con la clave (sin revelarla). La calificación se emite una sola vez, en el cierre |
 | 905 | Cierre y solicitud de calificación | **Aquí evalúas**: rúbrica de 7 criterios ponderados, veredicto y envío del resultado |
 | 990 | Mesa de consultas | «Responder consulta»: la respuesta le llega al estudiante por correo |
 

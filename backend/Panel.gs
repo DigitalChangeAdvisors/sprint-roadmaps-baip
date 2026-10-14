@@ -60,6 +60,11 @@ const ETIQUETAS_AUDICION = {
   '990': ['Tipo de consulta', 'Consulta', ''],
 };
 const VEREDICTOS = ['aprobado', 'aplazado', 'rechazado'];
+// Flash Feedback: retroalimentación breve tras cada entregable (901–904). No califica; orienta.
+const FLASH_EXPS = ['901', '902', '903', '904'];
+const FLASH_CRITERIOS = { '901': ['c1', 'c2'], '902': ['c1', 'c2'], '903': ['c3', 'c5', 'c7'], '904': ['c4', 'c6', 'c7'] };
+const FLASH_NIVELES = ['buen_camino', 'ajustar', 'replantear'];
+const FLASH_ROT = { buen_camino: 'En buen camino', ajustar: 'Ajustar', replantear: 'Replantear' };
 function _rubricaPara(instrumento) { return instrumento === INSTRUMENTO_AUDICION ? RUBRICA_AUDICION : RUBRICA; }
 function _claveAudicion() {
   const props = PropertiesService.getScriptProperties();
@@ -178,6 +183,8 @@ function _todasEntregas() {
       esAudicion: esAud,
       esConsulta: esAud && exp === '990',
       esCierre: esAud && exp === '905',
+      esFlash: esAud && FLASH_EXPS.indexOf(exp) !== -1,
+      criteriosFlash: (esAud && FLASH_CRITERIOS[exp]) ? RUBRICA_AUDICION.filter(r => FLASH_CRITERIOS[exp].indexOf(r.clave) !== -1).map(r => ({ clave: r.clave, titulo: r.titulo })) : [],
       rubrica: _rubricaPara(instr),
       veredicto: String(g('Veredicto') || ''),
       fila: k + 2,
@@ -219,6 +226,7 @@ function generarBorradorIA(token, recibo) {
   const e = _buscarEntrega(recibo);
   if (!e) throw new Error('No se encontró la entrega ' + recibo + '.');
   if (e.esConsulta) throw new Error('Esto es una consulta: usa «Responder consulta», no el borrador de evaluación.');
+  if (e.esFlash) return _borradorFlash(e);
   if (e.esAudicion) {
     if (!e.esCierre) throw new Error('La audición se evalúa sobre la entrega de CIERRE (905), que reúne los cuatro entregables.');
     return _borradorAudicion(e);
@@ -369,6 +377,7 @@ function enviarFeedback(token, payload) {
   if (!payload.comentario || !payload.comentario.trim()) throw new Error('El comentario de feedback está vacío.');
 
   if (e.esConsulta) throw new Error('Esto es una consulta: usa «Responder consulta».');
+  if (e.esFlash) return _enviarFlash(e, payload);
   if (e.esAudicion) return _enviarResultadoAudicion(e, payload);
 
   const criterios = (payload.criterios || []).map(c => {
@@ -700,4 +709,137 @@ function responderConsulta(token, payload) {
   set('FeedbackEnviadoEn', new Date());
   set('FeedbackPor', facilitadorActual());
   return { ok: true, enviadoEn: Utilities.formatDate(new Date(), 'America/Bogota', 'd MMM yyyy · HH:mm'), destinatario: e.email };
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  FLASH FEEDBACK · retroalimentación breve tras cada entregable (901–904)
+//  Orienta, no califica. La calificación se emite una sola vez, sobre el cierre (905).
+// ═══════════════════════════════════════════════════════════════════════════
+
+function _borradorFlash(e) {
+  const clave = _claveAudicion();
+  if (!clave) throw new Error('Falta la clave de la audición (CLAVE_AUDICION_1, 2, 3, 4) en las Propiedades del script.');
+  const claves = FLASH_CRITERIOS[e.exp];
+  const crit = RUBRICA_AUDICION.filter(r => claves.indexOf(r.clave) !== -1);
+  const criteriosTxt = crit.map(r => `- ${r.clave}: ${r.titulo} — ${r.descripcion}`).join('\n');
+
+  // Contexto: entregables previos del mismo estudiante (para juzgar coherencia entre ellos).
+  const porExp = _entregasDelEstudiante(e.email, INSTRUMENTO_AUDICION);
+  let previos = '';
+  FLASH_EXPS.filter(k => k < e.exp).forEach(k => {
+    const x = porExp[k];
+    previos += '\n\n---- ENTREGABLE PREVIO ' + k + ' ----\n' + (x ? x.campos.map(c => '### ' + c.etq + '\n' + c.val).join('\n\n') : '(NO ENTREGADO)');
+  });
+  const actual = e.campos.map(c => '### ' + c.etq + '\n' + c.val).join('\n\n');
+
+  const system =
+    'Eres el asistente del único evaluador de la audición Analista BAIP de la Digital Change Academy. ' +
+    'Preparas un FLASH FEEDBACK: una retroalimentación breve, formativa y NO calificada que el estudiante recibe tras cada entregable para orientar el siguiente. ' +
+    'Usas la CLAVE MAESTRA solo para juzgar el trabajo; NUNCA la reveles ni nombres el keystone correcto ni los errores del borrador por su número. ' +
+    'Orienta señalando qué tipo de error o vacío ves y qué evidencia del caso debe reconsiderar, sin darle la respuesta. ' +
+    'Voz consultiva en tuteo, directa, sin adular, máximo 5 frases en el comentario. ' +
+    'Por cada criterio indica un nivel: «buen_camino» (va bien, sigue así), «ajustar» (hay vacíos corregibles) o «replantear» (la lectura central no se sostiene con la evidencia). ' +
+    'Registra en «alertas» (solo para el evaluador) cualquier señal de autoría dudosa, incoherencia con entregables previos o contenido ausente.';
+  const usuario =
+    'ESTUDIANTE: ' + e.nombre + ' · Cohorte ' + e.cohorte + '\n' +
+    'ENTREGABLE: ' + e.experimento + '\n\n' +
+    'CRITERIOS QUE SE ORIENTAN EN ESTE FLASH:\n' + criteriosTxt + '\n\n' +
+    '=== CLAVE MAESTRA (CONFIDENCIAL, solo para ti) ===\n' + clave + '\n=== FIN DE LA CLAVE ===\n\n' +
+    'ENTREGABLE A ORIENTAR:\n' + actual + '\n' + (previos ? '\nCONTEXTO (entregables previos):' + previos : '') + '\n\n' +
+    'Devuelve: un nivel y una nota breve por criterio; un comentario flash de máximo 5 frases; alertas para el evaluador; y, si aporta, UNA sola mejora con foco, ejemplo y porque (sin revelar la respuesta correcta).';
+
+  const schema = {
+    type: 'object', additionalProperties: false,
+    properties: {
+      indicadores: { type: 'array', items: { type: 'object', additionalProperties: false,
+        properties: { clave: { type: 'string', enum: claves }, nivel: { type: 'string', enum: FLASH_NIVELES }, nota: { type: 'string' } },
+        required: ['clave', 'nivel', 'nota'] } },
+      comentario: { type: 'string' },
+      alertas: { type: 'array', items: { type: 'string' } },
+      mejoras: { type: 'array', items: { type: 'object', additionalProperties: false,
+        properties: { foco: { type: 'string' }, ejemplo: { type: 'string' }, porque: { type: 'string' } },
+        required: ['foco', 'ejemplo', 'porque'] } },
+    },
+    required: ['indicadores', 'comentario', 'alertas', 'mejoras'],
+  };
+  const out = _llamarClaude(system, usuario, schema);
+  const porClave = {};
+  (out.indicadores || []).forEach(i => { porClave[i.clave] = i; });
+  const indicadores = crit.map(r => ({ clave: r.clave, titulo: r.titulo,
+    nivel: (porClave[r.clave] && porClave[r.clave].nivel) || 'ajustar', nota: (porClave[r.clave] && porClave[r.clave].nota) || '' }));
+  const mejoras = (out.mejoras || []).slice(0, 1)
+    .map(m => ({ foco: String((m && m.foco) || ''), ejemplo: String((m && m.ejemplo) || ''), porque: String((m && m.porque) || '') }))
+    .filter(m => m.foco || m.ejemplo);
+  return { flash: true, indicadores: indicadores, comentario: out.comentario || '', mejoras: mejoras, alertas: out.alertas || [] };
+}
+
+function _enviarFlash(e, payload) {
+  const comentario = String((payload && payload.comentario) || '').trim();
+  if (!comentario) throw new Error('El comentario del Flash Feedback está vacío.');
+  const claves = FLASH_CRITERIOS[e.exp] || [];
+  const indicadores = claves.map(k => {
+    const def = RUBRICA_AUDICION.find(r => r.clave === k);
+    const x = (payload.indicadores || []).find(i => i.clave === k) || {};
+    const nivel = FLASH_NIVELES.indexOf(x.nivel) !== -1 ? x.nivel : '';
+    return { clave: k, titulo: def.titulo, nivel: nivel, nota: String(x.nota || '') };
+  });
+  if (indicadores.some(i => !i.nivel)) throw new Error('Elige un nivel para cada criterio del Flash Feedback.');
+  const mejoras = (payload.mejoras || [])
+    .map(m => ({ foco: String((m && m.foco) || '').trim(), ejemplo: String((m && m.ejemplo) || '').trim(), porque: String((m && m.porque) || '').trim() }))
+    .filter(m => m.foco || m.ejemplo);
+
+  _correoFlash(e, indicadores, comentario, mejoras);
+
+  const hoja = _hojaEnvios();
+  const set = (header, val) => hoja.getRange(e.fila, _asegurarColumna(hoja, header)).setValue(val);
+  set('RubricaJSON', JSON.stringify(indicadores));
+  set('FeedbackTexto', comentario);
+  set('MejorasJSON', JSON.stringify(mejoras));
+  set('FeedbackEnviadoEn', new Date());
+  set('FeedbackPor', facilitadorActual());
+  set('Veredicto', 'flash');
+  return { ok: true, enviadoEn: Utilities.formatDate(new Date(), 'America/Bogota', 'd MMM yyyy · HH:mm'), destinatario: e.email };
+}
+
+function _correoFlash(e, indicadores, comentario, mejoras) {
+  const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const primerNombre = (e.nombre || '').split(' ')[0] || 'Hola';
+  const colores = { buen_camino: MARCA.teal, ajustar: MARCA.oro, replantear: '#c2593f' };
+  const num = Number(e.exp) - 900;
+  const siguiente = num < 4 ? ('Sigue con el Entregable ' + (num + 1) + '.') : 'Sigue con el cierre y la solicitud de calificación final.';
+  const filas = indicadores.map(i => `
+    <tr>
+      <td style="padding:6px 10px;border-bottom:1px solid #eee">${esc(i.titulo)}</td>
+      <td style="padding:6px 10px;border-bottom:1px solid #eee;text-align:center"><span style="background:${colores[i.nivel]};color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:12px;white-space:nowrap">${esc(FLASH_ROT[i.nivel])}</span></td>
+      <td style="padding:6px 10px;border-bottom:1px solid #eee;color:${MARCA.gris};font-size:12px">${esc(i.nota)}</td>
+    </tr>`).join('');
+  const guia = (mejoras && mejoras.length) ? mejoras.map(m => `
+    <div style="border-left:3px solid ${MARCA.oro};padding:2px 0 2px 12px;margin-top:14px">
+      ${m.foco ? `<div style="font-weight:700;font-size:13px">${esc(m.foco)}</div>` : ''}
+      ${m.ejemplo ? `<div style="background:${MARCA.platino};border-radius:6px;padding:10px 12px;margin-top:6px;font-size:13px;line-height:1.6">${esc(m.ejemplo).replace(/\n/g, '<br>')}</div>` : ''}
+      ${m.porque ? `<div style="font-size:12px;color:${MARCA.gris};margin-top:6px"><b style="color:${MARCA.carbon}">Por qué funciona:</b> ${esc(m.porque)}</div>` : ''}
+    </div>`).join('') : '';
+  const cuerpo = `
+    <div style="font-family:Helvetica,Arial,sans-serif;color:${MARCA.carbon};max-width:620px">
+      <div style="background:${MARCA.carbon};padding:14px 18px">
+        <div style="color:${MARCA.oro};font-size:11px;letter-spacing:.14em;font-weight:700">DIGITAL CHANGE ACADEMY · AUDICIÓN DE CERTIFICACIÓN</div>
+        <div style="color:#fff;font-size:19px;margin-top:4px;font-family:Georgia,serif">⚡ Flash Feedback · Entregable ${num}</div>
+      </div>
+      <div style="background:${MARCA.oro};color:#fff;padding:8px 18px;font-size:13px">Orientación breve para tu siguiente paso. No es una calificación.</div>
+      <div style="padding:18px">
+        <p style="font-size:15px">Hola ${esc(primerNombre)},</p>
+        <p style="font-size:14px;line-height:1.7">${esc(comentario).replace(/\n/g, '<br>')}</p>
+        <table style="border-collapse:collapse;width:100%;margin-top:12px;font-size:13px">
+          <tr style="background:${MARCA.platino}"><th style="text-align:left;padding:6px 10px">Criterio</th><th style="padding:6px 10px">Nivel</th><th style="text-align:left;padding:6px 10px">Orientación</th></tr>
+          ${filas}
+        </table>
+        ${guia}
+        <p style="font-size:13px;margin-top:16px"><b>${esc(siguiente)}</b> Puedes reenviar una versión corregida de este entregable mientras la ventana esté abierta.</p>
+        <p style="font-size:12px;color:${MARCA.gris};border-top:2px solid ${MARCA.oro};padding-top:10px;margin-top:14px">Puedes responder este correo o usar la Mesa de consultas.<br>Digital Change Advisors · Modelo ARIA</p>
+      </div>
+    </div>`;
+  GmailApp.sendEmail(e.email, '⚡ Flash Feedback · Entregable ' + num + ' · Audición de certificación', 'Ver el mensaje en HTML.', {
+    name: CONFIG.REMITENTE, htmlBody: cuerpo, replyTo: CONFIG.MAIL_FACILITADOR, cc: CONFIG.MAIL_COPIA || undefined,
+  });
 }
