@@ -274,7 +274,7 @@ function escribirFila(hoja, d, recibo, hash, reenvio, e) {
   const total = d.campos.reduce((s, c) => s + String(c.value || '').length, 0);
   const llenos = d.campos.filter(c => String(c.value || '').trim()).length;
 
-  hoja.appendRow([
+  const valores = [
     new Date(),
     recibo,
     d.instrumento || 'sprint-01-baip',
@@ -289,7 +289,16 @@ function escribirFila(hoja, d, recibo, hash, reenvio, e) {
     hash,
     (d.meta && d.meta.userAgent) || '',
     (e && e.parameter && e.parameter.origen) || (d.meta && d.meta.origen) || '',
-  ]);
+  ];
+
+  // Las columnas de texto del estudiante se escriben con formato «texto plano». Si no, Sheets interpreta
+  // como FÓRMULA cualquier respuesta que empiece por «=», «+», «-» o «@» y la guarda como #ERROR!
+  // (así se perdió el S7 de una estudiante del Sprint 02). Con formato de texto, el contenido queda literal.
+  const fila = hoja.getLastRow() + 1;
+  const c0 = COLUMNAS.indexOf('ExperimentoNombre') + 1;
+  const c1 = COLUMNAS.indexOf('Observaciones') + 1;
+  hoja.getRange(fila, c0, 1, c1 - c0 + 1).setNumberFormat('@');
+  hoja.getRange(fila, 1, 1, valores.length).setValues([valores]);
 }
 
 /**
