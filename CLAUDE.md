@@ -198,6 +198,8 @@ ahora fallan con error visible; `d.instrumento || 'sprint-01-baip'` → se recha
 backend → rechazado; `ORIGENES_VALIDOS` (config inerte que simulaba protección) → eliminado; `version: '1.1'` → `VERSION_MOTOR`;
 «Hola Hola,» sin nombre → «Hola,».
 Favicon de DCA en el Panel (`setFaviconUrl`, desplegado 2026-10-19): Apps Script muestra el suyo si no se fija.
+**No** añadir `?v=…` a `FAVICON_URL`: `setFaviconUrl` lanza «No se admite el tipo de imagen de ícono de página» y el Panel entero muestra una página de error
+(incidente 2026-10-19, implementación @17, revertido en @18). Para forzar el refresco en los navegadores, usar un archivo con otro nombre.
 **Pendientes de decisión (zona protegida):** `saveField`/`localStorage.setItem` sin `try/catch` (si el navegador bloquea el almacenamiento el
 autosave falla en silencio y el aviso «tu trabajo está a salvo» deja de ser cierto); `enviarFeedback` de sprints acepta criterios sin
 calificar (`Number(...)||0`) a diferencia de la audición; `FeedbackPor` queda vacío con acceso por clave.

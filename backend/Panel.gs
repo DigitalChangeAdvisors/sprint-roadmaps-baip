@@ -12,7 +12,7 @@
 
 // Favicon de DCA para las pestañas del navegador (Apps Script muestra el suyo si no se fija uno).
 // Debe ser una URL https pública; el sitio ya sirve este archivo para las demás páginas.
-const FAVICON_URL = 'https://digitalchangeadvisors.com/assets/favicon.png?v=20261019';
+const FAVICON_URL = 'https://digitalchangeadvisors.com/assets/favicon.png';
 
 // Facilitadores autorizados a abrir el panel y enviar feedback.
 // Para varios facilitadores con cuentas distintas, ver README-panel-facilitador.md.
