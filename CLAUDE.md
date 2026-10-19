@@ -207,4 +207,4 @@ calificar (`Number(...)||0`) a diferencia de la audición; `FeedbackPor` queda v
 - Modelo de IA fijo en `Panel.gs` (`claude-sonnet-5`): moverlo a propiedad `MODELO_IA`.
 - Correos (`MAIL_FACILITADOR`, `MAIL_COPIA`, `FACILITADORES`) y `facilitador@…` en mensajes de error de los HTML.
 - Rúbrica en 3 sitios (ver Audición); `AUDICION_ORDEN.nombres` y `EXPERIMENTOS` duplican nombres que ya envía el HTML.
-- `apps-script/` (SPEC + `Code.gs` + `sync.client.js`) es un andamiaje con `TODO` que ningún HTML usa: implementar o archivar.
+- ~~`apps-script/` (SPEC + `Code.gs` + `sync.client.js`) es un andamiaje con `TODO` que ningún HTML usa~~ — **archivado 2026-10-19** en `_archivo/apps-script-backend-nextgen-sin-integrar/` (ver su README-ARCHIVO.md).

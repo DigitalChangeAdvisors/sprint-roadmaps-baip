@@ -1,0 +1,7 @@
+**/node_modules/**
+**/.git/**
+.clasp.json
+.claspignore
+.deployment-id
+deploy.sh
+README*.md
