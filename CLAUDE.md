@@ -172,7 +172,13 @@ Producción = monorepo `Presencia Digital DCA` → `./deploy.sh website` (force-
 2. Copiar, commit, `git push origin main`, `./deploy.sh website`, verificar en vivo (el `.md` y los `*-vN.html` los quita el script).
 3. **Apps Script (motor + Panel) NO se despliega desde aquí**: no hay `.clasp.json`. Se pega `Codigo.gs`, `Panel.gs` y `PanelUI.html` en el
    editor y se usa «Administrar implementaciones → editar la existente» (nunca «Nueva implementación»: cambia la URL `/exec` que está
-   incrustada en los HTML). Pendiente de pegar: versión `2026-10-19` (ver abajo).
+   incrustada en los HTML). Pendiente de pegar: versión `2026-10-19` (ver abajo). Intentado `clasp pull` con el scriptId del Panel (auditoría
+   2026-10-19 en otra sesión): falla con `invalid_rapt` — la cuenta de clasp necesita `clasp login` interactivo; no es automatizable desde
+   una sesión sin navegador.
+4. **Riesgo bidireccional (detectado y corregido 2026-10-19):** alguien editó `centro-baip.html` directamente en el espejo del monorepo
+   (`website/centro-baip/index.html`, ya publicado) sin devolver el cambio a este repo fuente — quedó 9 preguntas de FAQ atrás sin que
+   `deploy.sh` lo detectara (el monorepo sí estaba commiteado; el desajuste era solo entre este repo y el monorepo). Si se edita el espejo
+   directamente, copiar el archivo de vuelta aquí y commitear también en este repo — es la autoridad, el monorepo es solo espejo de publicación.
 
 ## Fallbacks — inventario (auditoría 2026-10-19)
 **Deliberados (no tocar sin decisión):** `nombreExp` (expNombre → mapa S01 → genérico); etiquetas de sprint/recibo (`etiquetaSprint`,
