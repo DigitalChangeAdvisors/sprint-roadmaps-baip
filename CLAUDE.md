@@ -26,6 +26,7 @@ Cada archivo es un Sprint Roadmap autónomo (CSS + JS inline, sin deps).
 - SAVE_KEY
 - **Motor de envío** (submitExp, collectPayload, validarEnvio, alerta, markSent) y **printExp** (PDF)
 - **Panel de Facilitador** (backend/Panel.gs, backend/PanelUI.html): gate por `PANEL_KEY`, funciones `listarEntregas`/`generarBorradorIA`/`enviarFeedback`, y el HTML debe llamarse `PanelUI`
+- *Excepción documentada (2026-10-19):* por instrucción explícita se corrigieron en `generarBorradorIA` los defaults que fabricaban datos (`|| 3`, `|| 'ajustar'`). Cualquier otro cambio en esas zonas sigue requiriendo petición expresa.
 
 ## Motor de envío + PDF + backend (canónico 2026-07-16)
 El botón «Enviar» realiza un envío REAL vía `fetch` a un Google Apps Script (`backend/Codigo.gs`),
@@ -33,6 +34,8 @@ que registra en Sheets, genera un PDF de marca y despacha correo al facilitador 
 estudiante), devolviendo un recibo. La confirmación «✓ Enviado» **solo** se muestra con recibo del
 servidor — nunca por optimismo. `printExp()` genera un PDF con el contenido íntegro (no `window.print()`
 sobre el formulario, que recorta). Campo `sf-email` en portada es obligatorio.
+
+**Ojo:** `sprint-roadmap-01-baip.html` es anterior al patrón: usa `const ENDPOINT` y el literal `instrumento: 'sprint-01-baip'` en `collectPayload`, y no tiene la guarda `PEGA_AQUI`. S02 y la audición sí usan `INSTRUMENT`.
 
 **Diseño genérico multi-sprint:** cada roadmap solo cambia 4 cosas — `const INSTRUMENT {id, sprintLabel,
 endpoint}`, `SAVE_KEY`, `expNames`, `EXP_FIELDS`. El motor es idéntico en todos. El backend es único para
@@ -144,3 +147,53 @@ El subdominio temporal `srbaip01` quedó retirado (CNAME del repo eliminado; pen
 Certificación: Analista BAIP | Instrumentos: AIMT · AILS · AICD
 
 OBSOLETOS: Analista BDP · DMT · DLS · DCD
+
+## Audición de Certificación (nombre canónico: «Certificación Analista BAIP»)
+Prueba final individual sobre el caso sintético Vertecsa Group. El nombre de la certificación es **«Certificación Analista BAIP»**
+(no «Champions ReturnAI», que es otro rol: quien mide en el cliente). Corregido en el kit el 2026-10-19.
+- Instrumento `audicion-baip`; ids 901–904 (entregables), 905 (cierre), 990 (Mesa de consultas). HTML: `audicion-certificacion-baip.html`
+  (producción, página no listada: `/audicion-baip-m4q7z/`).
+- Kit en `Audición de Certificación/` (v1 y `v2/`), **ignorado por git** (incluye la clave maestra: nunca publicar). La clave del Panel va
+  troceada en propiedades `CLAVE_AUDICION_1…n` (ver `Audición de Certificación/clave_para_el_panel/LEEME…`).
+- Orden secuencial verificado en servidor (`verificarOrdenAudicion`). Flash Feedback tras cada entregable; calificación única en semana 3.
+- **Rúbrica de 7 criterios y pesos (35/30/12/8/7/4/4) vive duplicada en 3 sitios: `RUBRICA_AUDICION` (Panel.gs), el HTML de la audición y
+  el Centro de Ayuda.** Si cambia, cambiar los tres. Verificado consistente el 2026-10-19.
+
+## Centro de Ayuda (`centro-baip.html`)
+Datos en `const FAQ` (JS dentro del HTML); cada entrada es un ítem de acordeón. Se ordena por `actualizado` descendente (más reciente primero),
+con «Nuevo» durante 14 días. Sección «Cómo se evalúa: los siete criterios» (9 entradas `audicion-criterio*`, 2026-10-19).
+Deuda conocida: el acordeón es un `div` con `onclick`, sin `tabindex`/`role`/aria → no se opera con teclado.
+
+## Despliegue (canónico)
+Producción = monorepo `Presencia Digital DCA` → `./deploy.sh website` (force-push a `dca-website`). Las fuentes de este repo se copian a
+`website/<carpeta>/index.html` (centro-baip, sprint-roadmap-01/02-baip, audicion-baip-m4q7z, expediente-modelo-nexforma-r8k2x).
+1. `git pull --ff-only` en el monorepo **antes de todo** (2026-10-19: el clon del Mac Mini estaba 56 commits atrás; publicar así habría
+   pisado en producción el trabajo del MacBook Pro).
+2. Copiar, commit, `git push origin main`, `./deploy.sh website`, verificar en vivo (el `.md` y los `*-vN.html` los quita el script).
+3. **Apps Script (motor + Panel) NO se despliega desde aquí**: no hay `.clasp.json`. Se pega `Codigo.gs`, `Panel.gs` y `PanelUI.html` en el
+   editor y se usa «Administrar implementaciones → editar la existente» (nunca «Nueva implementación»: cambia la URL `/exec` que está
+   incrustada en los HTML). Pendiente de pegar: versión `2026-10-19` (ver abajo).
+
+## Fallbacks — inventario (auditoría 2026-10-19)
+**Deliberados (no tocar sin decisión):** `nombreExp` (expNombre → mapa S01 → genérico); etiquetas de sprint/recibo (`etiquetaSprint`,
+`etiquetaCorta`, sprint `'00'`); copia de respaldo `MAIL_COPIA`; registro en la Hoja *antes* del correo; `registrarError` silencioso;
+reintentos a la API de Claude solo en 429/5xx (3 reintentos); centinelas `(sin nombre/cohorte/empresa/correo/respuesta)` en los HTML,
+bloqueados por `validarEnvio` y ahora también por el backend; guarda `PEGA_AQUI` (no envía si el endpoint no está configurado);
+`getData()` → `{}` si falla `localStorage`; sin recibo del servidor no hay «Enviado» (botón «Reintentar» + PDF manual); gate del Panel
+fail-closed (`PANEL_KEY` o cuenta de facilitador); `facilitadorActual()` vacío con despliegue «Cualquier persona» (limitación de Apps
+Script; deja `FeedbackPor` vacío); filtros/orden del Centro de Ayuda.
+**Corregidos el 2026-10-19 (repo; pendientes de pegar en Apps Script):** `|| 3` en el borrador de IA (2 sitios) y `|| 'ajustar'` en Flash →
+ahora fallan con error visible; `d.instrumento || 'sprint-01-baip'` → se rechaza el envío sin instrumento; `(sin …)` aceptado por el
+backend → rechazado; `ORIGENES_VALIDOS` (config inerte que simulaba protección) → eliminado; `version: '1.1'` → `VERSION_MOTOR`;
+«Hola Hola,» sin nombre → «Hola,».
+**Pendientes de decisión (zona protegida):** `saveField`/`localStorage.setItem` sin `try/catch` (si el navegador bloquea el almacenamiento el
+autosave falla en silencio y el aviso «tu trabajo está a salvo» deja de ser cierto); `enviarFeedback` de sprints acepta criterios sin
+calificar (`Number(...)||0`) a diferencia de la audición; `FeedbackPor` queda vacío con acceso por clave.
+
+## Hardcodeados que conviene resolver
+- Endpoint `/exec` copiado en 3 HTML (S01, S02, audición): seguro mientras se edite la implementación existente; centralizar exige romper
+  la regla «HTML autónomo».
+- Modelo de IA fijo en `Panel.gs` (`claude-sonnet-5`): moverlo a propiedad `MODELO_IA`.
+- Correos (`MAIL_FACILITADOR`, `MAIL_COPIA`, `FACILITADORES`) y `facilitador@…` en mensajes de error de los HTML.
+- Rúbrica en 3 sitios (ver Audición); `AUDICION_ORDEN.nombres` y `EXPERIMENTOS` duplican nombres que ya envía el HTML.
+- `apps-script/` (SPEC + `Code.gs` + `sync.client.js`) es un andamiaje con `TODO` que ningún HTML usa: implementar o archivar.

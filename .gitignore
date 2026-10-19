@@ -8,3 +8,7 @@ Audición de Certificación/
 sintesis-*.md
 Preguntas_Detonantes_Afinadas_*.docx
 DCA · Registro Sprint Roadmaps BAIP*.csv
+
+# Basura del sistema y archivos de bloqueo de Office
+.DS_Store
+~$*
