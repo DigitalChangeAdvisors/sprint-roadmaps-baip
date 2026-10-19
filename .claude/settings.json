@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./deploy.sh check)",
+      "Bash(./deploy.sh push)",
+      "Bash(./deploy.sh deploy)",
+      "Bash(cd backend && ./deploy.sh check)",
+      "Bash(cd backend && ./deploy.sh push)",
+      "Bash(cd backend && ./deploy.sh deploy)",
+      "Bash(clasp deployments:*)",
+      "Bash(clasp status:*)",
+      "Bash(clasp push:*)",
+      "Bash(clasp deploy:*)",
+      "Bash(clasp versions:*)"
+    ]
+  }
+}

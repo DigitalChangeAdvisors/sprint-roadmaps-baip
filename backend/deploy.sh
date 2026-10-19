@@ -46,9 +46,14 @@ guard_clasp() {
     say "✋ ABORTADO: falta backend/.clasp.json (scriptId del proyecto). Ver README-despliegue.md."
     exit 1
   fi
-  if ! clasp status >/dev/null 2>&1; then
-    say "✋ ABORTADO: clasp no puede leer el proyecto — probablemente falta sesión."
+  # `clasp status` es local y NO prueba la sesión (daba «autenticado» con la sesión caducada). `clasp deployments`
+  # sí llama a la API de Apps Script, así que falla de verdad si la sesión expiró (invalid_rapt / invalid_grant).
+  local salida
+  if ! salida="$(clasp deployments 2>&1)"; then
+    say "✋ ABORTADO: la sesión de clasp caducó o no existe."
     say "   Corre: clasp login   (abre el navegador; inicia sesión con la cuenta de Google de DCA)"
+    say "   Detalle: $(printf '%s' "$salida" | head -c 200)"
+    say "   Para que no vuelva a caducar, ver «Sesión de clasp» en README-despliegue.md."
     exit 1
   fi
 }

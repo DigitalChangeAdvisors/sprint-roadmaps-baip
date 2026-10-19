@@ -170,3 +170,24 @@ y el contenido que llegó. Nada falla en silencio.
 
 **¿Puedo cambiar el correo del facilitador?** Sí: en el bloque `CONFIG`, arriba del
 archivo `Codigo.gs`. Luego vuelve a implementar (ver arriba).
+
+---
+
+## Despliegue con clasp (canónico desde 2026-10-19)
+
+No se pega código a mano. Desde `backend/`:
+
+```
+./deploy.sh check     # solo lectura: sesión, scriptId y versión local vs en vivo
+./deploy.sh deploy    # clasp push + actualiza la implementación existente (la URL /exec no cambia)
+```
+
+`VERSION_MOTOR` (en `Codigo.gs`) es lo que compara el `check`. **Súbela en cada cambio** (`AAAA-MM-DD.n`): si dos cambios del mismo
+día llevan el mismo valor, el `check` dice «coinciden» aunque haya código sin desplegar.
+
+### Sesión de clasp
+`clasp login` abre el navegador una sola vez por máquina. Si el despliegue falla con `invalid_rapt`, no es un error del código: Google
+Workspace exige volver a iniciar sesión cada cierto tiempo para las aplicaciones que usan permisos de Google Cloud (como clasp).
+Para que no vuelva a ocurrir, un administrador de Workspace debe ir a **admin.google.com → Seguridad → Control de acceso y datos →
+Control de sesión de Google Cloud** y elegir **«No pedir nunca la reautenticación»** (o un plazo largo) para la unidad organizativa de la
+cuenta que administra el script. Mientras no se cambie, hay que repetir `clasp login` cuando caduque.

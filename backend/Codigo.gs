@@ -51,7 +51,7 @@ const CONFIG = {
 };
 
 // Versión lógica del motor (fecha del último cambio de código). Actualízala al modificar Codigo.gs o Panel.gs.
-const VERSION_MOTOR = '2026-10-19';
+const VERSION_MOTOR = '2026-10-19.2';
 
 // Paleta de marca DCA — debe coincidir con el brandbook.
 const MARCA = {
