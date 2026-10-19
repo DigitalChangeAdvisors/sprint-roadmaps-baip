@@ -197,6 +197,7 @@ Script; deja `FeedbackPor` vacío); filtros/orden del Centro de Ayuda.
 ahora fallan con error visible; `d.instrumento || 'sprint-01-baip'` → se rechaza el envío sin instrumento; `(sin …)` aceptado por el
 backend → rechazado; `ORIGENES_VALIDOS` (config inerte que simulaba protección) → eliminado; `version: '1.1'` → `VERSION_MOTOR`;
 «Hola Hola,» sin nombre → «Hola,».
+Favicon de DCA en el Panel (`setFaviconUrl`, 2026-10-19; también pendiente de pegar): Apps Script muestra el suyo si no se fija.
 **Pendientes de decisión (zona protegida):** `saveField`/`localStorage.setItem` sin `try/catch` (si el navegador bloquea el almacenamiento el
 autosave falla en silencio y el aviso «tu trabajo está a salvo» deja de ser cierto); `enviarFeedback` de sprints acepta criterios sin
 calificar (`Number(...)||0`) a diferencia de la audición; `FeedbackPor` queda vacío con acceso por clave.

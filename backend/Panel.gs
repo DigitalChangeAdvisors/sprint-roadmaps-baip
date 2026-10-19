@@ -10,6 +10,10 @@
  * ═══════════════════════════════════════════════════════════════════════════
  */
 
+// Favicon de DCA para las pestañas del navegador (Apps Script muestra el suyo si no se fija uno).
+// Debe ser una URL https pública; el sitio ya sirve este archivo para las demás páginas.
+const FAVICON_URL = 'https://digitalchangeadvisors.com/assets/favicon.png';
+
 // Facilitadores autorizados a abrir el panel y enviar feedback.
 // Para varios facilitadores con cuentas distintas, ver README-panel-facilitador.md.
 const FACILITADORES = [
@@ -145,7 +149,7 @@ function servirPanel(e) {
         : '<p>Aún no has configurado la clave del panel. Añade la propiedad de script ' +
           '<b>PANEL_KEY</b> y abre el enlace con <code>?panel=1&amp;key=TU_CLAVE</code>.</p>') +
       '</div>'
-    ).setTitle('DCA · Panel de Facilitador');
+    ).setTitle('DCA · Panel de Facilitador').setFaviconUrl(FAVICON_URL);
   }
   const t = HtmlService.createTemplateFromFile('PanelUI');
   t.email = facilitadorActual() || 'facilitador';
@@ -153,6 +157,7 @@ function servirPanel(e) {
   t.token = token; // el cliente lo reenvía en cada llamada al servidor
   return t.evaluate()
     .setTitle('DCA · Panel de Facilitador')
+    .setFaviconUrl(FAVICON_URL)
     .addMetaTag('viewport', 'width=device-width, initial-scale=1');
 }
 
