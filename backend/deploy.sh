@@ -38,7 +38,7 @@ version_local() {
 }
 
 version_en_vivo() {
-  curl -s --max-time 15 "$ENDPOINT" | grep -oE '"version"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*"\([^"]*\)"$/\1/' || true
+  curl -s -L --max-time 20 "$ENDPOINT" | grep -oE '"version"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*"\([^"]*\)"$/\1/' || true
 }
 
 guard_clasp() {
