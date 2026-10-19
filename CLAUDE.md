@@ -155,6 +155,11 @@ Prueba final individual sobre el caso sintético Vertecsa Group. El nombre de la
   (producción, página no listada: `/audicion-baip-m4q7z/`).
 - Kit en `Audición de Certificación/` (v1 y `v2/`), **ignorado por git** (incluye la clave maestra: nunca publicar). La clave del Panel va
   troceada en propiedades `CLAVE_AUDICION_1…n` (ver `Audición de Certificación/clave_para_el_panel/LEEME…`).
+- Documentos descargables (`/audicion-baip-m4q7z/docs/`): solo 01–05 (01–04 `_v2`; el 05 se llama `Vertecsa_05_Borrador_Reporte_BAIP.docx`, sin
+  «Senuelo» ni «v2», para no delatar el diseño). El 06 (Manuales del facilitador) y el 07 (Clave maestra) **nunca** se publican.
+  Verificación de enlaces: descargar cada `href` con `download`, comparar hash con `Audición de Certificación/v2/` y abrir como zip. Nota:
+  Cloudflare responde 403 al User-Agent por defecto de Python; usar cabecera de navegador o curl. Un archivo retirado puede seguir
+  sirviéndose hasta 4 h por caché de Cloudflare.
 - Orden secuencial verificado en servidor (`verificarOrdenAudicion`). Flash Feedback tras cada entregable; calificación única en semana 3.
 - **Rúbrica de 7 criterios y pesos (35/30/12/8/7/4/4) vive duplicada en 3 sitios: `RUBRICA_AUDICION` (Panel.gs), el HTML de la audición y
   el Centro de Ayuda.** Si cambia, cambiar los tres. Verificado consistente el 2026-10-19.
