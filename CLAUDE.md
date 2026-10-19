@@ -175,11 +175,11 @@ Producción = monorepo `Presencia Digital DCA` → `./deploy.sh website` (force-
 1. `git pull --ff-only` en el monorepo **antes de todo** (2026-10-19: el clon del Mac Mini estaba 56 commits atrás; publicar así habría
    pisado en producción el trabajo del MacBook Pro).
 2. Copiar, commit, `git push origin main`, `./deploy.sh website`, verificar en vivo (el `.md` y los `*-vN.html` los quita el script).
-3. **Apps Script (motor + Panel) NO se despliega desde aquí**: no hay `.clasp.json`. Se pega `Codigo.gs`, `Panel.gs` y `PanelUI.html` en el
-   editor y se usa «Administrar implementaciones → editar la existente» (nunca «Nueva implementación»: cambia la URL `/exec` que está
-   incrustada en los HTML). Pendiente de pegar: versión `2026-10-19` (ver abajo). Intentado `clasp pull` con el scriptId del Panel (auditoría
-   2026-10-19 en otra sesión): falla con `invalid_rapt` — la cuenta de clasp necesita `clasp login` interactivo; no es automatizable desde
-   una sesión sin navegador.
+3. **Apps Script (motor + Panel) se despliega con clasp:** `cd backend && ./deploy.sh check` (solo lectura) y `./deploy.sh deploy`
+   (push + actualiza la implementación existente; la URL `/exec` no cambia). Sube `VERSION_MOTOR` en cada cambio (`AAAA-MM-DD.n`): el
+   `check` compara esa cadena. Si falla con `invalid_rapt`, la sesión de Google caducó: `clasp login` (interactivo) y, para evitarlo, el
+   administrador debe poner «No pedir nunca la reautenticación» en el Control de sesión de Google Cloud (ver `backend/README-despliegue.md`).
+   Permisos de Claude Code para estos comandos: `.claude/settings.json`. Desplegado el 2026-10-19 (implementación @16, `2026-10-19.2`).
 4. **Riesgo bidireccional (detectado y corregido 2026-10-19):** alguien editó `centro-baip.html` directamente en el espejo del monorepo
    (`website/centro-baip/index.html`, ya publicado) sin devolver el cambio a este repo fuente — quedó 9 preguntas de FAQ atrás sin que
    `deploy.sh` lo detectara (el monorepo sí estaba commiteado; el desajuste era solo entre este repo y el monorepo). Si se edita el espejo
@@ -193,11 +193,11 @@ bloqueados por `validarEnvio` y ahora también por el backend; guarda `PEGA_AQUI
 `getData()` → `{}` si falla `localStorage`; sin recibo del servidor no hay «Enviado» (botón «Reintentar» + PDF manual); gate del Panel
 fail-closed (`PANEL_KEY` o cuenta de facilitador); `facilitadorActual()` vacío con despliegue «Cualquier persona» (limitación de Apps
 Script; deja `FeedbackPor` vacío); filtros/orden del Centro de Ayuda.
-**Corregidos el 2026-10-19 (repo; pendientes de pegar en Apps Script):** `|| 3` en el borrador de IA (2 sitios) y `|| 'ajustar'` en Flash →
+**Corregidos y desplegados el 2026-10-19 (en vivo, verificado con POST de prueba):** `|| 3` en el borrador de IA (2 sitios) y `|| 'ajustar'` en Flash →
 ahora fallan con error visible; `d.instrumento || 'sprint-01-baip'` → se rechaza el envío sin instrumento; `(sin …)` aceptado por el
 backend → rechazado; `ORIGENES_VALIDOS` (config inerte que simulaba protección) → eliminado; `version: '1.1'` → `VERSION_MOTOR`;
 «Hola Hola,» sin nombre → «Hola,».
-Favicon de DCA en el Panel (`setFaviconUrl`, 2026-10-19; también pendiente de pegar): Apps Script muestra el suyo si no se fija.
+Favicon de DCA en el Panel (`setFaviconUrl`, desplegado 2026-10-19): Apps Script muestra el suyo si no se fija.
 **Pendientes de decisión (zona protegida):** `saveField`/`localStorage.setItem` sin `try/catch` (si el navegador bloquea el almacenamiento el
 autosave falla en silencio y el aviso «tu trabajo está a salvo» deja de ser cierto); `enviarFeedback` de sprints acepta criterios sin
 calificar (`Number(...)||0`) a diferencia de la audición; `FeedbackPor` queda vacío con acceso por clave.
