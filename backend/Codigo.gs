@@ -44,9 +44,14 @@ const CONFIG = {
   // Enviar al estudiante una copia de su propio PDF. Recomendado: true.
   COPIA_AL_ESTUDIANTE: true,
 
-  // Orígenes autorizados a enviar (defensa básica contra uso ajeno).
-  ORIGENES_VALIDOS: ['https://digitalchangeadvisors.com'],
+  // NOTA: Apps Script no expone la cabecera Origin de la petición, así que el motor NO puede filtrar por
+  // origen. La defensa real contra envíos ajenos es la validación del payload (validar) y el orden de la
+  // audición en servidor. (Antes había aquí una lista ORIGENES_VALIDOS que nada leía: daba una falsa sensación
+  // de protección y se eliminó.)
 };
+
+// Versión lógica del motor (fecha del último cambio de código). Actualízala al modificar Codigo.gs o Panel.gs.
+const VERSION_MOTOR = '2026-10-19';
 
 // Paleta de marca DCA — debe coincidir con el brandbook.
 const MARCA = {
@@ -213,7 +218,7 @@ function doGet(e) {
   return responder({
     ok: true,
     servicio: 'DCA · Motor de Recepción Sprint Roadmaps BAIP',
-    version: '1.1',
+    version: VERSION_MOTOR,
     estado: 'operativo',
     hora: new Date().toISOString(),
   });
@@ -222,12 +227,18 @@ function doGet(e) {
 // ══ VALIDACIÓN ════════════════════════════════════════════════════════════
 function validar(d) {
   if (!d.exp) return 'Falta el identificador del experimento.';
+  // Sin instrumento no se sabe a qué sprint pertenece el envío. Antes se registraba en silencio como
+  // «sprint-01-baip», lo que contaminaba el registro. Un HTML desactualizado en caché es la causa típica.
+  if (!d.instrumento || !String(d.instrumento).trim()) {
+    return 'Tu documento está desactualizado (no identifica el instrumento). Recarga la página y vuelve a enviar.';
+  }
   if (!d.participante) return 'Faltan los datos del participante.';
 
   const p = d.participante;
-  if (!p.nombre || p.nombre.trim().length < 3) return 'Escribe tu nombre completo en la portada.';
+  // Los HTML usan «(sin nombre)», «(sin cohorte»…) como centinela de campo vacío: aquí no son valores válidos.
+  if (!p.nombre || esCentinela(p.nombre) || p.nombre.trim().length < 3) return 'Escribe tu nombre completo en la portada.';
   if (!p.email || !esEmailValido(p.email)) return 'Escribe un correo electrónico válido en la portada.';
-  if (!p.cohorte || !p.cohorte.trim()) return 'Indica tu cohorte en la portada.';
+  if (!p.cohorte || esCentinela(p.cohorte) || !p.cohorte.trim()) return 'Indica tu cohorte en la portada.';
 
   if (!Array.isArray(d.campos) || !d.campos.length) return 'No llegó ningún campo diligenciado.';
 
@@ -236,6 +247,11 @@ function validar(d) {
   if (!conContenido.length) return 'Todos los campos están vacíos.';
 
   return null;
+}
+
+/** Centinela de campo vacío que escriben los HTML: «(sin nombre)», «(sin cohorte)», «(sin empresa)»… */
+function esCentinela(x) {
+  return /^\s*\(sin\s/i.test(String(x));
 }
 
 function esEmailValido(x) {
@@ -277,10 +293,10 @@ function escribirFila(hoja, d, recibo, hash, reenvio, e) {
   const valores = [
     new Date(),
     recibo,
-    d.instrumento || 'sprint-01-baip',
+    d.instrumento,
     d.exp,
     nombreExp(d),
-    p.nombre, p.email, p.empresa || '', p.cohorte,
+    p.nombre, p.email, (p.empresa && !esCentinela(p.empresa)) ? p.empresa : '', p.cohorte,
     val('-rid-grupo'), val('-rid-fecha'), val('-nivel'),
     val('-e1'), val('-e2'), val('-e3'), val('-e4'), val('-obs'),
     total, llenos, d.campos.length,

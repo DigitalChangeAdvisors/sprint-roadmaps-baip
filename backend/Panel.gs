@@ -76,6 +76,22 @@ function _claveAudicion() {
   }
   return texto;
 }
+/** Puntaje que propone la IA para un criterio. Si falta o no es 1–5, falla en voz alta: antes se inventaba un 3
+ *  («suficiente») que el facilitador podía enviar al estudiante creyendo que lo había calificado la IA. */
+function _puntajeIA(c, clave) {
+  const p = Number(c && c.puntaje);
+  if (!(p >= 1 && p <= 5)) throw new Error('La IA no devolvió un puntaje válido (1–5) para «' + clave + '». Vuelve a pulsar «Generar borrador con IA».');
+  return p;
+}
+function _nivelIA(c, clave) {
+  const n = c && c.nivel;
+  if (FLASH_NIVELES.indexOf(n) === -1) throw new Error('La IA no devolvió un nivel válido para «' + clave + '». Vuelve a pulsar «Generar borrador con IA».');
+  return n;
+}
+/** Saludo del correo. Sin nombre, «Hola,» (antes quedaba «Hola Hola,»). */
+function saludo(primerNombre, esc) {
+  return primerNombre ? 'Hola ' + esc(primerNombre) + ',' : 'Hola,';
+}
 function _puntajePonderado(criterios) {
   // Devuelve el promedio ponderado en escala 1–5 y su porcentaje (peso × puntaje / 5).
   let pct = 0, escala = 0;
@@ -304,7 +320,7 @@ function generarBorradorIA(token, recibo) {
   (out.criterios || []).forEach(c => { porClave[c.clave] = c; });
   const criteriosOrden = RUBRICA.map(r => ({
     clave: r.clave, titulo: r.titulo,
-    puntaje: (porClave[r.clave] && porClave[r.clave].puntaje) || 3,
+    puntaje: _puntajeIA(porClave[r.clave], r.clave),
     nota: (porClave[r.clave] && porClave[r.clave].nota) || '',
   }));
   const mejoras = (out.mejoras || [])
@@ -417,7 +433,7 @@ function _buscarEntrega(recibo) {
 function _correoFeedback(e, criterios, comentario, suma, promedio, mejoras) {
   const esc = s => String(s == null ? '' : s)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-  const primerNombre = (e.nombre || '').split(' ')[0] || 'Hola';
+  const primerNombre = (e.nombre || '').trim().split(' ')[0];
 
   const filas = criterios.filter(c => c.puntaje > 0).map(c => `
     <tr>
@@ -453,7 +469,7 @@ function _correoFeedback(e, criterios, comentario, suma, promedio, mejoras) {
         ${esc(e.experimento)} · Recibo <b>${esc(e.recibo)}</b>
       </div>
       <div style="padding:18px">
-        <p style="font-size:15px;line-height:1.6">Hola ${esc(primerNombre)},</p>
+        <p style="font-size:15px;line-height:1.6">${saludo(primerNombre, esc)}</p>
         <p style="font-size:14px;line-height:1.7">${esc(comentario).replace(/\n/g, '<br>')}</p>
         ${filas ? `
         <table style="border-collapse:collapse;width:100%;margin-top:14px;font-size:13px">
@@ -571,7 +587,7 @@ function _borradorAudicion(e) {
   (out.criterios || []).forEach(c => { porClave[c.clave] = c; });
   const criteriosOrden = RUBRICA_AUDICION.map(r => ({
     clave: r.clave, titulo: r.titulo, peso: r.peso,
-    puntaje: (porClave[r.clave] && porClave[r.clave].puntaje) || 3,
+    puntaje: _puntajeIA(porClave[r.clave], r.clave),
     nota: (porClave[r.clave] && porClave[r.clave].nota) || '',
   }));
   const mejoras = (out.mejoras || [])
@@ -620,7 +636,7 @@ function _enviarResultadoAudicion(e, payload) {
 function _correoResultadoAudicion(e, criterios, comentario, ponderado, veredicto, mejoras) {
   const esc = s => String(s == null ? '' : s)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-  const primerNombre = (e.nombre || '').split(' ')[0] || 'Hola';
+  const primerNombre = (e.nombre || '').trim().split(' ')[0];
   const TERRA = '#c2593f';
   const cfg = {
     aprobado:  { color: MARCA.teal, titulo: 'Aprobado', texto: 'Superaste la audición de certificación. Te contactaremos con los pasos de emisión de tu certificado y tu incorporación al ecosistema de analistas certificados.' },
@@ -653,7 +669,7 @@ function _correoResultadoAudicion(e, criterios, comentario, ponderado, veredicto
       </div>
       <div style="background:${cfg.color};color:#fff;padding:10px 18px;font-size:15px;font-weight:700">${cfg.titulo} · Puntaje ponderado ${ponderado.pct}%</div>
       <div style="padding:18px">
-        <p style="font-size:15px;line-height:1.6">Hola ${esc(primerNombre)},</p>
+        <p style="font-size:15px;line-height:1.6">${saludo(primerNombre, esc)}</p>
         <p style="font-size:14px;line-height:1.7">${esc(cfg.texto)}</p>
         <p style="font-size:14px;line-height:1.7">${esc(comentario).replace(/\n/g, '<br>')}</p>
         <table style="border-collapse:collapse;width:100%;margin-top:14px;font-size:13px">
@@ -683,7 +699,7 @@ function responderConsulta(token, payload) {
   if (!respuesta) throw new Error('Escribe la respuesta antes de enviar.');
 
   const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  const primerNombre = (e.nombre || '').split(' ')[0] || 'Hola';
+  const primerNombre = (e.nombre || '').trim().split(' ')[0];
   const pregunta = e.campos.filter(c => c.etq !== 'Tipo de consulta').map(c => c.val).join('\n\n');
   const cuerpo = `
     <div style="font-family:Helvetica,Arial,sans-serif;color:${MARCA.carbon};max-width:620px">
@@ -692,7 +708,7 @@ function responderConsulta(token, payload) {
         <div style="color:#fff;font-size:18px;margin-top:4px;font-family:Georgia,serif">Respuesta a tu consulta</div>
       </div>
       <div style="padding:18px">
-        <p style="font-size:15px">Hola ${esc(primerNombre)},</p>
+        <p style="font-size:15px">${saludo(primerNombre, esc)}</p>
         <p style="font-size:14px;line-height:1.7">${esc(respuesta).replace(/\n/g, '<br>')}</p>
         <div style="margin-top:16px;background:${MARCA.platino};border-left:3px solid ${MARCA.oro};padding:10px 12px;font-size:12px;color:${MARCA.gris}">
           <b>Tu consulta (${esc(e.fecha)}):</b><br>${esc(pregunta).replace(/\n/g, '<br>')}</div>
@@ -767,7 +783,7 @@ function _borradorFlash(e) {
   const porClave = {};
   (out.indicadores || []).forEach(i => { porClave[i.clave] = i; });
   const indicadores = crit.map(r => ({ clave: r.clave, titulo: r.titulo,
-    nivel: (porClave[r.clave] && porClave[r.clave].nivel) || 'ajustar', nota: (porClave[r.clave] && porClave[r.clave].nota) || '' }));
+    nivel: _nivelIA(porClave[r.clave], r.clave), nota: (porClave[r.clave] && porClave[r.clave].nota) || '' }));
   const mejoras = (out.mejoras || []).slice(0, 1)
     .map(m => ({ foco: String((m && m.foco) || ''), ejemplo: String((m && m.ejemplo) || ''), porque: String((m && m.porque) || '') }))
     .filter(m => m.foco || m.ejemplo);
@@ -804,7 +820,7 @@ function _enviarFlash(e, payload) {
 
 function _correoFlash(e, indicadores, comentario, mejoras) {
   const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-  const primerNombre = (e.nombre || '').split(' ')[0] || 'Hola';
+  const primerNombre = (e.nombre || '').trim().split(' ')[0];
   const colores = { buen_camino: MARCA.teal, ajustar: MARCA.oro, replantear: '#c2593f' };
   const num = Number(e.exp) - 900;
   const siguiente = num < 4 ? ('Sigue con el Entregable ' + (num + 1) + '.') : 'Sigue con el cierre y la solicitud de calificación final.';
@@ -828,7 +844,7 @@ function _correoFlash(e, indicadores, comentario, mejoras) {
       </div>
       <div style="background:${MARCA.oro};color:#fff;padding:8px 18px;font-size:13px">Orientación breve para tu siguiente paso. No es una calificación.</div>
       <div style="padding:18px">
-        <p style="font-size:15px">Hola ${esc(primerNombre)},</p>
+        <p style="font-size:15px">${saludo(primerNombre, esc)}</p>
         <p style="font-size:14px;line-height:1.7">${esc(comentario).replace(/\n/g, '<br>')}</p>
         <table style="border-collapse:collapse;width:100%;margin-top:12px;font-size:13px">
           <tr style="background:${MARCA.platino}"><th style="text-align:left;padding:6px 10px">Criterio</th><th style="padding:6px 10px">Nivel</th><th style="text-align:left;padding:6px 10px">Orientación</th></tr>
